@@ -23,6 +23,11 @@ commands:
       && black src setup.py
     env_spec: rfjl37
 
+  atest:
+    unix: python -m atest.run
+    env_spec: rfjl37
+
+
 env_specs:
   robotframework-jupyterlibrary:
     packages:

@@ -1,5 +1,6 @@
-envs/
+__pycache__/
+_artifacts/
 *.egg-info
 build/
+envs/
 lib/
-__pycache__/
