@@ -20,7 +20,8 @@ commands:
   lint:
     unix: |-
       isort -rc src \
-      && black src setup.py
+      && black src setup.py \
+      && python -m robot.tidy -r atest
     env_spec: rfjl37
 
   atest:

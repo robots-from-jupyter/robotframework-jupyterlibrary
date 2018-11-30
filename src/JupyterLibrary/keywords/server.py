@@ -1,11 +1,11 @@
-import subprocess
-import time
-from six.moves.urllib.request import urlopen
-
 from robot.libraries.BuiltIn import BuiltIn
+from SeleniumLibrary.base import keyword
+from SeleniumLibrary.base import LibraryComponent
+from six.moves.urllib.request import urlopen
 from tornado.escape import json_decode
 
-from SeleniumLibrary.base import keyword, LibraryComponent
+import subprocess
+import time
 
 
 class NBServer(object):
@@ -19,7 +19,7 @@ class ServerKeywords(LibraryComponent):
     def start_new_jupyter_server(self, command="jupyter", *arguments, **configuration):
         """ Start a Jupyter server
         """
-        plib = BuiltIn().get_library_instance('Process')
+        plib = BuiltIn().get_library_instance("Process")
         if not arguments:
             arguments = self.build_jupyter_server_arguments()
 
@@ -38,7 +38,7 @@ class ServerKeywords(LibraryComponent):
         interval = float(kwargs.get("interval", 0.25))
         retries = int(kwargs.get("retries", 20))
 
-        plib = BuiltIn().get_library_instance('Process')
+        plib = BuiltIn().get_library_instance("Process")
 
         if not nbservers:
             if not self._nbserver_handles:
@@ -63,17 +63,16 @@ class ServerKeywords(LibraryComponent):
                 time.sleep(interval)
                 last_error = err
 
-        assert ready == len(nbservers), (
-            "Only {} of {} servers were ready: {}".format(
-                ready, len(nbservers), last_error
-            ))
+        assert ready == len(nbservers), "Only {} of {} servers were ready: {}".format(
+            ready, len(nbservers), last_error
+        )
         return ready
 
     @keyword
     def terminate_all_jupyter_servers(self, kill=False):
         """ Close all Jupyter servers started by JupyterLibrary
         """
-        plib = BuiltIn().get_library_instance('Process')
+        plib = BuiltIn().get_library_instance("Process")
         terminated = 0
         for handle in self._nbserver_handles:
             plib.terminate_process(handle, kill=kill)
@@ -84,7 +83,13 @@ class ServerKeywords(LibraryComponent):
         return terminated
 
     def get_jupyter_servers(self):
-        nbservers = list(map(json_decode, subprocess.check_output(
-            ["jupyter", "notebook", "list", "--json"]
-        ).decode("utf-8").strip().split("\n")))
+        nbservers = list(
+            map(
+                json_decode,
+                subprocess.check_output(["jupyter", "notebook", "list", "--json"])
+                .decode("utf-8")
+                .strip()
+                .split("\n"),
+            )
+        )
         return {nbserver["pid"]: nbserver for nbserver in nbservers}

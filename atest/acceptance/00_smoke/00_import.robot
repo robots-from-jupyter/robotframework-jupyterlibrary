@@ -1,6 +1,6 @@
 *** Settings ***
-Library  JupyterLibrary
+Library           JupyterLibrary
 
-*** Test Cases  ***
+*** Test Cases ***
 Just import
-  Log  JupyterLibrary probably imported
+    Log    JupyterLibrary probably imported

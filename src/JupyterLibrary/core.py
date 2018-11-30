@@ -1,13 +1,17 @@
-from SeleniumLibrary import SeleniumLibrary
-
 from .keywords import server
+from SeleniumLibrary import SeleniumLibrary
 
 
 class JupyterLibrary(SeleniumLibrary):
     """JupyterLibrary is a Jupyter testing library for Robot Framework."""
-    def __init__(self, timeout=5.0, implicit_wait=0.0,
-                 run_on_failure='Capture Page Screenshot',
-                 screenshot_root_directory=None):
+
+    def __init__(
+        self,
+        timeout=5.0,
+        implicit_wait=0.0,
+        run_on_failure="Capture Page Screenshot",
+        screenshot_root_directory=None,
+    ):
         """JupyterLibrary can be imported with several optional arguments.
         - ``timeout``:
           Default value for `timeouts` used with ``Wait ...`` keywords.
@@ -23,8 +27,6 @@ class JupyterLibrary(SeleniumLibrary):
             timeout=5.0,
             implicit_wait=0.0,
             run_on_failure="Capture Page Screenshot",
-            screenshot_root_directory=None
+            screenshot_root_directory=None,
         )
-        self.add_library_components([
-            server.ServerKeywords(self)
-        ])
+        self.add_library_components([server.ServerKeywords(self)])
