@@ -1,0 +1,59 @@
+name: robotframework-jupyterlibrary
+
+channels:
+- conda-forge
+- defaults
+
+commands:
+  lab:
+    unix: jupyter lab --no-browser --debug
+    env_spec: rfjl37
+
+  list:
+    unix: jupyter serverextension list
+    env_spec: rfjl37
+
+  setup:
+    unix: pip install -e . --no-deps --ignore-installed --no-cache-dir -vvv
+    env_spec: rfjl37
+
+  lint:
+    unix: |-
+      isort -rc src \
+      && black src setup.py
+    env_spec: rfjl37
+
+env_specs:
+  robotframework-jupyterlibrary:
+    packages:
+    - black
+    - flake8
+    - geckodriver
+    - isort
+    - jupyterlab
+    - nodejs >8,<9
+    - pillow
+    - pytest
+    - pytest-cov
+    - python-chromedriver-binary
+    - robotframework
+    - robotframework-lint
+    - robotframework-seleniumlibrary
+    - sphinx
+    - sphinx_rtd_theme
+    - pip:
+      - nteract_on_jupyter
+    channels:
+    - conda-forge
+    - defaults
+  rfjl37:
+    inherit_from:
+    - robotframework-jupyterlibrary
+    packages:
+    - python >=3.7,<3.8
+
+  rfjl2:
+    inherit_from:
+    - robotframework-jupyterlibrary
+    packages:
+    - python >=2.7,<3

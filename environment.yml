@@ -1,0 +1,24 @@
+name: robotframework-jupyterlibrary
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - black
+  - flake8
+  - geckodriver
+  - isort
+  - jupyterlab
+  - nodejs >8,<9
+  - pillow
+  - pytest
+  - pytest-cov
+  - python-chromedriver-binary
+  - robotframework
+  - robotframework-lint
+  - robotframework-seleniumlibrary
+  - sphinx
+  - sphinx_rtd_theme
+  - pip:
+    - nteract_on_jupyter
