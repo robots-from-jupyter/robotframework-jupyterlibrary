@@ -10,7 +10,7 @@ commands:
     env_spec: rfjl37
 
   list:
-    unix: jupyter serverextension list
+    unix: jupyter serverextension list && jupyter notebook list --json
     env_spec: rfjl37
 
   setup:

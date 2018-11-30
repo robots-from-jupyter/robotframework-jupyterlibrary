@@ -8,9 +8,15 @@ tests = os.path.join(here, "acceptance")
 
 
 def run_tests(*robot_args):
-    return subprocess.check_call([
+    proc = subprocess.Popen([
         "python", "-m", "robot", "-d", out, tests
     ], cwd=here)
+
+    try:
+        return proc.wait()
+    except KeyboardInterrupt:
+        proc.kill()
+        return proc.wait()
 
 
 if __name__ == "__main__":

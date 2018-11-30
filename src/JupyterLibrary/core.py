@@ -1,8 +1,6 @@
 from SeleniumLibrary import SeleniumLibrary
 
-from .keywords import (
-    server,
-)
+from .keywords import server
 
 
 class JupyterLibrary(SeleniumLibrary):
@@ -28,5 +26,5 @@ class JupyterLibrary(SeleniumLibrary):
             screenshot_root_directory=None
         )
         self.add_library_components([
-            server
+            server.ServerKeywords(self)
         ])
