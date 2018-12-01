@@ -1,5 +1,13 @@
-from .keywords import server
+from glob import glob
+from os.path import basename, dirname, join
+
+from robot.libraries.BuiltIn import BuiltIn
 from SeleniumLibrary import SeleniumLibrary
+
+from .keywords import server
+
+
+RESOURCES = join(dirname(__file__), "resources")
 
 
 class JupyterLibrary(SeleniumLibrary):
@@ -30,3 +38,6 @@ class JupyterLibrary(SeleniumLibrary):
             screenshot_root_directory=None,
         )
         self.add_library_components([server.ServerKeywords(self)])
+        for path in glob(join(RESOURCES, "jupyterlab", "*.robot")):
+            resource = "JupyterLibrary/resources/jupyterlab/" + basename(path)
+            BuiltIn().import_resource(resource)

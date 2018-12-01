@@ -1,1 +1,2 @@
 include  LICENSE README.md
+recursive-include src/JupyterLibrary *.robot

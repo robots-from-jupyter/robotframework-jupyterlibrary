@@ -29,4 +29,3 @@ Start three servers
     Should Not Contain    ${log3}    The Jupyter Notebook is running    msg=Unawaited server log should not contain expected status message
     ${terminated} =    Terminate All Jupyter Servers
     Should be equal as integers    ${terminated}    0    msg=No servers should have been terminated
-    Run Keyword And Expect Error    Only 0 of 3*    Wait for Jupyter Server to be Ready    ${nb2}    ${nb1}    ${nb3}

@@ -1,11 +1,10 @@
-from robot.libraries.BuiltIn import BuiltIn
-from SeleniumLibrary.base import keyword
-from SeleniumLibrary.base import LibraryComponent
-from six.moves.urllib.request import urlopen
-from tornado.escape import json_decode
-
 import subprocess
 import time
+
+from robot.libraries.BuiltIn import BuiltIn
+from SeleniumLibrary.base import LibraryComponent, keyword
+from six.moves.urllib.request import urlopen
+from tornado.escape import json_decode
 
 
 class NBServer(object):
@@ -63,10 +62,20 @@ class ServerKeywords(LibraryComponent):
                 time.sleep(interval)
                 last_error = err
 
-        assert ready == len(nbservers), "Only {} of {} servers were ready: {}".format(
+        assert ready == len(
+            nbservers
+        ), "Only {} of {} servers were ready. Last error: {}".format(
             ready, len(nbservers), last_error
         )
         return ready
+
+    @keyword
+    def wait_for_new_jupyter_server_to_be_ready(
+        self, command=None, *arguments, **configuration
+    ):
+        handle = self.start_new_jupyter_server(command, *arguments, **configuration)
+        self.wait_for_jupyter_server_to_be_ready(handle)
+        return handle
 
     @keyword
     def terminate_all_jupyter_servers(self, kill=False):
@@ -81,6 +90,14 @@ class ServerKeywords(LibraryComponent):
         self._nbserver_handles = []
 
         return terminated
+
+    @keyword
+    def get_jupyter_server_info(self, nbserver=None):
+        nbserver = nbserver or self._nbserver_handles[-1]
+        plib = BuiltIn().get_library_instance("Process")
+        nbpopen = plib.get_process_object(nbserver)
+        nbj = self.get_jupyter_servers()[nbpopen.pid]
+        return nbj
 
     def get_jupyter_servers(self):
         nbservers = list(
