@@ -17,13 +17,21 @@ class ScreenshotKeywords(LibraryComponent):
     @keyword
     def capture_element_screenshot(self, locator, filename):
         el = self.find_element(locator)
+        bbox = self.normalize_bounding_box({**el.location, **el.size})
         BuiltIn().run_keyword("Capture Page Screenshot", filename)
-        rect = {**el.location, **el.size}
-        self.crop_image(filename, **self.round_dict(rect))
+        self.crop_image(filename, **bbox)
 
-    def round_dict(self, dict):
+    def normalize_bounding_box(self, bbox):
+        """ Normalize a bounding box to reasonable defaults
+            TODO: also handle larger-than-screen elements (if that's a thing)
+        """
         return {
-            k: int(round(v)) if isinstance(v, float) else v for k, v in dict.items()
+            k: (
+                max(int(round(v)), 1)
+                if k in ["width", "height"]
+                else max(int(round(v)), 0)
+            )
+            for k, v in bbox.items()
         }
 
     @keyword

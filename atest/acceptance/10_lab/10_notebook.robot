@@ -16,9 +16,10 @@ IPython Notebook
 IPython Notebook Outputs
     Open JupyterLab
     Launch a new JupyterLab Document
-    Add and Run Cell    print("hello world")
+    : FOR    ${i}    IN RANGE    ${10}
+    \    Add and Run Cell    print("hello world " * ${i})
     Wait Until Kernel Is Idle
-    Screenshot Each Output of Active Document    ${OUTPUT_DIR}${/}ipython
+    Screenshot Each Output of Active Document    ${OUTPUT_DIR}${/}ipython_outputs/
 
 *** Keywords ***
 Clean Up Everything
