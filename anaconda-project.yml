@@ -25,7 +25,7 @@ commands:
     env_spec: rfjl37
 
   atest:
-    unix: python -m atest.run
+    unix: rm -rf _artifacts/test_output && python -m atest.run
     env_spec: rfjl37
 
 

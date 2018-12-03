@@ -1,5 +1,9 @@
+import os
+import shutil
 import subprocess
+import tempfile
 import time
+from os.path import join
 
 from robot.libraries.BuiltIn import BuiltIn
 from SeleniumLibrary.base import LibraryComponent, keyword
@@ -9,6 +13,7 @@ from tornado.escape import json_decode
 
 class ServerKeywords(LibraryComponent):
     _nbserver_handles = []
+    _nbserver_tmpdirs = {}
 
     @keyword
     def start_new_jupyter_server(self, command="jupyter", *arguments, **configuration):
@@ -18,8 +23,23 @@ class ServerKeywords(LibraryComponent):
         if not arguments:
             arguments = self.build_jupyter_server_arguments()
 
+        tmpdir = tempfile.mkdtemp()
+
+        if "--notebook-dir" not in arguments:
+            notebook_dir = join(tmpdir, "notebooks")
+            os.mkdir(notebook_dir)
+            arguments += ["--notebook-dir", notebook_dir]
+
+        if "env:HOME" not in configuration:
+            home_dir = join(tmpdir, "home")
+            os.mkdir(home_dir)
+            configuration["env:HOME"] = home_dir
+
         handle = plib.start_process("jupyter", *arguments, **configuration)
+
         self._nbserver_handles += [handle]
+        self._nbserver_tmpdirs[handle] = tmpdir
+
         return handle
 
     @keyword
@@ -83,7 +103,11 @@ class ServerKeywords(LibraryComponent):
             plib.terminate_process(handle, kill=kill)
             terminated += 1
 
+        for tmpdir in self._nbserver_tmpdirs.values():
+            shutil.rmtree(tmpdir)
+
         self._nbserver_handles = []
+        self._nbserver_tmpdirs = {}
 
         return terminated
 
