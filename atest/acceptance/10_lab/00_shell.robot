@@ -3,7 +3,6 @@ Suite Setup       Wait for New Jupyter Server to be Ready
 Test Teardown     Close All Browsers
 Library           JupyterLibrary
 Library           Process
-Resource          JupyterLibrary/resources/jupyterlab/Shell.robot
 
 *** Test Cases ***
 Open JupyterLab

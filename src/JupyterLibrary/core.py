@@ -1,8 +1,11 @@
 from glob import glob
 from os.path import basename, dirname, join
 
+from robot.api import ResourceFile
 from robot.libraries.BuiltIn import BuiltIn
+from robot.utils import find_file
 from SeleniumLibrary import SeleniumLibrary
+from SeleniumLibrary.utils.librarylistener import LibraryListener
 
 from .keywords import server
 
@@ -38,6 +41,17 @@ class JupyterLibrary(SeleniumLibrary):
             screenshot_root_directory=None,
         )
         self.add_library_components([server.ServerKeywords(self)])
+        self.ROBOT_LIBRARY_LISTENER = JupyterLibraryListener()
+
+
+class JupyterLibraryListener(LibraryListener):
+    """ Custom listener to do per-suite imports of resource files
+    """
+
+    ROBOT_LISTENER_API_VERSION = 2
+
+    def start_suite(self, name, attrs):
+        super(JupyterLibraryListener, self).start_suite(name, attrs)
         for path in glob(join(RESOURCES, "jupyterlab", "*.robot")):
-            resource = "JupyterLibrary/resources/jupyterlab/" + basename(path)
+            resource = "JupyterLibrary/resources/jupyterlab/{}".format(basename(path))
             BuiltIn().import_resource(resource)

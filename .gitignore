@@ -1,6 +1,8 @@
 __pycache__/
 _artifacts/
+.ipynb_checkpoints/
 *.egg-info
 build/
 envs/
 lib/
+Untitled*.*
