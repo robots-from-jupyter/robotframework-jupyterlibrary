@@ -2,6 +2,7 @@
 Test Teardown     Terminate All Processes
 Library           JupyterLibrary
 Library           Process
+Library           OperatingSystem
 
 *** Test Cases ***
 Start one server
@@ -29,3 +30,17 @@ Start three servers
     Should Not Contain    ${log3}    The Jupyter Notebook is running    msg=Unawaited server log should not contain expected status message
     ${terminated} =    Terminate All Jupyter Servers
     Should be equal as integers    ${terminated}    0    msg=No servers should have been terminated
+
+Notebook Files
+    [Setup]    Create File    ${OUTPUT_DIR}${/}foo.txt    bar
+    ${nb1} =    Start New Jupyter Server
+    Copy Files to Jupyter Directory    ${OUTPUT_DIR}${/}*.txt
+    ${nbdir} =    Get Jupyter Directory    ${nb1}
+    ${out} =    Get File    ${nbdir}${/}foo.txt
+    Should Be Equal    ${out}    bar
+    Copy Files from Jupyter Directory    foo.txt    ${OUTPUT_DIR}
+    Terminate All Jupyter Servers
+    ${out} =    Get File    ${OUTPUT_DIR}${/}foo.txt
+    Should Be Equal    ${out}    bar
+    File Should Not Exist    ${nbdir}${/}foo.txt
+    [Teardown]    Remove File    ${OUTPUT_DIR}${/}foo.txt

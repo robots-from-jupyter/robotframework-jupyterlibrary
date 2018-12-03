@@ -14,10 +14,17 @@ from tornado.escape import json_decode
 class ServerKeywords(LibraryComponent):
     _nbserver_handles = []
     _nbserver_tmpdirs = {}
+    _nbserver_notebook_dirs = {}
 
     @keyword
     def start_new_jupyter_server(self, command="jupyter", *arguments, **configuration):
         """ Start a Jupyter server
+
+            If not configured, the HOME environment variable and current
+            working directory will be set to avoid leaking configuration
+            between between runs (or the test instance) itself. These
+            directories will be cleaned up after the server process is
+            terminated.
         """
         plib = BuiltIn().get_library_instance("Process")
         if not arguments:
@@ -25,26 +32,59 @@ class ServerKeywords(LibraryComponent):
 
         tmpdir = tempfile.mkdtemp()
 
-        if "--notebook-dir" not in arguments:
-            notebook_dir = join(tmpdir, "notebooks")
-            os.mkdir(notebook_dir)
-            arguments += ["--notebook-dir", notebook_dir]
-
         if "env:HOME" not in configuration:
             home_dir = join(tmpdir, "home")
             os.mkdir(home_dir)
             configuration["env:HOME"] = home_dir
 
+        notebook_dir = configuration.get("cwd")
+        if notebook_dir is None:
+            notebook_dir = join(tmpdir, "notebooks")
+            os.mkdir(notebook_dir)
+            configuration["cwd"] = notebook_dir
+
         handle = plib.start_process("jupyter", *arguments, **configuration)
 
         self._nbserver_handles += [handle]
         self._nbserver_tmpdirs[handle] = tmpdir
+        self._nbserver_notebook_dirs[handle] = notebook_dir
 
         return handle
 
     @keyword
     def build_jupyter_server_arguments(self):
+        """ Some default jupyter arguments
+        """
         return ["notebook", "--no-browser"]
+
+    @keyword
+    def copy_files_to_jupyter_directory(self, *sources, **kwargs):
+        """ Copy some files into the (temporary) jupyter server root
+        """
+        nbserver = kwargs.get("nbserver", self._nbserver_handles[-1])
+        notebook_dir = self._nbserver_notebook_dirs[nbserver]
+        BuiltIn().import_library("OperatingSystem")
+        osli = BuiltIn().get_library_instance("OperatingSystem")
+        osli.copy_files(*(list(sources) + [notebook_dir]))
+
+    @keyword
+    def copy_files_from_jupyter_directory(self, *sources_and_destinations, **kwargs):
+        """ Copy some files from the (temporary) jupyter server root
+
+            Patterns will have the notebook directory prepended
+        """
+        nbserver = kwargs.get("nbserver", self._nbserver_handles[-1])
+        notebook_dir = self._nbserver_notebook_dirs[nbserver]
+        BuiltIn().import_library("OperatingSystem")
+        osli = BuiltIn().get_library_instance("OperatingSystem")
+        sources = [join(notebook_dir, src) for src in sources_and_destinations[:-1]]
+        dest = sources_and_destinations[-1]
+        osli.copy_files(*sources + [dest])
+
+    @keyword
+    def get_jupyter_directory(self, nbserver=None):
+        nbserver = nbserver if nbserver is not None else self._nbserver_handles[-1]
+        return self._nbserver_notebook_dirs[nbserver]
 
     @keyword
     def wait_for_jupyter_server_to_be_ready(self, *nbservers, **kwargs):
