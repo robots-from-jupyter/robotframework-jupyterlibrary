@@ -12,8 +12,10 @@ tests = os.path.join(here, "acceptance")
 
 def run_tests(*robot_args):
     proc = subprocess.Popen([
-        "python", "-m", "robot", "-d", out, tests
-    ], cwd=here)
+        "python", "-m", "robot", "-d", out,
+        ] + list(robot_args) + [
+            tests,
+        ], cwd=here)
 
     try:
         return proc.wait()
@@ -23,4 +25,4 @@ def run_tests(*robot_args):
 
 
 if __name__ == "__main__":
-    sys.exit(run_tests(sys.argv[1:]))
+    sys.exit(run_tests(*sys.argv[1:]))

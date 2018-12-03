@@ -39,6 +39,6 @@ Open With JupyterLab Menu
     :FOR  ${item_label}  IN  @{submenu_labels}
     \  Click JupyterLab Menu Item  ${item_label}
 
-Maybe Accept a Prompt
+Maybe Accept a JupyterLab Prompt
     ${accept} =  Get WebElements  css:${JLAB CSS ACCEPT}
     Run Keyword If  ${accept}   Click Element    ${accept[0]}

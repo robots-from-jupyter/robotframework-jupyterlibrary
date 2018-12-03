@@ -15,7 +15,7 @@ except ImportError:
 
 class ScreenshotKeywords(LibraryComponent):
     @keyword
-    def capture_element_screenshot(self, locator, filename, embed=True):
+    def capture_element_screenshot(self, locator, filename):
         el = self.find_element(locator)
         BuiltIn().run_keyword("Capture Page Screenshot", filename)
         rect = {**el.location, **el.size}
