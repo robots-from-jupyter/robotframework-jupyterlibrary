@@ -7,10 +7,6 @@ from six.moves.urllib.request import urlopen
 from tornado.escape import json_decode
 
 
-class NBServer(object):
-    process = None
-
-
 class ServerKeywords(LibraryComponent):
     _nbserver_handles = []
 

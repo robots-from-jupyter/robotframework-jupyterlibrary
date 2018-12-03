@@ -2,6 +2,9 @@ import sys
 import subprocess
 import os
 
+# import for PATH side-effect. yuck.
+import chromedriver_binary  # noqa
+
 here = os.path.dirname(__file__)
 out = os.path.join(here, "..", "_artifacts", "test_output")
 tests = os.path.join(here, "acceptance")

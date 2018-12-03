@@ -7,10 +7,11 @@ from robot.utils import find_file
 from SeleniumLibrary import SeleniumLibrary
 from SeleniumLibrary.utils.librarylistener import LibraryListener
 
-from .keywords import server
+from .keywords import screenshots, server
 
 
 RESOURCES = join(dirname(__file__), "resources")
+CLIENTS = ["jupyterlab"]
 
 
 class JupyterLibrary(SeleniumLibrary):
@@ -40,7 +41,9 @@ class JupyterLibrary(SeleniumLibrary):
             run_on_failure="Capture Page Screenshot",
             screenshot_root_directory=None,
         )
-        self.add_library_components([server.ServerKeywords(self)])
+        self.add_library_components(
+            [server.ServerKeywords(self), screenshots.ScreenshotKeywords(self)]
+        )
         self.ROBOT_LIBRARY_LISTENER = JupyterLibraryListener()
 
 
@@ -52,6 +55,8 @@ class JupyterLibraryListener(LibraryListener):
 
     def start_suite(self, name, attrs):
         super(JupyterLibraryListener, self).start_suite(name, attrs)
-        for path in glob(join(RESOURCES, "jupyterlab", "*.robot")):
-            resource = "JupyterLibrary/resources/jupyterlab/{}".format(basename(path))
-            BuiltIn().import_resource(resource)
+        for client in CLIENTS:
+            for path in glob(join(RESOURCES, client, "*.robot")):
+                BuiltIn().import_resource(
+                    "JupyterLibrary/resources/{}/{}".format(client, basename(path))
+                )

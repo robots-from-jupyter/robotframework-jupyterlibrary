@@ -12,6 +12,7 @@ Get Help
     Open JupyterLab
     Click JupyterLab Menu    Help
     Click JupyterLab Menu Item    About JupyterLab
+    Capture Element Screenshot    css:.jp-Dialog-content    ${OUTPUT_DIR}${/}about.png
     Click Element    css:${JLAB CSS ACCEPT}
 
 *** Keywords ***
