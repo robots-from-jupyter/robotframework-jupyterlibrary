@@ -45,8 +45,6 @@ env_specs:
     - robotframework-lint
     - robotframework-seleniumlibrary
     - six
-    - sphinx
-    - sphinx_rtd_theme
     - pip:
       - nteract_on_jupyter
     channels:

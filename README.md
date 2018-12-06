@@ -1,9 +1,9 @@
 # robotframework-jupyterlibrary
 > A Robot Framework library for testing Jupyter end-user applications and extensions
 
----
+[![binder-badge][]][binder] [![pipeline-badge]][pipeline]
 
-> _TODO: binder, tests, pip, conda_
+> _TODO: rtd, pip, conda_
 
 # Installation
 
@@ -30,3 +30,9 @@ python -m scripts.atest
 
 Write `.robot` files that use `JupyterLibrary` keywords. See the
 [acceptance tests](./atest/acceptance) for examples.
+
+
+[binder-badge]: https://mybinder.org/badge_logo.svg
+[binder]: https://mybinder.org/v2/gh/bollwyvl/robotframework-jupyterlibrary/ci/azure-pipelines?urlpath=lab
+[pipeline-badge]: https://dev.azure.com/nickbollweg/nickbollweg/_apis/build/status/bollwyvl.robotframework-jupyterlibrary
+[pipeline]: https://dev.azure.com/nickbollweg/nickbollweg/_build/latest?definitionId=2
