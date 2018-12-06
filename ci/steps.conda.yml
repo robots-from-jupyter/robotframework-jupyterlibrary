@@ -19,5 +19,11 @@ steps:
         robotframework
         robotframework-lint
         robotframework-seleniumlibrary
+  - ${{ if eq(parameters.name, 'Linux') }}:
+    - script: sudo chown -R $UID /usr/envs/robotframework-jupyterlibrary
+      displayName: Fix Conda env permissions on Linux
+  - ${{ if eq(parameters.name, 'MacOSX') }}:
+    - script: sudo chown -R $UID /usr/local/miniconda/envs/robotframework-jupyterlibrary
+      displayName: Fix Conda env permissions on MacOSX
   - script: pip install nteract_on_jupyter --no-deps --ignore-installed -vv
     displayName: Pip dependencies
