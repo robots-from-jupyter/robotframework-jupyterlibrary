@@ -52,11 +52,18 @@ env_specs:
     channels:
     - conda-forge
     - defaults
+
   rfjl37:
     inherit_from:
     - robotframework-jupyterlibrary
     packages:
     - python >=3.7,<3.8
+
+  rfjl36:
+    inherit_from:
+    - robotframework-jupyterlibrary
+    packages:
+    - python >=3.6,<3.7
 
   rfjl2:
     inherit_from:
