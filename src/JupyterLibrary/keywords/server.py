@@ -90,8 +90,8 @@ class ServerKeywords(LibraryComponent):
     def wait_for_jupyter_server_to_be_ready(self, *nbservers, **kwargs):
         """  Wait for the most-recently started Jupyter server to be ready
         """
-        interval = float(kwargs.get("interval", 0.25))
-        retries = int(kwargs.get("retries", 20))
+        interval = float(kwargs.get("interval", 0.5))
+        retries = int(kwargs.get("retries", 60))
 
         plib = BuiltIn().get_library_instance("Process")
 
@@ -120,8 +120,9 @@ class ServerKeywords(LibraryComponent):
 
         assert ready == len(
             nbservers
-        ), "Only {} of {} servers were ready. Last error: {}".format(
-            ready, len(nbservers), last_error
+        ), "Only {} of {} servers were ready after {}s. Last error: {} {}".format(
+            ready, len(nbservers), interval * retries, type(last_error),
+            last_error
         )
         return ready
 
