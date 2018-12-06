@@ -12,12 +12,11 @@ dependencies:
   - jupyterlab
   - nodejs >8,<9
   - pillow
-  - pytest
-  - pytest-cov
   - python-chromedriver-binary
   - robotframework
   - robotframework-lint
   - robotframework-seleniumlibrary
+  - six
   - sphinx
   - sphinx_rtd_theme
   - pip:

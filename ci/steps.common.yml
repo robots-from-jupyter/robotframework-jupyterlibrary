@@ -1,0 +1,28 @@
+parameters:
+  name: Linux
+
+steps:
+  - script: >
+      isort -rc src
+      && black src setup.py
+      && python -m robot.tidy -r atest
+    displayName: Lint
+
+  - script: python -m pip install . --no-deps --ignore-installed -vv
+    displayName: Test
+
+  - script: python -m atest.run
+    displayName: Test
+
+  - task: PublishTestResults@2
+    displayName: Publish Test Results
+    inputs:
+      testResultsFiles: _artifacts/test_output/**/*.xunit.xml
+    condition: always()
+
+  - task: PublishBuildArtifacts@1
+    displayName: Publish Robot Logs
+    inputs:
+      PathtoPublish: _artifacts/test_output
+      ArtifactName: ${{ parameters.name }} tests
+    condition: always()

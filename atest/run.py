@@ -13,6 +13,8 @@ tests = os.path.join(here, "acceptance")
 def run_tests(*robot_args):
     proc = subprocess.Popen([
         "python", "-m", "robot", "-d", out,
+        "--xunit",
+        "robot.xunit.xml",
         ] + list(robot_args) + [
             tests,
         ], cwd=here)
