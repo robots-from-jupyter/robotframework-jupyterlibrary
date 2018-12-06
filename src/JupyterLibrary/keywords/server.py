@@ -121,8 +121,7 @@ class ServerKeywords(LibraryComponent):
         assert ready == len(
             nbservers
         ), "Only {} of {} servers were ready after {}s. Last error: {} {}".format(
-            ready, len(nbservers), interval * retries, type(last_error),
-            last_error
+            ready, len(nbservers), interval * retries, type(last_error), last_error
         )
         return ready
 
