@@ -2,16 +2,13 @@ parameters:
   name: Linux
 
 steps:
-  - script: >
-      isort -rc src
-      && black src setup.py
-      && python -m robot.tidy -r atest
+  - script: python -m scripts.lint
     displayName: Lint
 
   - script: python -m pip install . --no-deps --ignore-installed -vv
-    displayName: INstall
+    displayName: Install
 
-  - script: python -m atest.run
+  - script: python -m scripts.atest
     displayName: Test
 
   - task: PublishTestResults@2

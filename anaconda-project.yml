@@ -17,6 +17,10 @@ commands:
     unix: pip install -e . --no-deps --ignore-installed --no-cache-dir -vvv
     env_spec: rfjl37
 
+  install:
+    unix: pip install . --no-deps --ignore-installed --no-cache-dir -vvv
+    env_spec: rfjl37
+
   lint:
     unix: python -m scripts.lint
     env_spec: rfjl37
