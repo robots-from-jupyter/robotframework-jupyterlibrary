@@ -12,7 +12,7 @@ steps:
         geckodriver
         isort
         jupyterlab
-        nodejs >8,<9
+        nodejs>8,<9
         pillow
         python-chromedriver-binary
         python>=3.6,<3.7
