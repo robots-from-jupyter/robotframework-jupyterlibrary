@@ -6,7 +6,7 @@ Library           OperatingSystem
 
 *** Test Cases ***
 Start one server
-    ${nbserver} =    Start New Jupyter Server
+    ${nbserver} =    Start New Jupyter Server    stdout=${OUTPUT_DIR}${/}one_server.log    stderr=STDOUT
     ${ready} =    Wait for Jupyter Server to be Ready
     Should be equal as integers    ${ready}    1    msg=One server should be ready
     ${terminated} =    Terminate All Jupyter Servers

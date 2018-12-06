@@ -9,7 +9,7 @@ steps:
     displayName: Lint
 
   - script: python -m pip install . --no-deps --ignore-installed -vv
-    displayName: Test
+    displayName: INstall
 
   - script: python -m atest.run
     displayName: Test

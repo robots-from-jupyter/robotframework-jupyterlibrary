@@ -21,7 +21,7 @@ pip install -e . --no-deps --ignore-installed
 ```
 - run the tests
 ```
-python -m atest.run
+python -m scripts.atest
 ```
 
 # Using

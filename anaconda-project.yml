@@ -18,14 +18,11 @@ commands:
     env_spec: rfjl37
 
   lint:
-    unix: |-
-      isort -rc src \
-      && black src setup.py \
-      && python -m robot.tidy -r atest
+    unix: python -m scripts.lint
     env_spec: rfjl37
 
   atest:
-    unix: rm -rf _artifacts/test_output && python -m atest.run
+    unix: rm -rf _artifacts/test_output && python -m scripts.atest
     env_spec: rfjl37
 
 
