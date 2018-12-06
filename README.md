@@ -33,6 +33,6 @@ Write `.robot` files that use `JupyterLibrary` keywords. See the
 
 
 [binder-badge]: https://mybinder.org/badge_logo.svg
-[binder]: https://mybinder.org/v2/gh/bollwyvl/robotframework-jupyterlibrary/ci/azure-pipelines?urlpath=lab
+[binder]: https://mybinder.org/v2/gh/bollwyvl/robotframework-jupyterlibrary/master?urlpath=lab/tree/README.md
 [pipeline-badge]: https://dev.azure.com/nickbollweg/nickbollweg/_apis/build/status/bollwyvl.robotframework-jupyterlibrary
 [pipeline]: https://dev.azure.com/nickbollweg/nickbollweg/_build/latest?definitionId=2
