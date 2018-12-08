@@ -9,6 +9,10 @@ commands:
     unix: jupyter lab --no-browser --debug
     env_spec: rfjl37
 
+  lab:win:
+    windows: jupyter lab --no-browser --debug
+    env_spec: win_rfjl37
+
   list:
     unix: jupyter serverextension list && jupyter notebook list --json
     env_spec: rfjl37
@@ -42,7 +46,7 @@ commands:
     env_spec: rfjl37
 
   sdist:win:
-    unix: python setup.py sdist --dist-dir=_artifacts/sdist
+    windows: python setup.py sdist --dist-dir=_artifacts/sdist
     env_spec: win_rfjl37
 
   install:
@@ -50,7 +54,8 @@ commands:
     env_spec: rfjl37
 
   install:win:
-    unix:  python -m pip install _artifacts\sdist\robotframework-jupyterlibrary-0.1.0.tar.gz --no-deps --ignore-installed
+    windows: >
+      python -m pip install _artifacts\\sdist\\robotframework-jupyterlibrary-0.1.0.tar.gz --no-deps --ignore-installed -vv
     env_spec: win_rfjl37
 
 env_specs:

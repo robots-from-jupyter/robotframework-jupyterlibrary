@@ -57,9 +57,7 @@ class ServerKeywords(LibraryComponent):
             os.mkdir(notebook_dir)
             config["cwd"] = notebook_dir
 
-        args = args or self.build_jupyter_server_arguments(
-            port, base_url, token, notebook_dir
-        )
+        args = args or self.build_jupyter_server_arguments(port, base_url, token)
 
         handle = plib.start_process(command, *args, **config)
 
@@ -73,7 +71,7 @@ class ServerKeywords(LibraryComponent):
         return handle
 
     @keyword
-    def build_jupyter_server_arguments(self, port, base_url, token, notebook_dir):
+    def build_jupyter_server_arguments(self, port, base_url, token):
         """ Some default jupyter arguments
         """
         return [
@@ -83,7 +81,6 @@ class ServerKeywords(LibraryComponent):
             f"--port={port}",
             f"--NotebookApp.token='{token}'",
             f"--NotebookApp.base_url='{base_url}'",
-            f"--notebook-dir='{notebook_dir}'",
         ]
 
     @keyword
