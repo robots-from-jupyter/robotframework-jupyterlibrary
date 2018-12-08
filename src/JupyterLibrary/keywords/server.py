@@ -43,6 +43,7 @@ class ServerKeywords(LibraryComponent):
         base_url = base_url or "/@rf/"
         token = str(uuid4()) if token is None else token
 
+        BuiltIn().import_library("Process")
         plib = BuiltIn().get_library_instance("Process")
 
         tmpdir = tempfile.mkdtemp()

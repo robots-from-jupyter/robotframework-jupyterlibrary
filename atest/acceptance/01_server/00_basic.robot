@@ -1,5 +1,5 @@
 *** Settings ***
-Test Teardown     Terminate All Processes
+Suite Teardown    Terminate All Jupyter Servers
 Library           JupyterLibrary
 Library           Process
 Library           OperatingSystem

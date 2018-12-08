@@ -1,6 +1,6 @@
 *** Settings ***
-Suite Setup       Wait for New Jupyter Server to be Ready
-Test Teardown     Close All Browsers
+Suite Teardown    Close All Browsers
+Test Teardown     Reset JupyterLab and Close
 Library           JupyterLibrary
 Library           Process
 
@@ -13,8 +13,3 @@ Get Help
     Open With JupyterLab Menu    Help    About JupyterLab
     Capture Element Screenshot    css:.jp-Dialog-content    ${OUTPUT_DIR}${/}about.png
     Click Element    css:${JLAB CSS ACCEPT}
-
-*** Keywords ***
-Clean Up Everything
-    Close All Browsers
-    Terminate All Processes
