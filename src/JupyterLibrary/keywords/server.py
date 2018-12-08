@@ -171,8 +171,17 @@ class ServerKeywords(LibraryComponent):
         terminated = 0
         for nbh in self._handles:
             plib.terminate_process(nbh, kill=True)
+            try:
+                shutil.rmtree(self._tmpdirs[nbh])
+            except Exception:
+                BuiltIn().log(f"Failed to delete {self._tmpdirs[nbh]}")
+                BuiltIn().sleep("5s")
+                try:
+                    shutil.rmtree(self._tmpdirs[nbh])
+                except Exception:
+                    BuiltIn().log(f"Giving up {self._tmpdirs[nbh]}")
+
             terminated += 1
-            shutil.rmtree(self._tmpdirs[nbh])
 
         self._handles = []
 
