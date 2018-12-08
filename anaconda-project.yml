@@ -29,6 +29,10 @@ commands:
     unix: rm -rf _artifacts/test_output && python -m scripts.atest
     env_spec: rfjl37
 
+  clean:
+    unix: rm -rf $(find src | grep __pycache__)
+    env_spec: rfjl37
+
 
 env_specs:
   robotframework-jupyterlibrary:
@@ -38,7 +42,7 @@ env_specs:
     - geckodriver
     - isort
     - jupyterlab
-    - nodejs >8,<9
+    - nodejs >=8.12,<9
     - pillow
     - python-chromedriver-binary
     - robotframework
@@ -50,7 +54,6 @@ env_specs:
     channels:
     - conda-forge
     - defaults
-
   rfjl37:
     inherit_from:
     - robotframework-jupyterlibrary

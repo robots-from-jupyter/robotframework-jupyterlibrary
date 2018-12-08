@@ -15,11 +15,11 @@ Start one server
     Should Contain    ${log}    The Jupyter Notebook is running    msg=Log should contain expected status message
 
 Start three servers
-    ${nb1} =    Start New Jupyter Server
-    ${nb2} =    Start New Jupyter Server
+    ${nb1} =    Start New Jupyter Server    stdout=${OUTPUT_DIR}${/}one_of_three_server.log    stderr=STDOUT
+    ${nb2} =    Start New Jupyter Server    stdout=${OUTPUT_DIR}${/}two_of_three_server.log    stderr=STDOUT
     ${ready} =    Wait for Jupyter Server to be Ready    ${nb2}    ${nb1}
     Should be equal as integers    ${ready}    2    msg=Three servers should be ready
-    ${nb3} =    Start New Jupyter Server
+    ${nb3} =    Start New Jupyter Server    stdout=${OUTPUT_DIR}${/}three_of_three_server.log    stderr=STDOUT
     ${terminated} =    Terminate All Jupyter Servers
     Should be equal as integers    ${terminated}    3    msg=Three servers should have been terminated
     ${log1} =    Get Process Result    ${nb1}    stderr=${True}

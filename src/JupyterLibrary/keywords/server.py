@@ -4,6 +4,7 @@ import socket
 import tempfile
 import time
 from os.path import join
+from uuid import uuid4
 
 from robot.libraries.BuiltIn import BuiltIn
 from SeleniumLibrary.base import LibraryComponent, keyword
@@ -16,10 +17,18 @@ class ServerKeywords(LibraryComponent):
     _notebook_dirs = {}
     _ports = {}
     _base_urls = {}
+    _tokens = {}
 
     @keyword
     def start_new_jupyter_server(
-        self, command=None, port=None, base_url=None, *args, **config
+        self,
+        command=None,
+        port=None,
+        base_url=None,
+        notebook_dir=None,
+        token=None,
+        *args,
+        **config,
     ):
         """ Start a Jupyter server
 
@@ -32,7 +41,7 @@ class ServerKeywords(LibraryComponent):
         command = command or "jupyter"
         port = port or self.get_unused_port()
         base_url = base_url or "/@rf/"
-        args = args or self.build_jupyter_server_arguments(port, base_url)
+        token = str(uuid4()) if token is None else token
 
         plib = BuiltIn().get_library_instance("Process")
 
@@ -43,11 +52,14 @@ class ServerKeywords(LibraryComponent):
             os.mkdir(home_dir)
             config["env:HOME"] = home_dir
 
-        notebook_dir = config.get("cwd")
         if notebook_dir is None:
             notebook_dir = join(tmpdir, "notebooks")
             os.mkdir(notebook_dir)
             config["cwd"] = notebook_dir
+
+        args = args or self.build_jupyter_server_arguments(
+            port, base_url, token, notebook_dir
+        )
 
         handle = plib.start_process(command, *args, **config)
 
@@ -56,20 +68,22 @@ class ServerKeywords(LibraryComponent):
         self._notebook_dirs[handle] = notebook_dir
         self._ports[handle] = port
         self._base_urls[handle] = base_url
+        self._tokens[handle] = token
 
         return handle
 
     @keyword
-    def build_jupyter_server_arguments(self, port, base_url):
+    def build_jupyter_server_arguments(self, port, base_url, token, notebook_dir):
         """ Some default jupyter arguments
         """
         return [
             "notebook",
             "--no-browser",
-            "--port",
-            port,
-            "--NotebookApp.base_url",
-            base_url,
+            "--debug",
+            f"--port={port}",
+            f"--NotebookApp.token='{token}'",
+            f"--NotebookApp.base_url='{base_url}'",
+            f"--notebook-dir='{notebook_dir}'",
         ]
 
     @keyword
@@ -121,7 +135,7 @@ class ServerKeywords(LibraryComponent):
             ready = 0
             try:
                 for nbh in nbservers:
-                    urlopen("{}favicon.ico".format(self.get_jupyter_server_url(nbh)))
+                    urlopen(self.get_jupyter_server_url(nbh))
                     ready += 1
             except Exception as _error:
                 time.sleep(interval)
@@ -140,6 +154,11 @@ class ServerKeywords(LibraryComponent):
         return "http://localhost:{}{}".format(self._ports[nbh], self._base_urls[nbh])
 
     @keyword
+    def get_jupyter_server_token(self, nbserver=None):
+        nbh = nbserver or self._handles[-1]
+        return self._tokens[nbh]
+
+    @keyword
     def wait_for_new_jupyter_server_to_be_ready(self, command=None, *args, **config):
         handle = self.start_new_jupyter_server(command, *args, **config)
         self.wait_for_jupyter_server_to_be_ready(handle)
@@ -151,20 +170,17 @@ class ServerKeywords(LibraryComponent):
         """
         plib = BuiltIn().get_library_instance("Process")
         terminated = 0
-        for handle in self._handles:
-            plib.terminate_process(handle, kill=True)
+        for nbh in self._handles:
+            plib.terminate_process(nbh, kill=True)
             terminated += 1
-
-        for tmpdir in self._tmpdirs.values():
-            shutil.rmtree(tmpdir)
+            shutil.rmtree(self._tmpdirs[nbh])
 
         self._handles = []
-        self._tmpdirs = {}
 
         return terminated
 
     @keyword
-    def get_unused_port():
+    def get_unused_port(self):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.bind(("localhost", 0))
         s.listen(1)

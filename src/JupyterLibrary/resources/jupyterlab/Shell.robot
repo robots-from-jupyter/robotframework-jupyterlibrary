@@ -7,8 +7,9 @@ Resource   JupyterLibrary/resources/jupyterlab/Selectors.robot
 Open JupyterLab
     [Arguments]    ${browser}=headlessfirefox  ${nbserver}=${None}
     [Documentation]    Open JupyterLab in a Browser
-    ${info} =  Get Jupyter Server Info  ${nbserver}
-    Open Browser    ${info['url']}lab?token=${info['token']}    ${browser}
+    ${url} =  Get Jupyter Server URL  ${nbserver}
+    ${token} =  Get Jupyter Server Token  ${nbserver}
+    Open Browser    ${url}lab?token=${token}    ${browser}
     Wait for JupyterLab Splash Screen
 
 Wait for JupyterLab Splash Screen

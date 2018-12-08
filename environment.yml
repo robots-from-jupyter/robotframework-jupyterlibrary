@@ -10,7 +10,7 @@ dependencies:
   - geckodriver
   - isort
   - jupyterlab
-  - nodejs >8,<9
+  - nodejs >=8.12,<9
   - pillow
   - python-chromedriver-binary
   - robotframework
