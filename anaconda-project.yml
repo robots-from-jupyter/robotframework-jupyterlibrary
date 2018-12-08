@@ -17,9 +17,9 @@ commands:
     unix: pip install -e . --no-deps --ignore-installed --no-cache-dir -vvv
     env_spec: rfjl37
 
-  install:
-    unix: pip install . --no-deps --ignore-installed --no-cache-dir -vvv
-    env_spec: rfjl37
+  setup:win:
+    windows: pip install -e . --no-deps --ignore-installed --no-cache-dir -vvv
+    env_spec: win_rfjl37
 
   lint:
     unix: python -m scripts.lint
@@ -29,6 +29,10 @@ commands:
     unix: rm -rf _artifacts/test_output && python -m scripts.atest
     env_spec: rfjl37
 
+  atest:win:
+    unix: rm -rf _artifacts/test_output && python -m scripts.atest
+    env_spec: win_rfjl37
+
   clean:
     unix: rm -rf $(find src | grep __pycache__)
     env_spec: rfjl37
@@ -37,6 +41,17 @@ commands:
     unix: python setup.py sdist --dist-dir=_artifacts/sdist
     env_spec: rfjl37
 
+  sdist:win:
+    unix: python setup.py sdist --dist-dir=_artifacts/sdist
+    env_spec: win_rfjl37
+
+  install:
+    unix: pip install . --no-deps --ignore-installed --no-cache-dir -vvv
+    env_spec: rfjl37
+
+  install:win:
+    unix:  python -m pip install _artifacts\sdist\robotframework-jupyterlibrary-0.1.0.tar.gz --no-deps --ignore-installed
+    env_spec: win_rfjl37
 
 env_specs:
   robotframework-jupyterlibrary:
@@ -46,7 +61,7 @@ env_specs:
     - geckodriver
     - isort
     - jupyterlab
-    - nodejs >=8.12,<9
+    - nodejs
     - pillow
     - python-chromedriver-binary
     - robotframework
@@ -58,7 +73,15 @@ env_specs:
     channels:
     - conda-forge
     - defaults
+
   rfjl37:
+    inherit_from:
+    - robotframework-jupyterlibrary
+    packages:
+    - python >=3.7,<3.8
+    - nodejs >=8.12,<9
+
+  win_rfjl37:
     inherit_from:
     - robotframework-jupyterlibrary
     packages:
