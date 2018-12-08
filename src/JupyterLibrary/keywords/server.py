@@ -60,6 +60,8 @@ class ServerKeywords(LibraryComponent):
         args = args or self.build_jupyter_server_arguments(port, base_url, token)
 
         handle = plib.start_process(command, *args, **config)
+        BuiltIn().sleep("5s")
+        plib.process_should_be_running(handle)
 
         self._handles += [handle]
         self._tmpdirs[handle] = tmpdir
