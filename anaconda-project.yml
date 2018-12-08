@@ -33,6 +33,10 @@ commands:
     unix: rm -rf $(find src | grep __pycache__)
     env_spec: rfjl37
 
+  sdist:
+    unix: python setup.py sdist --dist-dir=_artifacts/sdist
+    env_spec: rfjl37
+
 
 env_specs:
   robotframework-jupyterlibrary:

@@ -5,8 +5,17 @@ steps:
   - script: python -m scripts.lint
     displayName: Lint
 
-  - script: python -m pip install . --no-deps --ignore-installed -vv
-    displayName: Install
+  - ${{ if not(eq(parameters.name, 'Windows')) }}:
+    - script: python setup.py sdist --dist-dir=_artifacts/sdist
+      displayName: Build Source Distribution
+    - script: python -m pip install _artifacts/sdist/*.tar.gz --no-deps --ignore-installed
+      displayName: Install Source Distribution
+
+  - ${{ if eq(parameters.name, 'Windows') }}:
+    - script: python setup.py sdist --dist-dir=_artifacts\sdist
+      displayName: Build Source Distribution
+    - script: python -m pip install _artifacts\sdist\*.tar.gz --no-deps --ignore-installed
+      displayName: Install Source Distribution
 
   - script: python -m scripts.atest
     displayName: Test
