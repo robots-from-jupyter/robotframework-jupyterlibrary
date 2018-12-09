@@ -19,4 +19,4 @@ IPython Notebook Outputs
     : FOR    ${i}    IN RANGE    ${10}
     \    Add and Run Cell    print("${i} hello world " * ${i ** 2})
     Wait Until Kernel Is Idle
-    Screenshot Each Output of Active Document    ${OUTPUT_DIR}${/}ipython_outputs/
+    Screenshot Each Output of Active Document    ${OUTPUT_DIR}${/}ipython_outputs${/}

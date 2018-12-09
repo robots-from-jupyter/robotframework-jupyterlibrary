@@ -31,7 +31,7 @@ Start three servers
 
 Notebook Files
     [Setup]    Create File    ${OUTPUT_DIR}${/}foo.txt    bar
-    ${nb1} =    Start New Jupyter Server  stdout=${OUTPUT_DIR}${/}files.log    stderr=STDOUT
+    ${nb1} =    Start New Jupyter Server    stdout=${OUTPUT_DIR}${/}files.log    stderr=STDOUT
     Copy Files to Jupyter Directory    ${OUTPUT_DIR}${/}*.txt
     ${nbdir} =    Get Jupyter Directory    ${nb1}
     ${out} =    Get File    ${nbdir}${/}foo.txt
