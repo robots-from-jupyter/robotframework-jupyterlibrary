@@ -61,8 +61,6 @@ class ServerKeywords(LibraryComponent):
         args = args or self.build_jupyter_server_arguments(port, base_url, token)
 
         handle = plib.start_process(command, *args, **config)
-        BuiltIn().sleep("5s")
-        plib.process_should_be_running(handle)
 
         self._handles += [handle]
         self._tmpdirs[handle] = tmpdir
@@ -81,9 +79,9 @@ class ServerKeywords(LibraryComponent):
             "notebook",
             "--no-browser",
             "--debug",
-            f"--port={port}",
-            f"--NotebookApp.token='{token}'",
-            f"--NotebookApp.base_url='{base_url}'",
+            "--port={}".format(port),
+            "--NotebookApp.token='{}'".format(token),
+            "--NotebookApp.base_url='{}'".format(base_url),
         ]
 
     @keyword
@@ -169,22 +167,40 @@ class ServerKeywords(LibraryComponent):
         """ Close all Jupyter servers started by JupyterLibrary
         """
         plib = BuiltIn().get_library_instance("Process")
-        terminated = 0
-        for nbh in self._handles:
-            plib.terminate_process(nbh, kill=True)
-            try:
-                shutil.rmtree(self._tmpdirs[nbh])
-            except Exception:
-                BuiltIn().log(f"Failed to delete {self._tmpdirs[nbh]}")
-                BuiltIn().sleep("5s")
-                try:
-                    shutil.rmtree(self._tmpdirs[nbh])
-                except Exception:
-                    BuiltIn().log(f"Giving up {self._tmpdirs[nbh]}")
 
-            terminated += 1
+        self.wait_for_jupyter_server_to_be_ready()
+
+        terminated = 0
+        shutdown = 0
+        for nbh in self._handles:
+            url = self.get_jupyter_server_url(nbh)
+            token = self.get_jupyter_server_token(nbh)
+            try:
+                urlopen("{}api/shutdown?token={}".format(url, token), data=[])
+                shutdown += 1
+            except Exception as err:
+                BuiltIn().log(err)
+
+        if shutdown:
+            for nbh in self._handles:
+                try:
+                    plib.terminate_process(nbh, kill=True)
+                    terminated += 1
+                except Exception as err:
+                    BuiltIn().log(err)
+
+        # give processes a mo to shutdown
+        if terminated or shutdown:
+            BuiltIn().sleep("5s")
+            for nbh in self._handles:
+                shutil.rmtree(self._tmpdirs[nbh])
 
         self._handles = []
+        self._tmpdirs = {}
+        self._notebook_dirs = {}
+        self._ports = {}
+        self._base_urls = {}
+        self._tokens = {}
 
         return terminated
 

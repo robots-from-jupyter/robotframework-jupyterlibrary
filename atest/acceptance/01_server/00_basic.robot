@@ -26,8 +26,6 @@ Start three servers
     Should Contain    ${log1}    The Jupyter Notebook is running    msg=Log should contain expected status message
     ${log2} =    Get Process Result    ${nb2}    stderr=${True}
     Should Contain    ${log2}    The Jupyter Notebook is running    msg=Log should contain expected status message
-    ${log3} =    Get Process Result    ${nb3}    stderr=${True}
-    Should Contain    ${log2}    The Jupyter Notebook is running    msg=Log should contain expected status message
     ${terminated} =    Terminate All Jupyter Servers
     Should be equal as integers    ${terminated}    0    msg=No servers should have been terminated
 
