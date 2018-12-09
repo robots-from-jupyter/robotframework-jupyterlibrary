@@ -13,4 +13,5 @@ Maybe Open JupyterLab Sidebar
     [Arguments]  ${data id}
     [Documentation]  Attempt to open a JupyterLab sidebar (if not already open)
     Maybe Close JupyterLab Sidebar
-    Click Element  css:${JLAB CSS SIDEBAR TAB}[data-id="${data id}"]
+    ${sel} =  Catenate   SEPARATOR=${EMPTY}   ${JLAB CSS SIDEBAR TAB}  [data-id="${data id}"]
+    Click Element  css:${sel}
