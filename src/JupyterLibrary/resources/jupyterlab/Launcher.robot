@@ -6,7 +6,8 @@ Resource   JupyterLibrary/resources/jupyterlab/Selectors.robot
 Launch a new JupyterLab Document
     [Arguments]    ${kernel}=Python 3    ${category}=Notebook
     [Documentation]    Use the JupyterLab launcher to launch Notebook or Console
-    Click Element    xpath:${JLAB XP CARD}[@title='${kernel}'][@data-category='${category}']
+    ${sel} =  Catenate  SEPARATOR=${EMPTY}  ${JLAB XP CARD}  [@title='${kernel}'][@data-category='${category}']
+    Click Element    xpath:${sel}
     Wait Until Page Does Not Contain Element    css:${JLAB CSS SPINNER}
     Wait Until Page Contains Element    css:${JLAB CSS CELL}
     Sleep    0.1s

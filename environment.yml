@@ -9,7 +9,7 @@ dependencies:
   - flake8
   - geckodriver
   - isort
-  - jupyterlab >=0.45
+  - jupyterlab >=0.35
   - nodejs
   - pillow
   - python-chromedriver-binary

@@ -21,7 +21,10 @@ Wait for JupyterLab Splash Screen
 Click JupyterLab Menu
     [Arguments]    ${menu_label}
     [Documentation]    Click a top-level JupyterLab Menu bar, e.g. File, Help, etc.
-    ${xpath} =  Set Variable  ${JLAB XP TOP}${JLAB XP MENU LABEL}[text() = '${menu_label}']
+    ${xpath} =  Catenate  SEPARATOR=${EMPTY}
+    ...  ${JLAB XP TOP}
+    ...  ${JLAB XP MENU LABEL}
+    ...  [text() = '${menu_label}']
     Wait Until Page Contains Element    ${xpath}
     Mouse Over    ${xpath}
     Click Element    ${xpath}
@@ -29,7 +32,9 @@ Click JupyterLab Menu
 Click JupyterLab Menu Item
     [Arguments]    ${item_label}
     [Documentation]    Click a top-level JupyterLab Menu Item (not File, Help, etc.)
-    ${item} =    Set Variable    ${JLAB XP MENU ITEM LABEL}[text() = '${item_label}']
+    ${item} =    Catenate  SEPARATOR=${EMPTY}
+    ...    ${JLAB XP MENU ITEM LABEL}
+    ...   [text() = '${item_label}']
     Wait Until Page Contains Element    ${item}
     Mouse Over    ${item}
     Click Element    ${item}
