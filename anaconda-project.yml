@@ -54,8 +54,17 @@ commands:
     env_spec: rfjl37
 
   install:win:
-    windows: python -m pip install _artifacts\\sdist\\robotframework-jupyterlibrary-0.1.0.tar.gz --no-deps --ignore-installed -vv
+    windows: python -m pip install _artifacts\\sdist\\robotframework-jupyterlibrary-0.1.0.tar.gz
+      --no-deps --ignore-installed -vv
     env_spec: win_rfjl37
+
+  docs:
+    unix: cd docs && make html
+    env_spec: rfjl37
+
+  docs:libdoc:
+    unix: python -m robot.libdoc JupyterLibrary docs/JupyterLibrary.html
+    env_spec: rfjl37
 
 env_specs:
   robotframework-jupyterlibrary:
@@ -65,13 +74,17 @@ env_specs:
     - geckodriver
     - isort
     - jupyterlab >=0.35
+    - nbsphinx
     - nodejs
     - pillow
     - python-chromedriver-binary
+    - recommonmark
     - robotframework >=3.1
     - robotframework-lint
     - robotframework-seleniumlibrary >=3.2
     - six
+    - sphinx
+    - sphinx_rtd_theme
     - pip:
       - nteract_on_jupyter
     channels:

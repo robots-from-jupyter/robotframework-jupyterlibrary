@@ -1,7 +1,7 @@
 from subprocess import check_call
 
 
-PY_SRC = ["src", "setup.py", "scripts"]
+PY_SRC = ["src", "setup.py", "scripts", "docs"]
 RF_SRC = ["atest", "src"]
 
 
