@@ -9,13 +9,13 @@ dependencies:
   - flake8
   - geckodriver
   - isort
-  - jupyterlab
+  - jupyterlab >=0.45
   - nodejs
   - pillow
   - python-chromedriver-binary
-  - robotframework
+  - robotframework >=3.1
   - robotframework-lint
-  - robotframework-seleniumlibrary
+  - robotframework-seleniumlibrary >=3.2
   - six
   - pip:
     - nteract_on_jupyter

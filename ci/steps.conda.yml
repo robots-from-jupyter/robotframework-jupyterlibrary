@@ -11,13 +11,13 @@ steps:
         flake8
         geckodriver
         isort
-        jupyterlab
+        jupyterlab>=0.35
         nodejs>=10,<11
         pillow
         python-chromedriver-binary
         python>=3.6,<3.7
-        robotframework
+        robotframework>=3.1
         robotframework-lint
-        robotframework-seleniumlibrary
+        robotframework-seleniumlibrary>=3.2
   - script: pip install nteract_on_jupyter --no-deps --ignore-installed -vv
     displayName: Pip dependencies
