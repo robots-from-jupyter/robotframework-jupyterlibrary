@@ -1,14 +1,14 @@
-import os
 import subprocess
 import sys
+from os.path import abspath, dirname, join
 
 # import for PATH side-effect. yuck.
 import chromedriver_binary  # noqa
 
 
-here = os.path.dirname(__file__)
-out = os.path.join(here, "..", "_artifacts", "test_output")
-tests = os.path.join(here, "..", "atest", "acceptance")
+here = dirname(__file__)
+out = abspath(join(here, "..", "_artifacts", "test_output"))
+tests = abspath(join(here, "..", "atest", "acceptance"))
 
 
 def run_tests(*robot_args):
