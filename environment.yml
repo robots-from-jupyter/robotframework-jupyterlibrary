@@ -10,15 +10,12 @@ dependencies:
   - geckodriver
   - isort
   - jupyterlab
-  - nodejs >8,<9
+  - nodejs
   - pillow
-  - pytest
-  - pytest-cov
   - python-chromedriver-binary
   - robotframework
   - robotframework-lint
   - robotframework-seleniumlibrary
-  - sphinx
-  - sphinx_rtd_theme
+  - six
   - pip:
     - nteract_on_jupyter

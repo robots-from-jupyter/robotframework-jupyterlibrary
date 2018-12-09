@@ -1,0 +1,34 @@
+parameters:
+  name: Linux
+
+steps:
+  - script: python -m scripts.lint
+    displayName: Lint
+
+  - ${{ if not(eq(parameters.name, 'Windows')) }}:
+    - script: python setup.py sdist --dist-dir=_artifacts/sdist
+      displayName: Build Source Distribution
+    - script: python -m pip install _artifacts/sdist/robotframework-jupyterlibrary-0.1.0.tar.gz --no-deps --ignore-installed
+      displayName: Install Source Distribution
+
+  - ${{ if eq(parameters.name, 'Windows') }}:
+    - script: python setup.py sdist --dist-dir=_artifacts\sdist
+      displayName: Build Source Distribution
+    - script: python -m pip install _artifacts\sdist\robotframework-jupyterlibrary-0.1.0.tar.gz --no-deps --ignore-installed
+      displayName: Install Source Distribution
+
+  - script: python -m scripts.atest
+    displayName: Test
+
+  - task: PublishTestResults@2
+    displayName: Publish Test Results
+    inputs:
+      testResultsFiles: _artifacts/test_output/**/*.xunit.xml
+    condition: always()
+
+  - task: PublishBuildArtifacts@1
+    displayName: Publish Robot Logs
+    inputs:
+      PathtoPublish: _artifacts/test_output
+      ArtifactName: ${{ parameters.name }} tests
+    condition: always()

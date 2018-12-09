@@ -1,9 +1,7 @@
 from glob import glob
 from os.path import basename, dirname, join
 
-from robot.api import ResourceFile
 from robot.libraries.BuiltIn import BuiltIn
-from robot.utils import find_file
 from SeleniumLibrary import SeleniumLibrary
 from SeleniumLibrary.utils.librarylistener import LibraryListener
 

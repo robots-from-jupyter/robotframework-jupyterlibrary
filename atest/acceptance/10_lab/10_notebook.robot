@@ -1,5 +1,5 @@
 *** Settings ***
-Suite Setup       Wait for New Jupyter Server to be Ready
+Suite Teardown    Close All Browsers
 Test Teardown     Reset JupyterLab and Close
 Default Tags      notebook
 Library           JupyterLibrary
@@ -19,9 +19,4 @@ IPython Notebook Outputs
     : FOR    ${i}    IN RANGE    ${10}
     \    Add and Run Cell    print("${i} hello world " * ${i ** 2})
     Wait Until Kernel Is Idle
-    Screenshot Each Output of Active Document    ${OUTPUT_DIR}${/}ipython_outputs/
-
-*** Keywords ***
-Clean Up Everything
-    Close All Browsers
-    Terminate All Processes
+    Screenshot Each Output of Active Document    ipython_outputs${/}
