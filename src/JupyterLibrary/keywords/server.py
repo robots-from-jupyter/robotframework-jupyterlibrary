@@ -53,6 +53,12 @@ class ServerKeywords(LibraryComponent):
             os.mkdir(home_dir)
             config["env:HOME"] = home_dir
 
+        if "stdout" not in config:
+            config["stdout"] = join(tmpdir, "server.log")
+
+        if "stderr" not in config:
+            config["stderr"] = "STDOUT"
+
         if notebook_dir is None:
             notebook_dir = join(tmpdir, "notebooks")
             os.mkdir(notebook_dir)
