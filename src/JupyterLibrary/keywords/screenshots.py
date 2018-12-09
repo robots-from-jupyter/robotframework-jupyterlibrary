@@ -18,7 +18,7 @@ class ScreenshotKeywords(LibraryComponent):
     def capture_element_screenshot(self, locator, filename):
         el = self.find_element(locator)
         bbox = self.normalize_bounding_box({**el.location, **el.size})
-        BuiltIn().run_keyword("Capture Page Screenshot", filename)
+        filename = BuiltIn().run_keyword("Capture Page Screenshot", filename)
         self.crop_image(filename, **bbox)
 
     def normalize_bounding_box(self, bbox):

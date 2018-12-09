@@ -34,7 +34,7 @@ commands:
     env_spec: rfjl37
 
   atest:win:
-    windows: rm -rf _artifacts\test_output && python -m scripts.atest
+    windows: rmdir /s /q _artifacts\test_output && python -m scripts.atest
     env_spec: win_rfjl37
 
   clean:
