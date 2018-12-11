@@ -1,0 +1,45 @@
+:root {
+  --rf-blue: rgb(0,192,181);
+}
+@font-face {
+  font-family: "OCR-A";
+  src: url("../fonts/OCRA.woff2") format("woff2");
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "OCR-A", monospace;
+  text-transform: uppercase;
+}
+
+.wy-side-nav-search,
+.wy-nav-top {
+  background-color: var(--rf-blue);
+}
+
+a {
+  color: var(--rf-blue);
+  font-weight: bold;
+}
+
+iframe {
+  height: 95vh;
+}
+
+a:hover, a:active {
+  text-decoration: underline;
+  color: var(--rf-blue);
+}
+
+.wy-side-nav-search a:hover,
+.wy-side-nav-search a:active {
+  color: black;
+  background-color: transparent;
+}
+
+div.nbinput div.prompt, div.nboutput div.prompt {
+  display: none;
+}
+
+.wy-nav-content {
+  max-width: unset;
+}

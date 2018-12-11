@@ -6,7 +6,20 @@
 # full list see the documentation:
 # http://www.sphinx-doc.org/en/master/config
 
+import subprocess
+import sys
+from pathlib import Path
+from tempfile import TemporaryDirectory
+
+import nbsphinx
 from recommonmark.parser import CommonMarkParser
+
+
+nbsphinx.RST_TEMPLATE = nbsphinx.RST_TEMPLATE.replace(
+    """{% block input -%}""",
+    """{% block input -%}"""
+    """{% if not cell.metadata.get("jupyter", {}).get("source_hidden", False) -%}""",
+).replace("""{% endblock input %}""", """{%- endif -%}{%- endblock input %}""")
 
 
 # -- Path setup --------------------------------------------------------------
@@ -78,9 +91,7 @@ language = None
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = []
-
-html_extra_path = ["libdoc/JupyterLibrary.html"]
+exclude_patterns = [".ipynb_checkpoints", "**/.ipynb_checkpoints"]
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = None
@@ -211,8 +222,8 @@ todo_include_todos = True
 
 
 def setup(app):
-    import sys
-    import subprocess
+    here = Path(__file__)
+    root = (here / ".." / ".." / "..").resolve()
 
     subprocess.run(
         [
@@ -220,6 +231,29 @@ def setup(app):
             "-m",
             "robot.libdoc",
             "JupyterLibrary",
-            "source/libdoc/JupyterLibrary.html",
+            "source/_static/JupyterLibrary.html",
         ]
     )
+
+    resources = root / "src" / "JupyterLibrary" / "resources"
+
+    print("looking for resources in", resources)
+    for top_level in resources.glob("*"):
+        with TemporaryDirectory() as td:
+            tdp = Path(td)
+            agg = ""
+            for sub in top_level.rglob("*.robot"):
+                agg += sub.read_text()
+            out_file = Path(tdp / f"{top_level.name}.robot")
+            out_file.write_text(agg)
+            subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "robot.libdoc",
+                    str(out_file),
+                    f"source/_static/{top_level.name}.html",
+                ]
+            )
+
+    app.add_css_file("css/custom.css")

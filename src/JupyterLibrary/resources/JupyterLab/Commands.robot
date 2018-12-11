@@ -1,12 +1,14 @@
 *** Settings ***
-Documentation     Run JupyterLab commands
-Resource   JupyterLibrary/resources/jupyterlab/Selectors.robot
+Resource   JupyterLibrary/resources/JupyterLab/Selectors.robot
 
 
 *** Keywords ***
 Execute JupyterLab Command
     [Arguments]    ${command}  ${accept}=${True}  ${close}=${True}
-    [Documentation]    Use the JupyterLab Command Palette to run a command
+    [Documentation]    Use the JupyterLab
+    ...   [https://jupyterlab.readthedocs.io/en/stable/user/commands.html|Command Palette]
+    ...   to run a command and ``accept`` any resulting dialogs, then ``close``
+    ...   the Command Palette.
     Maybe accept a JupyterLab prompt
     Maybe Open JupyterLab Sidebar  command-palette
     Input Text    css:${JLAB CSS CMD INPUT}    ${command}
@@ -16,6 +18,7 @@ Execute JupyterLab Command
     Run Keyword If  ${close}  Maybe Close JupyterLab Sidebar
 
 Reset JupyterLab and Close
-    [Documentation]    Try to clean up after doing some things to the JupyterLab state
+    [Documentation]    Try to clean up after doing some things to the JupyterLab
+    ...    open in the current browser, then close the browser.
     Execute JupyterLab Command    Reset Application State
     Close Browser
