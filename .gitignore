@@ -7,3 +7,4 @@ envs/
 lib/
 Untitled*.*
 libdoc/
+*.html
