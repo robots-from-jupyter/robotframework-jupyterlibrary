@@ -21,12 +21,12 @@ Screenshot Markdown of Active JupyterLab Cell
 Screenshot Each Output of Active JupyterLab Document
     [Arguments]  ${prefix}
     [Documentation]  Capture all of the outputs of the current **Document** as
-    ...   screenshots with a ``prefix``. 
+    ...   screenshots with a ``prefix``.
     ${cells} =  Get WebElements  css:${JLAB CSS ACTIVE DOC CELLS}
     :FOR  ${i}   IN RANGE  ${cells.__len__()}
     \   Click element  ${cells[${i}]}
     \   Run Keyword And Ignore Error    Click element  ${cells[${i + 1}]}
     \   Click element  ${cells[${i}]}
     \   Sleep  0.1s
-    \   Screenshot each output of active cell	${prefix}_cell_${i}
-    \   Screenshot Markdown of active cell	${prefix}_cell_${i}
+    \   Screenshot Each Output of Active JupyterLab Cell	${prefix}_cell_${i}
+    \   Screenshot Markdown of Active JupyterLab Cell 	${prefix}_cell_${i}

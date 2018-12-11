@@ -29,7 +29,7 @@ Start three servers
     ${terminated} =    Terminate All Jupyter Servers
     Should be equal as integers    ${terminated}    0    msg=No servers should have been terminated
 
-Notebook Files
+Server Files
     [Setup]    Create File    ${OUTPUT_DIR}${/}foo.txt    bar
     ${nb1} =    Start New Jupyter Server    stdout=${OUTPUT_DIR}${/}files.log    stderr=STDOUT
     Copy Files to Jupyter Directory    ${OUTPUT_DIR}${/}*.txt

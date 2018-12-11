@@ -17,6 +17,6 @@ IPython Notebook Outputs
     Open JupyterLab
     Launch a new JupyterLab Document
     : FOR    ${i}    IN RANGE    ${10}
-    \    Add and Run Cell    print("${i} hello world " * ${i ** 2})
+    \    Add and Run JupyterLab Code Cell    print("${i} hello world " * ${i ** 2})
     Wait Until JupyterLab Kernel Is Idle
     Screenshot Each Output of Active JupyterLab Document    ipython_outputs${/}

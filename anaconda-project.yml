@@ -78,7 +78,6 @@ env_specs:
     - nodejs
     - pillow
     - python-chromedriver-binary
-    - recommonmark
     - robotframework >=3.1
     - robotframework-lint
     - robotframework-seleniumlibrary >=3.2

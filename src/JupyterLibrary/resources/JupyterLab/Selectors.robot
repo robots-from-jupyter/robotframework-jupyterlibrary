@@ -12,7 +12,6 @@ ${JLAB CSS BUSY KERNEL}  .jp-Toolbar-kernelStatus.jp-FilledCircleIcon
 ${JLAB CSS CELL}       .jp-Notebook .jp-Cell:last-of-type .jp-InputArea-editor .CodeMirror
 ${JLAB CSS CMD INPUT}    .p-CommandPalette-input
 ${JLAB CSS CMD ITEM}    .p-CommandPalette-item
-${JLAB CSS CMD PALETTE}    li[data-id="command-palette"]
 ${JLAB CSS ICON ADD}  .jp-AddIcon
 ${JLAB CSS ICON RUN}  .jp-RunIcon
 ${JLAB CSS NB TOOLBAR}  .jp-NotebookPanel-toolbar

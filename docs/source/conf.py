@@ -12,7 +12,6 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 import nbsphinx
-from recommonmark.parser import CommonMarkParser
 
 
 nbsphinx.RST_TEMPLATE = nbsphinx.RST_TEMPLATE.replace(
@@ -73,10 +72,7 @@ templates_path = ["_templates"]
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 #
-source_suffix = [".rst", ".md"]
-
-
-source_parsers = {".md": CommonMarkParser}
+source_suffix = ".rst"
 
 # The master toctree document.
 master_doc = "index"

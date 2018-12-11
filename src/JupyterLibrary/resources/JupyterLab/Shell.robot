@@ -7,15 +7,15 @@ Documentation   Keywords for working with the JupyterLab web application
 
 *** Keywords ***
 Open JupyterLab
-    [Arguments]    ${browser}=headlessfirefox  ${nbserver}=${None}  ${url}=${None}   &{configuration}
+    [Arguments]    ${browser}=headlessfirefox  ${nbserver}=${None}  ${url}=${EMPTY}   &{configuration}
     [Documentation]    Open JupyterLab, served from the given (or most-recently-started)
     ...   ``nbserver`` in a ``browser`` (or ``headlessfirefox``) or ``url``,
     ...   then wait for the splash screen.
-    ...   Extra ``configuration`` is passed on to SeleniumLibrary's **Open Browser**.
-    ${url_} =  Run Keyword If    not "${url}"  Get Jupyter Server URL  ${nbserver}
+    ...   Extra ``configuration`` is passed on to SeleniumLibrary's *Open Browser*.
+    ${nbserver_url} =  Run Keyword If    not "${url}"  Get Jupyter Server URL  ${nbserver}
     ${token} =  Run Keyword If    not "${url}"  Get Jupyter Server Token  ${nbserver}
-    ${url} =  Set Variable    "${url}"   ${url}  ${url_}lab?token=${token}
-    Open Browser    url=${url}    browser=${browser}  &{configuration}
+    ${final_url} =  Set Variable If   "${url}"   ${url}  ${nbserver_url}lab?token=${token}
+    Open Browser    url=${final_url}    browser=${browser}  &{configuration}
     Wait for JupyterLab Splash Screen
 
 Wait for JupyterLab Splash Screen
@@ -36,7 +36,7 @@ Click JupyterLab Menu
 Click JupyterLab Menu Item
     [Arguments]    ${label}
     [Documentation]    Click a currently-visible JupyterLab menu item by ``label``.
-    ${item} =    Set Variable  ${JLAB XP MENU ITEM LABEL}\[text() = '${item_label}']
+    ${item} =    Set Variable  ${JLAB XP MENU ITEM LABEL}\[text() = '${label}']
     Wait Until Page Contains Element    ${item}
     Mouse Over    ${item}
     Click Element    ${item}
