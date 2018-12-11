@@ -43,3 +43,22 @@ div.nbinput div.prompt, div.nboutput div.prompt {
 .wy-nav-content {
   max-width: unset;
 }
+
+
+#rtd-search-form input[type=text] {
+  border: 0;
+  border-radius: 0;
+  --notchSize: 9px;
+
+  clip-path:
+    polygon(
+      0% var(--notchSize),
+      var(--notchSize) 0%,
+      calc(100% - var(--notchSize)) 0%,
+      100% var(--notchSize),
+      100% calc(100% - var(--notchSize)),
+      calc(100% - var(--notchSize)) 100%,
+      var(--notchSize) 100%,
+      0% calc(100% - var(--notchSize))
+    );
+}
