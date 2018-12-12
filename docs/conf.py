@@ -218,29 +218,29 @@ todo_include_todos = True
 
 
 def setup(app):
-    here = Path(__file__)
-    root = (here / ".." / ".." / "..").resolve()
+    here = Path(__file__).parent
+    root = here.parent.resolve()
 
-    subprocess.run(
+    subprocess.check_call(
         [
             sys.executable,
             "-m",
             "robot.libdoc",
             "JupyterLibrary",
-            "source/_static/JupyterLibrary.html",
+            str(here / "_static" / "JupyterLibrary.html"),
         ]
     )
 
-    resources = root / "src" / "JupyterLibrary" / "resources"
+    client_resources = root / "src" / "JupyterLibrary" / "resources"
 
-    print("looking for resources in", resources)
-    for top_level in resources.glob("*"):
+    print("looking for resources in", client_resources)
+    for client in client_resources.glob("*"):
         with TemporaryDirectory() as td:
             tdp = Path(td)
             agg = ""
-            for sub in top_level.rglob("*.robot"):
+            for sub in client.rglob("*.robot"):
                 agg += sub.read_text()
-            out_file = Path(tdp / f"{top_level.name}.robot")
+            out_file = Path(tdp / f"{client.name}.robot")
             out_file.write_text(agg)
             subprocess.run(
                 [
@@ -248,7 +248,7 @@ def setup(app):
                     "-m",
                     "robot.libdoc",
                     str(out_file),
-                    f"source/_static/{top_level.name}.html",
+                    str(here / "_static" / f"{client.name}.html"),
                 ]
             )
 

@@ -59,11 +59,7 @@ commands:
     env_spec: win_rfjl37
 
   docs:
-    unix: cd docs && make html
-    env_spec: rfjl37
-
-  docs:libdoc:
-    unix: python -m robot.libdoc JupyterLibrary docs/JupyterLibrary.html
+    unix: sphinx-build -M html docs dist/docs
     env_spec: rfjl37
 
 env_specs:

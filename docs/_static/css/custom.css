@@ -11,6 +11,26 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
 }
 
+.rst-content blockquote {
+  padding: 24px;
+  margin-left: 0;
+  font-size: 120%;
+  font-style: italic;
+  background: linear-gradient(to right, #eee 10px, #fff 0)
+}
+
+h1 {
+  font-size: 350%;
+}
+
+h2 {
+  font-size: 200%;
+}
+
+p {
+  max-width: 45em;
+}
+
 .wy-side-nav-search,
 .wy-nav-top {
   background-color: var(--rf-blue);
@@ -45,7 +65,8 @@ div.nbinput div.prompt, div.nboutput div.prompt {
 }
 
 
-#rtd-search-form input[type=text] {
+#rtd-search-form input[type=text],
+.rst-content blockquote {
   border: 0;
   border-radius: 0;
   --notchSize: 9px;
@@ -61,4 +82,26 @@ div.nbinput div.prompt, div.nboutput div.prompt {
       var(--notchSize) 100%,
       0% calc(100% - var(--notchSize))
     );
+}
+
+.rst-content .section .toctree-wrapper > ul {
+  display: flex;
+  flex-direction: row;
+}
+
+.rst-content .section .toctree-wrapper > ul > li {
+  flex: 1;
+}
+
+.rst-content .section .toctree-wrapper ul,
+.rst-content .section .toctree-wrapper li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.rst-content .section .toctree-wrapper .toctree-l1 > a {
+  font-family: "OCR-A", monospace;
+  text-transform: uppercase;
+  font-size: 150%;
 }
