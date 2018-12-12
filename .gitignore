@@ -6,6 +6,4 @@ build/
 envs/
 lib/
 Untitled*.*
-libdoc/
 *.html
-dist/

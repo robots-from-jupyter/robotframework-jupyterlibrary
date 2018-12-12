@@ -59,7 +59,7 @@ commands:
     env_spec: win_rfjl37
 
   docs:
-    unix: sphinx-build -M html docs dist/docs
+    unix: sphinx-build -M html docs _artifacts/docs
     env_spec: rfjl37
 
 env_specs:
