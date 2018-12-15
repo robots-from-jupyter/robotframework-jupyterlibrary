@@ -1,9 +1,10 @@
 name: robotframework-jupyterlibrary
 type: sphinx
 conda:
-     file: environment.yml
+  file: environment.yml
 python:
   version: 3
+  setup_py_install: true
 formats:
   - htmlzip
   - epub

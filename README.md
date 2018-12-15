@@ -4,7 +4,10 @@
 [Robot Framework]: http://robotframework.org
 [Jupyter]: https://jupyter.org
 
-[![binder-badge][]][binder] [![pipeline-badge]][pipeline]
+| docs                    | demo                        | pipes                         |
+|:-----------------------:|:---------------------------:|:-----------------------------:|
+| [![docs-badge][]][docs] | [![binder-badge][]][binder] | [![pipeline-badge]][pipeline] |
+
 
 # Using
 Write `.robot` files that use `JupyterLibrary` keywords.
@@ -58,3 +61,5 @@ See the [acceptance tests][] for examples.
 [binder]: https://mybinder.org/v2/gh/bollwyvl/robotframework-jupyterlibrary/master?urlpath=lab/tree/README.md
 [pipeline-badge]: https://dev.azure.com/nickbollweg/nickbollweg/_apis/build/status/bollwyvl.robotframework-jupyterlibrary
 [pipeline]: https://dev.azure.com/nickbollweg/nickbollweg/_build/latest?definitionId=2
+[docs-badge]: https://readthedocs.org/projects/robotframework-jupyterlibrary/badge/?version=latest
+[docs]: https://robotframework-jupyterlibrary.readthedocs.io
