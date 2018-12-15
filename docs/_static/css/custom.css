@@ -43,6 +43,7 @@ a {
 
 iframe {
   height: 95vh;
+  border: 0;
 }
 
 a:hover, a:active {
