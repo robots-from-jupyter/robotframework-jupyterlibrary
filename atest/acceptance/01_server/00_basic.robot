@@ -1,5 +1,6 @@
 *** Settings ***
 Suite Teardown    Terminate All Jupyter Servers
+Force Tags        server
 Library           JupyterLibrary
 Library           Process
 Library           OperatingSystem

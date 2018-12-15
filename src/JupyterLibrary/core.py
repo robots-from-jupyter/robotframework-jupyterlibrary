@@ -9,7 +9,7 @@ from .keywords import screenshots, server
 
 
 RESOURCES = join(dirname(__file__), "resources")
-CLIENTS = ["JupyterLab"]
+CLIENTS = ["JupyterLab", "NotebookClassic"]
 
 
 class JupyterLibrary(SeleniumLibrary):
