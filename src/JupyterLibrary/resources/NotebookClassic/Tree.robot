@@ -6,7 +6,7 @@ Documentation   Keywords for working with the Jupyter Notebook Clasic web applic
 
 
 *** Keywords ***
-Open Jupyter Notebook Classic
+Open Notebook Classic
     [Arguments]    ${browser}=headlessfirefox  ${nbserver}=${None}  ${url}=${EMPTY}   &{configuration}
     [Documentation]    Open Jupyter Notebook Classic, served from the given (or most-recently-started)
     ...   ``nbserver`` in a ``browser`` (or ``headlessfirefox``) or ``url``,
@@ -17,7 +17,7 @@ Open Jupyter Notebook Classic
     ${final_url} =  Set Variable If   "${url}"   ${url}  ${nbserver_url}tree?token=${token}
     Open Browser    url=${final_url}    browser=${browser}  &{configuration}
 
-Launch a new Jupyter Notebook Classic Notebook
+Launch a new Notebook Classic Notebook
     [Arguments]    ${kernel}=Python 3
     [Documentation]    Use the Jupyter Notebook Classic tree to launch a
     ...   Notebook with the given ``kernel``

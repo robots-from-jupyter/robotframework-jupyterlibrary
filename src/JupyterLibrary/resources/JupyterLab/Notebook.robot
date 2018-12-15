@@ -3,7 +3,7 @@ Resource   JupyterLibrary/resources/JupyterLab/Selectors.robot
 
 *** Keywords ***
 Add and Run JupyterLab Code Cell
-    [Arguments]    ${code}
+    [Arguments]    ${code}=print("hello world")
     [Documentation]    Add a ``code`` cell to the currently active notebook and run it.
     Click Element    css:${JLAB CSS NB TOOLBAR} ${JLAB CSS ICON ADD}
     Sleep    0.1s
