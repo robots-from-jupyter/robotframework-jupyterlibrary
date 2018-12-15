@@ -20,6 +20,16 @@ steps:
   - script: python -m scripts.atest
     displayName: Test
 
+  - ${{ if eq(parameters.name, 'Linux') }}:
+    - script: sphinx-build -M html docs _artifacts/docs
+      displayName: Build Docs
+    - task: PublishBuildArtifacts@1
+      displayName: Publish Docs
+      inputs:
+        PathtoPublish: _artifacts/docs/html
+        ArtifactName: ${{ parameters.name }} tests
+      condition: always()
+
   - task: PublishTestResults@2
     displayName: Publish Test Results
     inputs:

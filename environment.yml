@@ -10,6 +10,7 @@ dependencies:
   - geckodriver
   - isort
   - jupyterlab >=0.35
+  - nbsphinx
   - nodejs
   - pillow
   - python-chromedriver-binary
@@ -17,5 +18,7 @@ dependencies:
   - robotframework-lint
   - robotframework-seleniumlibrary >=3.2
   - six
+  - sphinx
+  - sphinx_rtd_theme
   - pip:
     - nteract_on_jupyter

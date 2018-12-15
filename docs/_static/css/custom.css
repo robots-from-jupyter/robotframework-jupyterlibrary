@@ -1,0 +1,108 @@
+:root {
+  --rf-blue: rgb(0,192,181);
+}
+@font-face {
+  font-family: "OCR-A";
+  src: url("../fonts/OCRA.woff2") format("woff2");
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "OCR-A", monospace;
+  text-transform: uppercase;
+}
+
+.rst-content blockquote {
+  padding: 24px;
+  margin-left: 0;
+  font-size: 120%;
+  font-style: italic;
+  background: linear-gradient(to right, #eee 10px, #fff 0)
+}
+
+h1 {
+  font-size: 350%;
+}
+
+h2 {
+  font-size: 200%;
+}
+
+p {
+  max-width: 45em;
+}
+
+.wy-side-nav-search,
+.wy-nav-top {
+  background-color: var(--rf-blue);
+}
+
+a {
+  color: var(--rf-blue);
+  font-weight: bold;
+}
+
+iframe {
+  height: 95vh;
+  border: 0;
+}
+
+a:hover, a:active {
+  text-decoration: underline;
+  color: var(--rf-blue);
+}
+
+.wy-side-nav-search a:hover,
+.wy-side-nav-search a:active {
+  color: black;
+  background-color: transparent;
+}
+
+div.nbinput div.prompt, div.nboutput div.prompt {
+  display: none;
+}
+
+.wy-nav-content {
+  max-width: unset;
+}
+
+
+#rtd-search-form input[type=text],
+.rst-content blockquote {
+  border: 0;
+  border-radius: 0;
+  --notchSize: 9px;
+
+  clip-path:
+    polygon(
+      0% var(--notchSize),
+      var(--notchSize) 0%,
+      calc(100% - var(--notchSize)) 0%,
+      100% var(--notchSize),
+      100% calc(100% - var(--notchSize)),
+      calc(100% - var(--notchSize)) 100%,
+      var(--notchSize) 100%,
+      0% calc(100% - var(--notchSize))
+    );
+}
+
+.rst-content .section .toctree-wrapper > ul {
+  display: flex;
+  flex-direction: row;
+}
+
+.rst-content .section .toctree-wrapper > ul > li {
+  flex: 1;
+}
+
+.rst-content .section .toctree-wrapper ul,
+.rst-content .section .toctree-wrapper li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.rst-content .section .toctree-wrapper .toctree-l1 > a {
+  font-family: "OCR-A", monospace;
+  text-transform: uppercase;
+  font-size: 150%;
+}
