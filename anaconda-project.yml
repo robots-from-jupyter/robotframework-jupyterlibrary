@@ -72,6 +72,7 @@ env_specs:
     - jupyterlab >=0.35
     - nbsphinx
     - nodejs
+    - python >=3.6
     - pillow
     - python-chromedriver-binary
     - robotframework >=3.1
