@@ -62,6 +62,10 @@ commands:
     unix: python setup.py sdist --dist-dir=_artifacts/sdist
     env_spec: rfjl37
 
+  wheel:
+    unix: python setup.py bdist_wheel --dist-dir=_artifacts/wheel
+    env_spec: rfjl37
+
   sdist:win:
     windows: python setup.py sdist --dist-dir=_artifacts/sdist
     env_spec: win_rfjl37
