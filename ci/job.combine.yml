@@ -12,6 +12,9 @@ jobs:
       - MacOSX
       - Windows
     steps:
+      - template: steps.conda.yml
+        parameters:
+          name: Linux
       - task: DownloadPipelineArtifact@0
         inputs:
           artifactName: Linux Tests
@@ -24,10 +27,6 @@ jobs:
         inputs:
           artifactName: Windows Tests
           targetPath: _artifacts/test_output
-      - template: steps.conda.yml
-        condition: always()
-        parameters:
-          name: Linux
       - script: python -m scripts.combine
         condition: always()
         displayName: Rebot
