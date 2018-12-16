@@ -23,5 +23,5 @@ Launch a new nteract Notebook
     [Documentation]    Use the nteract tree to launch a
     ...   Notebook with the given ``kernel``
     Click Element   css:${NOJ CSS CARD KERNEL}\[title$="${kernel}"]
-    Select Window   NEW
+    Run Keyword and Ignore Error  Select Window   NEW
     Wait Until Page Contains Element  css:${NOJ CSS CELL}
