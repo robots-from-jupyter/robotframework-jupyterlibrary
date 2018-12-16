@@ -5,9 +5,9 @@ Library           JupyterLibrary
 Library           Process
 
 *** Test Cases ***
-IPython Notebook
+IPython Notebook on Classic
     Open Notebook Classic
     Launch a new Notebook Classic Notebook
     Add and Run Notebook Classic Code Cell
     Wait Until Notebook Classic Kernel Is Idle
-    Capture Page Screenshot    ipython.png
+    Capture Page Screenshot    clasic${/}ipython.png

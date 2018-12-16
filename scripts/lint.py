@@ -16,11 +16,11 @@ def lint():
     for src in RF_SRC:
         check_call(["python", "-m", "robot.tidy", "-r", src])
 
-    for nbp in (Path(__file__).parent / "docs").rglob("*.ipynb"):
-        nbf = read(nbp, NO_CONVERT)
+    for nbp in (Path(__file__).parent.parent / "docs").rglob("*.ipynb"):
+        nbf = read(str(nbp), NO_CONVERT)
         changed = False
-        for cell in nbf:
-            if cell.cell_type == "code_cell":
+        for cell in nbf.cells:
+            if cell.cell_type == "code":
                 if cell.outputs:
                     cell.outputs = []
                     changed = True
@@ -28,7 +28,8 @@ def lint():
                     cell.execution_count = None
                     changed = True
         if changed:
-            write(nbf, nbp)
+            print(f"Overwriting {nbp}")
+            write(nbf, str(nbp))
 
 
 if __name__ == "__main__":
