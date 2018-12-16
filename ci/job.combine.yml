@@ -18,17 +18,17 @@ jobs:
       - task: DownloadPipelineArtifact@0
         condition: always()
         inputs:
-          artifactName: Linux Tests
+          artifactName: Linux Robot Logs
           targetPath: _artifacts/test_output
       - task: DownloadPipelineArtifact@0
         condition: always()
         inputs:
-          artifactName: MacOSX Tests
+          artifactName: MacOSX Robot Logs
           targetPath: _artifacts/test_output
       - task: DownloadPipelineArtifact@0
         condition: always()
         inputs:
-          artifactName: Windows Tests
+          artifactName: Windows Robot Logs
           targetPath: _artifacts/test_output
       - script: python -m scripts.combine
         condition: always()
