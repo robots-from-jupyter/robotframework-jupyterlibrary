@@ -17,4 +17,7 @@ ${JNC CSS NB TOOLBAR}  \#maintoolbar-container
 ${JNC CSS ICON ADD}  .fa-plus
 ${JNC CSS ICON RUN}  .fa-step-forward
 
-${JNC CSS CELL}   \#notebook-container .cell:last-of-type .CodeMirror
+${JNC CSS CELL}   \#notebook-container .cell
+${JNC CSS ACTIVE CELL}  ${JNC CSS CELL}.selected
+${JNC CSS ACTIVE INPUT}  ${JNC CSS ACTIVE CELL} .CodeMirror
+${JNC CSS ACTIVE OUTPUT}  ${JNC CSS ACTIVE CELL} .output_wrapper

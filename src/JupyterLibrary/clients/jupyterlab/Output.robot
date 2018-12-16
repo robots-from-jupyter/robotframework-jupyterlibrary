@@ -2,6 +2,11 @@
 Resource   JupyterLibrary/clients/jupyterlab/Selectors.robot
 
 *** Keywords ***
+Current JupyterLab Cell Output Should Contain
+  [Arguments]  ${expected}
+  Element Should Contain    css:${JLAB CSS ACTIVE OUTPUT CHILDREN}    ${expected}
+
+
 Screenshot Each Output of Active JupyterLab Cell
     [Arguments]  ${prefix}
     [Documentation]   Capture all of the outputs of the current Cell as screenshots

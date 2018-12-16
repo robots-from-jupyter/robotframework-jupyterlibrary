@@ -11,6 +11,7 @@ IPython Notebook on Lab
     Launch a new JupyterLab Document
     Add and Run JupyterLab Code Cell    print("hello world")
     Wait Until JupyterLab Kernel Is Idle
+    Current JupyterLab Cell Output Should Contain    hello world
     Capture Page Screenshot    lab${/}ipython.png
 
 IPython Notebook Outputs on Lab

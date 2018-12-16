@@ -8,6 +8,7 @@ Launch a new JupyterLab Document
     ...   Notebook or Console with the given ``kernel``, and wait until the loading
     ...   animation is complete.
     Click Element    xpath:${JLAB XP CARD}\[@title='${kernel}'][@data-category='${category}']
+    Run Keyword And Ignore Error    timeout=0.1s  Wait Until Page Contains Element    css:${JLAB CSS SPINNER}
     Wait Until Page Does Not Contain Element    css:${JLAB CSS SPINNER}
-    Wait Until Page Contains Element    css:${JLAB CSS CELL}
+    Wait Until Page Contains Element    css:${JLAB CSS ACTIVE INPUT}
     Sleep    0.1s

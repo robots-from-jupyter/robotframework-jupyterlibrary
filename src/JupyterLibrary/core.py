@@ -17,6 +17,8 @@ CLIENTS = [
     client for client in glob(join(dirname(__file__), "clients", "*")) if isdir(client)
 ]
 
+COMMON = list(glob(join(dirname(__file__), "common", "*.robot")))
+
 component_classes = [server.ServerKeywords, screenshots.ScreenshotKeywords]
 
 if not hasattr(ElementKeywords, "press_keys"):
@@ -66,10 +68,15 @@ class JupyterLibraryListener(LibraryListener):
 
     def start_suite(self, name, attrs):
         super(JupyterLibraryListener, self).start_suite(name, attrs)
+        resources = COMMON
+
         for client in CLIENTS:
             for path in glob(join(client, "*.robot")):
-                BuiltIn().import_resource(
+                resources += [
                     "JupyterLibrary/clients/{}/{}".format(
                         basename(client), basename(path)
                     )
-                )
+                ]
+
+        for resource in resources:
+            BuiltIn().import_resource(resource)

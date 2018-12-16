@@ -1,6 +1,6 @@
 *** Settings ***
 Resource   JupyterLibrary/clients/nteract_on_jupyter/Selectors.robot
-Library  JupyterLibrary
+Resource   JupyterLibrary/common/CodeMirror.robot
 
 *** Keywords ***
 Add and Run nteract Code Cell
@@ -9,8 +9,13 @@ Add and Run nteract Code Cell
     ${creators} =  Get WebElements    css:${NOJ CSS CREATOR}
     Mouse Over  ${creators[-1]}
     Click Element    css:${NOJ CSS CREATOR}:hover ${NOJ CSS ADD CODE CELL}
-    Click Element    css:${NOJ CSS CELL INPUT}
-    Execute JavaScript    document.querySelector("${NOJ CSS CELL INPUT}").CodeMirror.setValue(`${code}`)
+    ${cells} =  Get WebElements    css:${NOJ CSS CELL INPUT}
+    Click Element    ${cells[-1]}
+    Set CodeMirror Value  ${NOJ CSS ACTIVE CELL INPUT}  ${code}
+    Run Current nteract Code Cell
+
+Run Current nteract Code Cell
+    Mouse Over    css:${NOJ CSS EXECUTE}
     Click Element    css:${NOJ CSS EXECUTE}
 
 Wait Until nteract Kernel Is Idle

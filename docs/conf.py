@@ -10,7 +10,7 @@ from tempfile import TemporaryDirectory
 import nbsphinx
 
 # you have to have run `python -m pip install -e`
-from JupyterLibrary.core import CLIENTS
+from JupyterLibrary.core import CLIENTS, COMMON
 
 
 def setup(app):
@@ -46,6 +46,19 @@ def setup(app):
                     str(here / "_static" / f"{client.name}.html"),
                 ]
             )
+
+    for common_file in COMMON:
+        common = Path(common_file)
+        common_name = common.name.lower().replace(".robot", "")
+        subprocess.run(
+            [
+                sys.executable,
+                "-m",
+                "robot.libdoc",
+                common,
+                str(here / "_static" / f"{common_name}.html"),
+            ]
+        )
 
     app.add_css_file("css/custom.css")
 
