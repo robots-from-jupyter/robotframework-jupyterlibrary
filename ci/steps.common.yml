@@ -18,7 +18,11 @@ steps:
       displayName: Install Source Distribution
 
   - script: python -m scripts.atest
-    displayName: Test
+    displayName: Test on Firefox
+
+  - ${{ if not(eq(parameters.name, 'Windows')) }}:
+    - script: BROWSER=headlesschrome python -m scripts.atest
+      displayName: Test on Chrome
 
   - ${{ if eq(parameters.name, 'Linux') }}:
     - script: sphinx-build -M html docs _artifacts/docs
@@ -27,7 +31,7 @@ steps:
       displayName: Publish Docs
       inputs:
         PathtoPublish: _artifacts/docs/html
-        ArtifactName: ${{ parameters.name }} tests
+        ArtifactName: Docs
       condition: always()
 
   - task: PublishTestResults@2
@@ -40,5 +44,5 @@ steps:
     displayName: Publish Robot Logs
     inputs:
       PathtoPublish: _artifacts/test_output
-      ArtifactName: ${{ parameters.name }} tests
+      ArtifactName: ${{ parameters.name }} Robot Logs
     condition: always()

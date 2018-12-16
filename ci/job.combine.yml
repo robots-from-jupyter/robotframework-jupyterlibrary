@@ -1,0 +1,36 @@
+parameters:
+  name: Linux
+  vmImage: ubuntu-16.04
+
+jobs:
+  - job: ${{ parameters.name }}
+    pool:
+      vmImage: ${{ parameters.vmImage }}
+    dependsOn:
+      - Linux
+      - MacOSX
+      - Windows
+    steps:
+      - task: DownloadPipelineArtifact@0
+        inputs:
+          artifactName: Linux Tests
+          targetPath: _artifacts/test_output
+      - task: DownloadPipelineArtifact@0
+        inputs:
+          artifactName: MacOSX Tests
+          targetPath: _artifacts/test_output
+      - task: DownloadPipelineArtifact@0
+        inputs:
+          artifactName: Windows Tests
+          targetPath: _artifacts/test_output
+      - template: steps.conda.yml
+        parameters:
+          name: Linux
+      - script: python -m scripts.combine
+        displayName: Rebot
+      - task: PublishBuildArtifacts@1
+        displayName: Publish Robot Logs
+        inputs:
+          PathtoPublish: _artifacts/test_output
+          ArtifactName: Combined Robot Logs
+        condition: always()

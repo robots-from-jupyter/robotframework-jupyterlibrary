@@ -1,5 +1,6 @@
 *** Variables ***
 ${JNC CSS TREE LIST}  \#notebook_list
+${JNC CSS TREE LIST ITEM}  ${JNC CSS TREE LIST} .list_item
 ${JNC CSS TREE NEW BUTTON}  \#new-dropdown-button
 ${JNC CSS TREE NEW MENU}  \#new-menu
 ${JNC CSS NB KERNEL ICON}  \#kernel_indicator_icon

@@ -16,6 +16,7 @@ Open Notebook Classic
     ${token} =  Run Keyword If    not "${url}"  Get Jupyter Server Token  ${nbserver}
     ${final_url} =  Set Variable If   "${url}"   ${url}  ${nbserver_url}tree?token=${token}
     Open Browser    url=${final_url}    browser=${browser}  &{configuration}
+    Wait Until Page Contains Element  css:${JNC CSS TREE LIST ITEM}
 
 Launch a new Notebook Classic Notebook
     [Arguments]    ${kernel}=Python 3
