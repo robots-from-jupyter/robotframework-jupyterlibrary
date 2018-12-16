@@ -2,8 +2,9 @@ parameters:
   name: Linux
 
 steps:
-  - script: python -m scripts.lint
-    displayName: Lint
+  - ${{ if eq(parameters.name, 'Linux') }}:
+    - script: python -m scripts.lint
+      displayName: Lint
 
   - ${{ if not(eq(parameters.name, 'Windows')) }}:
     - script: python setup.py sdist --dist-dir=_artifacts/sdist
@@ -24,16 +25,6 @@ steps:
     - script: BROWSER=headlesschrome python -m scripts.atest
       displayName: Test on Chrome
 
-  - ${{ if eq(parameters.name, 'Linux') }}:
-    - script: sphinx-build -M html docs _artifacts/docs
-      displayName: Build Docs
-    - task: PublishPipelineArtifact@0
-      displayName: Publish Docs
-      inputs:
-        targetPath: _artifacts/docs/html
-        artifactName: JupyterLibrary Docs
-      condition: always()
-
   - task: PublishTestResults@2
     displayName: Publish Test Results
     inputs:
@@ -46,3 +37,13 @@ steps:
       targetPath: _artifacts/test_output
       artifactName: JupyterLibrary ${{ parameters.name }} Robot Logs
     condition: always()
+
+  - ${{ if eq(parameters.name, 'Linux') }}:
+    - script: sphinx-build -M html docs _artifacts/docs
+      displayName: Build Docs
+    - task: PublishPipelineArtifact@0
+      displayName: Publish Docs
+      inputs:
+        targetPath: _artifacts/docs/html
+        artifactName: JupyterLibrary Docs
+      condition: always()

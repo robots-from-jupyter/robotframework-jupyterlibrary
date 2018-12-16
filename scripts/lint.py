@@ -1,3 +1,8 @@
+""" Apply source normalization and checking
+
+    This should run without JupyterLibrary installed, but only needs to
+    work on Python3
+"""
 from pathlib import Path
 from subprocess import check_call
 
