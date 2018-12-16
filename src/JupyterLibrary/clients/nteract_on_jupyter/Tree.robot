@@ -17,11 +17,13 @@ Open nteract
     ${final_url} =  Set Variable If   "${url}"   ${url}  ${nbserver_url}nteract?token=${token}
     Open Browser    url=${final_url}    browser=${browser}  &{configuration}
     Wait Until Page Contains Element  css:${NOJ CSS TREE LIST}
+    Sleep  1s
 
 Launch a new nteract Notebook
     [Arguments]    ${kernel}=Python 3
     [Documentation]    Use the nteract tree to launch a
     ...   Notebook with the given ``kernel``
     Click Element   css:${NOJ CSS CARD KERNEL}\[title$="${kernel}"]
+    Sleep  1s
     Run Keyword and Ignore Error  Select Window   NEW
     Wait Until Page Contains Element  css:${NOJ CSS CELL}

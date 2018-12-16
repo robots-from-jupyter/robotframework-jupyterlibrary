@@ -16,14 +16,17 @@ jobs:
         parameters:
           name: Linux
       - task: DownloadPipelineArtifact@0
+        condition: always()
         inputs:
           artifactName: Linux Tests
           targetPath: _artifacts/test_output
       - task: DownloadPipelineArtifact@0
+        condition: always()
         inputs:
           artifactName: MacOSX Tests
           targetPath: _artifacts/test_output
       - task: DownloadPipelineArtifact@0
+        condition: always()
         inputs:
           artifactName: Windows Tests
           targetPath: _artifacts/test_output
