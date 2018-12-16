@@ -10,4 +10,4 @@ IPython Notebook on Classic
     Launch a new Notebook Classic Notebook
     Add and Run Notebook Classic Code Cell
     Wait Until Notebook Classic Kernel Is Idle
-    Capture Page Screenshot    clasic${/}ipython.png
+    Capture Page Screenshot    classic${/}ipython.png
