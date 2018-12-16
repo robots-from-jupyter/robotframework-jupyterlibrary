@@ -68,7 +68,12 @@ class JupyterLibraryListener(LibraryListener):
 
     def start_suite(self, name, attrs):
         super(JupyterLibraryListener, self).start_suite(name, attrs)
-        resources = COMMON
+        resources = []
+
+        for common in COMMON:
+            resources += [
+                "JupyterLibrary/common/{}".format(basename(common))
+            ]
 
         for client in CLIENTS:
             for path in glob(join(client, "*.robot")):
