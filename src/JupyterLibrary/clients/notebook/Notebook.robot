@@ -1,5 +1,5 @@
 *** Settings ***
-Resource   JupyterLibrary/resources/NotebookClassic/Selectors.robot
+Resource   JupyterLibrary/clients/notebook/Selectors.robot
 
 *** Keywords ***
 Add and Run Notebook Classic Code Cell

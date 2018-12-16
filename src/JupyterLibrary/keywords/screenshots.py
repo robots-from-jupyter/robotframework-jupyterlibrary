@@ -1,7 +1,6 @@
+from PIL import Image
 from robot.libraries.BuiltIn import BuiltIn
 from SeleniumLibrary.base import LibraryComponent, keyword
-
-from PIL import Image
 
 
 class ScreenshotKeywords(LibraryComponent):

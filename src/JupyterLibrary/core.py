@@ -1,5 +1,9 @@
+""" Core library entrypoint for JupyterLibrary
+
+    We <3 Python3, but for the time being, this module should also run in Python2
+"""
 from glob import glob
-from os.path import basename, dirname, join
+from os.path import basename, dirname, isdir, join
 
 from robot.libraries.BuiltIn import BuiltIn
 from SeleniumLibrary import SeleniumLibrary
@@ -9,8 +13,9 @@ from SeleniumLibrary.utils.librarylistener import LibraryListener
 from .keywords import screenshots, server
 
 
-RESOURCES = join(dirname(__file__), "resources")
-CLIENTS = ["JupyterLab", "NotebookClassic"]
+CLIENTS = [
+    client for client in glob(join(dirname(__file__), "clients", "*")) if isdir(client)
+]
 
 component_classes = [server.ServerKeywords, screenshots.ScreenshotKeywords]
 
@@ -62,7 +67,9 @@ class JupyterLibraryListener(LibraryListener):
     def start_suite(self, name, attrs):
         super(JupyterLibraryListener, self).start_suite(name, attrs)
         for client in CLIENTS:
-            for path in glob(join(RESOURCES, client, "*.robot")):
+            for path in glob(join(client, "*.robot")):
                 BuiltIn().import_resource(
-                    "JupyterLibrary/resources/{}/{}".format(client, basename(path))
+                    "JupyterLibrary/clients/{}/{}".format(
+                        basename(client), basename(path)
+                    )
                 )

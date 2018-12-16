@@ -1,5 +1,5 @@
 *** Settings ***
-Resource   JupyterLibrary/resources/JupyterLab/Selectors.robot
+Resource   JupyterLibrary/clients/jupyterlab/Selectors.robot
 
 *** Keywords ***
 Launch a new JupyterLab Document

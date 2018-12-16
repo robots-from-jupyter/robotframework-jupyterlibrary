@@ -1,5 +1,5 @@
 *** Settings ***
-Resource   JupyterLibrary/resources/NotebookClassic/Selectors.robot
+Resource   JupyterLibrary/clients/notebook/Selectors.robot
 Documentation   Keywords for working with the Jupyter Notebook Clasic web application
 ...    You should have already started a Jupyter Server, such as with
 ...    *Wait For New Jupyter Server To Be Ready*.

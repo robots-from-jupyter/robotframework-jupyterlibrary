@@ -1,17 +1,53 @@
-# -*- coding: utf-8 -*-
-#
-# Configuration file for the Sphinx documentation builder.
-#
-# This file does only contain a selection of the most common options. For a
-# full list see the documentation:
-# http://www.sphinx-doc.org/en/master/config
+""" Documentation configuration and workflow for JupyterLibrary
 
+    Unlike the JupyterLibrary core, this may use Python3 syntax.
+"""
 import subprocess
 import sys
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
 import nbsphinx
+
+# you have to have run `python -m pip install -e`
+from JupyterLibrary.core import CLIENTS
+
+
+def setup(app):
+    """ Runs before the "normal business" of sphinx. Don't go too crazy here.
+    """
+    here = Path(__file__).parent
+
+    subprocess.check_call(
+        [
+            sys.executable,
+            "-m",
+            "robot.libdoc",
+            "JupyterLibrary",
+            str(here / "_static" / "JupyterLibrary.html"),
+        ]
+    )
+
+    for client_dir in CLIENTS:
+        client = Path(client_dir)
+        with TemporaryDirectory() as td:
+            tdp = Path(td)
+            agg = ""
+            for sub in client.rglob("*.robot"):
+                agg += sub.read_text()
+            out_file = Path(tdp / f"{client.name}.robot")
+            out_file.write_text(agg)
+            subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "robot.libdoc",
+                    str(out_file),
+                    str(here / "_static" / f"{client.name}.html"),
+                ]
+            )
+
+    app.add_css_file("css/custom.css")
 
 
 nbsphinx.RST_TEMPLATE = nbsphinx.RST_TEMPLATE.replace(
@@ -215,41 +251,3 @@ intersphinx_mapping = {"https://docs.python.org/": None}
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
-
-
-def setup(app):
-    here = Path(__file__).parent
-    root = here.parent.resolve()
-
-    subprocess.check_call(
-        [
-            sys.executable,
-            "-m",
-            "robot.libdoc",
-            "JupyterLibrary",
-            str(here / "_static" / "JupyterLibrary.html"),
-        ]
-    )
-
-    client_resources = root / "src" / "JupyterLibrary" / "resources"
-
-    print("looking for resources in", client_resources)
-    for client in client_resources.glob("*"):
-        with TemporaryDirectory() as td:
-            tdp = Path(td)
-            agg = ""
-            for sub in client.rglob("*.robot"):
-                agg += sub.read_text()
-            out_file = Path(tdp / f"{client.name}.robot")
-            out_file.write_text(agg)
-            subprocess.run(
-                [
-                    sys.executable,
-                    "-m",
-                    "robot.libdoc",
-                    str(out_file),
-                    str(here / "_static" / f"{client.name}.html"),
-                ]
-            )
-
-    app.add_css_file("css/custom.css")
