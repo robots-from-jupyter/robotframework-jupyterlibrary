@@ -27,11 +27,11 @@ steps:
   - ${{ if eq(parameters.name, 'Linux') }}:
     - script: sphinx-build -M html docs _artifacts/docs
       displayName: Build Docs
-    - task: PublishBuildArtifacts@1
+    - task: PublishPipelineArtifact@0
       displayName: Publish Docs
       inputs:
-        PathtoPublish: _artifacts/docs/html
-        ArtifactName: Docs
+        targetPath: _artifacts/docs/html
+        artifactName: JupyterLibrary Docs
       condition: always()
 
   - task: PublishTestResults@2
@@ -40,9 +40,9 @@ steps:
       testResultsFiles: _artifacts/test_output/**/*.xunit.xml
     condition: always()
 
-  - task: PublishBuildArtifacts@1
+  - task: PublishPipelineArtifact@0
     displayName: Publish Robot Logs
     inputs:
-      PathtoPublish: _artifacts/test_output
-      ArtifactName: ${{ parameters.name }} Robot Logs
+      targetPath: _artifacts/test_output
+      artifactName: JupyterLibrary ${{ parameters.name }} Robot Logs
     condition: always()

@@ -18,24 +18,24 @@ jobs:
       - task: DownloadPipelineArtifact@0
         condition: always()
         inputs:
-          artifactName: Linux Robot Logs
+          artifactName: JupyterLibrary Linux Robot Logs
           targetPath: _artifacts/test_output
       - task: DownloadPipelineArtifact@0
         condition: always()
         inputs:
-          artifactName: MacOSX Robot Logs
+          artifactName: JupyterLibrary MacOSX Robot Logs
           targetPath: _artifacts/test_output
       - task: DownloadPipelineArtifact@0
         condition: always()
         inputs:
-          artifactName: Windows Robot Logs
+          artifactName: JupyterLibrary Windows Robot Logs
           targetPath: _artifacts/test_output
       - script: python -m scripts.combine
         condition: always()
         displayName: Rebot
-      - task: PublishBuildArtifacts@1
+      - task: PublishPipelineArtifact@0
         condition: always()
         displayName: Publish Robot Logs
         inputs:
-          PathtoPublish: _artifacts/test_output
-          ArtifactName: Combined Robot Logs
+          targetPath: _artifacts/test_output
+          artifactName: JupyterLibrary Combined Robot Logs
