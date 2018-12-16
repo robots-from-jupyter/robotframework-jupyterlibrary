@@ -12,7 +12,7 @@ jobs:
       - MacOSX
       - Windows
     steps:
-      - template: steps.conda.yml
+      - template: steps.conda.robot.yml
         parameters:
           name: Linux
       - task: DownloadPipelineArtifact@0
