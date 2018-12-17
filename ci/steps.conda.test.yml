@@ -4,22 +4,14 @@ steps:
       createOptions: -c conda-forge -c defaults
       createCustomEnvironment: true
       updateConda: false
-      environmentName: robotframework-jupyterlibrary
+      environmentName: robotframework-jupyterlibrary-test
       packageSpecs: >
-        black
-        conda-verify
-        flake8
         geckodriver
-        isort
         jupyterlab>=0.35
-        nbsphinx
-        nodejs>=10,<11
         pillow
         python-chromedriver-binary
         python>=3.6,<3.7
-        robotframework-lint
         robotframework-seleniumlibrary>=3.2
         robotframework>=3.1
-        sphinx_rtd_theme
   - script: pip install nteract_on_jupyter --no-deps --ignore-installed -vv
     displayName: Pip dependencies

@@ -55,6 +55,15 @@ See the [acceptance tests][] for examples.
 
       python -m scripts.atest
 
+# Free Software
+JupyterLibrary is Free Software under the BSD-3-Clause License. It contains code
+from a number of other projects:
+
+- [SeleniumLibrary][] ([APL-2.0][selibrary-license])
+  - backport of `Press Keys`
+- [Jyve][] ([BSD-3-Clause][jyve-license])
+  - Initial implementations of robot keywords
+
 [acceptance tests]: https://github.com/bollwyvl/robotframework-jupyterlab
 [Miniconda3]: https://conda.io/miniconda.html
 [binder-badge]: https://mybinder.org/badge_logo.svg
@@ -63,3 +72,9 @@ See the [acceptance tests][] for examples.
 [pipeline]: https://dev.azure.com/nickbollweg/nickbollweg/_build/latest?definitionId=2
 [docs-badge]: https://readthedocs.org/projects/robotframework-jupyterlibrary/badge/?version=latest
 [docs]: https://robotframework-jupyterlibrary.readthedocs.io
+
+[SeleniumLibrary]: https://github.com/robotframework/SeleniumLibrary
+[selibrary-license]: https://github.com/robotframework/SeleniumLibrary/blob/master/LICENSE.txt
+
+[Jyve]: https://github.com/deathbeds/jyve
+[jyve-license]: https://github.com/deathbeds/jyve/blob/master/LICENSE

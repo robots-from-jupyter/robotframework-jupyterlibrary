@@ -1,15 +1,30 @@
+""" Core library entrypoint for JupyterLibrary
+
+    We <3 Python3, but for the time being, this module should also run in Python2
+"""
 from glob import glob
-from os.path import basename, dirname, join
+from os.path import basename, dirname, isdir, join
 
 from robot.libraries.BuiltIn import BuiltIn
 from SeleniumLibrary import SeleniumLibrary
+from SeleniumLibrary.keywords.element import ElementKeywords
 from SeleniumLibrary.utils.librarylistener import LibraryListener
 
 from .keywords import screenshots, server
 
 
-RESOURCES = join(dirname(__file__), "resources")
-CLIENTS = ["JupyterLab"]
+CLIENTS = [
+    client for client in glob(join(dirname(__file__), "clients", "*")) if isdir(client)
+]
+
+COMMON = list(glob(join(dirname(__file__), "common", "*.robot")))
+
+component_classes = [server.ServerKeywords, screenshots.ScreenshotKeywords]
+
+if not hasattr(ElementKeywords, "press_keys"):
+    from .keywords import keys
+
+    component_classes += [keys.KeysKeywords]
 
 
 class JupyterLibrary(SeleniumLibrary):
@@ -40,7 +55,7 @@ class JupyterLibrary(SeleniumLibrary):
             screenshot_root_directory=None,
         )
         self.add_library_components(
-            [server.ServerKeywords(self), screenshots.ScreenshotKeywords(self)]
+            [Component(self) for Component in component_classes]
         )
         self.ROBOT_LIBRARY_LISTENER = JupyterLibraryListener()
 
@@ -53,8 +68,20 @@ class JupyterLibraryListener(LibraryListener):
 
     def start_suite(self, name, attrs):
         super(JupyterLibraryListener, self).start_suite(name, attrs)
+        resources = []
+
+        for common in COMMON:
+            resources += [
+                "JupyterLibrary/common/{}".format(basename(common))
+            ]
+
         for client in CLIENTS:
-            for path in glob(join(RESOURCES, client, "*.robot")):
-                BuiltIn().import_resource(
-                    "JupyterLibrary/resources/{}/{}".format(client, basename(path))
-                )
+            for path in glob(join(client, "*.robot")):
+                resources += [
+                    "JupyterLibrary/clients/{}/{}".format(
+                        basename(client), basename(path)
+                    )
+                ]
+
+        for resource in resources:
+            BuiltIn().import_resource(resource)

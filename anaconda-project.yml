@@ -30,7 +30,24 @@ commands:
     env_spec: rfjl37
 
   atest:
-    unix: rm -rf _artifacts/test_output && python -m scripts.atest
+    unix: python -m scripts.atest
+    env_spec: rfjl37
+
+  atest:full:
+    unix: |-
+      set -eux &&
+      rm -rf _artifacts/test_output &&
+      python -m scripts.atest &&
+      BROWSER=headlesschrome python -m scripts.atest &&
+      python -m scripts.combine
+    env_spec: rfjl37
+
+  atest:clean:
+    unix: rm -rf _artifacts/test_output
+    env_spec: rfjl37
+
+  atest:combine:
+    unix: python -m scripts.combine
     env_spec: rfjl37
 
   atest:win:
@@ -43,6 +60,10 @@ commands:
 
   sdist:
     unix: python setup.py sdist --dist-dir=_artifacts/sdist
+    env_spec: rfjl37
+
+  wheel:
+    unix: python setup.py bdist_wheel --dist-dir=_artifacts/wheel
     env_spec: rfjl37
 
   sdist:win:

@@ -1,0 +1,27 @@
+parameters:
+  name: Linux
+  vmImage: ubuntu-16.04
+
+jobs:
+  - job: ${{ parameters.name }}
+    pool:
+      vmImage: ${{ parameters.vmImage }}
+
+    steps:
+      - template: steps.browser.yml
+        parameters:
+          name: ${{ parameters.name }}
+
+      - ${{ if eq(parameters.name, 'Linux') }}:
+        - template: steps.conda.full.yml
+          parameters:
+            name: ${{ parameters.name }}
+
+      - ${{ if not(eq(parameters.name, 'Linux')) }}:
+        - template: steps.conda.test.yml
+          parameters:
+            name: ${{ parameters.name }}
+
+      - template: steps.common.yml
+        parameters:
+          name: ${{ parameters.name }}
