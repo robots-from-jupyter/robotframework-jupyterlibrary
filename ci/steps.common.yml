@@ -32,18 +32,18 @@ steps:
     condition: always()
 
   - task: PublishPipelineArtifact@0
-    displayName: Publish Robot Logs
+    displayName: Publish Robot Output
     inputs:
       targetPath: _artifacts/test_output
-      artifactName: JupyterLibrary ${{ parameters.name }} Robot Logs
+      artifactName: Robot Output ${{ parameters.name }}
     condition: always()
 
   - ${{ if eq(parameters.name, 'Linux') }}:
     - script: sphinx-build -M html docs _artifacts/docs
       displayName: Build Docs
-    - task: PublishPipelineArtifact@0
+    - task: PublishBuildArtifacts@1
       displayName: Publish Docs
       inputs:
-        targetPath: _artifacts/docs/html
+        pathtoPublish: _artifacts/docs/html
         artifactName: JupyterLibrary Docs
       condition: always()
