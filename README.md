@@ -4,33 +4,38 @@
 [Robot Framework]: http://robotframework.org
 [Jupyter]: https://jupyter.org
 
-| docs                    | demo                        | pipes                         |
-|:-----------------------:|:---------------------------:|:-----------------------------:|
-| [![docs-badge][]][docs] | [![binder-badge][]][binder] | [![pipeline-badge]][pipeline] |
+| pip                     | conda                   | docs                    | demo                        | pipes                         |
+|:-----------------------:|:-----------------------:|:-----------------------:|:---------------------------:|:-----------------------------:|
+| [![pip-badge][]][pip]   | TODO                    | [![docs-badge][]][docs] | [![binder-badge][]][binder] | [![pipeline-badge]][pipeline] |
 
 
 # Using
 Write `.robot` files that use `JupyterLibrary` keywords.
 
-    *** Settings ***
-    Library           JupyterLibrary
-    Suite Setup       Wait for New Jupyter Server to be Ready
-    Test Teardown     Reset JupyterLab and Close
-    Suite Teardown    Terminate All Jupyter Servers
+```robotframework
+*** Settings ***
+Library           JupyterLibrary
+Suite Setup       Wait for New Jupyter Server to be Ready
+Test Teardown     Reset JupyterLab and Close
+Suite Teardown    Terminate All Jupyter Servers
 
-    *** Test Cases ***
-    A Notebook in JupyterLab
-        Open JupyterLab
-        Launch a new JupyterLab Document
-        Add and Run JupyterLab Code Cell
-        Wait Until JupyterLab Kernel Is Idle
-        Capture Page Screenshot
+*** Test Cases ***
+A Notebook in JupyterLab
+    Open JupyterLab
+    Launch a new JupyterLab Document
+    Add and Run JupyterLab Code Cell
+    Wait Until JupyterLab Kernel Is Idle
+    Capture Page Screenshot
+```
 
 See the [acceptance tests][] for examples.
 
 
 # Installation
-> _TODO: release on pypi, conda-forge_
+```bash
+pip install robotframework-jupyterlibrary
+```
+> _TODO: release on conda-forge_
 
 ## Development Installation
 
@@ -71,6 +76,8 @@ from a number of other projects:
 [pipeline-badge]: https://dev.azure.com/nickbollweg/nickbollweg/_apis/build/status/bollwyvl.robotframework-jupyterlibrary
 [pipeline]: https://dev.azure.com/nickbollweg/nickbollweg/_build/latest?definitionId=2
 [docs-badge]: https://readthedocs.org/projects/robotframework-jupyterlibrary/badge/?version=latest
+[pip-badge]: https://img.shields.io/pypi/v/robotframework-jupyterlibrary.svg
+[pip]: https://pypi.org/project/robotframework-jupyterlibrary
 [docs]: https://robotframework-jupyterlibrary.readthedocs.io
 
 [SeleniumLibrary]: https://github.com/robotframework/SeleniumLibrary

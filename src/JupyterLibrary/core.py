@@ -71,9 +71,7 @@ class JupyterLibraryListener(LibraryListener):
         resources = []
 
         for common in COMMON:
-            resources += [
-                "JupyterLibrary/common/{}".format(basename(common))
-            ]
+            resources += ["JupyterLibrary/common/{}".format(basename(common))]
 
         for client in CLIENTS:
             for path in glob(join(client, "*.robot")):

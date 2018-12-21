@@ -83,6 +83,10 @@ commands:
     unix: sphinx-build -M html docs _artifacts/docs
     env_spec: rfjl37
 
+  publish:pypi:
+    unix: twine upload --repository-url https://upload.pypi.org/legacy/ _artifacts/{sdist,wheel}/*
+    env_spec: rfjl37
+
 env_specs:
   robotframework-jupyterlibrary:
     packages:
@@ -107,12 +111,14 @@ env_specs:
     channels:
     - conda-forge
     - defaults
+
   rfjl37:
     inherit_from:
     - robotframework-jupyterlibrary
     packages:
     - python >=3.7,<3.8
     - nodejs >=8.12,<9
+    - twine
 
   win_rfjl37:
     inherit_from:
