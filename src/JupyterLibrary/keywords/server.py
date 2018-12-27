@@ -38,7 +38,7 @@ class ServerKeywords(LibraryComponent):
             directories will be cleaned up after the server process is
             terminated.
         """
-        command = command or "jupyter"
+        command = command or "jupyter-notebook"
         port = port or self.get_unused_port()
         base_url = base_url or "/@rf/"
         token = str(uuid4()) if token is None else token
@@ -82,7 +82,6 @@ class ServerKeywords(LibraryComponent):
         """ Some default jupyter arguments
         """
         return [
-            "notebook",
             "--no-browser",
             "--debug",
             "--port={}".format(port),
