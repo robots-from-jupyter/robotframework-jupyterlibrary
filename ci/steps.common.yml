@@ -26,7 +26,7 @@ steps:
       displayName: Test on Chrome
 
   - ${{ if eq(parameters.name, 'Windows') }}:
-    - script: set BROWSER=headlesschrome && python -m scripts.atest
+    - script: set "BROWSER=headlesschrome" && python -m scripts.atest
       displayName: Test on Chrome
 
   - task: PublishTestResults@2
