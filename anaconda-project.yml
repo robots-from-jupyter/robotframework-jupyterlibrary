@@ -83,6 +83,10 @@ commands:
     unix: sphinx-build -M html docs _artifacts/docs
     env_spec: rfjl37
 
+  docs:watch:
+    unix: sphinx-autobuild docs _artifacts/docs
+    env_spec: rfjl37
+
   publish:pypi:
     unix: twine upload --repository-url https://upload.pypi.org/legacy/ _artifacts/{sdist,wheel}/*
     env_spec: rfjl37
