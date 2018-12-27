@@ -7,7 +7,6 @@ from os.path import basename, dirname, isdir, join
 
 from robot.libraries.BuiltIn import BuiltIn
 from SeleniumLibrary import SeleniumLibrary
-from SeleniumLibrary.keywords.element import ElementKeywords
 from SeleniumLibrary.utils.librarylistener import LibraryListener
 
 from .keywords import screenshots, server
@@ -20,11 +19,6 @@ CLIENTS = [
 COMMON = list(glob(join(dirname(__file__), "common", "*.robot")))
 
 component_classes = [server.ServerKeywords, screenshots.ScreenshotKeywords]
-
-if not hasattr(ElementKeywords, "press_keys"):
-    from .keywords import keys
-
-    component_classes += [keys.KeysKeywords]
 
 
 class JupyterLibrary(SeleniumLibrary):

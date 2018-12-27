@@ -17,7 +17,7 @@ dependencies:
   - python-chromedriver-binary
   - robotframework >=3.1
   - robotframework-lint
-  - robotframework-seleniumlibrary >=3.2
+  - robotframework-seleniumlibrary >=3.3
   - six
   - sphinx
   - sphinx_rtd_theme

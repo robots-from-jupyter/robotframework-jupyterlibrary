@@ -9,13 +9,13 @@ steps:
   - ${{ if not(eq(parameters.name, 'Windows')) }}:
     - script: python setup.py sdist --dist-dir=_artifacts/sdist
       displayName: Build Source Distribution
-    - script: python -m pip install _artifacts/sdist/robotframework-jupyterlibrary-0.1.0.tar.gz --no-deps --ignore-installed
+    - script: python -m pip install _artifacts/sdist/robotframework-jupyterlibrary-0.2.0.tar.gz --no-deps --ignore-installed
       displayName: Install Source Distribution
 
   - ${{ if eq(parameters.name, 'Windows') }}:
     - script: python setup.py sdist --dist-dir=_artifacts\sdist
       displayName: Build Source Distribution
-    - script: python -m pip install _artifacts\sdist\robotframework-jupyterlibrary-0.1.0.tar.gz --no-deps --ignore-installed
+    - script: python -m pip install _artifacts\sdist\robotframework-jupyterlibrary-0.2.0.tar.gz --no-deps --ignore-installed
       displayName: Install Source Distribution
 
   - script: python -m scripts.atest
@@ -23,6 +23,10 @@ steps:
 
   - ${{ if not(eq(parameters.name, 'Windows')) }}:
     - script: BROWSER=headlesschrome python -m scripts.atest
+      displayName: Test on Chrome
+
+  - ${{ if eq(parameters.name, 'Windows') }}:
+    - script: set BROWSER=headlesschrome && python -m scripts.atest
       displayName: Test on Chrome
 
   - task: PublishTestResults@2
