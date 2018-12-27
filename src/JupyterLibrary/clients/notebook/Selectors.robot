@@ -21,3 +21,5 @@ ${JNC CSS CELL}   \#notebook-container .cell
 ${JNC CSS ACTIVE CELL}  ${JNC CSS CELL}.selected
 ${JNC CSS ACTIVE INPUT}  ${JNC CSS ACTIVE CELL} .CodeMirror
 ${JNC CSS ACTIVE OUTPUT}  ${JNC CSS ACTIVE CELL} .output_wrapper
+${JNC CSS ACTIVE OUTPUT SUBAREAS}  ${JNC CSS ACTIVE OUTPUT} .output_subarea
+${JNC CSS ACTIVE MARKDOWN}  ${JNC CSS ACTIVE CELL} .text_cell_render
