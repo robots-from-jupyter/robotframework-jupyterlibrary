@@ -106,12 +106,12 @@ env_specs:
     - six
     - sphinx
     - sphinx_rtd_theme
+    - sphinx-autobuild
     - pip:
       - nteract_on_jupyter
     channels:
     - conda-forge
     - defaults
-
   rfjl37:
     inherit_from:
     - robotframework-jupyterlibrary
