@@ -15,7 +15,7 @@ IPython Notebook on Lab
     Capture Page Screenshot    lab${/}ipython.png
 
 IPython Notebook Outputs on Lab
-    Open JupyterLab  ${BROWSER}
+    Open JupyterLab    ${BROWSER}
     Launch a new JupyterLab Document
     : FOR    ${i}    IN RANGE    ${10}
     \    Add and Run JupyterLab Code Cell    print("${i} hello world " * ${i ** 2})

@@ -2,6 +2,7 @@
 ${NOJ CSS TREE LIST}  .listing-root
 ${NOJ CSS CARD}  .new-notebook
 ${NOJ CSS CARD KERNEL}  ${NOJ CSS CARD} .display-name-long
+${NOJ CSS CELLS}  .cells
 ${NOJ CSS CELL}  .cell
 ${NOJ CSS CELL INPUT}  .cell .CodeMirror .CodeMirror
 ${NOJ CSS ACTIVE CELL}  .focused.cell
@@ -13,3 +14,4 @@ ${NOJ CSS CELL TOOLBAR}  .cell .cell-toolbar
 ${NOJ CSS EXECUTE}  .focused${NOJ CSS CELL TOOLBAR} .executeButton
 ${NOJ TEXT BUSY PROMPT}  [*]
 ${NOJ CSS ACTIVE CELL MARKDOWN}    ${NOJ CSS ACTIVE CELL} > div > .outputs
+${NOJ CSS STATUS BAR}  \#root > .status-bar

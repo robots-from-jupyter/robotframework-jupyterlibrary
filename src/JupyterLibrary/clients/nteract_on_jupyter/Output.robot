@@ -32,5 +32,5 @@ Screenshot Each Output of Active nteract Document
     \   Run Keyword And Ignore Error    Click element  ${cells[${i + 1}]}
     \   Click element  ${cells[${i}]}
     \   Sleep  0.1s
-    \   Screenshot Each Output of Active JupyterLab Cell	${prefix}_cell_${i}
-    \   Screenshot Markdown of Active JupyterLab Cell 	${prefix}_cell_${i}
+    \   Screenshot Each Output of Active nteract Cell	${prefix}_cell_${i}
+    \   Screenshot Markdown of Active nteract Cell 	${prefix}_cell_${i}

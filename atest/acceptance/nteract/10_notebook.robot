@@ -6,7 +6,7 @@ Library           Process
 
 *** Test Cases ***
 IPython Notebook on nteract
-    Open nteract  ${BROWSER}
+    Open nteract    ${BROWSER}
     Launch a new nteract Notebook
     Add and Run nteract Code Cell    print("hello world")
     Wait Until nteract Kernel Is Idle
@@ -14,7 +14,7 @@ IPython Notebook on nteract
     Capture Page Screenshot    nteract${/}ipython.png
 
 IPython Notebook Outputs on nteract
-    Open nteract  ${BROWSER}
+    Open nteract    ${BROWSER}
     Launch a new nteract Notebook
     : FOR    ${i}    IN RANGE    ${10}
     \    Add and Run nteract Code Cell    print("${i} hello world " * ${i ** 2})
