@@ -11,7 +11,7 @@ Add and Run Notebook Classic Code Cell
     ${cell} =  Get WebElement  css:${JNC CSS ACTIVE INPUT}
     Click Element    ${cell}
     Set CodeMirror Value    ${JNC CSS ACTIVE INPUT}  ${code}
-    Click Element    css:${JNC CSS NB TOOLBAR} ${JNC CSS ICON RUN}
+    Press Keys  css:body  CTRL+ENTER
     Click Element   ${cell}
 
 Wait Until Notebook Classic Kernel Is Idle
