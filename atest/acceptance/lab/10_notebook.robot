@@ -7,7 +7,7 @@ Library           Process
 
 *** Test Cases ***
 IPython Notebook on Lab
-    Open JupyterLab
+    Open JupyterLab    ${BROWSER}
     Launch a new JupyterLab Document
     Add and Run JupyterLab Code Cell    print("hello world")
     Wait Until JupyterLab Kernel Is Idle
@@ -15,7 +15,7 @@ IPython Notebook on Lab
     Capture Page Screenshot    lab${/}ipython.png
 
 IPython Notebook Outputs on Lab
-    Open JupyterLab
+    Open JupyterLab  ${BROWSER}
     Launch a new JupyterLab Document
     : FOR    ${i}    IN RANGE    ${10}
     \    Add and Run JupyterLab Code Cell    print("${i} hello world " * ${i ** 2})
