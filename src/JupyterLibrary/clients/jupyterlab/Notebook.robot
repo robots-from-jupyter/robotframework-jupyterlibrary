@@ -11,7 +11,7 @@ Add and Run JupyterLab Code Cell
     ${cell} =   Get WebElement  css:${JLAB CSS ACTIVE INPUT}
     Click Element    ${cell}
     Set CodeMirror Value    ${JLAB CSS ACTIVE INPUT}  ${code}
-    Click Element    css:${JLAB CSS ICON RUN}
+    Run Current JupyterLab Code Cell
     Click Element    ${cell}
 
 Wait Until JupyterLab Kernel Is Idle
@@ -20,5 +20,7 @@ Wait Until JupyterLab Kernel Is Idle
     Wait Until Page Does Not Contain    ${JLAB TEXT BUSY PROMPT}
 
 Save JupyterLab Notebook
-    ${accel} =  Get Accelerator Key
-    Press Keys  css:body  ${accel}+S
+    Execute JupyterLab Command   Save Notebook
+
+Run Current JupyterLab Code Cell
+    Click Element    css:${JLAB CSS ICON RUN}

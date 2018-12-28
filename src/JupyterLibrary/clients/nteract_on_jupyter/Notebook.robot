@@ -21,8 +21,8 @@ Add and Run nteract Code Cell
     Run Current nteract Code Cell
 
 Run Current nteract Code Cell
-    ${accel} =  Get Accelerator Key
-    Press Keys   css:body  ${accel}+ENTER
+    Mouse Over    css:${NOJ CSS EXECUTE}
+    Click Element    css:${NOJ CSS EXECUTE}
 
 Wait Until nteract Kernel Is Idle
     [Documentation]    Wait for a kernel to be busy, and then stop being busy

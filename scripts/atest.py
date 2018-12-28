@@ -5,7 +5,7 @@ from os.path import join
 # import for PATH side-effect. yuck.
 import chromedriver_binary  # noqa
 
-from . import BROWSER, HERE, PLATFORM, TEST_OUT, TESTS
+from . import BROWSER, ROOT, PLATFORM, TESTS, TEST_OUT
 
 
 def run_tests(robot_args):
@@ -36,7 +36,7 @@ def run_tests(robot_args):
     )
 
     print(" ".join(args))
-    proc = subprocess.Popen(args, cwd=HERE)
+    proc = subprocess.Popen(args, cwd=ROOT)
 
     try:
         return proc.wait()
