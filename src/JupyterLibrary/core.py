@@ -9,7 +9,7 @@ from robot.libraries.BuiltIn import BuiltIn
 from SeleniumLibrary import SeleniumLibrary
 from SeleniumLibrary.utils.librarylistener import LibraryListener
 
-from .keywords import screenshots, server
+from .keywords import keys, screenshots, server
 
 
 CLIENTS = [
@@ -18,7 +18,11 @@ CLIENTS = [
 
 COMMON = list(glob(join(dirname(__file__), "common", "*.robot")))
 
-component_classes = [server.ServerKeywords, screenshots.ScreenshotKeywords]
+component_classes = [
+    server.ServerKeywords,
+    screenshots.ScreenshotKeywords,
+    keys.KeyKeywords,
+]
 
 
 class JupyterLibrary(SeleniumLibrary):

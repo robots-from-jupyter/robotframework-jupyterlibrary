@@ -20,4 +20,5 @@ Wait Until JupyterLab Kernel Is Idle
     Wait Until Page Does Not Contain    ${JLAB TEXT BUSY PROMPT}
 
 Save JupyterLab Notebook
-    Press Keys  css:body  CTRL+S
+    ${accel} =  Get Accelerator Key
+    Press Keys  css:body  ${accel}+S

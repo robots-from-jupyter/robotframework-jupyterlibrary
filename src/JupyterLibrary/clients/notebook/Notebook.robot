@@ -11,7 +11,8 @@ Add and Run Notebook Classic Code Cell
     ${cell} =  Get WebElement  css:${JNC CSS ACTIVE INPUT}
     Click Element    ${cell}
     Set CodeMirror Value    ${JNC CSS ACTIVE INPUT}  ${code}
-    Press Keys  css:body  CTRL+ENTER
+    ${accel} =  Get Accelerator Key
+    Press Keys  css:body  ${accel}+ENTER
     Click Element   ${cell}
 
 Wait Until Notebook Classic Kernel Is Idle
