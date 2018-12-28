@@ -6,7 +6,6 @@ Current Notebook Classic Cell Output Should Contain
   [Arguments]  ${expected}
   Element Should Contain    css:${JNC CSS ACTIVE OUTPUT}    ${expected}
 
-
 Screenshot Each Output of Active Notebook Classic Cell
     [Arguments]  ${prefix}
     [Documentation]   Capture all of the outputs of the current Cell as screenshots
@@ -22,7 +21,6 @@ Screenshot Markdown of Active Notebook Classic Cell
     ${inputs} =  Get WebElements  css:${JNC CSS ACTIVE MARKDOWN}
     :FOR   ${i}  IN RANGE  ${inputs.__len__()}
     \  Capture Element Screenshot  ${inputs[${i}]}  ${prefix}_markdown_${i}.png
-
 
 Screenshot Each Output of Active Notebook Classic Document
     [Arguments]  ${prefix}

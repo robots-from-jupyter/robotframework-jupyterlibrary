@@ -4,7 +4,6 @@ Documentation   Keywords for working with the Jupyter Notebook Clasic web applic
 ...    You should have already started a Jupyter Server, such as with
 ...    *Wait For New Jupyter Server To Be Ready*.
 
-
 *** Keywords ***
 Open Notebook Classic
     [Arguments]    ${browser}=headlessfirefox  ${nbserver}=${None}  ${url}=${EMPTY}   &{configuration}

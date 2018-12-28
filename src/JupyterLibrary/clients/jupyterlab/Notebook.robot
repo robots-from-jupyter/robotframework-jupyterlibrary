@@ -2,7 +2,6 @@
 Resource   JupyterLibrary/clients/jupyterlab/Selectors.robot
 Resource   JupyterLibrary/common/CodeMirror.robot
 
-
 *** Keywords ***
 Add and Run JupyterLab Code Cell
     [Arguments]    ${code}=print("hello world")

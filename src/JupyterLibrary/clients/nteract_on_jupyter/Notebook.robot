@@ -23,7 +23,6 @@ Add and Run nteract Code Cell
 Run Current nteract Code Cell
     Press Keys   css:body  CTRL+ENTER
 
-
 Wait Until nteract Kernel Is Idle
     [Documentation]    Wait for a kernel to be busy, and then stop being busy
     Wait Until Page Does Not Contain    ${NOJ TEXT BUSY PROMPT}

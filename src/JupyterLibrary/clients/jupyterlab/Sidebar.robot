@@ -1,7 +1,6 @@
 *** Settings ***
 Resource   JupyterLibrary/clients/jupyterlab/Selectors.robot
 
-
 *** Keywords ***
 Maybe Close JupyterLab Sidebar
     [Documentation]  Attempt to close the JupyterLab sidebar

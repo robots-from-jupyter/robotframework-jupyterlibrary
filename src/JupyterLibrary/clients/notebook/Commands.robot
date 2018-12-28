@@ -1,7 +1,6 @@
 *** Settings ***
 Resource   JupyterLibrary/clients/notebook/Selectors.robot
 
-
 *** Keywords ***
 Execute Notebook Classic Command
     [Arguments]    ${command}  ${accept}=${True}  ${close}=${True}

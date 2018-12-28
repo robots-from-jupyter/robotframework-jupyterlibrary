@@ -1,7 +1,6 @@
 *** Settings ***
 Resource   JupyterLibrary/clients/jupyterlab/Selectors.robot
 
-
 *** Keywords ***
 Execute JupyterLab Command
     [Arguments]    ${command}  ${accept}=${True}  ${close}=${True}
