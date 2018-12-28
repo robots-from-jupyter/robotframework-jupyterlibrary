@@ -18,3 +18,6 @@ Wait Until JupyterLab Kernel Is Idle
     [Documentation]    Wait for a kernel to be busy, and then stop being busy
     Wait Until Page Does Not Contain Element    ${JLAB CSS BUSY KERNEL}
     Wait Until Page Does Not Contain    ${JLAB TEXT BUSY PROMPT}
+
+Save JupyterLab Notebook
+    Press Keys  css:body  CTRL+S

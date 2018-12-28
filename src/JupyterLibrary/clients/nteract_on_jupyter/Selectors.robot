@@ -15,3 +15,6 @@ ${NOJ CSS EXECUTE}  .focused${NOJ CSS CELL TOOLBAR} .executeButton
 ${NOJ TEXT BUSY PROMPT}  [*]
 ${NOJ CSS ACTIVE CELL MARKDOWN}    ${NOJ CSS ACTIVE CELL} > div > .outputs
 ${NOJ CSS STATUS BAR}  \#root > .status-bar
+
+${NOJ XP MENU}  //div[contains(@class, 'rc-menu-submenu-title')]
+${NOJ XP MENU ITEM}  //li[contains(@class, 'rc-menu-item')]

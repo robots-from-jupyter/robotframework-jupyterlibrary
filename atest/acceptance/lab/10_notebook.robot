@@ -13,6 +13,7 @@ IPython Notebook on Lab
     Wait Until JupyterLab Kernel Is Idle
     Current JupyterLab Cell Output Should Contain    hello world
     Capture Page Screenshot    lab${/}ipython.png
+    Save JupyterLab Notebook
 
 IPython Notebook Outputs on Lab
     Open JupyterLab    ${BROWSER}
@@ -21,3 +22,4 @@ IPython Notebook Outputs on Lab
     \    Add and Run JupyterLab Code Cell    print("${i} hello world " * ${i ** 2})
     Wait Until JupyterLab Kernel Is Idle
     Screenshot Each Output of Active JupyterLab Document    lab${/}ipython_outputs${/}
+    Save JupyterLab Notebook

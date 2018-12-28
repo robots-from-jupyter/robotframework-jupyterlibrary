@@ -12,6 +12,7 @@ IPython Notebook on nteract
     Wait Until nteract Kernel Is Idle
     Current nteract Cell Output Should Contain    hello world
     Capture Page Screenshot    nteract${/}ipython.png
+    Save nteract Notebook
 
 IPython Notebook Outputs on nteract
     Open nteract    ${BROWSER}
@@ -20,3 +21,4 @@ IPython Notebook Outputs on nteract
     \    Add and Run nteract Code Cell    print("${i} hello world " * ${i ** 2})
     Wait Until nteract Kernel Is Idle
     Screenshot Each Output of Active nteract Document    nteract${/}ipython_outputs${/}
+    Save nteract Notebook

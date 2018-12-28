@@ -10,7 +10,7 @@ Add and Run nteract Code Cell
     Set nteract Status Bar Pointer Events  "none"
     Scroll To End Of Page
     Scroll Element Into View  ${creators[-1]}
-    Mouse Over  ${creators[-1]}
+    Click Element  ${creators[-1]}
     Click Element    css:${NOJ CSS CREATOR}:hover ${NOJ CSS ADD CODE CELL}
     ${cells} =  Get WebElements    css:${NOJ CSS CELL INPUT}
     Scroll To End Of Page
@@ -35,3 +35,33 @@ Set nteract Status Bar Pointer Events
 Scroll To End Of Page
     Execute JavaScript
     ...   document.querySelector("body").scrollTop = 999999
+
+Scroll To Top Of Page
+    Execute JavaScript
+    ...   document.querySelector("body").scrollTop = 0
+
+Click nteract Menu
+    [Arguments]    ${label}
+    [Documentation]    Click a top-level nteract menu bar item with by ``label``,
+    ...   e.g. File, Help, etc.
+    Scroll To Top Of Page
+    ${xpath} =  Set Variable  ${NOJ XP MENU}\[@title = '${label}']
+    Wait Until Page Contains Element    ${xpath}
+    Mouse Over    ${xpath}
+
+Click nteract Menu Item
+    [Arguments]    ${label}
+    [Documentation]    Click a currently-visible nteract menu item by ``label``.
+    ${item} =    Set Variable  ${NOJ XP MENU ITEM}\[contains(text(), '${label}')]
+    Wait Until Page Contains Element    ${item}
+    Click Element    ${item}
+
+Open With nteract Menu
+    [Arguments]  ${menu}  @{submenus}
+    [Documentation]  Click into a ``menu``, then a series of ``submenus``
+    Click nteract Menu  ${menu}
+    :FOR  ${submenu}  IN  @{submenus}
+    \  Click nteract Menu Item  ${submenu}
+
+Save nteract Notebook
+    Open With nteract Menu  File  Save
