@@ -24,3 +24,4 @@ Save JupyterLab Notebook
 
 Run Current JupyterLab Code Cell
     Click Element    css:${JLAB CSS ICON RUN}
+    Sleep  0.5s
