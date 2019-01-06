@@ -4,6 +4,7 @@ Resource   JupyterLibrary/clients/nteract_on_jupyter/Selectors.robot
 *** Keywords ***
 Current Notebook Classic Cell Output Should Contain
   [Arguments]  ${expected}
+  Wait Until Page Contains Element  css:${JNC CSS ACTIVE OUTPUT}
   Element Should Contain    css:${JNC CSS ACTIVE OUTPUT}    ${expected}
 
 Screenshot Each Output of Active Notebook Classic Cell
