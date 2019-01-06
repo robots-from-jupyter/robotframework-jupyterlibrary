@@ -4,8 +4,8 @@ Resource   JupyterLibrary/clients/jupyterlab/Selectors.robot
 *** Keywords ***
 Current JupyterLab Cell Output Should Contain
   [Arguments]  ${expected}
+  Wait Until Page Contains Element  css:${JLAB CSS ACTIVE OUTPUT CHILDREN}
   Element Should Contain    css:${JLAB CSS ACTIVE OUTPUT CHILDREN}    ${expected}
-
 
 Screenshot Each Output of Active JupyterLab Cell
     [Arguments]  ${prefix}

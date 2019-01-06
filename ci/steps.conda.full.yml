@@ -18,7 +18,7 @@ steps:
         python-chromedriver-binary
         python>=3.6,<3.7
         robotframework-lint
-        robotframework-seleniumlibrary>=3.2
+        robotframework-seleniumlibrary>=3.3
         robotframework>=3.1
         sphinx_rtd_theme
   - script: pip install nteract_on_jupyter --no-deps --ignore-installed -vv

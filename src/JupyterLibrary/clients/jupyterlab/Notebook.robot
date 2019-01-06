@@ -2,7 +2,6 @@
 Resource   JupyterLibrary/clients/jupyterlab/Selectors.robot
 Resource   JupyterLibrary/common/CodeMirror.robot
 
-
 *** Keywords ***
 Add and Run JupyterLab Code Cell
     [Arguments]    ${code}=print("hello world")
@@ -12,10 +11,17 @@ Add and Run JupyterLab Code Cell
     ${cell} =   Get WebElement  css:${JLAB CSS ACTIVE INPUT}
     Click Element    ${cell}
     Set CodeMirror Value    ${JLAB CSS ACTIVE INPUT}  ${code}
-    Click Element    css:${JLAB CSS ICON RUN}
+    Run Current JupyterLab Code Cell
     Click Element    ${cell}
 
 Wait Until JupyterLab Kernel Is Idle
     [Documentation]    Wait for a kernel to be busy, and then stop being busy
     Wait Until Page Does Not Contain Element    ${JLAB CSS BUSY KERNEL}
     Wait Until Page Does Not Contain    ${JLAB TEXT BUSY PROMPT}
+
+Save JupyterLab Notebook
+    Execute JupyterLab Command   Save Notebook
+
+Run Current JupyterLab Code Cell
+    Click Element    css:${JLAB CSS ICON RUN}
+    Sleep  0.5s

@@ -3,9 +3,10 @@ import platform
 from os.path import abspath, dirname, join
 
 HERE = dirname(__file__)
-TESTS = abspath(join(HERE, "..", "atest", "acceptance"))
+ROOT = abspath(join(HERE, ".."))
+TESTS = abspath(join(ROOT, "atest", "acceptance"))
 
-TEST_OUT = abspath(join(HERE, "..", "_artifacts", "test_output"))
+TEST_OUT = abspath(join(ROOT, "_artifacts", "test_output"))
 
 PLATFORM = platform.system().lower()
 BROWSER = os.environ.get("BROWSER", "headlessfirefox")

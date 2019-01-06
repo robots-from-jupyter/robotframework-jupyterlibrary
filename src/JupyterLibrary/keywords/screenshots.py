@@ -6,10 +6,15 @@ from SeleniumLibrary.base import LibraryComponent, keyword
 class ScreenshotKeywords(LibraryComponent):
     @keyword
     def capture_element_screenshot(self, locator, filename):
+        """ This is an overload of SeleniumLibrary's implementation
+            which uses pillow on the backend to make this feature work across
+            multiple browsers. Sorta.
+        """
         el = self.find_element(locator)
         bbox = self.normalize_bounding_box({**el.location, **el.size})
         filename = BuiltIn().run_keyword("Capture Page Screenshot", filename)
         self.crop_image(filename, **bbox)
+        return filename
 
     def normalize_bounding_box(self, bbox):
         """ Normalize a bounding box to reasonable defaults

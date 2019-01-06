@@ -34,6 +34,7 @@ def setup(app):
             tdp = Path(td)
             agg = ""
             for sub in client.rglob("*.robot"):
+                print(f"collecting {sub.relative_to(client)}")
                 agg += sub.read_text()
             out_file = Path(tdp / f"{client.name}.robot")
             out_file.write_text(agg)

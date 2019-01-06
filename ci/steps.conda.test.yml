@@ -1,17 +1,33 @@
 steps:
-  - task: CondaEnvironment@1
-    inputs:
-      createOptions: -c conda-forge -c defaults
-      createCustomEnvironment: true
-      updateConda: false
-      environmentName: robotframework-jupyterlibrary-test
-      packageSpecs: >
-        geckodriver
-        jupyterlab>=0.35
-        pillow
-        python-chromedriver-binary
-        python>=3.6,<3.7
-        robotframework-seleniumlibrary>=3.2
-        robotframework>=3.1
+  - ${{ if not(eq(parameters.name, 'Windows')) }}:
+    - task: CondaEnvironment@1
+      inputs:
+        createOptions: -c conda-forge -c defaults
+        createCustomEnvironment: true
+        updateConda: false
+        environmentName: robotframework-jupyterlibrary-test
+        packageSpecs: >
+          geckodriver
+          jupyterlab>=0.35
+          pillow
+          python-chromedriver-binary
+          python>=3.6,<3.7
+          robotframework-seleniumlibrary>=3.3
+          robotframework>=3.1
+  - ${{ if eq(parameters.name, 'Windows') }}:
+    - task: CondaEnvironment@1
+      inputs:
+        createOptions: -c conda-forge -c defaults
+        createCustomEnvironment: true
+        updateConda: false
+        environmentName: robotframework-jupyterlibrary-test
+        packageSpecs: >
+          geckodriver
+          jupyterlab>=0.35
+          pillow
+          python-chromedriver-binary==2.42
+          python>=3.6,<3.7
+          robotframework-seleniumlibrary>=3.3
+          robotframework>=3.1
   - script: pip install nteract_on_jupyter --no-deps --ignore-installed -vv
     displayName: Pip dependencies

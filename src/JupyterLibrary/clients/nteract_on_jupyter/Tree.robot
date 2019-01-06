@@ -4,7 +4,6 @@ Documentation   Keywords for working with nteract web application
 ...    You should have already started a Jupyter Server, such as with
 ...    *Wait For New Jupyter Server To Be Ready*.
 
-
 *** Keywords ***
 Open nteract
     [Arguments]    ${browser}=headlessfirefox  ${nbserver}=${None}  ${url}=${EMPTY}   &{configuration}
