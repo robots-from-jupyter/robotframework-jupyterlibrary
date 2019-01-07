@@ -44,7 +44,7 @@ pip install robotframework-jupyterlibrary
 - get [Miniconda3][] (as in Python 3.6+)
 - clone this repo...
 
-      git clone https://github.com/bollwyvl/robotframework-jupyterlibrary
+      git clone https://github.com/robots-from-jupyter/robotframework-jupyterlibrary
       cd robotframework-jupyterlibrary
 
 - update and activate...
@@ -69,12 +69,12 @@ from a number of other projects:
 - [Jyve][] ([BSD-3-Clause][jyve-license])
   - Initial implementations of robot keywords
 
-[acceptance tests]: https://github.com/bollwyvl/robotframework-jupyterlab
+[acceptance tests]: https://github.com/robots-from-jupyter/robotframework-jupyterlab
 [Miniconda3]: https://conda.io/miniconda.html
 [binder-badge]: https://mybinder.org/badge_logo.svg
-[binder]: https://mybinder.org/v2/gh/bollwyvl/robotframework-jupyterlibrary/master?urlpath=lab/tree/README.md
-[pipeline-badge]: https://dev.azure.com/nickbollweg/nickbollweg/_apis/build/status/bollwyvl.robotframework-jupyterlibrary
-[pipeline]: https://dev.azure.com/nickbollweg/nickbollweg/_build/latest?definitionId=2
+[binder]: https://mybinder.org/v2/gh/robots-from-jupyter/robotframework-jupyterlibrary/master?urlpath=lab/tree/README.md
+[pipeline-badge]: https://dev.azure.com/robots-from-jupyter/robots-from-jupyter/_apis/build/status/robots-from-jupyter.robotframework-jupyterlibrary?branchName=master
+[pipeline]: https://dev.azure.com/robots-from-jupyter/robots-from-jupyter/_build/latest?definitionId=4
 [docs-badge]: https://readthedocs.org/projects/robotframework-jupyterlibrary/badge/?version=latest
 [pip-badge]: https://img.shields.io/pypi/v/robotframework-jupyterlibrary.svg
 [pip]: https://pypi.org/project/robotframework-jupyterlibrary
