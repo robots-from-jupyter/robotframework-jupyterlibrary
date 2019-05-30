@@ -2,6 +2,7 @@ import os
 import platform
 from os.path import abspath, dirname, join
 
+
 HERE = dirname(__file__)
 ROOT = abspath(join(HERE, ".."))
 TESTS = abspath(join(ROOT, "atest", "acceptance"))

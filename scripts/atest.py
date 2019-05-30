@@ -5,7 +5,7 @@ from os.path import join
 # import for PATH side-effect. yuck.
 import chromedriver_binary  # noqa
 
-from . import BROWSER, ROOT, PLATFORM, TESTS, TEST_OUT
+from . import BROWSER, PLATFORM, ROOT, TEST_OUT, TESTS
 
 
 def run_tests(robot_args):

@@ -15,9 +15,10 @@ Add and Run JupyterLab Code Cell
     Click Element    ${cell}
 
 Wait Until JupyterLab Kernel Is Idle
-    [Documentation]    Wait for a kernel to be busy, and then stop being busy
+    [Arguments]    ${timeout}=10s
+    [Documentation]    Wait for a kernel to stop being busy
+    Wait Until Element Does Not Contain    css:${JLAB CSS INPUT PROMPT}    ${JLAB TEXT BUSY PROMPT}   timeout=${timeout}
     Wait Until Page Does Not Contain Element    ${JLAB CSS BUSY KERNEL}
-    Wait Until Page Does Not Contain    ${JLAB TEXT BUSY PROMPT}
 
 Save JupyterLab Notebook
     Execute JupyterLab Command   Save Notebook

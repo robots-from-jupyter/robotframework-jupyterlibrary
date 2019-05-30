@@ -15,10 +15,11 @@ ${JLAB CSS CMD ITEM}    .p-CommandPalette-item
 ${JLAB CSS ICON ADD}  .jp-AddIcon
 ${JLAB CSS ICON RUN}  .jp-RunIcon
 ${JLAB CSS NB TOOLBAR}  .jp-NotebookPanel-toolbar
+${JLAB CSS INPUT PROMPT}  .jp-InputPrompt
 ${JLAB CSS SIDEBAR TAB}  .jp-SideBar .p-TabBar-tab
 ${JLAB CSS SPINNER}        .jp-Spinner
 ${JLAB ID SPLASH}      jupyterlab-splash
-${JLAB TEXT BUSY PROMPT}  In [*]:
+${JLAB TEXT BUSY PROMPT}  [*]:
 ${JLAB XP CARD}           //div[@class='jp-LauncherCard']
 ${JLAB XP DOCK}           //div[@id='jp-main-dock-panel']
 ${JLAB XP MENU ITEM LABEL}  //div[@class='p-Menu-itemLabel']
