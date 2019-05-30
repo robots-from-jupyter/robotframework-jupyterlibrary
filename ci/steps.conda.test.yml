@@ -1,5 +1,5 @@
 steps:
-  - ${{ if not(eq(parameters.name, 'Windows')) }}:
+  - ${{ if eq(parameters.name, 'Linux') }}:
     - task: CondaEnvironment@1
       inputs:
         createOptions: -c conda-forge -c defaults
@@ -8,9 +8,24 @@ steps:
         environmentName: robotframework-jupyterlibrary-test
         packageSpecs: >
           geckodriver
-          jupyterlab>=0.35
+          jupyterlab>=0.35.6,<0.36
           pillow
-          python-chromedriver-binary
+          python-chromedriver-binary>73,<74
+          python>=3.6,<3.7
+          robotframework-seleniumlibrary>=3.3
+          robotframework>=3.1
+  - ${{ if eq(parameters.name, 'MacOSX') }}:
+    - task: CondaEnvironment@1
+      inputs:
+        createOptions: -c conda-forge -c defaults
+        createCustomEnvironment: true
+        updateConda: false
+        environmentName: robotframework-jupyterlibrary-test
+        packageSpecs: >
+          geckodriver
+          jupyterlab>=0.35.6,<0.36
+          pillow
+          python-chromedriver-binary>74,<75
           python>=3.6,<3.7
           robotframework-seleniumlibrary>=3.3
           robotframework>=3.1
@@ -23,9 +38,9 @@ steps:
         environmentName: robotframework-jupyterlibrary-test
         packageSpecs: >
           geckodriver
-          jupyterlab>=0.35
+          jupyterlab>=0.35.6,<0.36
           pillow
-          python-chromedriver-binary==2.42
+          python-chromedriver-binary>73,<74
           python>=3.6,<3.7
           robotframework-seleniumlibrary>=3.3
           robotframework>=3.1
