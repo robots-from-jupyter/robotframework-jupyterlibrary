@@ -35,7 +35,12 @@ See the [acceptance tests][] for examples.
 ```bash
 pip install robotframework-jupyterlibrary
 ```
-> _TODO: release on conda-forge_
+
+Or
+
+```bash
+conda install -c conda-forge robotframework-jupyterlibrary
+```
 
 ## Development Installation
 
