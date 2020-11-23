@@ -1,0 +1,12 @@
+channels:
+  - conda-forge
+  - msys2
+dependencies:
+  - firefox =78
+  - geckodriver
+  - jupyterlab
+  - pip
+  - python
+  - robotframework
+  - robotframework-seleniumlibrary
+  - twine
