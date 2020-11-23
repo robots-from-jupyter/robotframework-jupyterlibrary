@@ -10,7 +10,7 @@ dependencies:
   - geckodriver
   - firefox =78
   - isort <5
-  - jupyterlab <1
+  - jupyterlab >=2
   - nbsphinx
   - nodejs >=10
   - nteract_on_jupyter
