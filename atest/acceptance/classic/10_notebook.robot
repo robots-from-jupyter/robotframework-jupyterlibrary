@@ -16,7 +16,8 @@ IPython Notebook on Classic
 IPython Notebook Outputs on Classic
     Open Notebook Classic    ${BROWSER}
     Launch a new Notebook Classic Notebook
-    : FOR    ${i}    IN RANGE    ${10}
-    \    Add and Run Notebook Classic Code Cell    print("${i} hello world " * ${i ** 2})
+    FOR    ${i}    IN RANGE    ${10}
+        Add and Run Notebook Classic Code Cell    print("${i} hello world " * ${i ** 2})
+    END
     Wait Until Notebook Classic Kernel Is Idle
     Screenshot Each Output of Active Notebook Classic Document    classic${/}ipython_outputs${/}

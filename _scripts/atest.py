@@ -3,7 +3,7 @@ import sys
 from os.path import join
 
 # import for PATH side-effect. yuck.
-import chromedriver_binary  # noqa
+# import chromedriver_binary  # noqa
 
 from . import BROWSER, ROOT, PLATFORM, TESTS, TEST_OUT
 

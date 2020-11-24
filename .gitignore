@@ -8,3 +8,4 @@ lib/
 Untitled*.*
 *.html
 .doit*
+.envs/

@@ -55,8 +55,7 @@ class JupyterLibrary(SeleniumLibrary):
 
 
 class JupyterLibraryListener(LibraryListener):
-    """ Custom listener to do per-suite imports of resource files
-    """
+    """Custom listener to do per-suite imports of resource files"""
 
     ROBOT_LISTENER_API_VERSION = 2
 

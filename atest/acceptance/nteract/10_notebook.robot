@@ -17,8 +17,9 @@ IPython Notebook on nteract
 IPython Notebook Outputs on nteract
     Open nteract    ${BROWSER}
     Launch a new nteract Notebook
-    : FOR    ${i}    IN RANGE    ${10}
-    \    Add and Run nteract Code Cell    print("${i} hello world " * ${i ** 2})
+    FOR    ${i}    IN RANGE    ${10}
+        Add and Run nteract Code Cell    print("${i} hello world " * ${i ** 2})
+    END
     Wait Until nteract Kernel Is Idle
     Screenshot Each Output of Active nteract Document    nteract${/}ipython_outputs${/}
     Save nteract Notebook

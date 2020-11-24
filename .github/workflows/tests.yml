@@ -16,8 +16,23 @@ env:
   PYTHONUNBUFFERED: 1
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: cache (conda)
+        uses: actions/cache@v1
+        with:
+          path: ~/conda_pkgs_dir
+          key:
+            ${{ runner.os }}-conda-lint-${{ hashFiles(".github/locks/lint/linux-64/conda.lock") }}
+          restore-keys: |
+            ${{ runner.os }}-conda-lint-
+      - run: doit lint
+
   test:
     runs-on: ${{ matrix.os }}-latest
+    needs: [lint]
     strategy:
       fail-fast: false
       matrix:
@@ -46,4 +61,4 @@ jobs:
         with:
           environment-file: locks/${{ format("locks/{0}-py{1}-lab{}.conda.lock"), matrix.conda-subdir, matrix.python-version, matrix.lab-version) }}
           use-only-tar-bz2: true
-      - run: doit ci
+      - run: doit test

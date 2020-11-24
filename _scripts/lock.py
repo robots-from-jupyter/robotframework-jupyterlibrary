@@ -13,10 +13,12 @@ parser = ArgumentParser()
 CHN = "channels"
 DEP = "dependencies"
 
+
 def expand_specs(specs):
     for raw in specs:
         match = MatchSpec(raw)
         yield match.name, [raw, match]
+
 
 def merge(composite, env):
     for channel in env.get(CHN, []):
@@ -26,9 +28,7 @@ def merge(composite, env):
     comp_specs = dict(expand_specs(composite.get(DEP, [])))
     env_specs = dict(expand_specs(env.get(DEP, [])))
 
-    composite[DEP] = [
-        raw for (raw, match) in env_specs.values()
-    ] + [
+    composite[DEP] = [raw for (raw, match) in env_specs.values()] + [
         raw for name, (raw, match) in comp_specs.items() if name not in env_specs
     ]
 
@@ -62,7 +62,9 @@ def main(lockfile=None):
     lockfile = lockfile or sys.argv[1]
     assert lockfile
     lockpath = Path(lockfile)
-    flow, platform, python, lab = [k for k, v in P.ENVENTURES.items() if v == lockpath][0]
+    flow, platform, python, lab = [k for k, v in P.ENVENTURES.items() if v == lockpath][
+        0
+    ]
     return lock(flow, platform, python, lab)
 
 
