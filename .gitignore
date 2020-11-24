@@ -7,6 +7,7 @@ _artifacts/
 *.egg-info
 *.html
 build/
+dist/
 envs/
 lib/
 Untitled*.*

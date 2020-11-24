@@ -18,7 +18,11 @@ SCRIPTS = Path(__file__).parent
 ROOT = SCRIPTS.parent
 DODO = ROOT / "dodo.py"
 
+SETUP_CRUFT = [ROOT / "setup.py", ROOT / "MANIFEST.in", ROOT / "setup.cfg"]
+
 SRC = ROOT / "src" / "JupyterLibrary"
+VERSION_FILE = SRC / "VERSION"
+VERSION = VERSION_FILE.read_text().strip()
 PY_SRC = [*SRC.rglob("*.py")]
 ALL_PY = [*SCRIPTS.rglob("*.py"), *PY_SRC, DODO]
 ATEST = ROOT / "atest"
@@ -27,6 +31,11 @@ ALL_ROBOT = [*ATEST.rglob("*.robot"), *ROBOT_SRC]
 
 BUILD = ROOT / "build"
 BUILD.exists() or BUILD.mkdir()
+
+DIST = ROOT / "dist"
+IMPORTABLE = "robotframework_jupyterlibrary"
+SDIST = DIST / f"""{IMPORTABLE.replace("_", "-")}-{VERSION}.tar.gz"""
+WHEEL = DIST / f"{IMPORTABLE}-{VERSION}-py3-none-any.whl"
 
 # partial environments
 GITHUB = ROOT / ".github"

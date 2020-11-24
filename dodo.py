@@ -18,8 +18,17 @@ def task_binder():
     return dict(actions=[["echo", "ok"]])
 
 
+def task_release():
+    return dict(actions=[["echo", "OK"]], task_dep=["lint", "build", "test"])
+
+
 def task_build():
-    yield dict(name="pypi", actions=[[*P.PY, "setup.py", "sdist", "bdist_wheel"]])
+    yield dict(
+        name="pypi",
+        actions=[[*P.PY, "setup.py", "sdist", "bdist_wheel"]],
+        targets=[P.SDIST, P.WHEEL],
+        file_dep=[*P.PY_SRC, *P.ROBOT_SRC, P.VERSION_FILE, *P.SETUP_CRUFT],
+    )
 
 
 def _make_env(env):
@@ -67,7 +76,7 @@ def task_lint():
     env_lock = P.BUILD / "lint" / "conda.lock"
     yield dict(
         name="black",
-        actions=[[*P.RUN_IN["lint"], *P.PYM, "black", *P.ALL_PY]],
+        actions=[[*P.RUN_IN["lint"], *P.PYM, "black", "--quiet", *P.ALL_PY]],
         file_dep=[*P.ALL_PY, env_lock],
     )
     yield dict(
