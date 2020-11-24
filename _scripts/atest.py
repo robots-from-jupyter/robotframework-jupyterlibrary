@@ -11,9 +11,9 @@ from . import BROWSER, ROOT, PLATFORM, TESTS, TEST_OUT
 def run_tests(robot_args):
     args = (
         [
-            "python",
-            "-m",
-            "robot",
+            "pabot",
+            "--testlevelsplit",
+            "--artifactsinsubfolders",
             "-d",
             TEST_OUT,
             "--log",

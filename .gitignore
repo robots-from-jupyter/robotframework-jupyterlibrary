@@ -1,11 +1,12 @@
 __pycache__/
 _artifacts/
+.doit*
+.envs/
 .ipynb_checkpoints/
+.pabotsuitenames
 *.egg-info
+*.html
 build/
 envs/
 lib/
 Untitled*.*
-*.html
-.doit*
-.envs/
