@@ -1,0 +1,5 @@
+dependencies:
+  - nbsphinx
+  - sphinx
+  - sphinx_rtd_theme
+  - sphinx-autobuild

@@ -9,9 +9,6 @@ from argparse import ArgumentParser
 from ruamel_yaml import safe_load, safe_dump
 
 parser = ArgumentParser()
-parser.add_argument('--platform', help='the platform')
-parser.add_argument('--python', help='the version of python')
-parser.add_argument('--lab', help='the version of jupyterlab')
 
 CHN = "channels"
 DEP = "dependencies"
@@ -38,12 +35,12 @@ def merge(composite, env):
     return composite
 
 
-def lock(pf, py, lab):
-    output = P.ENVENTURES[pf, py, lab]
+def lock(flow, pf, py, lab):
+    output = P.ENVENTURES[flow, pf, py, lab]
     if not output.parent.exists():
         output.parent.mkdir(parents=True)
     composite = {"name": output.name, CHN: [], DEP: []}
-    for env in P.ENV_DEPS[pf, py, lab]:
+    for env in P.ENV_DEPS[flow, pf, py, lab]:
         composite = merge(composite, safe_load(env.read_text()))
 
     print(safe_dump(composite, default_flow_style=False), flush=True)
@@ -61,13 +58,12 @@ def lock(pf, py, lab):
     return 0
 
 
-def main(platform=None, python=None, lab=None):
-    args = parser.parse_args()
-    platform = platform or args.platform
-    python = python or args.python
-    lab = lab or args.lab
-    assert (platform, python, lab) in P.ENVENTURES
-    return lock(platform, python, lab)
+def main(lockfile=None):
+    lockfile = lockfile or sys.argv[1]
+    assert lockfile
+    lockpath = Path(lockfile)
+    flow, platform, python, lab = [k for k, v in P.ENVENTURES.items() if v == lockpath][0]
+    return lock(flow, platform, python, lab)
 
 
 if __name__ == "__main__":

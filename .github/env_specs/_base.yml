@@ -1,12 +1,11 @@
 channels:
   - conda-forge
+  - nodefaults
   - msys2
 dependencies:
-  - firefox =78
-  - geckodriver
-  - jupyterlab
+  # whatever
   - pip
-  - python
-  - robotframework
-  - robotframework-seleniumlibrary
-  - twine
+  # hard deps
+  - robotframework >=3.2
+  - robotframework-seleniumlibrary >=4.5
+  - pillow

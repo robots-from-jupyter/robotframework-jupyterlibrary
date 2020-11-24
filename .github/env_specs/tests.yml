@@ -1,0 +1,8 @@
+dependencies:
+  # jupyter stuff
+  - nteract_on_jupyter
+  # the robot stack
+  - robotframework-pabot
+  # screenshots
+  - firefox =78
+  - geckodriver

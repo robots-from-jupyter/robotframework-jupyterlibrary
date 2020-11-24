@@ -17,30 +17,47 @@ PYTHONS = TEST_MATRIX["python-version"]
 LABS = TEST_MATRIX["lab-version"]
 PLATFORMS = TEST_MATRIX["conda-subdir"]
 
+EXCLUDES = {
+    ("tests", ex["conda-subdir"], ex["python-version"], ex["lab-version"]): True
+        for ex in TEST_MATRIX.get("exclude", [])
+}
+
 ENVENTURES = {
-    (pf, py, lab): LOCKS / pf / f"py{py}" / f"lab{lab}" / "conda.lock"
+    ("tests", pf, py, lab): LOCKS / "tests" / pf / f"py{py}" / f"lab{lab}" / "conda.lock"
     for pf in PLATFORMS
     for lab in LABS
     for py in PYTHONS
+    if not EXCLUDES.get(("tests", pf, py, lab))
 }
 
+
+ENVENTURES.update({
+    ("lint", pf, None, None): LOCKS / "lint" / pf / "conda.lock"
+    for pf in PLATFORMS
+})
+
+ENVENTURES.update({
+    ("docs", pf, None, None): LOCKS / "docs" / pf / "conda.lock"
+    for pf in PLATFORMS
+})
+
 ENV_DEPS = {
-    (pf, py, lab): [
+    (flow, pf, py, lab): [
         ENV_SPECS / "_base.yml",
+        ENV_SPECS / f"{flow}.yml"
     ]
-    for (pf, py, lab), target in ENVENTURES.items()
+    for (flow, pf, py, lab), target in ENVENTURES.items()
 }
 
 
 [
-    ENV_DEPS[pf, py, lab].extend([
-        ENV_SPECS / f"py_{py}.yml",
-        ENV_SPECS / f"lab_{lab}.yml",
+    ENV_DEPS[flow, pf, py, lab].extend([
+        *([ENV_SPECS / f"py_{py}.yml"] if py else []),
+        *([ENV_SPECS / f"lab_{lab}.yml"] if lab else []),
     ])
-    for (pf, py, lab), target in ENVENTURES.items()
+    for (flow, pf, py, lab), target in ENVENTURES.items()
 ]
 
-
-
-PYM = ["python", "-m"]
+PY = ["python"]
+PYM = [*PY, "-m"]
 SCRIPT_LOCK = [*PYM, "_scripts.lock"]

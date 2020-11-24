@@ -1,0 +1,6 @@
+dependencies:
+  - black
+  - flake8
+  - isort <5
+  - nodejs >=10
+  - robotframework-lint

@@ -16,16 +16,22 @@ def task_binder():
         actions=[["echo", "ok"]]
     )
 
+def task_build():
+    yield dict(
+        name="pypi",
+        actions=[[*P.PY, "setup.py", "sdist", "bdist_wheel"]]
+    )
 
 def task_lock():
     """ generate conda lock files for all the excursions
     """
-    for (pf, py, lab), target in P.ENVENTURES.items():
+    for (flow, pf, py, lab), target in P.ENVENTURES.items():
+        file_dep = P.ENV_DEPS[flow, pf, py, lab]
         yield dict(
-            name=f"{pf}__py{py}__lab{lab}".replace(".", "_"),
+            name=f"{flow}_{pf}__py{py}__lab{lab}".replace(".", "_"),
             actions=[
-                [*P.SCRIPT_LOCK, "--platform", pf, "--python", py, "--lab", lab]
+                [*P.SCRIPT_LOCK, target]
             ],
-            file_dep=P.ENV_DEPS[pf, py, lab],
+            file_dep=file_dep,
             targets=[target]
         )
