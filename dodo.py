@@ -96,7 +96,7 @@ def _make_env(env):
 
 def task_env():
     """prepare envs"""
-    for env in ["tests", "lint", "docs"]:
+    for env in P.ENV_NAMES:
         task = _make_env(env)
         if task:
             yield task
@@ -132,7 +132,7 @@ def task_lint():
 def task_lab():
     """start a jupyter lab server (with all other extensions)"""
 
-    env = "tests"
+    env = "test"
     frozen = P.PIP_LISTS[env]
     run_in = P.RUN_IN[env]
     pym = [*run_in, *P.PYM]
@@ -190,13 +190,13 @@ def _make_setup(env):
 
 def task_setup():
     """do an editable install of the package"""
-    for env in ["tests", "docs"]:
+    for env in P.ENV_NAMES:
         yield _make_setup(env)
 
 
 def task_test():
     """run tests"""
-    env = "tests"
+    env = "test"
 
     yield dict(
         name="atest",

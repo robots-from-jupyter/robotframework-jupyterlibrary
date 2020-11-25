@@ -86,7 +86,7 @@ jobs:
             ${{ runner.os }}-conda-${{ matrix.python-version }}-
       - uses: conda-incubator/setup-miniconda@v2
         with:
-          activate-environment: tests
+          activate-environment: test
           environment-file: ${{ steps.lock.outputs.file }}
           use-only-tar-bz2: true
       - run: doit test

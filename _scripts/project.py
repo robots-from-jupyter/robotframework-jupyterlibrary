@@ -22,6 +22,7 @@ import platform
 import os
 
 CI = int(os.environ.get("CI", "0"))
+BINDER = int(os.environ.get("BINDER", "0"))
 
 THIS_CONDA_SUBDIR = {
     "Linux": "linux-64",
@@ -57,7 +58,7 @@ ROBOT_SRC = [*SRC.rglob("*.robot")]
 # things we build
 BUILD = ROOT / "build"
 BUILD.exists() or BUILD.mkdir()
-ATEST_OUTPUT = BUILD / "tests" / "output" / "output.xml"
+ATEST_OUTPUT = BUILD / "test" / "output" / "output.xml"
 
 DIST = ROOT / "dist"
 IMPORTABLE = "robotframework_jupyterlibrary"
@@ -76,38 +77,34 @@ LOCKS = GITHUB / "locks"
 ENV_SPECS = GITHUB / "env_specs"
 ENVS = ROOT / ".envs"
 
-ENV_NAMES = ["tests", "lint", "docs"]
+ENV_NAMES = ["test", "lint", "docs"]
 
 if CI:
     RUN_IN = {env: ["conda", "run", "-n", env] for env in ENV_NAMES}
 else:
     RUN_IN = {env: ["conda", "run", "-p", ENVS / env] for env in ENV_NAMES}
+
 CONDA_LISTS = {env: BUILD / env / "conda.lock" for env in ENV_NAMES}
 PIP_LISTS = {env: BUILD / env / "pip.freeze" for env in ENV_NAMES}
 
-WORKFLOW_TEST = WORKFLOWS / "tests.yml"
-WORKFLOW_TEST_YAML = safe_load(WORKFLOW_TEST.read_text())
-TEST_MATRIX = WORKFLOW_TEST_YAML["jobs"]["test"]["strategy"]["matrix"]
+WORKFLOW_CI = WORKFLOWS / "ci.yml"
+WORKFLOW_CI_YAML = safe_load(WORKFLOW_CI.read_text())
+TEST_MATRIX = WORKFLOW_CI_YAML["jobs"]["test"]["strategy"]["matrix"]
 PYTHONS = TEST_MATRIX["python-version"]
 LABS = TEST_MATRIX["lab-version"]
 PLATFORMS = TEST_MATRIX["conda-subdir"]
 
 EXCLUDES = {
-    ("tests", ex["conda-subdir"], ex["python-version"], ex["lab-version"]): True
+    ("test", ex["conda-subdir"], ex["python-version"], ex["lab-version"]): True
     for ex in TEST_MATRIX.get("exclude", [])
 }
 
 ENVENTURES = {
-    ("tests", pf, py, lab): LOCKS
-    / "tests"
-    / pf
-    / f"py{py}"
-    / f"lab{lab}"
-    / "conda.lock"
+    ("test", pf, py, lab): LOCKS / "test" / pf / f"py{py}" / f"lab{lab}" / "conda.lock"
     for pf in PLATFORMS
     for lab in LABS
     for py in PYTHONS
-    if not EXCLUDES.get(("tests", pf, py, lab))
+    if not EXCLUDES.get(("test", pf, py, lab))
 }
 
 

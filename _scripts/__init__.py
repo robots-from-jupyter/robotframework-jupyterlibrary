@@ -6,7 +6,7 @@ HERE = dirname(__file__)
 ROOT = abspath(join(HERE, ".."))
 TESTS = abspath(join(ROOT, "atest", "acceptance"))
 
-TEST_OUT = abspath(join(ROOT, "build", "tests", "output"))
+TEST_OUT = abspath(join(ROOT, "build", "test", "output"))
 
 PLATFORM = platform.system().lower()
 BROWSER = os.environ.get("BROWSER", "headlessfirefox")
