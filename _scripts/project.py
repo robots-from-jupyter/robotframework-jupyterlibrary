@@ -48,8 +48,10 @@ PY_SRC = [*SRC.rglob("*.py")]
 ATEST = ROOT / "atest"
 ROBOT_SRC = [*SRC.rglob("*.robot")]
 
+# things we build
 BUILD = ROOT / "build"
 BUILD.exists() or BUILD.mkdir()
+ATEST_OUTPUT = BUILD / "tests" / "output" / "output.xml"
 
 DIST = ROOT / "dist"
 IMPORTABLE = "robotframework_jupyterlibrary"

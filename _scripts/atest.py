@@ -1,7 +1,6 @@
 import subprocess
 import sys
 import os
-from os.path import join
 
 # import for PATH side-effect. yuck.
 # import chromedriver_binary  # noqa
@@ -25,20 +24,12 @@ def run_tests(robot_args):
             "--artifactsinsubfolders",
             "-d",
             TEST_OUT,
-            "--log",
-            join(".".join([PLATFORM, BROWSER, "log", "html"])),
-            "--name",
-            "{} on {}".format(BROWSER, PLATFORM),
-            "--output",
-            join(".".join([PLATFORM, BROWSER, "robot", "xml"])),
-            "--report",
-            join(".".join([PLATFORM, BROWSER, "report", "html"])),
             "--variable",
-            "BROWSER:" + BROWSER,
+            f"BROWSER:{BROWSER}",
             "--variable",
-            "OS:" + PLATFORM,
+            f"OS:{PLATFORM}",
             "--xunit",
-            ".".join([PLATFORM, BROWSER, "robot", "xunit", "xml"]),
+            ".".join(["xunit", "xml"]),
         ]
         + robot_args
         + [TESTS]

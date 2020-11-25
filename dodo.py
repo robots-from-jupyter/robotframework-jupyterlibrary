@@ -203,7 +203,7 @@ def task_test():
         uptodate=[config_changed(os.environ.get("ATEST_ARGS", ""))],
         actions=[[*P.RUN_IN[env], *P.PYM, "_scripts.atest"]],
         file_dep=[*P.PY_SRC, *P.ALL_ROBOT, P.PIP_LISTS[env]],
-        targets=["build/test_output/log.xml"],
+        targets=[P.ATEST_OUTPUT],
     )
 
 
