@@ -6,7 +6,8 @@ Resource          JupyterLibrary/common/CodeMirror.robot
 Add and Run JupyterLab Code Cell
     [Arguments]    ${code}=print("hello world")
     [Documentation]    Add a ``code`` cell to the currently active notebook and run it.
-    Click Element    css:${JLAB CSS NB TOOLBAR} ${JLAB CSS ICON ADD}
+    # Click Element    css:${JLAB CSS NB TOOLBAR} ${JLAB CSS ICON ADD}
+    Click Element    xpath:${JLAB XP NB TOOLBAR}${JLAB XP ICON ADD}
     Sleep    0.1s
     ${cell} =    Get WebElement    css:${JLAB CSS ACTIVE INPUT}
     Click Element    ${cell}
@@ -23,5 +24,5 @@ Save JupyterLab Notebook
     Execute JupyterLab Command    Save Notebook
 
 Run Current JupyterLab Code Cell
-    Click Element    css:${JLAB CSS ICON RUN}
+    Click Element    xpath:${JLAB XP NB TOOLBAR}${JLAB XP ICON RUN}
     Sleep    0.5s

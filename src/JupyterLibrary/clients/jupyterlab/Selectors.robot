@@ -18,8 +18,12 @@ ${JLAB CSS SIDEBAR TAB}    .jp-SideBar .p-TabBar-tab
 ${JLAB CSS SPINNER}    .jp-Spinner
 ${JLAB ID SPLASH}    jupyterlab-splash
 ${JLAB TEXT BUSY PROMPT}    In [*]:
-${JLAB XP CARD}    //div[@class='jp-LauncherCard']
+${JLAB XP CARD}    //div[contains(@class, 'jp-LauncherCard')]
 ${JLAB XP DOCK}    //div[@id='jp-main-dock-panel']
 ${JLAB XP MENU ITEM LABEL}    //div[contains(@class, 'p-Menu-itemLabel')]
 ${JLAB XP MENU LABEL}    //div[contains(@class, 'p-MenuBar-itemLabel')]
 ${JLAB XP TOP}    //div[@id='jp-top-panel']
+${JLAB XP NB TOOLBAR}    //div[contains(@class, 'jp-NotebookPanel-toolbar')]
+# TODO: validate these hit on lab 1
+${JLAB XP ICON ADD}    //*[(local-name() = 'div' and contains(@class, 'jp-AddIcon')) or (local-name() = 'svg' and contains(@data-icon, 'ui-components:add'))]
+${JLAB XP ICON RUN}    //*[(local-name() = 'div' and contains(@class, 'jp-RunIcon')) or (local-name() = 'svg' and contains(@data-icon, 'ui-components:run'))]

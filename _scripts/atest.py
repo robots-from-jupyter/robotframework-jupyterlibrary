@@ -1,5 +1,6 @@
 import subprocess
 import sys
+import os
 from os.path import join
 
 # import for PATH side-effect. yuck.
@@ -35,7 +36,7 @@ def run_tests(robot_args):
         + [TESTS]
     )
 
-    print(" ".join(args))
+    print(" ".join(args), flush=True)
     proc = subprocess.Popen(args, cwd=ROOT)
 
     try:
@@ -46,4 +47,4 @@ def run_tests(robot_args):
 
 
 if __name__ == "__main__":
-    sys.exit(run_tests(sys.argv[1:]))
+    sys.exit(run_tests([*sys.argv[1:], *os.environ.get("ATEST_ARGS", "").split()]))
