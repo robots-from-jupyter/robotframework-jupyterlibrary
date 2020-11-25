@@ -1,5 +1,5 @@
 # platform: win-64
-# env_hash: fb3ae7cee3eb3bb1822070741a9d1f08005818cdd6a5a534cdaeb567f0e916ab
+# env_hash: 5e8b3848479eccdf93c1d6330d52304f62e3c166e472d4f105ced5185e434b40
 
 @EXPLICIT
 
@@ -21,11 +21,13 @@ https://conda.anaconda.org/conda-forge/win-64/openssl-1.1.1h-he774522_0.tar.bz2#
 https://conda.anaconda.org/conda-forge/win-64/python-3.6.11-h9303ea8_2_cpython.tar.bz2#42a6e8c961a5a6a7698001001552721e
 https://conda.anaconda.org/conda-forge/win-64/tk-8.6.10-he774522_1.tar.bz2#34a906fb55a5f0820d87b93da4dbb596
 https://conda.anaconda.org/conda-forge/win-64/xz-5.2.5-h62dcd97_1.tar.bz2#eabcbfedd14d7c18a514afca09ea0ebb
+https://conda.anaconda.org/conda-forge/win-64/yaml-0.2.5-he774522_0.tar.bz2#d41c34441d8bbb6d141e691ae7bccf35
 https://conda.anaconda.org/conda-forge/win-64/zlib-1.2.11-h62dcd97_1010.tar.bz2#a4cdf389c5f73e60a0ca121ff77c22a9
 https://conda.anaconda.org/conda-forge/noarch/async_generator-1.10-py_0.tar.bz2#d56c596e61b1c4952acf0a9920856c12
 https://conda.anaconda.org/conda-forge/noarch/attrs-20.3.0-pyhd3deb0d_0.tar.bz2#5b319abb055eefcfa344bc21378ca23f
 https://conda.anaconda.org/conda-forge/noarch/backcall-0.2.0-pyh9f0ad1d_0.tar.bz2#6006a6d08a3fa99268a2681c7fb55213
 https://conda.anaconda.org/conda-forge/win-64/backports-1.0-py36_1.tar.bz2#9e2edf61601c41f64367c8a384c4cfda
+https://conda.anaconda.org/conda-forge/noarch/cloudpickle-1.6.0-py_0.tar.bz2#76d764d8881719e305f6fa368dc2b65e
 https://conda.anaconda.org/conda-forge/noarch/colorama-0.4.4-pyh9f0ad1d_0.tar.bz2#c08b4c1326b880ed44f3ffb04803332f
 https://conda.anaconda.org/conda-forge/noarch/decorator-4.4.2-py_0.tar.bz2#d2eabb9cabd212e1ec6a9463bd846243
 https://conda.anaconda.org/conda-forge/noarch/defusedxml-0.6.0-py_0.tar.bz2#37e1033daee0e2edaa5ff42584c52b21
@@ -53,7 +55,8 @@ https://conda.anaconda.org/conda-forge/win-64/zeromq-4.3.3-h0e60522_3.tar.bz2#3f
 https://conda.anaconda.org/conda-forge/noarch/zipp-3.4.0-py_0.tar.bz2#0df927d2e46244cef8fd75d7ec2ba51c
 https://conda.anaconda.org/conda-forge/win-64/zstd-1.4.5-h1f3a1b7_2.tar.bz2#b35d995f210429648e920844701b57a9
 https://conda.anaconda.org/conda-forge/win-64/certifi-2020.11.8-py36ha15d459_0.tar.bz2#e59976ec9ce2d60ff6b1e49f04b57706
-https://conda.anaconda.org/conda-forge/win-64/cffi-1.14.3-py36h2e103f8_1.tar.bz2#4618de03fc3523b716835d50ae2779c3
+https://conda.anaconda.org/conda-forge/win-64/cffi-1.14.4-py36he58ceb7_0.tar.bz2#e332020ea3ca37aff0b7a4cc2e6697cd
+https://conda.anaconda.org/conda-forge/win-64/doit-0.33.1-py36h9f0ad1d_1.tar.bz2#eda38f9e8dc256068db9f41d2c26febb
 https://conda.anaconda.org/conda-forge/win-64/entrypoints-0.3-py36h9f0ad1d_1002.tar.bz2#2b77a25e6a38ae845abff3e0d6c695bd
 https://conda.anaconda.org/conda-forge/win-64/freetype-2.10.4-hd328e21_0.tar.bz2#2a8e3917bc23b5619d77d3b559d70e01
 https://conda.anaconda.org/conda-forge/noarch/importlib-metadata-3.1.0-pyhd8ed1ab_0.tar.bz2#97a4bcec44626ddea360efdf7d5ad816
@@ -67,9 +70,10 @@ https://conda.anaconda.org/conda-forge/win-64/pickleshare-0.7.5-py36h9f0ad1d_100
 https://conda.anaconda.org/conda-forge/win-64/pyrsistent-0.17.3-py36h779f372_1.tar.bz2#09ee48b5b61537854099a4cf4c93346f
 https://conda.anaconda.org/conda-forge/noarch/python-dateutil-2.8.1-py_0.tar.bz2#0d0150ed9c2d25817f5324108d3f7571
 https://conda.anaconda.org/conda-forge/win-64/pywin32-228-py36h779f372_0.tar.bz2#7c9d3505f950551adc6bba6488aa3ec6
+https://conda.anaconda.org/conda-forge/win-64/pyyaml-5.3.1-py36hc753bc4_1.tar.bz2#03eaa6ce290ad922ce452ce69e09c49d
 https://conda.anaconda.org/conda-forge/win-64/pyzmq-20.0.0-py36hb0157bd_1.tar.bz2#64e205b6acca262cfca914883efc7524
 https://conda.anaconda.org/conda-forge/noarch/robotframework-pabot-1.10.0-py_0.tar.bz2#34b9ed99c11f7ce4bd211f6f8eeeafac
-https://conda.anaconda.org/conda-forge/noarch/robotframework-pythonlibcore-2.1.0-py_0.tar.bz2#de381ef42de5c25524f5c43cd487a999
+https://conda.anaconda.org/conda-forge/noarch/robotframework-pythonlibcore-2.1.0-pyhd8ed1ab_1.tar.bz2#c20e2a5cca5be112eddedd02396897b9
 https://conda.anaconda.org/conda-forge/win-64/tornado-6.1-py36h68aa20f_0.tar.bz2#97d906d21bdb7a17b6e7e96f405aca82
 https://conda.anaconda.org/conda-forge/win-64/traitlets-4.3.3-py36h9f0ad1d_1.tar.bz2#af03bfeb2e66a71f3830d68a56695bd6
 https://conda.anaconda.org/conda-forge/win-64/win_inet_pton-1.1.0-py36h9f0ad1d_1.tar.bz2#3cbd276acd9fb1b313b81e118275053b

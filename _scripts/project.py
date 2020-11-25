@@ -1,5 +1,11 @@
 from pathlib import Path
 
+try:
+    __import__("conda_lock")
+    CAN_CONDA_LOCK = True
+except:
+    CAN_CONDA_LOCK = False
+
 for _yaml in ["yaml", "ruamel_yaml", "ruamel.yaml"]:
     try:
         yaml = __import__(_yaml)
@@ -106,7 +112,10 @@ ENVENTURES.update(
 )
 
 ENV_DEPS = {
-    (flow, pf, py, lab): [ENV_SPECS / "_base.yml", ENV_SPECS / f"{flow}.yml"]
+    (flow, pf, py, lab): [
+        ENV_SPECS / "_base.yml",
+        ENV_SPECS / f"{flow}.yml",
+    ]
     for (flow, pf, py, lab), target in ENVENTURES.items()
 }
 

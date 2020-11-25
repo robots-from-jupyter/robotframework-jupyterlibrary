@@ -11,7 +11,7 @@ DOIT_CONFIG = {
     "backend": "sqlite3",
     "verbosity": 2,
     "par_type": "thread",
-    "default_tasks": ["binder"],
+    "default_tasks": ["lab:ext"],
 }
 
 
@@ -21,10 +21,12 @@ def task_binder():
 
 
 def task_release():
+    """the full set of tasks needed for a new release"""
     return dict(actions=[["echo", "ok"]], task_dep=["lint", "docs", "build", "test"])
 
 
 def task_build():
+    """build packages"""
     yield dict(
         name="pypi",
         actions=[[*P.PY, "setup.py", "sdist", "bdist_wheel"]],
@@ -34,6 +36,7 @@ def task_build():
 
 
 def task_docs():
+    """build HTML docs"""
     env = "docs"
     run_in = P.RUN_IN[env]
     frozen = P.PIP_LISTS[env]
@@ -92,6 +95,7 @@ def _make_env(env):
 
 
 def task_env():
+    """prepare envs"""
     for env in ["tests", "lint", "docs"]:
         task = _make_env(env)
         if task:
@@ -99,6 +103,7 @@ def task_env():
 
 
 def task_lint():
+    """lint code"""
     env = "lint"
     env_lock = P.CONDA_LISTS["lint"]
     run_in = P.RUN_IN[env]
@@ -125,7 +130,7 @@ def task_lint():
 
 
 def task_lab():
-    """start jupyter_lab (and other extensions)"""
+    """start a jupyter lab server (with all other extensions)"""
 
     env = "tests"
     frozen = P.PIP_LISTS[env]
@@ -184,11 +189,13 @@ def _make_setup(env):
 
 
 def task_setup():
+    """do an editable install of the package"""
     for env in ["tests", "docs"]:
         yield _make_setup(env)
 
 
 def task_test():
+    """run tests"""
     env = "tests"
 
     yield dict(
@@ -200,13 +207,15 @@ def task_test():
     )
 
 
-def task_lock():
-    """generate conda lock files for all the excursions"""
-    for (flow, pf, py, lab), target in P.ENVENTURES.items():
-        file_dep = P.ENV_DEPS[flow, pf, py, lab]
-        yield dict(
-            name=f"{flow}_{pf}__py{py}__lab{lab}".replace(".", "_"),
-            actions=[[*P.SCRIPT_LOCK, target]],
-            file_dep=file_dep,
-            targets=[target],
-        )
+if P.CAN_CONDA_LOCK:
+
+    def task_lock():
+        """generate conda lock files for all the excursions"""
+        for (flow, pf, py, lab), target in P.ENVENTURES.items():
+            file_dep = P.ENV_DEPS[flow, pf, py, lab]
+            yield dict(
+                name=f"{flow}_{pf}__py{py}__lab{lab}".replace(".", "_"),
+                actions=[[*P.SCRIPT_LOCK, target]],
+                file_dep=file_dep,
+                targets=[target],
+            )

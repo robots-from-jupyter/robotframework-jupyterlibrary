@@ -1,5 +1,5 @@
 # platform: win-64
-# env_hash: 49b47ef640e6d4f32036bc8cd0c16b03c6156b7ee81af6cd58b5e8011378d08b
+# env_hash: df88cfaa733f3604d0bdf8d6ede520fe2eb716e4135127bee68249cae8b671c9
 
 @EXPLICIT
 
@@ -22,6 +22,7 @@ https://conda.anaconda.org/conda-forge/noarch/async_generator-1.10-py_0.tar.bz2#
 https://conda.anaconda.org/conda-forge/noarch/attrs-20.3.0-pyhd3deb0d_0.tar.bz2#5b319abb055eefcfa344bc21378ca23f
 https://conda.anaconda.org/conda-forge/noarch/backcall-0.2.0-pyh9f0ad1d_0.tar.bz2#6006a6d08a3fa99268a2681c7fb55213
 https://conda.anaconda.org/conda-forge/win-64/backports-1.0-py36_1.tar.bz2#9e2edf61601c41f64367c8a384c4cfda
+https://conda.anaconda.org/conda-forge/noarch/cloudpickle-1.6.0-py_0.tar.bz2#76d764d8881719e305f6fa368dc2b65e
 https://conda.anaconda.org/conda-forge/noarch/colorama-0.4.4-pyh9f0ad1d_0.tar.bz2#c08b4c1326b880ed44f3ffb04803332f
 https://conda.anaconda.org/conda-forge/noarch/decorator-4.4.2-py_0.tar.bz2#d2eabb9cabd212e1ec6a9463bd846243
 https://conda.anaconda.org/conda-forge/noarch/defusedxml-0.6.0-py_0.tar.bz2#37e1033daee0e2edaa5ff42584c52b21
@@ -59,6 +60,7 @@ https://conda.anaconda.org/conda-forge/win-64/certifi-2020.11.8-py36ha15d459_0.t
 https://conda.anaconda.org/conda-forge/win-64/cffi-1.14.4-py36he58ceb7_0.tar.bz2#e332020ea3ca37aff0b7a4cc2e6697cd
 https://conda.anaconda.org/conda-forge/win-64/chardet-3.0.4-py36hd36e781_1008.tar.bz2#b4c402bdbb4a268ccbfdf597ebe5c686
 https://conda.anaconda.org/conda-forge/win-64/docutils-0.16-py36hd36e781_2.tar.bz2#c88aa34374401aed15b8564e4d7d9c84
+https://conda.anaconda.org/conda-forge/win-64/doit-0.33.1-py36h9f0ad1d_1.tar.bz2#eda38f9e8dc256068db9f41d2c26febb
 https://conda.anaconda.org/conda-forge/win-64/entrypoints-0.3-py36h9f0ad1d_1002.tar.bz2#2b77a25e6a38ae845abff3e0d6c695bd
 https://conda.anaconda.org/conda-forge/win-64/freetype-2.10.4-hd328e21_0.tar.bz2#2a8e3917bc23b5619d77d3b559d70e01
 https://conda.anaconda.org/conda-forge/noarch/importlib-metadata-3.1.0-pyhd8ed1ab_0.tar.bz2#97a4bcec44626ddea360efdf7d5ad816

@@ -1,11 +1,11 @@
 # platform: win-64
-# env_hash: cb4be510aebdc76f997a0d5d6329e33b8d00eca5355a9b8aa66906ad74f19e25
+# env_hash: 5e96d9d86319670662e2aabcb11f9389fca9ba9e7f79565e68a165bc90ec2b62
 
 @EXPLICIT
 
 https://conda.anaconda.org/conda-forge/win-64/ca-certificates-2020.11.8-h5b45459_0.tar.bz2#21fea8c142c35d2967cb0300e5056980
 https://conda.anaconda.org/conda-forge/win-64/vs2015_runtime-14.16.27012-h30e32a0_2.tar.bz2#37a0bcc72c5e97f5602dca37eb3f8314
-https://conda.anaconda.org/conda-forge/win-64/nodejs-15.2.1-h57928b3_1.tar.bz2#536344f46b04f8c8b353094f06b6b0a5
+https://conda.anaconda.org/conda-forge/win-64/nodejs-15.3.0-h57928b3_0.tar.bz2#4ee8f48d83a95e4260b74538ec4556bb
 https://conda.anaconda.org/conda-forge/win-64/vc-14.1-h869be7e_1.tar.bz2#4fae57303daa91367eca263374e4a638
 https://conda.anaconda.org/conda-forge/win-64/jpeg-9d-he774522_0.tar.bz2#093a3f2034d3002ee017859e388cc8a1
 https://conda.anaconda.org/conda-forge/win-64/lz4-c-1.9.2-h62dcd97_2.tar.bz2#a90475bc5d6e86b41360b614b20aa973
@@ -13,12 +13,14 @@ https://conda.anaconda.org/conda-forge/win-64/openssl-1.1.1h-he774522_0.tar.bz2#
 https://conda.anaconda.org/conda-forge/win-64/sqlite-3.33.0-he774522_1.tar.bz2#d71a870ed0940cdf9f4bcb827d12ead6
 https://conda.anaconda.org/conda-forge/win-64/tk-8.6.10-he774522_1.tar.bz2#34a906fb55a5f0820d87b93da4dbb596
 https://conda.anaconda.org/conda-forge/win-64/xz-5.2.5-h62dcd97_1.tar.bz2#eabcbfedd14d7c18a514afca09ea0ebb
+https://conda.anaconda.org/conda-forge/win-64/yaml-0.2.5-he774522_0.tar.bz2#d41c34441d8bbb6d141e691ae7bccf35
 https://conda.anaconda.org/conda-forge/win-64/zlib-1.2.11-h62dcd97_1010.tar.bz2#a4cdf389c5f73e60a0ca121ff77c22a9
 https://conda.anaconda.org/conda-forge/win-64/libpng-1.6.37-ha81a0f5_2.tar.bz2#cc8f11542031225ef813cbc7b60713fc
 https://conda.anaconda.org/conda-forge/win-64/python-3.8.6-h60c2a47_0_cpython.tar.bz2#b6c4723a2ba9b8f68521404bc0d23462
 https://conda.anaconda.org/conda-forge/win-64/zstd-1.4.5-h1f3a1b7_2.tar.bz2#b35d995f210429648e920844701b57a9
 https://conda.anaconda.org/conda-forge/noarch/appdirs-1.4.4-pyh9f0ad1d_0.tar.bz2#5f095bc6454094e96f146491fd03633b
 https://conda.anaconda.org/conda-forge/noarch/click-7.1.2-pyh9f0ad1d_0.tar.bz2#bd50a970ce07e660c319fdc4d730d3f1
+https://conda.anaconda.org/conda-forge/noarch/cloudpickle-1.6.0-py_0.tar.bz2#76d764d8881719e305f6fa368dc2b65e
 https://conda.anaconda.org/conda-forge/win-64/dataclasses-0.7-py38_0.tar.bz2#01e24a611001e4de5d30c8d3eb2e1ae2
 https://conda.anaconda.org/conda-forge/win-64/freetype-2.10.4-hd328e21_0.tar.bz2#2a8e3917bc23b5619d77d3b559d70e01
 https://conda.anaconda.org/conda-forge/noarch/idna-2.10-pyh9f0ad1d_0.tar.bz2#f95a12b4f435aae6680fe55ae2eb1b06
@@ -37,13 +39,15 @@ https://conda.anaconda.org/conda-forge/noarch/typing_extensions-3.7.4.3-py_0.tar
 https://conda.anaconda.org/conda-forge/noarch/wheel-0.35.1-pyh9f0ad1d_0.tar.bz2#126827869be32f21872a2b30ebe2b038
 https://conda.anaconda.org/conda-forge/noarch/zipp-3.4.0-py_0.tar.bz2#0df927d2e46244cef8fd75d7ec2ba51c
 https://conda.anaconda.org/conda-forge/win-64/certifi-2020.11.8-py38haa244fe_0.tar.bz2#1e3a88f8db13d19c4d23422e2f8f0e6c
-https://conda.anaconda.org/conda-forge/win-64/cffi-1.14.3-py38h0e640b1_1.tar.bz2#0fd3a8bf420e2ad6dfc7fbfa8cbdc4ec
-https://conda.anaconda.org/conda-forge/noarch/importlib-metadata-3.0.0-pyhd8ed1ab_0.tar.bz2#99e8b0f8aad565f27470505fe6f46a3c
+https://conda.anaconda.org/conda-forge/win-64/cffi-1.14.4-py38hd8c33c5_0.tar.bz2#9209bbba02dcf97fe56278c6a00314a5
+https://conda.anaconda.org/conda-forge/win-64/doit-0.33.1-py38h32f6830_1.tar.bz2#8b263b9225a12d7d926b3266bcbd2d00
+https://conda.anaconda.org/conda-forge/noarch/importlib-metadata-3.1.0-pyhd8ed1ab_0.tar.bz2#97a4bcec44626ddea360efdf7d5ad816
 https://conda.anaconda.org/conda-forge/win-64/mypy_extensions-0.4.3-py38h32f6830_2.tar.bz2#f749c2b175569eaf350b025cde50ee48
 https://conda.anaconda.org/conda-forge/win-64/pillow-8.0.1-py38hf7ce48b_0.tar.bz2#16e4e66d1cf4304ef66c94a899db93be
+https://conda.anaconda.org/conda-forge/win-64/pyyaml-5.3.1-py38hab1e662_1.tar.bz2#25ce237676e0d4f8029d3440c2f4afc6
 https://conda.anaconda.org/conda-forge/win-64/regex-2020.11.13-py38h294d835_0.tar.bz2#b0fc6e573333bf715f53ebe373bc0c27
 https://conda.anaconda.org/conda-forge/noarch/robotframework-lint-1.1-pyh9f0ad1d_0.tar.bz2#c3fa280c4a10c06e83f23193ef4ea5cc
-https://conda.anaconda.org/conda-forge/noarch/robotframework-pythonlibcore-2.1.0-py_0.tar.bz2#de381ef42de5c25524f5c43cd487a999
+https://conda.anaconda.org/conda-forge/noarch/robotframework-pythonlibcore-2.1.0-pyhd8ed1ab_1.tar.bz2#c20e2a5cca5be112eddedd02396897b9
 https://conda.anaconda.org/conda-forge/win-64/typed-ast-1.4.1-py38h294d835_1.tar.bz2#5e3a77f3d30a63e54db547e9ad99bc52
 https://conda.anaconda.org/conda-forge/win-64/win_inet_pton-1.1.0-py38h32f6830_1.tar.bz2#f387a5afa714e658385f33dcda93a802
 https://conda.anaconda.org/conda-forge/win-64/wincertstore-0.2-py38h32f6830_1005.tar.bz2#8c253621e1f3121360b00b5ffe4626ff
