@@ -20,7 +20,7 @@ defaults:
     shell: bash -l {0}
 
 jobs:
-  lint:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -39,7 +39,13 @@ jobs:
           environment-file: .github/locks/lint/linux-64/conda.lock
           use-only-tar-bz2: true
       - run: conda list && conda info
-      - run: doit lint
+      - run: doit lint build
+      - run: cd dist && sha256sum * > SHA256SUMS && cat SHA256SUMS
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ job.status }} dist ${{ github.run_number }}
+          path: ./dist
+        if: always()
 
   docs:
     runs-on: ubuntu-latest
@@ -60,10 +66,15 @@ jobs:
           environment-file: .github/locks/docs/linux-64/conda.lock
           use-only-tar-bz2: true
       - run: doit docs
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ job.status }} docs ${{ github.run_number }}
+          path: ./build/docs/html
+        if: always()
 
   test:
     runs-on: ${{ matrix.os }}-latest
-    needs: [docs, lint]
+    needs: [docs, build]
     strategy:
       fail-fast: false
       matrix:
@@ -108,3 +119,8 @@ jobs:
       - if: ${{ matrix.os == 'windows' }}
         run: doit test
         shell: cmd /C CALL {0}
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ job.status }} atest ${{ matrix.os }} py${{ matrix.python-version }} lab${{ matrix.lab-version }} ${{ github.run_number }}
+          path: ./build/test/output
+        if: always()
