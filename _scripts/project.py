@@ -1,5 +1,17 @@
 from pathlib import Path
-from ruamel_yaml import safe_load
+
+for _yaml in ["yaml", "ruamel_yaml", "ruamel.yaml"]:
+    try:
+        yaml = __import__(_yaml)
+        if _yaml == "ruamel.yaml":
+            safe_load = yaml.yaml.safe_load
+        else:
+            safe_load = yaml.safe_load
+    except ImportError:
+        pass
+
+assert safe_load, "need at least a yaml parser"
+
 import platform
 import os
 
@@ -41,6 +53,7 @@ WHEEL = DIST / f"{IMPORTABLE}-{VERSION}-py3-none-any.whl"
 # docs
 DOCS = ROOT / "docs"
 DOCS_CONF_PY = DOCS / "conf.py"
+DOCS_BUILDINFO = BUILD / "docs" / "html" / ".buildinfo"
 
 # partial environments
 GITHUB = ROOT / ".github"
