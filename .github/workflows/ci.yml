@@ -15,6 +15,9 @@ env:
   PYTHONUNBUFFERED: 1
   CI: 1
 
+defaults:
+  shell: bash -l {0}
+
 jobs:
   lint:
     runs-on: ubuntu-latest
