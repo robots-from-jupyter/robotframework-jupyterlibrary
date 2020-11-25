@@ -35,6 +35,7 @@ jobs:
       - uses: conda-incubator/setup-miniconda@v2
         with:
           activate-environment: lint
+          conda-version: "*"
           environment-file: .github/locks/lint/linux-64/conda.lock
           use-only-tar-bz2: true
       - run: conda list && conda info
@@ -55,6 +56,7 @@ jobs:
       - uses: conda-incubator/setup-miniconda@v2
         with:
           activate-environment: docs
+          conda-version: "*"
           environment-file: .github/locks/docs/linux-64/conda.lock
           use-only-tar-bz2: true
       - run: doit docs
@@ -98,6 +100,7 @@ jobs:
       - uses: conda-incubator/setup-miniconda@v2
         with:
           activate-environment: test
+          conda-version: "*"
           environment-file: ${{ steps.lock.outputs.file }}
           use-only-tar-bz2: true
       - if: ${{ runner.os != 'windows' }}
