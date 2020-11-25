@@ -20,6 +20,6 @@ ${JLAB ID SPLASH}    jupyterlab-splash
 ${JLAB TEXT BUSY PROMPT}    In [*]:
 ${JLAB XP CARD}    //div[@class='jp-LauncherCard']
 ${JLAB XP DOCK}    //div[@id='jp-main-dock-panel']
-${JLAB XP MENU ITEM LABEL}    //div[@class='p-Menu-itemLabel']
-${JLAB XP MENU LABEL}    //div[@class='p-MenuBar-itemLabel']
+${JLAB XP MENU ITEM LABEL}    //div[contains(@class, 'p-Menu-itemLabel')]
+${JLAB XP MENU LABEL}    //div[contains(@class, 'p-MenuBar-itemLabel')]
 ${JLAB XP TOP}    //div[@id='jp-top-panel']

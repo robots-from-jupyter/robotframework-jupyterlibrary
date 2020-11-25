@@ -1,6 +1,8 @@
 import os
 import subprocess
 
+from doit.tools import PythonInteractiveAction
+
 from _scripts import project as P
 
 os.environ["PYTHONIOENCODING"] = "utf-8"
@@ -94,6 +96,37 @@ def task_lint():
             for it in [P.SRC, P.ATEST]
         ],
         file_dep=[*P.ALL_ROBOT, env_lock],
+    )
+
+
+def task_lab():
+    """start jupyter_lab (and other extensions)"""
+
+    env = "tests"
+    frozen = P.PIP_LISTS[env]
+    run_in = P.RUN_IN[env]
+    pym = [*run_in, *P.PYM]
+
+    def _lab():
+        p = subprocess.Popen(
+            [*pym, "jupyter", "lab", "--no-browser", "--debug"], stdin=subprocess.PIPE
+        )
+        try:
+            p.wait()
+        except KeyboardInterrupt:
+            p.terminate()
+            p.communicate(b"y\n")
+            p.terminate()
+        finally:
+            p.wait()
+
+        print("maybe check your process log")
+
+    yield dict(
+        name="serve",
+        uptodate=[lambda: False],
+        actions=[PythonInteractiveAction(_lab)],
+        file_dep=[frozen],
     )
 
 
