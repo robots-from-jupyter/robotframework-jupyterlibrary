@@ -79,10 +79,11 @@ ENVS = ROOT / ".envs"
 
 ENV_NAMES = ["test", "lint", "docs"]
 
+CONDA_RUN = ["conda", "run", "--live-stream", "--no-capture-output"]
 if CI:
-    RUN_IN = {env: ["conda", "run", "-n", env] for env in ENV_NAMES}
+    RUN_IN = {env: [*CONDA_RUN, "-n", env] for env in ENV_NAMES}
 else:
-    RUN_IN = {env: ["conda", "run", "-p", ENVS / env] for env in ENV_NAMES}
+    RUN_IN = {env: [*CONDA_RUN, "-p", ENVS / env] for env in ENV_NAMES}
 
 CONDA_LISTS = {env: BUILD / env / "conda.lock" for env in ENV_NAMES}
 PIP_LISTS = {env: BUILD / env / "pip.freeze" for env in ENV_NAMES}
