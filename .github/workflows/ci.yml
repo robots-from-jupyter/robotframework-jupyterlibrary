@@ -15,6 +15,10 @@ env:
   PYTHONUNBUFFERED: 1
   CI: 1
 
+defaults:
+  run:
+    shell: bash -l {0}
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -98,7 +102,6 @@ jobs:
           use-only-tar-bz2: true
       - if: ${{ runner.os != 'windows' }}
         run: doit test
-        shell: bash -l {0}
       - if: ${{ runner.os == 'windows' }}
         run: doit test
         shell: cmd /C CALL {0}
