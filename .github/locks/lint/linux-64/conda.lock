@@ -1,5 +1,5 @@
 # platform: linux-64
-# env_hash: e25c2486b63b78fd3e29a54ac9c7ea64c9997c16126cb8793d738995dbc9a2d3
+# env_hash: 8263c6c6d04e083ac9cba2d458ca5cfe2820493850a8915d0efa4a2f6e5a41cf
 
 @EXPLICIT
 
@@ -19,6 +19,7 @@ https://conda.anaconda.org/conda-forge/linux-64/lz4-c-1.9.2-he1b5a44_3.tar.bz2#b
 https://conda.anaconda.org/conda-forge/linux-64/ncurses-6.2-h58526e2_4.tar.bz2#509f2a21c4a09214cd737a480dfd80c9
 https://conda.anaconda.org/conda-forge/linux-64/openssl-1.1.1h-h516909a_0.tar.bz2#3a99e0cb8f325dbf8f616da2d2fb6d4f
 https://conda.anaconda.org/conda-forge/linux-64/xz-5.2.5-h516909a_1.tar.bz2#33f601066901f3e1a85af3522a8113f9
+https://conda.anaconda.org/conda-forge/linux-64/yaml-0.2.5-h516909a_0.tar.bz2#03a530e925414902547cf48da7756db8
 https://conda.anaconda.org/conda-forge/linux-64/zlib-1.2.11-h516909a_1010.tar.bz2#339cc5584e6d26bc73a875ba900028c3
 https://conda.anaconda.org/conda-forge/linux-64/libpng-1.6.37-hed695b0_2.tar.bz2#5685fb1f2e761545e9f5ea34411efd98
 https://conda.anaconda.org/conda-forge/linux-64/nodejs-15.3.0-h25f6087_0.tar.bz2#6b86fd5540eb41260be403e4227d1e5f
@@ -32,6 +33,7 @@ https://conda.anaconda.org/conda-forge/linux-64/lcms2-2.11-hcbb858e_1.tar.bz2#89
 https://conda.anaconda.org/conda-forge/linux-64/python-3.8.6-h852b56e_0_cpython.tar.bz2#dd65401dfb61ac030edc0dc4d15c2c51
 https://conda.anaconda.org/conda-forge/noarch/appdirs-1.4.4-pyh9f0ad1d_0.tar.bz2#5f095bc6454094e96f146491fd03633b
 https://conda.anaconda.org/conda-forge/noarch/click-7.1.2-pyh9f0ad1d_0.tar.bz2#bd50a970ce07e660c319fdc4d730d3f1
+https://conda.anaconda.org/conda-forge/noarch/cloudpickle-1.6.0-py_0.tar.bz2#76d764d8881719e305f6fa368dc2b65e
 https://conda.anaconda.org/conda-forge/linux-64/dataclasses-0.7-py38_0.tar.bz2#fc23a28d6ad2b84b317d6d398806fcb6
 https://conda.anaconda.org/conda-forge/noarch/idna-2.10-pyh9f0ad1d_0.tar.bz2#f95a12b4f435aae6680fe55ae2eb1b06
 https://conda.anaconda.org/conda-forge/noarch/mccabe-0.6.1-py_1.tar.bz2#a326cb400c1ccd91789f3e7d02124d61
@@ -52,7 +54,9 @@ https://conda.anaconda.org/conda-forge/linux-64/cffi-1.14.4-py38ha312104_0.tar.b
 https://conda.anaconda.org/conda-forge/noarch/importlib-metadata-3.1.0-pyhd8ed1ab_0.tar.bz2#97a4bcec44626ddea360efdf7d5ad816
 https://conda.anaconda.org/conda-forge/linux-64/mypy_extensions-0.4.3-py38h32f6830_2.tar.bz2#6e3e78137fde56d8bc77daf99bf986f5
 https://conda.anaconda.org/conda-forge/linux-64/pillow-8.0.1-py38h9776b28_0.tar.bz2#69eeec725252f24f7ffe1a63ef39e295
+https://conda.anaconda.org/conda-forge/linux-64/pyinotify-0.9.6-py38h32f6830_1002.tar.bz2#de46392fc6fb5f50921b0240c71e9d70
 https://conda.anaconda.org/conda-forge/linux-64/pysocks-1.7.1-py38h924ce5b_2.tar.bz2#b589d2f798c01ba2bfbc1afe2f95b639
+https://conda.anaconda.org/conda-forge/linux-64/pyyaml-5.3.1-py38h8df0ef7_1.tar.bz2#8eaa66e391971ac0e9e329b91bc37003
 https://conda.anaconda.org/conda-forge/linux-64/regex-2020.11.13-py38h25fe258_0.tar.bz2#a6be67d5c9588f9ec67f9c8a8beabf53
 https://conda.anaconda.org/conda-forge/noarch/robotframework-lint-1.1-pyh9f0ad1d_0.tar.bz2#c3fa280c4a10c06e83f23193ef4ea5cc
 https://conda.anaconda.org/conda-forge/noarch/robotframework-pythonlibcore-2.1.0-pyhd8ed1ab_1.tar.bz2#c20e2a5cca5be112eddedd02396897b9
@@ -60,6 +64,7 @@ https://conda.anaconda.org/conda-forge/linux-64/typed-ast-1.4.1-py38h25fe258_1.t
 https://conda.anaconda.org/conda-forge/noarch/black-20.8b1-py_1.tar.bz2#e555d6b71ec916c3dc4e6e3793cc9796
 https://conda.anaconda.org/conda-forge/linux-64/brotlipy-0.7.0-py38h8df0ef7_1001.tar.bz2#1d928644b8bfd49b2e869609dd3e57a1
 https://conda.anaconda.org/conda-forge/linux-64/cryptography-3.2.1-py38h7699a38_0.tar.bz2#7f46d842a1dccbcb03cedb53970b4c05
+https://conda.anaconda.org/conda-forge/linux-64/doit-0.33.1-py38h32f6830_1.tar.bz2#c3a34ba48a004ab17e926f72f13ca488
 https://conda.anaconda.org/conda-forge/linux-64/setuptools-49.6.0-py38h924ce5b_2.tar.bz2#85f49978317e2f963ffd1d0989b16038
 https://conda.anaconda.org/conda-forge/noarch/flake8-3.8.4-py_0.tar.bz2#138b1704321c115bd10e1966320ac790
 https://conda.anaconda.org/conda-forge/linux-64/isort-4.3.21-py38h32f6830_1.tar.bz2#7a962de435df2743269a1cb288a88cfe

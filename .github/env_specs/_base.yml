@@ -3,8 +3,10 @@ channels:
   - nodefaults
   - msys2
 dependencies:
-  # whatever
+  # enough stuff to run doit
+  - doit
   - pip
+  - pyyaml
   # hard deps
   - robotframework >=3.2
   - robotframework-seleniumlibrary >=4.5

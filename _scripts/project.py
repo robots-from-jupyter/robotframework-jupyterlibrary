@@ -39,12 +39,18 @@ SCRIPTS = Path(__file__).parent
 ROOT = SCRIPTS.parent
 DODO = ROOT / "dodo.py"
 
-SETUP_CRUFT = [ROOT / "setup.py", ROOT / "MANIFEST.in", ROOT / "setup.cfg"]
 
 SRC = ROOT / "src" / "JupyterLibrary"
 VERSION_FILE = SRC / "VERSION"
 VERSION = VERSION_FILE.read_text().strip()
 PY_SRC = [*SRC.rglob("*.py")]
+SETUP_CRUFT = [
+    ROOT / "setup.py",
+    ROOT / "MANIFEST.in",
+    ROOT / "setup.cfg",
+    VERSION_FILE,
+]
+
 ATEST = ROOT / "atest"
 ROBOT_SRC = [*SRC.rglob("*.robot")]
 
