@@ -20,4 +20,5 @@ Wait Until Notebook Classic Kernel Is Idle
     Wait Until Page Does Not Contain    ${JNC TEXT BUSY PROMPT}
 
 Run Current Notebook Classic Code Cell
-    Click Element    css:${JNC CSS NB TOOLBAR} ${JNC CSS ICON RUN}
+    # Click Element    css:${JNC CSS NB TOOLBAR} ${JNC CSS ICON RUN}
+    Click Element    xpath:${JNC XP NB TOOLBAR}${JNC XP ICON RUN}

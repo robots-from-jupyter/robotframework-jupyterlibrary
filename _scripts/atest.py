@@ -8,8 +8,16 @@ from os.path import join
 
 from . import BROWSER, ROOT, PLATFORM, TESTS, TEST_OUT
 
+NON_CRITICAL = [
+    # TODO: figure out some plan for supporting obfuscated nteract
+    ["client:nteract_on_jupyter"],
+]
+
 
 def run_tests(robot_args):
+    for non_critical in NON_CRITICAL:
+        robot_args += ["--noncritical", "AND".join(non_critical)]
+
     args = (
         [
             "pabot",

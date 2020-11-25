@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-from doit.tools import PythonInteractiveAction
+from doit.tools import PythonInteractiveAction, config_changed
 
 from _scripts import project as P
 
@@ -164,6 +164,7 @@ def task_test():
 
     yield dict(
         name="atest",
+        uptodate=[config_changed(os.environ.get("ATEST_ARGS", ""))],
         actions=[[*P.RUN_IN[env], *P.PYM, "_scripts.atest"]],
         file_dep=[*P.PY_SRC, *P.ALL_ROBOT, P.PIP_LISTS[env]],
         targets=["_artifacts/test_output/log.xml"],

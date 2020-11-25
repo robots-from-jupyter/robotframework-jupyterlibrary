@@ -20,3 +20,5 @@ ${JNC CSS ACTIVE INPUT}    ${JNC CSS ACTIVE CELL} .CodeMirror
 ${JNC CSS ACTIVE OUTPUT}    ${JNC CSS ACTIVE CELL} .output_wrapper
 ${JNC CSS ACTIVE OUTPUT SUBAREAS}    ${JNC CSS ACTIVE OUTPUT} .output_subarea
 ${JNC CSS ACTIVE MARKDOWN}    ${JNC CSS ACTIVE CELL} .text_cell_render
+${JNC XP NB TOOLBAR}    //div[@id='maintoolbar-container']
+${JNC XP ICON RUN}    //i[contains(@class, 'fa-step-forward') or contains(@class, 'fa-play')]
