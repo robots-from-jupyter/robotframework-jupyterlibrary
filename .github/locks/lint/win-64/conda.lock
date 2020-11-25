@@ -1,11 +1,11 @@
 # platform: win-64
-# env_hash: 5e96d9d86319670662e2aabcb11f9389fca9ba9e7f79565e68a165bc90ec2b62
+# env_hash: 2f0d5c5e2e848eb69b7f2c9b2ee4619b25115517cb6c285a34436aa081b8661d
 
 @EXPLICIT
 
 https://conda.anaconda.org/conda-forge/win-64/ca-certificates-2020.11.8-h5b45459_0.tar.bz2#21fea8c142c35d2967cb0300e5056980
 https://conda.anaconda.org/conda-forge/win-64/vs2015_runtime-14.16.27012-h30e32a0_2.tar.bz2#37a0bcc72c5e97f5602dca37eb3f8314
-https://conda.anaconda.org/conda-forge/win-64/nodejs-15.3.0-h57928b3_0.tar.bz2#4ee8f48d83a95e4260b74538ec4556bb
+https://conda.anaconda.org/conda-forge/win-64/nodejs-14.15.1-h57928b3_0.tar.bz2#d864e5c8a3de3ccf10a5cfc841084c39
 https://conda.anaconda.org/conda-forge/win-64/vc-14.1-h869be7e_1.tar.bz2#4fae57303daa91367eca263374e4a638
 https://conda.anaconda.org/conda-forge/win-64/jpeg-9d-he774522_0.tar.bz2#093a3f2034d3002ee017859e388cc8a1
 https://conda.anaconda.org/conda-forge/win-64/lz4-c-1.9.2-h62dcd97_2.tar.bz2#a90475bc5d6e86b41360b614b20aa973

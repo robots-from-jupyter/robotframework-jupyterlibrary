@@ -25,7 +25,7 @@ jobs:
         with:
           path: ~/conda_pkgs_dir
           key:
-            ${{ runner.os }}-conda-lint-${{ hashFiles(".github/locks/lint/linux-64/conda.lock") }}
+            ${{ runner.os }}-conda-lint-${{ hashFiles('.github/locks/lint/linux-64/conda.lock') }}
           restore-keys: |
             ${{ runner.os }}-conda-lint-
       - uses: conda-incubator/setup-miniconda@v2
@@ -44,7 +44,7 @@ jobs:
         with:
           path: ~/conda_pkgs_dir
           key:
-            ${{ runner.os }}-conda-docs-${{ hashFiles(".github/locks/docs/linux-64/conda.lock") }}
+            ${{ runner.os }}-conda-docs-${{ hashFiles('.github/locks/docs/linux-64/conda.lock') }}
           restore-keys: |
             ${{ runner.os }}-conda-docs-
       - uses: conda-incubator/setup-miniconda@v2
@@ -75,7 +75,7 @@ jobs:
       - uses: actions/checkout@v2
       - id: lock
         run: |
-          echo "::set-output name=file::${{ format(".github/locks/{0}/py{1}/lab{2}/conda.lock"), matrix.conda-subdir, matrix.python-version, matrix.lab-version) }}"
+          echo "::set-output name=file::${{ format('.github/locks/{0}/py{1}/lab{2}/conda.lock'), matrix.conda-subdir, matrix.python-version, matrix.lab-version) }}"
       - name: cache (conda)
         uses: actions/cache@v1
         with:

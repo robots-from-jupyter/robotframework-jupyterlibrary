@@ -2,5 +2,5 @@ dependencies:
   - black
   - flake8
   - isort <5
-  - nodejs >=10
+  - nodejs >=10,!=11.*,!=13.*,!=15.*,!=17.*
   - robotframework-lint
