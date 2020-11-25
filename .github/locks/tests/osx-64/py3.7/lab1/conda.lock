@@ -57,7 +57,7 @@ https://conda.anaconda.org/conda-forge/osx-64/certifi-2020.11.8-py37hf985489_0.t
 https://conda.anaconda.org/conda-forge/osx-64/cffi-1.14.3-py37h446cb54_1.tar.bz2#c1edd2c92277cdca3c543b74efd2811a
 https://conda.anaconda.org/conda-forge/osx-64/chardet-3.0.4-py37h2987424_1008.tar.bz2#cc67a92b9d49d74caf6a71e6c8685141
 https://conda.anaconda.org/conda-forge/osx-64/entrypoints-0.3-py37hc8dfbb8_1002.tar.bz2#a16c8f3b8e001df820983e55ecd063fe
-https://conda.anaconda.org/conda-forge/noarch/importlib-metadata-3.0.0-pyhd8ed1ab_0.tar.bz2#99e8b0f8aad565f27470505fe6f46a3c
+https://conda.anaconda.org/conda-forge/noarch/importlib-metadata-3.1.0-pyhd8ed1ab_0.tar.bz2#97a4bcec44626ddea360efdf7d5ad816
 https://conda.anaconda.org/conda-forge/osx-64/jedi-0.17.2-py37hf985489_1.tar.bz2#f31b483e11441fd2f85d89fa9fbd284a
 https://conda.anaconda.org/conda-forge/osx-64/markupsafe-1.1.1-py37h395d20d_2.tar.bz2#c1a1e424c418d2a2c599951b3c33f77c
 https://conda.anaconda.org/conda-forge/osx-64/mistune-0.8.4-py37h60d8a13_1002.tar.bz2#1f617174bfbec3df7132821c50587760
@@ -76,7 +76,7 @@ https://conda.anaconda.org/conda-forge/noarch/traitlets-5.0.5-py_0.tar.bz2#99618
 https://conda.anaconda.org/conda-forge/osx-64/argon2-cffi-20.1.0-py37h60d8a13_2.tar.bz2#596fc8a5b1009c0cae2cff3953f40685
 https://conda.anaconda.org/conda-forge/osx-64/brotlipy-0.7.0-py37h395d20d_1001.tar.bz2#1407a480e4f9e14dc56546dc9263bdd2
 https://conda.anaconda.org/conda-forge/osx-64/cryptography-3.2.1-py37h3b7a55b_0.tar.bz2#ffe7daf50625d35d7e9cd880f5ecaf1b
-https://conda.anaconda.org/conda-forge/noarch/importlib_metadata-3.0.0-hd8ed1ab_0.tar.bz2#a398fd632e96cc2bca2a890fe2921110
+https://conda.anaconda.org/conda-forge/noarch/importlib_metadata-3.1.0-hd8ed1ab_0.tar.bz2#182b3a7c361dfc0de2ed1abf90fd61c8
 https://conda.anaconda.org/conda-forge/osx-64/jupyter_core-4.7.0-py37hf985489_0.tar.bz2#9f60c9d0cf30fb24bcb3cf5326d1d0f2
 https://conda.anaconda.org/conda-forge/osx-64/setuptools-49.6.0-py37h2987424_2.tar.bz2#3d0ef7d49d82130fc8374190238dc989
 https://conda.anaconda.org/conda-forge/osx-64/terminado-0.9.1-py37hf985489_1.tar.bz2#465e91e1ed9dff4e921507823d270d10

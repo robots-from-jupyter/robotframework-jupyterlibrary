@@ -19,7 +19,7 @@ def task_binder():
 
 
 def task_release():
-    return dict(actions=[["echo", "OK"]], task_dep=["lint", "build", "test"])
+    return dict(actions=[["echo", "ok"]], task_dep=["lint", "build", "test"])
 
 
 def task_build():
@@ -73,36 +73,41 @@ def task_env():
 
 
 def task_lint():
-    env_lock = P.BUILD / "lint" / "conda.lock"
+    env_lock = P.CONDA_LISTS["lint"]
+
     yield dict(
         name="black",
         actions=[[*P.RUN_IN["lint"], *P.PYM, "black", "--quiet", *P.ALL_PY]],
         file_dep=[*P.ALL_PY, env_lock],
     )
+
     yield dict(
         name="pyflakes",
         actions=[[*P.RUN_IN["lint"], *P.PYM, "pyflakes", *P.ALL_PY]],
         file_dep=[*P.ALL_PY, env_lock],
     )
+
     yield dict(
         name="robot:tidy",
         actions=[
             [*P.RUN_IN["lint"], *P.PYM, "robot.tidy", "--recursive", it]
             for it in [P.SRC, P.ATEST]
         ],
-        file_dep=[*P.ALL_ROBOT],
+        file_dep=[*P.ALL_ROBOT, env_lock],
     )
 
 
 def task_setup():
-    frozen = P.BUILD / "tests" / "pip.freeze"
+    env = "tests"
+    frozen = P.PIP_LISTS[env]
+    run_in = P.RUN_IN[env]
+    pym = [*run_in, *P.PYM]
 
     yield dict(
         name="py",
         actions=[
             [
-                *P.RUN_IN["tests"],
-                *P.PYM,
+                *pym,
                 "pip",
                 "install",
                 "-e",
@@ -110,28 +115,24 @@ def task_setup():
                 "--no-deps",
                 "--ignore-installed",
             ],
-            [*P.RUN_IN["tests"], *P.PYM, "pip", "check"],
+            [*pym, "pip", "check"],
             lambda: [
-                frozen.write_bytes(
-                    subprocess.check_output(
-                        [*P.RUN_IN["tests"], *P.PYM, "pip", "freeze"]
-                    )
-                ),
+                frozen.write_bytes(subprocess.check_output([*pym, "pip", "freeze"])),
                 None,
             ][-1],
         ],
-        file_dep=[P.BUILD / "tests" / "conda.lock"],
+        file_dep=[P.CONDA_LISTS[env]],
         targets=[frozen],
     )
 
 
 def task_test():
-    frozen = P.BUILD / "tests" / "pip.freeze"
+    env = "tests"
 
     yield dict(
         name="atest",
-        actions=[[*P.RUN_IN["tests"], *P.PYM, "_scripts.atest"]],
-        file_dep=[*P.PY_SRC, *P.ALL_ROBOT, frozen],
+        actions=[[*P.RUN_IN[env], *P.PYM, "_scripts.atest"]],
+        file_dep=[*P.PY_SRC, *P.ALL_ROBOT, P.PIP_LISTS[env]],
         targets=["_artifacts/test_output/log.xml"],
     )
 

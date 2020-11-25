@@ -1,5 +1,5 @@
 dependencies:
-  # jupyter stuff
+  # eventually need excursions for different nteract versions
   - nteract_on_jupyter
   # the robot stack
   - robotframework-pabot

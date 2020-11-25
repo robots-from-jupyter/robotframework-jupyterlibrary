@@ -62,7 +62,7 @@ https://conda.anaconda.org/conda-forge/linux-64/certifi-2020.11.8-py39hf3d152e_0
 https://conda.anaconda.org/conda-forge/linux-64/cffi-1.14.3-py39h0da4893_1.tar.bz2#649fbfd231a98ec54159b04e4180470b
 https://conda.anaconda.org/conda-forge/linux-64/chardet-3.0.4-py39h079e4ff_1008.tar.bz2#7162795b821bf41ecb26ce145dba3975
 https://conda.anaconda.org/conda-forge/linux-64/entrypoints-0.3-py39hde42818_1002.tar.bz2#dad6134fb73bfd57f9658c30c7296355
-https://conda.anaconda.org/conda-forge/noarch/importlib-metadata-3.0.0-pyhd8ed1ab_0.tar.bz2#99e8b0f8aad565f27470505fe6f46a3c
+https://conda.anaconda.org/conda-forge/noarch/importlib-metadata-3.1.0-pyhd8ed1ab_0.tar.bz2#97a4bcec44626ddea360efdf7d5ad816
 https://conda.anaconda.org/conda-forge/linux-64/jedi-0.17.2-py39hf3d152e_1.tar.bz2#0e7f4e5a1b4547a1a3d633fab26af567
 https://conda.anaconda.org/conda-forge/linux-64/markupsafe-1.1.1-py39h38d8fee_2.tar.bz2#512d9a3b59d316b608ee5743c829ae59
 https://conda.anaconda.org/conda-forge/linux-64/mistune-0.8.4-py39hbd71b63_1002.tar.bz2#6447e320265e19a39db45ca144b6f823
@@ -81,7 +81,7 @@ https://conda.anaconda.org/conda-forge/noarch/traitlets-5.0.5-py_0.tar.bz2#99618
 https://conda.anaconda.org/conda-forge/linux-64/argon2-cffi-20.1.0-py39hbd71b63_2.tar.bz2#d50b0c20ad55e01c90309ab6f93c6336
 https://conda.anaconda.org/conda-forge/linux-64/brotlipy-0.7.0-py39h38d8fee_1001.tar.bz2#0566ecef0c7d763b4c0819ac5c7f8dae
 https://conda.anaconda.org/conda-forge/linux-64/cryptography-3.2.1-py39h01d1d65_0.tar.bz2#c1db0a6029b7696f26315048bfc3b1f4
-https://conda.anaconda.org/conda-forge/noarch/importlib_metadata-3.0.0-hd8ed1ab_0.tar.bz2#a398fd632e96cc2bca2a890fe2921110
+https://conda.anaconda.org/conda-forge/noarch/importlib_metadata-3.1.0-hd8ed1ab_0.tar.bz2#182b3a7c361dfc0de2ed1abf90fd61c8
 https://conda.anaconda.org/conda-forge/linux-64/jupyter_core-4.7.0-py39hf3d152e_0.tar.bz2#8735747a563952d4bae6f8a8f5b71d94
 https://conda.anaconda.org/conda-forge/linux-64/setuptools-49.6.0-py39h079e4ff_2.tar.bz2#7cebf33355b537e5706bfe0a546bb193
 https://conda.anaconda.org/conda-forge/linux-64/terminado-0.9.1-py39hf3d152e_1.tar.bz2#ee53504a09994271cb095e9e634e0b47

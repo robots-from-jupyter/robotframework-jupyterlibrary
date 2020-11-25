@@ -59,7 +59,7 @@ https://conda.anaconda.org/conda-forge/win-64/certifi-2020.11.8-py38haa244fe_0.t
 https://conda.anaconda.org/conda-forge/win-64/cffi-1.14.3-py38h0e640b1_1.tar.bz2#0fd3a8bf420e2ad6dfc7fbfa8cbdc4ec
 https://conda.anaconda.org/conda-forge/win-64/chardet-3.0.4-py38h9bdc248_1008.tar.bz2#503ab812d4aa8f5e4e40448a22f16233
 https://conda.anaconda.org/conda-forge/win-64/entrypoints-0.3-py38h32f6830_1002.tar.bz2#6e62109f3a8b1734dc22d25317ba32a9
-https://conda.anaconda.org/conda-forge/noarch/importlib-metadata-3.0.0-pyhd8ed1ab_0.tar.bz2#99e8b0f8aad565f27470505fe6f46a3c
+https://conda.anaconda.org/conda-forge/noarch/importlib-metadata-3.1.0-pyhd8ed1ab_0.tar.bz2#97a4bcec44626ddea360efdf7d5ad816
 https://conda.anaconda.org/conda-forge/win-64/jedi-0.17.2-py38haa244fe_1.tar.bz2#097ff99775022e7e449c02cdde5875fc
 https://conda.anaconda.org/conda-forge/win-64/markupsafe-1.1.1-py38hab1e662_2.tar.bz2#0737676f52f6bb7d2260636434140519
 https://conda.anaconda.org/conda-forge/win-64/mistune-0.8.4-py38h294d835_1002.tar.bz2#5c55b27e29c30aeef4e11832441a50f2
@@ -80,7 +80,7 @@ https://conda.anaconda.org/conda-forge/win-64/wincertstore-0.2-py38h32f6830_1005
 https://conda.anaconda.org/conda-forge/win-64/argon2-cffi-20.1.0-py38h294d835_2.tar.bz2#2c84cff56efb8071cd3996453f8d05a2
 https://conda.anaconda.org/conda-forge/win-64/brotlipy-0.7.0-py38hab1e662_1001.tar.bz2#2d6f5a730bc180307463869c63ac0cdd
 https://conda.anaconda.org/conda-forge/win-64/cryptography-3.2.1-py38hd8c33c5_0.tar.bz2#6e96f917369950d4df5208afe2bb4058
-https://conda.anaconda.org/conda-forge/noarch/importlib_metadata-3.0.0-hd8ed1ab_0.tar.bz2#a398fd632e96cc2bca2a890fe2921110
+https://conda.anaconda.org/conda-forge/noarch/importlib_metadata-3.1.0-hd8ed1ab_0.tar.bz2#182b3a7c361dfc0de2ed1abf90fd61c8
 https://conda.anaconda.org/conda-forge/win-64/jupyter_core-4.7.0-py38haa244fe_0.tar.bz2#fe95f3dc033651e47455ecddc6d51af0
 https://conda.anaconda.org/conda-forge/win-64/pysocks-1.7.1-py38h9bdc248_2.tar.bz2#6ed736e4e660a6ed5987b259b7f17fc1
 https://conda.anaconda.org/conda-forge/win-64/setuptools-49.6.0-py38h9bdc248_2.tar.bz2#98726e11607788e59c4135db810e8521

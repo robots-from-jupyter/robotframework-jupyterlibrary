@@ -46,6 +46,8 @@ ENVS = ROOT / ".envs"
 
 ENV_NAMES = ["tests", "lint", "docs"]
 RUN_IN = {env: ["conda", "run", "-p", ENVS / env] for env in ENV_NAMES}
+CONDA_LISTS = {env: BUILD / env / "conda.lock" for env in ENV_NAMES}
+PIP_LISTS = {env: BUILD / env / "pip.freeze" for env in ENV_NAMES}
 
 WORKFLOW_TEST = WORKFLOWS / "tests.yml"
 WORKFLOW_TEST_YAML = safe_load(WORKFLOW_TEST.read_text())
