@@ -33,6 +33,7 @@ jobs:
           activate-environment: lint
           environment-file: .github/locks/lint/linux-64/conda.lock
           use-only-tar-bz2: true
+      - run: conda list && conda info
       - run: doit lint
 
   docs:
@@ -52,6 +53,7 @@ jobs:
           activate-environment: docs
           environment-file: .github/locks/docs/linux-64/conda.lock
           use-only-tar-bz2: true
+      - run: conda list && conda info
       - run: doit docs
 
   test:
@@ -89,4 +91,5 @@ jobs:
           activate-environment: test
           environment-file: ${{ steps.lock.outputs.file }}
           use-only-tar-bz2: true
+      - run: conda list && conda info
       - run: doit test
