@@ -1,6 +1,9 @@
 from pathlib import Path
 from ruamel_yaml import safe_load
 import platform
+import os
+
+CI = int(os.environ.get("CI", "0"))
 
 THIS_CONDA_SUBDIR = {
     "Linux": "linux-64",
@@ -24,10 +27,8 @@ SRC = ROOT / "src" / "JupyterLibrary"
 VERSION_FILE = SRC / "VERSION"
 VERSION = VERSION_FILE.read_text().strip()
 PY_SRC = [*SRC.rglob("*.py")]
-ALL_PY = [*SCRIPTS.rglob("*.py"), *PY_SRC, DODO]
 ATEST = ROOT / "atest"
 ROBOT_SRC = [*SRC.rglob("*.robot")]
-ALL_ROBOT = [*ATEST.rglob("*.robot"), *ROBOT_SRC]
 
 BUILD = ROOT / "build"
 BUILD.exists() or BUILD.mkdir()
@@ -37,6 +38,10 @@ IMPORTABLE = "robotframework_jupyterlibrary"
 SDIST = DIST / f"""{IMPORTABLE.replace("_", "-")}-{VERSION}.tar.gz"""
 WHEEL = DIST / f"{IMPORTABLE}-{VERSION}-py3-none-any.whl"
 
+# docs
+DOCS = ROOT / "docs"
+DOCS_CONF_PY = DOCS / "conf.py"
+
 # partial environments
 GITHUB = ROOT / ".github"
 WORKFLOWS = GITHUB / "workflows"
@@ -45,7 +50,11 @@ ENV_SPECS = GITHUB / "env_specs"
 ENVS = ROOT / ".envs"
 
 ENV_NAMES = ["tests", "lint", "docs"]
-RUN_IN = {env: ["conda", "run", "-p", ENVS / env] for env in ENV_NAMES}
+
+if CI:
+    RUN_IN = {env: ["conda", "run", "-n", env] for env in ENV_NAMES}
+else:
+    RUN_IN = {env: ["conda", "run", "-p", ENVS / env] for env in ENV_NAMES}
 CONDA_LISTS = {env: BUILD / env / "conda.lock" for env in ENV_NAMES}
 PIP_LISTS = {env: BUILD / env / "pip.freeze" for env in ENV_NAMES}
 
@@ -97,4 +106,14 @@ ENV_DEPS = {
         ]
     )
     for (flow, pf, py, lab), target in ENVENTURES.items()
+]
+
+# linting
+ALL_ROBOT = [*ATEST.rglob("*.robot"), *ROBOT_SRC]
+ALL_PY = [*SCRIPTS.rglob("*.py"), *PY_SRC, DODO, DOCS_CONF_PY]
+ALL_DOCS_SRC = [
+    *(DOCS / "_static").rglob("*.*"),
+    *DOCS.rglob(".ipynb"),
+    *PY_SRC,
+    DOCS_CONF_PY,
 ]

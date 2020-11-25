@@ -14,8 +14,7 @@ from JupyterLibrary.core import CLIENTS, COMMON
 
 
 def setup(app):
-    """ Runs before the "normal business" of sphinx. Don't go too crazy here.
-    """
+    """Runs before the "normal business" of sphinx. Don't go too crazy here."""
     here = Path(__file__).parent
 
     subprocess.check_call(

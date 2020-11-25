@@ -3,3 +3,5 @@ dependencies:
   - sphinx
   - sphinx_rtd_theme
   - sphinx-autobuild
+  - port-for =0.3.1
+  - ipykernel

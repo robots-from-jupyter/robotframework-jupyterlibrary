@@ -21,7 +21,7 @@ def task_binder():
 
 
 def task_release():
-    return dict(actions=[["echo", "ok"]], task_dep=["lint", "build", "test"])
+    return dict(actions=[["echo", "ok"]], task_dep=["lint", "docs", "build", "test"])
 
 
 def task_build():
@@ -30,6 +30,19 @@ def task_build():
         actions=[[*P.PY, "setup.py", "sdist", "bdist_wheel"]],
         targets=[P.SDIST, P.WHEEL],
         file_dep=[*P.PY_SRC, *P.ROBOT_SRC, P.VERSION_FILE, *P.SETUP_CRUFT],
+    )
+
+
+def task_docs():
+    env = "docs"
+    run_in = P.RUN_IN[env]
+    frozen = P.PIP_LISTS[env]
+
+    yield dict(
+        name="sphinx",
+        actions=[[*run_in, "sphinx-build", "-M", "html", "docs", "build/docs"]],
+        file_dep=[frozen, *P.ALL_DOCS_SRC],
+        targets=["build/docs/html/index.html"],
     )
 
 
@@ -48,21 +61,32 @@ def _make_env(env):
     if not explicit_list.parent.exists():
         explicit_list.parent.mkdir(parents=True)
 
+    actions = [
+        lambda: explicit_list.unlink() if explicit_list.exists() else None,
+    ]
+
+    if P.CI:
+        env_args = ["-n", env]
+    else:
+        env_args = ["-p", P.ENVS / env]
+        actions += [
+            ["conda", "create", "-y", *env_args, "--file", lockfile],
+        ]
+    actions += [
+        lambda: [
+            explicit_list.write_bytes(
+                subprocess.check_output(
+                    ["conda", "list", "--explicit", "--md5", *env_args]
+                )
+            ),
+            None,
+        ][-1],
+    ]
+
     yield dict(
         name=env,
         file_dep=[lockfile],
-        actions=[
-            lambda: explicit_list.unlink() if explicit_list.exists() else None,
-            ["conda", "create", "-yp", P.ENVS / env, "--file", lockfile],
-            lambda: [
-                explicit_list.write_bytes(
-                    subprocess.check_output(
-                        ["conda", "list", "--explicit", "--md5", "-p", P.ENVS / env]
-                    )
-                ),
-                None,
-            ][-1],
-        ],
+        actions=actions,
         targets=[explicit_list],
     )
 
@@ -75,26 +99,27 @@ def task_env():
 
 
 def task_lint():
+    env = "lint"
     env_lock = P.CONDA_LISTS["lint"]
+    run_in = P.RUN_IN[env]
+    pym = [*run_in, *P.PYM]
 
     yield dict(
         name="black",
-        actions=[[*P.RUN_IN["lint"], *P.PYM, "black", "--quiet", *P.ALL_PY]],
+        actions=[[*pym, "black", "--quiet", *P.ALL_PY]],
         file_dep=[*P.ALL_PY, env_lock],
     )
 
     yield dict(
         name="pyflakes",
-        actions=[[*P.RUN_IN["lint"], *P.PYM, "pyflakes", *P.ALL_PY]],
+        task_dep=["lint:black"],
+        actions=[[*pym, "pyflakes", *P.ALL_PY]],
         file_dep=[*P.ALL_PY, env_lock],
     )
 
     yield dict(
         name="robot:tidy",
-        actions=[
-            [*P.RUN_IN["lint"], *P.PYM, "robot.tidy", "--recursive", it]
-            for it in [P.SRC, P.ATEST]
-        ],
+        actions=[[*pym, "robot.tidy", "--recursive", it] for it in [P.SRC, P.ATEST]],
         file_dep=[*P.ALL_ROBOT, env_lock],
     )
 
@@ -130,14 +155,13 @@ def task_lab():
     )
 
 
-def task_setup():
-    env = "tests"
+def _make_setup(env):
     frozen = P.PIP_LISTS[env]
     run_in = P.RUN_IN[env]
     pym = [*run_in, *P.PYM]
 
     yield dict(
-        name="py",
+        name=env,
         actions=[
             [
                 *pym,
@@ -159,6 +183,11 @@ def task_setup():
     )
 
 
+def task_setup():
+    for env in ["tests", "docs"]:
+        yield _make_setup(env)
+
+
 def task_test():
     env = "tests"
 
@@ -167,7 +196,7 @@ def task_test():
         uptodate=[config_changed(os.environ.get("ATEST_ARGS", ""))],
         actions=[[*P.RUN_IN[env], *P.PYM, "_scripts.atest"]],
         file_dep=[*P.PY_SRC, *P.ALL_ROBOT, P.PIP_LISTS[env]],
-        targets=["_artifacts/test_output/log.xml"],
+        targets=["build/test_output/log.xml"],
     )
 
 
