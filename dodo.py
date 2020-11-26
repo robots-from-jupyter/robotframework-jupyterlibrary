@@ -25,7 +25,11 @@ def task_binder():
 
 def task_release():
     """the full set of tasks needed for a new release"""
-    return dict(actions=[["echo", "ok"]], task_dep=["lint", "docs", "build", "test"])
+    return dict(
+        actions=[["echo", "ok"]],
+        task_dep=["lint", "test"],
+        file_dep=[P.SHA256SUMS, P.DOCS_BUILDINFO],
+    )
 
 
 def task_build():

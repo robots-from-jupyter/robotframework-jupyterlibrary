@@ -146,8 +146,11 @@ ENV_DEPS = {
 ALL_ROBOT = [*ATEST.rglob("*.robot"), *ROBOT_SRC]
 ALL_PY = [*SCRIPTS.rglob("*.py"), *PY_SRC, DODO, DOCS_CONF_PY]
 ALL_DOCS_SRC = [
-    *(DOCS / "_static").rglob("*.*"),
-    *DOCS.rglob(".ipynb"),
-    *PY_SRC,
-    DOCS_CONF_PY,
+    p for p in [
+        *(DOCS / "_static").rglob("*.*"),
+        *DOCS.rglob("*.ipynb"),
+        *PY_SRC,
+        DOCS_CONF_PY,
+    ]
+    if ".ipynb_checkpoints" not in str(p)
 ]
