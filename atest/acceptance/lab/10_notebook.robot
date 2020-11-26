@@ -1,6 +1,6 @@
 *** Settings ***
-Suite Teardown    Close All Browsers
-Test Teardown     Reset JupyterLab and Close
+Suite Teardown    Run Keyword and Ignore Error    Close All Browsers
+Test Teardown     Run Keyword and Ignore Error    Reset JupyterLab and Close
 Default Tags      notebook
 Library           JupyterLibrary
 Library           Process

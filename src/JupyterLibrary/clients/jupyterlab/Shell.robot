@@ -1,12 +1,18 @@
 *** Settings ***
 Resource          JupyterLibrary/clients/jupyterlab/Selectors.robot
+Resource          JupyterLibrary/clients/jupyterlab/PageInfo.robot
 Documentation     Keywords for working with the JupyterLab web application
 ...               You should have already started a Jupyter Server, such as with
 ...               *Wait For New Jupyter Server To Be Ready*.
 
 *** Keywords ***
 Open JupyterLab
-    [Arguments]    ${browser}=headlessfirefox    ${nbserver}=${None}    ${url}=${EMPTY}    &{configuration}
+    [Arguments]    ${browser}=headlessfirefox
+    ...    ${nbserver}=${None}
+    ...    ${url}=${EMPTY}
+    ...    ${clear}=${False}
+    ...    ${pageinfo tags}=@{JLAB DEFAULT PAGEINFO TAGS}
+    ...    &{configuration}
     [Documentation]    Open JupyterLab, served from the given (or most-recently-started)
     ...    ``nbserver`` in a ``browser`` (or ``headlessfirefox``) or ``url``,
     ...    then wait for the splash screen.
@@ -16,6 +22,7 @@ Open JupyterLab
     ${final_url} =    Set Variable If    "${url}"    ${url}    ${nbserver_url}lab?token=${token}
     Open Browser    url=${final_url}    browser=${browser}    &{configuration}
     Wait for JupyterLab Splash Screen
+    Tag With JupyterLab Metadata    ${pageinfo tags}    clear=${clear}
 
 Wait for JupyterLab Splash Screen
     [Documentation]    Wait for the JupyterLab splash animation

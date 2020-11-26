@@ -11,8 +11,6 @@ ${JLAB CSS ACTIVE SIDEBAR}    .jp-SideBar .p-TabBar-tab.p-mod-current
 ${JLAB CSS BUSY KERNEL}    .jp-Toolbar-kernelStatus.jp-FilledCircleIcon
 ${JLAB CSS CMD INPUT}    .p-CommandPalette-input
 ${JLAB CSS CMD ITEM}    .p-CommandPalette-item
-${JLAB CSS ICON ADD}    .jp-AddIcon
-${JLAB CSS ICON RUN}    .jp-RunIcon
 ${JLAB CSS NB TOOLBAR}    .jp-NotebookPanel-toolbar
 ${JLAB CSS SIDEBAR TAB}    .jp-SideBar .p-TabBar-tab
 ${JLAB CSS SPINNER}    .jp-Spinner
@@ -25,5 +23,4 @@ ${JLAB XP MENU LABEL}    //div[contains(@class, 'p-MenuBar-itemLabel')]
 ${JLAB XP TOP}    //div[@id='jp-top-panel']
 ${JLAB XP NB TOOLBAR}    //div[contains(@class, 'jp-NotebookPanel-toolbar')]
 # TODO: validate these hit on lab 1
-${JLAB XP ICON ADD}    //*[(local-name() = 'div' and contains(@class, 'jp-AddIcon')) or (local-name() = 'svg' and contains(@data-icon, 'ui-components:add'))]
-${JLAB XP ICON RUN}    //*[(local-name() = 'div' and contains(@class, 'jp-RunIcon')) or (local-name() = 'svg' and contains(@data-icon, 'ui-components:run'))]
+${JLAB XP BUSY KERNEL}    //*[local-name() = 'div' and conttains(@class, 'jp-FilledCircleIcon' or (local-name() = 'svg' and contains(@data-icon, 'ui-components:circle-filled')))]
