@@ -3,6 +3,7 @@ import subprocess
 
 from hashlib import sha256
 
+import doit
 from doit.tools import PythonInteractiveAction, config_changed
 
 from _scripts import project as P
@@ -13,13 +14,13 @@ DOIT_CONFIG = {
     "backend": "sqlite3",
     "verbosity": 2,
     "par_type": "thread",
-    "default_tasks": ["lab:ext"],
+    "default_tasks": ["binder"],
 }
 
 
 def task_binder():
     """get to a basic interactive state"""
-    return dict(actions=[["echo", "ok"]])
+    return dict(actions=[["echo", "ok"]], file_dep=[P.PIP_LISTS["test"]])
 
 
 def task_release():
@@ -265,3 +266,7 @@ if P.CAN_CONDA_LOCK:
                 file_dep=file_dep,
                 targets=[target],
             )
+
+
+if __name__ == "__main__":
+    doit.run(globals())

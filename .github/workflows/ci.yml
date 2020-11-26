@@ -37,7 +37,7 @@ jobs:
           auto-update-conda: true
           environment-file: .github/locks/lint/linux-64/conda.lock
           use-only-tar-bz2: true
-      - run: doit lint build || doit lint build
+      - run: python dodo.py lint build || python dodo.py lint build
       - uses: actions/upload-artifact@v2
         with:
           name: ${{ job.status }} dist ${{ github.run_number }}
@@ -60,7 +60,7 @@ jobs:
           auto-update-conda: true
           environment-file: .github/locks/docs/linux-64/conda.lock
           use-only-tar-bz2: true
-      - run: doit docs || doit docs
+      - run: python dodo.py docs || python dodo.py docs
       - uses: actions/upload-artifact@v2
         with:
           name: ${{ job.status }} docs ${{ github.run_number }}
@@ -109,9 +109,9 @@ jobs:
           environment-file: ${{ steps.lock.outputs.file }}
           use-only-tar-bz2: true
       - if: ${{ matrix.os != 'windows' }}
-        run: doit test || doit test
+        run: python dodo.py test || python dodo.py test
       - if: ${{ matrix.os == 'windows' }}
-        run: doit test || doit test
+        run: python dodo.py test || python dodo.py test
         shell: cmd /C CALL {0}
       - uses: actions/upload-artifact@v2
         with:
