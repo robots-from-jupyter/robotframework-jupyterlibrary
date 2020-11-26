@@ -50,14 +50,37 @@ def task_docs():
 
 
 def _make_env(env):
-    try:
-        lockfile = [
-            target
-            for (flow, pf, py, lab), target in P.ENVENTURES.items()
-            if flow == env and pf == P.THIS_CONDA_SUBDIR
-        ][-1]
-    except:
-        return
+    lockfile = None
+
+    env_var_lock = os.environ.get("RFJL_LOCKFILE")
+
+    if env_var_lock is not None:
+        eflow, epf, epy, elab = [
+            (v if v != "" else None) for v in env_var_lock.split(":")
+        ]
+        try:
+            lockfile = [
+                target
+                for (flow, pf, py, lab), target in P.ENVENTURES.items()
+                if (flow == env == eflow)
+                and (
+                    (pf == epf)
+                    and (lab == elab if lab else True)
+                    and (py == epy if py else True)
+                )
+            ][-1]
+        except:
+            pass
+
+    if lockfile is None:
+        try:
+            lockfile = [
+                target
+                for (flow, pf, py, lab), target in P.ENVENTURES.items()
+                if flow == env and pf == P.THIS_CONDA_SUBDIR
+            ][-1]
+        except:
+            return
 
     explicit_list = P.BUILD / env / lockfile.name
 

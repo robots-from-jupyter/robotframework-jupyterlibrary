@@ -4,8 +4,8 @@ Resource          JupyterLibrary/clients/jupyterlab/PageInfo.robot
 
 *** Variables ***
 &{JLAB1 CSS ICONS}
-...               add=.jp-AddIcon
-...               run=.jp-RunIcon
+...               add=span[data-icon="add"]
+...               run=span[data-icon="run"]
 ...               filled circle=.jp-CircleFilledIcon
 ...               empty circle=.jp-CircleEmptyIcon
 &{JLAB2 CSS ICONS}
@@ -14,8 +14,8 @@ Resource          JupyterLibrary/clients/jupyterlab/PageInfo.robot
 ...               filled circle=svg[@data-icon='ui-components:circle-filled']
 ...               empty circle=svg[@data-icon='ui-components:circle-empty']
 &{JLAB1 XP ICONS}
-...               add=div[contains(@class, 'jp-AddIcon')]
-...               run=div[contains(@class, 'jp-RunIcon')]
+...               add=span[@data-icon = 'add']
+...               run=span[@data-icon = 'run']
 ...               filled circle=div[contains(@class, 'jp-CircleFilledIcon')]
 ...               empty circle=div[contains(@class, 'jp-CircleEmptyIcon')]
 &{JLAB2 XP ICONS}
