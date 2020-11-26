@@ -74,11 +74,11 @@ jobs:
     runs-on: ${{ matrix.os }}-latest
     needs: [build]
     strategy:
-      max-parallel: 4
+      max-parallel: 8
       matrix:
-        conda-subdir: [linux-64, osx-64, win-64]
-        python-version: ["3.6", "3.7", "3.8", "3.9"]
         lab-version: ["1", "2"]
+        python-version: ["3.6", "3.7", "3.8", "3.9"]
+        conda-subdir: [linux-64, osx-64, win-64]
         include:
           - conda-subdir: linux-64
             os: ubuntu
