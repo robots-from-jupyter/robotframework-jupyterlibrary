@@ -91,7 +91,7 @@ ENVS = ROOT / ".envs"
 
 ENV_NAMES = ["test", "lint", "docs"]
 
-CONDA_RUN = ["conda", "run"]
+CONDA_RUN = [CONDA_EXE, "run"]
 if CI:
     RUN_IN = {env: [*CONDA_RUN, "-n", env] for env in ENV_NAMES}
 else:
