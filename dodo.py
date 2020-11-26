@@ -1,6 +1,8 @@
 import os
 import subprocess
 
+from hashlib import sha256
+
 from doit.tools import PythonInteractiveAction, config_changed
 
 from _scripts import project as P
@@ -32,6 +34,27 @@ def task_build():
         actions=[[*P.PY, "setup.py", "sdist", "bdist_wheel"]],
         targets=[P.SDIST, P.WHEEL],
         file_dep=[*P.PY_SRC, *P.ROBOT_SRC, P.VERSION_FILE, *P.SETUP_CRUFT],
+    )
+
+    def _run_hash():
+        # mimic sha256sum CLI
+        if P.SHA256SUMS.exists():
+            P.SHA256SUMS.unlink()
+
+        lines = []
+
+        for p in P.HASH_DEPS:
+            lines += ["  ".join([sha256(p.read_bytes()).hexdigest(), p.name])]
+
+        output = "\n".join(lines)
+        print(output)
+        P.SHA256SUMS.write_text(output)
+
+    yield dict(
+        name="hash",
+        file_dep=P.HASH_DEPS,
+        targets=[P.SHA256SUMS],
+        actions=[_run_hash],
     )
 
 

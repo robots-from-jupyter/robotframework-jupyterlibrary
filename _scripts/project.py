@@ -64,6 +64,9 @@ DIST = ROOT / "dist"
 IMPORTABLE = "robotframework_jupyterlibrary"
 SDIST = DIST / f"""{IMPORTABLE.replace("_", "-")}-{VERSION}.tar.gz"""
 WHEEL = DIST / f"{IMPORTABLE}-{VERSION}-py3-none-any.whl"
+HASH_DEPS = [SDIST, WHEEL]
+SHA256SUMS = DIST / "SHA256SUMS"
+
 
 # docs
 DOCS = ROOT / "docs"

@@ -39,7 +39,6 @@ jobs:
           environment-file: .github/locks/lint/linux-64/conda.lock
           use-only-tar-bz2: true
       - run: doit lint build || doit lint build
-      - run: cd dist && sha256sum * > SHA256SUMS && cat SHA256SUMS
       - uses: actions/upload-artifact@v2
         with:
           name: ${{ job.status }} dist ${{ github.run_number }}
