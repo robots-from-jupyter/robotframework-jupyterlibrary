@@ -1,5 +1,5 @@
 # platform: osx-64
-# env_hash: 085d789ea6073aa0e9a6dd8fcecf595034180e59157e28c7a470d9b1fa290292
+# env_hash: c609a2371e3e89dcf5972e3c9fdbc30f1c98d2948c837171d74154f70618e01e
 
 @EXPLICIT
 
@@ -107,5 +107,4 @@ https://conda.anaconda.org/conda-forge/noarch/robotframework-seleniumlibrary-4.5
 https://conda.anaconda.org/conda-forge/osx-64/ipykernel-5.3.4-py37he01cfaa_1.tar.bz2#200f698f713874d3815c3aa2a1086962
 https://conda.anaconda.org/conda-forge/osx-64/notebook-6.1.5-py37hf985489_0.tar.bz2#c678b3bd1a538283c2ae072ff7c2b6cb
 https://conda.anaconda.org/conda-forge/noarch/jupyterlab_server-1.2.0-py_0.tar.bz2#77d654573f19a836b326fb77ffd86860
-https://conda.anaconda.org/conda-forge/noarch/nteract_on_jupyter-2.1.3-py_0.tar.bz2#1430ccd983ae6b161e2fbf4377965f7a
 https://conda.anaconda.org/conda-forge/noarch/jupyterlab-1.2.16-py_0.tar.bz2#f7de1776f979161029d59fbbcfa35eb5

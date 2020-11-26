@@ -8,8 +8,8 @@ import os
 from . import BROWSER, ROOT, PLATFORM, TESTS, TEST_OUT
 
 NON_CRITICAL = [
-    # TODO: figure out some plan for supporting obfuscated nteract
-    ["client:nteract_on_jupyter"],
+    ## Historically supported nteract_on_jupyter
+    # ["client:nteract_on_jupyter"],
 ]
 
 

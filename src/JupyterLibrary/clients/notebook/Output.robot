@@ -1,5 +1,5 @@
 *** Settings ***
-Resource          JupyterLibrary/clients/nteract_on_jupyter/Selectors.robot
+Resource          JupyterLibrary/clients/notebook/Selectors.robot
 
 *** Keywords ***
 Current Notebook Classic Cell Output Should Contain

@@ -67,7 +67,7 @@ def task_docs():
     yield dict(
         name="sphinx",
         actions=[[*run_in, "sphinx-build", "-M", "html", "docs", "build/docs"]],
-        file_dep=[frozen, *P.ALL_DOCS_SRC, *P.SETUP_CRUFT],
+        file_dep=[frozen, *P.ALL_DOCS_SRC, *P.SETUP_CRUFT, *P.ROBOT_SRC],
         targets=[P.DOCS_BUILDINFO],
     )
 
