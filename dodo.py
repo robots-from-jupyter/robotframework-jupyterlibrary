@@ -124,13 +124,13 @@ def _make_env(env):
     else:
         env_args = ["-p", P.ENVS / env]
         actions += [
-            ["conda", "create", "-y", *env_args, "--file", lockfile],
+            [P.CONDA_EXE, "create", "-y", *env_args, "--file", lockfile],
         ]
     actions += [
         lambda: [
             explicit_list.write_bytes(
                 subprocess.check_output(
-                    ["conda", "list", "--explicit", "--md5", *env_args]
+                    [P.CONDA_EXE, "list", "--explicit", "--md5", *env_args]
                 )
             ),
             None,

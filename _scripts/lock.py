@@ -50,7 +50,7 @@ def lock(flow, pf, py, lab):
 
         env = tdp / "environment.yml"
         env.write_text(safe_dump(composite, default_flow_style=False))
-        args = ["conda", "lock", "--platform", pf]
+        args = [P.CONDA_EXE, "lock", "--platform", pf]
         subprocess.check_call(args, cwd=td)
         if not output.parent.exists():
             output.parent.mkdir(parents=True)

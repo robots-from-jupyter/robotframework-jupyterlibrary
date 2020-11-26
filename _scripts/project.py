@@ -23,12 +23,21 @@ import os
 
 CI = int(os.environ.get("CI", "0"))
 BINDER = int(os.environ.get("BINDER", "0"))
+PLATFORM = platform.system()
+
+CONDA_EXE = os.environ.get("CONDA_EXE")
+
+if CONDA_EXE is None and PLATFORM == "windows":
+    CONDA_EXE = "conda.bat"
+
+if CONDA_EXE is None:
+    CONDA_EXE = "conda"
 
 THIS_CONDA_SUBDIR = {
     "Linux": "linux-64",
     "Darwin": "osx-64",
     "Windows": "win-64",
-}[platform.system()]
+}[PLATFORM]
 
 # commands
 PY = ["python"]
@@ -146,7 +155,8 @@ ENV_DEPS = {
 ALL_ROBOT = [*ATEST.rglob("*.robot"), *ROBOT_SRC]
 ALL_PY = [*SCRIPTS.rglob("*.py"), *PY_SRC, DODO, DOCS_CONF_PY]
 ALL_DOCS_SRC = [
-    p for p in [
+    p
+    for p in [
         *(DOCS / "_static").rglob("*.*"),
         *DOCS.rglob("*.ipynb"),
         *PY_SRC,
