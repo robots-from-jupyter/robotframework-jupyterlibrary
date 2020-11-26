@@ -115,9 +115,9 @@ jobs:
           environment-file: ${{ steps.lock.outputs.file }}
           use-only-tar-bz2: true
       - if: ${{ matrix.os != 'windows' }}
-        run: doit test
+        run: doit test || doit test
       - if: ${{ matrix.os == 'windows' }}
-        run: doit test
+        run: doit test || doit test
         shell: cmd /C CALL {0}
       - uses: actions/upload-artifact@v2
         with:
