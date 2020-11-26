@@ -24,8 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: cache (conda)
-        uses: actions/cache@v1
+      - uses: actions/cache@v1
         with:
           path: ~/conda_pkgs_dir
           key:
@@ -43,14 +42,12 @@ jobs:
         with:
           name: ${{ job.status }} dist ${{ github.run_number }}
           path: ./dist
-        if: always()
 
   docs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: cache (conda)
-        uses: actions/cache@v1
+      - uses: actions/cache@v1
         with:
           path: ~/conda_pkgs_dir
           key:
@@ -98,8 +95,7 @@ jobs:
               matrix.python-version,
               matrix.lab-version
             ) }}"
-      - name: cache (conda)
-        uses: actions/cache@v1
+      - uses: actions/cache@v1
         with:
           path: ~/conda_pkgs_dir
           key:
