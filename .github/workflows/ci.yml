@@ -38,8 +38,7 @@ jobs:
           auto-update-conda: true
           environment-file: .github/locks/lint/linux-64/conda.lock
           use-only-tar-bz2: true
-      - run: conda list && conda info
-      - run: doit lint build
+      - run: doit lint build || doit lint build
       - run: cd dist && sha256sum * > SHA256SUMS && cat SHA256SUMS
       - uses: actions/upload-artifact@v2
         with:
@@ -65,7 +64,7 @@ jobs:
           auto-update-conda: true
           environment-file: .github/locks/docs/linux-64/conda.lock
           use-only-tar-bz2: true
-      - run: doit docs
+      - run: doit docs || doit docs
       - uses: actions/upload-artifact@v2
         with:
           name: ${{ job.status }} docs ${{ github.run_number }}
@@ -74,9 +73,9 @@ jobs:
 
   test:
     runs-on: ${{ matrix.os }}-latest
-    needs: [docs, build]
+    needs: [build]
     strategy:
-      fail-fast: false
+      max-parallel: 4
       matrix:
         conda-subdir: [linux-64, osx-64, win-64]
         python-version: ["3.6", "3.7", "3.8", "3.9"]
