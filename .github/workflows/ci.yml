@@ -71,8 +71,10 @@ jobs:
     runs-on: ${{ matrix.os }}-latest
     needs: [build]
     strategy:
-      # TODO: probably restore
+      ## TODO: probably restore
       # max-parallel: 8
+      # TODO: probably remove
+      fail-fast: false
       matrix:
         lab-version: ["1", "2"]
         python-version: ["3.6", "3.7", "3.8", "3.9"]
@@ -112,7 +114,7 @@ jobs:
       - if: ${{ matrix.os != 'windows' }}
         run: python dodo.py test || python dodo.py test
       - if: ${{ matrix.os == 'windows' }}
-        run: call conda.bat activate -n test && python dodo.py test || python dodo.py test
+        run: call conda.bat activate test && python dodo.py test || python dodo.py test
         shell: cmd /C CALL {0}
       - uses: actions/upload-artifact@v2
         with:
