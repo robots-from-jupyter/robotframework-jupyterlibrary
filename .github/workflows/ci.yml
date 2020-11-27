@@ -71,6 +71,7 @@ jobs:
         if: always()
 
   combine:
+    if: always()
     needs: [test]
     runs-on: ubuntu-20.04
     steps:
