@@ -74,12 +74,39 @@ jobs:
     needs: [test]
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/download-artifact@v2
+      - if: always()
+        uses: actions/download-artifact@v2
         with:
           path: artifacts/
-        if: always()
-      - run: find artifacts/
-        if: always()
+      - if: always()
+        run: find artifacts/
+      - if: always()
+        uses: actions/checkout@v2
+      - if: always()
+        uses: actions/cache@v1
+        with:
+          path: ~/conda_pkgs_dir
+          key:
+            ${{ runner.os }}-conda-lint-${{
+            hashFiles('.github/locks/lint/linux-64/conda.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-conda-lint-
+      - if: always()
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          activate-environment: lint
+          auto-update-conda: true
+          environment-file: .github/locks/lint/linux-64/conda.lock
+          use-only-tar-bz2: true
+      - if: always()
+        run: python dodo.py combine
+      - if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: COMBINED ${{ github.run_number }}
+          path: |
+            ./build/test/output
+            !./build/test/output/**/pabot_results
 
   test:
     runs-on: ${{ matrix.vm }}
