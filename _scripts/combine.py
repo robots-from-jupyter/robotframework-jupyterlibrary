@@ -1,3 +1,4 @@
+import sys
 import subprocess
 
 from . import project as P
@@ -6,7 +7,11 @@ from . import project as P
 def combine():
     final = P.ATEST_OUT / P.ATEST_OUT_XML
 
-    all_robot = [p for p in P.ATEST_OUT.rglob(P.ATEST_OUT_XML) if p != final]
+    all_robot = [
+        p
+        for p in P.ATEST_OUT.rglob(P.ATEST_OUT_XML)
+        if p != final and "pabot_results" not in str(p)
+    ]
     args = [
         "python",
         "-m",
@@ -18,7 +23,12 @@ def combine():
         "--output",
         P.ATEST_OUT_XML,
     ] + all_robot
-    proc = subprocess.Popen(args)
+
+    str_args = [*map(str, args)]
+
+    print(">>> rebot args: ", " ".join(str_args), flush=True)
+
+    proc = subprocess.Popen(str_args)
 
     try:
         return proc.wait()
@@ -28,4 +38,4 @@ def combine():
 
 
 if __name__ == "__main__":
-    combine()
+    sys.exit(combine())

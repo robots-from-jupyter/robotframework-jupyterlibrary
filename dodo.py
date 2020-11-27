@@ -27,7 +27,7 @@ def task_release():
     """the full set of tasks needed for a new release"""
     return dict(
         actions=[["echo", "ok"]],
-        task_dep=["lint", "test"],
+        task_dep=["lint", "test", "report"],
         file_dep=[P.SHA256SUMS, P.DOCS_BUILDINFO],
     )
 
@@ -228,9 +228,9 @@ def task_setup():
 def task_test():
     """run tests"""
     env = "test"
+    pym = [*P.RUN_IN[env], *P.PYM]
 
     stem = P.get_atest_stem(lockfile=P.get_lockfile(env), browser=P.BROWSER)
-    pym = [*P.RUN_IN[env], *P.PYM]
 
     yield dict(
         name="atest",
@@ -240,10 +240,16 @@ def task_test():
         targets=[P.ATEST_OUT / stem / P.ATEST_OUT_XML],
     )
 
+
+def task_report():
+    """report on other generated artifacts"""
+    env = "lint"
+    pym = [*P.RUN_IN[env], *P.PYM]
+
     final = P.ATEST_OUT / P.ATEST_OUT_XML
 
     yield dict(
-        name="combine",
+        name="rebot",
         actions=[[*pym, "_scripts.combine"]],
         file_dep=[p for p in P.ATEST_OUT.rglob(P.ATEST_OUT_XML) if p != final],
         targets=[final],
