@@ -150,13 +150,23 @@ def task_lint():
     )
 
     yield dict(
-        name="prettier",
+        name="prettier:pre",
+        uptodate=[
+            config_changed({k: P.PACKAGE[k] for k in ["devDependencies", "prettier"]})
+        ],
+        file_dep=[P.YARN_LOCK, env_lock],
         actions=[
             [*run_in, "yarn", "--prefer-offline", "--ignore-optional"],
+        ],
+        targets=[P.YARN_INTEGRITY],
+    )
+
+    yield dict(
+        name="prettier",
+        actions=[
             [*run_in, "yarn", "prettier"],
         ],
-        file_dep=[P.YARN_LOCK, *P.ALL_PRETTIER, env_lock],
-        targets=[P.YARN_INTEGRITY],
+        file_dep=[*P.ALL_PRETTIER, P.YARN_INTEGRITY],
     )
 
 

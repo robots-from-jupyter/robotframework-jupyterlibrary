@@ -85,10 +85,9 @@ jobs:
     runs-on: ${{ matrix.vm }}
     needs: [build]
     strategy:
-      # TODO: probably restore
-      max-parallel: 5
-      # # TODO: probably remove
-      # fail-fast: false
+      max-parallel: 6
+      # TODO: probably remove
+      fail-fast: false
       matrix:
         lab-version: ['lab1', 'lab2']
         python-version: ['py3.6', 'py3.7', 'py3.8', 'py3.9']

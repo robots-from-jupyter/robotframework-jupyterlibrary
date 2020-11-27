@@ -180,6 +180,7 @@ ALL_DOCS_SRC = [
 ]
 
 PACKAGE_JSON = ROOT / "package.json"
+PACKAGE = safe_load(PACKAGE_JSON.read_text("utf-8"))
 YARN_LOCK = ROOT / "yarn.lock"
 YARN_INTEGRITY = ROOT / "node_modules" / ".yarn-integrity"
 ALL_PRETTIER = [
