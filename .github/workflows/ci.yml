@@ -175,8 +175,8 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name:
-            ${{ job.status }} atest ${{ matrix.os }} py${{ matrix.python-version
-            }} lab${{ matrix.lab-version }} ${{ github.run_number }}
+            ${{ job.status }} atest ${{ matrix.os }} ${{ matrix.python-version
+            }} ${{ matrix.lab-version }} ${{ github.run_number }}
           path: |
             ./build/test/output
             !./build/test/output/**/pabot_results

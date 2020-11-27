@@ -21,9 +21,12 @@ def expand_specs(specs):
 
 
 def merge(composite, env):
+    if CHN in env:
+        composite[CHN] = env[CHN]
+
     for channel in env.get(CHN, []):
         if channel not in composite.get(CHN, []):
-            composite[CHN] = [channel, *composite.get(CHN, [])]
+            composite[CHN] += [channel]
 
     comp_specs = dict(expand_specs(composite.get(DEP, [])))
     env_specs = dict(expand_specs(env.get(DEP, [])))
