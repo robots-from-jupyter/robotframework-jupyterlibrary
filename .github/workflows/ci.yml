@@ -81,7 +81,11 @@ jobs:
           path: artifacts/
       - if: always()
         run: find artifacts/
-      - run: mv "artifacts/* atest */*" build/test/output
+      - if: always()
+        run: |
+          set -eux
+          mkdir -p build/test/output
+          cp -r artifacts/*/* build/test/output/
       - if: always()
         uses: actions/checkout@v2
       - if: always()
