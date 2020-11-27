@@ -3,4 +3,5 @@ dependencies:
   - flake8
   - isort <5
   - nodejs >=10,!=11.*,!=13.*,!=15.*,!=17.*
+  - yarn <2
   - robotframework-lint

@@ -1,11 +1,12 @@
 import subprocess
-from glob import glob
-from os.path import join
 
-from . import HERE, TEST_OUT
+from . import project as P
 
 
 def combine():
+    final = P.ATEST_OUT / P.ATEST_OUT_XML
+
+    all_robot = [p for p in P.ATEST_OUT.rglob(P.ATEST_OUT_XML) if p != final]
     args = [
         "python",
         "-m",
@@ -13,11 +14,11 @@ def combine():
         "--name",
         "JupyterLibrary",
         "--outputdir",
-        TEST_OUT,
+        P.ATEST_OUT,
         "--output",
-        "output.xml",
-    ] + list(glob(join(TEST_OUT, "*.robot.xml")))
-    proc = subprocess.Popen(args, cwd=HERE)
+        P.ATEST_OUT_XML,
+    ] + all_robot
+    proc = subprocess.Popen(args)
 
     try:
         return proc.wait()

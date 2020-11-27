@@ -149,6 +149,16 @@ def task_lint():
         file_dep=[*P.ALL_ROBOT, env_lock],
     )
 
+    yield dict(
+        name="prettier",
+        actions=[
+            [*run_in, "yarn", "--prefer-offline", "--ignore-optional"],
+            [*run_in, "yarn", "prettier"],
+        ],
+        file_dep=[P.YARN_LOCK, *P.ALL_PRETTIER, env_lock],
+        targets=[P.YARN_INTEGRITY],
+    )
+
 
 def task_lab():
     """start a jupyter lab server (with all other extensions)"""
@@ -220,13 +230,23 @@ def task_test():
     env = "test"
 
     stem = P.get_atest_stem(lockfile=P.get_lockfile(env), browser=P.BROWSER)
+    pym = [*P.RUN_IN[env], *P.PYM]
 
     yield dict(
         name="atest",
         uptodate=[config_changed(os.environ.get("ATEST_ARGS", ""))],
-        actions=[[*P.RUN_IN[env], *P.PYM, "_scripts.atest"]],
+        actions=[[*pym, "_scripts.atest"]],
         file_dep=[*P.PY_SRC, *P.ALL_ROBOT, P.PIP_LISTS[env], P.SCRIPTS / "atest.py"],
         targets=[P.ATEST_OUT / stem / P.ATEST_OUT_XML],
+    )
+
+    final = P.ATEST_OUT / P.ATEST_OUT_XML
+
+    yield dict(
+        name="combine",
+        actions=[[*pym, "_scripts.combine"]],
+        file_dep=[p for p in P.ATEST_OUT.rglob(P.ATEST_OUT_XML) if p != final],
+        targets=[final],
     )
 
 

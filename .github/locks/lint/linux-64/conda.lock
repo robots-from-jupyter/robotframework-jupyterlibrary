@@ -1,5 +1,5 @@
 # platform: linux-64
-# env_hash: d9737589fef9c192affba1f699e5681cc8396be0e974b6b0e57abc7b41aaacf6
+# env_hash: 7f14f443159d232311df0f40d45e504ba3bb9f51f0acf8e788b06bd2dc3ea8ea
 
 @EXPLICIT
 
@@ -22,6 +22,7 @@ https://conda.anaconda.org/conda-forge/linux-64/nodejs-14.15.1-h25f6087_0.tar.bz
 https://conda.anaconda.org/conda-forge/linux-64/readline-8.0-he28a2e2_2.tar.bz2#4d0ae8d473f863696088f76800ef9d38
 https://conda.anaconda.org/conda-forge/linux-64/tk-8.6.10-hed695b0_1.tar.bz2#7ef837cd455bd0f19f49b8b62d4cb568
 https://conda.anaconda.org/conda-forge/linux-64/sqlite-3.33.0-h4cf870e_1.tar.bz2#1968ff6c4b8fbd2903f6672e292d932d
+https://conda.anaconda.org/conda-forge/linux-64/yarn-1.22.10-0.tar.bz2#a2a4efe3536edf0798dd258834de62bc
 https://conda.anaconda.org/conda-forge/linux-64/python-3.8.6-h852b56e_0_cpython.tar.bz2#dd65401dfb61ac030edc0dc4d15c2c51
 https://conda.anaconda.org/conda-forge/noarch/appdirs-1.4.4-pyh9f0ad1d_0.tar.bz2#5f095bc6454094e96f146491fd03633b
 https://conda.anaconda.org/conda-forge/noarch/click-7.1.2-pyh9f0ad1d_0.tar.bz2#bd50a970ce07e660c319fdc4d730d3f1

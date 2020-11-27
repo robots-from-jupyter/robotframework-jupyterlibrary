@@ -28,7 +28,8 @@ jobs:
         with:
           path: ~/conda_pkgs_dir
           key:
-            ${{ runner.os }}-conda-lint-${{ hashFiles('.github/locks/lint/linux-64/conda.lock') }}
+            ${{ runner.os }}-conda-lint-${{
+            hashFiles('.github/locks/lint/linux-64/conda.lock') }}
           restore-keys: |
             ${{ runner.os }}-conda-lint-
       - uses: conda-incubator/setup-miniconda@v2
@@ -52,7 +53,8 @@ jobs:
         with:
           path: ~/conda_pkgs_dir
           key:
-            ${{ runner.os }}-conda-docs-${{ hashFiles('.github/locks/docs/linux-64/conda.lock') }}
+            ${{ runner.os }}-conda-docs-${{
+            hashFiles('.github/locks/docs/linux-64/conda.lock') }}
           restore-keys: |
             ${{ runner.os }}-conda-docs-
       - uses: conda-incubator/setup-miniconda@v2
@@ -77,8 +79,8 @@ jobs:
       # # TODO: probably remove
       # fail-fast: false
       matrix:
-        lab-version: ["lab1", "lab2"]
-        python-version: ["py3.6", "py3.7", "py3.8", "py3.9"]
+        lab-version: ['lab1', 'lab2']
+        python-version: ['py3.6', 'py3.7', 'py3.8', 'py3.9']
         conda-subdir: [linux-64, osx-64, win-64]
         include:
           - conda-subdir: linux-64
@@ -108,7 +110,8 @@ jobs:
         with:
           path: ~/conda_pkgs_dir
           key:
-            ${{ runner.os }}-conda-${{ matrix.python-version }}-${{ hashFiles(steps.lock.outputs.file) }}
+            ${{ runner.os }}-conda-${{ matrix.python-version }}-${{
+            hashFiles(steps.lock.outputs.file) }}
           restore-keys: |
             ${{ runner.os }}-conda-${{ matrix.python-version }}-
       - uses: conda-incubator/setup-miniconda@v2
@@ -124,12 +127,15 @@ jobs:
         if: ${{ matrix.os == 'windows' }}
         env:
           CONDA_EXE: C:\Miniconda\envs\Script\conda.exe
-        run: call conda activate test && python dodo.py test || python dodo.py test
+        run:
+          call conda activate test && python dodo.py test || python dodo.py test
         shell: cmd /C CALL {0}
       - name: upload test output
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ job.status }} atest ${{ matrix.os }} py${{ matrix.python-version }} lab${{ matrix.lab-version }} ${{ github.run_number }}
+          name:
+            ${{ job.status }} atest ${{ matrix.os }} py${{ matrix.python-version
+            }} lab${{ matrix.lab-version }} ${{ github.run_number }}
           path: |
             ./build/test/output
             !./build/test/output/**/pabot_results

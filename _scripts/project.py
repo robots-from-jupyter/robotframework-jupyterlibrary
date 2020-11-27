@@ -24,7 +24,7 @@ assert safe_load, "need at least a yaml parser"
 
 
 CI = int(os.environ.get("CI", "0"))
-BINDER = int(os.environ.get("BINDER", "0"))
+IN_BINDER = int(os.environ.get("IN_BINDER", "0"))
 PLATFORM = platform.system()
 BROWSER = os.environ.get("BROWSER", "headlessfirefox")
 
@@ -73,7 +73,7 @@ SETUP_CRUFT = [
     ROOT / "setup.cfg",
     VERSION_FILE,
 ]
-
+BINDER = ROOT / ".binder"
 ATEST = ROOT / "atest"
 ROBOT_SRC = [*SRC.rglob("*.robot")]
 
@@ -179,6 +179,17 @@ ALL_DOCS_SRC = [
     if ".ipynb_checkpoints" not in str(p)
 ]
 
+PACKAGE_JSON = ROOT / "package.json"
+YARN_LOCK = ROOT / "yarn.lock"
+YARN_INTEGRITY = ROOT / "node_modules" / ".yarn-integrity"
+ALL_PRETTIER = [
+    *ROOT.glob("*.md"),
+    *ROOT.glob("*.json"),
+    *ROOT.glob("*.yml"),
+    *GITHUB.rglob("*.yml"),
+    *BINDER.rglob("*.yml"),
+]
+
 
 def get_atest_stem(attempt=1, extra_args=None, lockfile=None, browser=None):
     """get the directory in ATEST_OUT for this platform/apps"""
@@ -197,6 +208,12 @@ def get_atest_stem(attempt=1, extra_args=None, lockfile=None, browser=None):
 
 
 def get_lockfile(env):
+    """
+
+    e.g.
+
+        RFJL_LOCKFILE=test:linux-64:py3.6:lab1 doit test
+    """
     lockfile = None
 
     env_var_lock = os.environ.get("RFJL_LOCKFILE")

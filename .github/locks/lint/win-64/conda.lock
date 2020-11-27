@@ -1,5 +1,5 @@
 # platform: win-64
-# env_hash: 18be129d6a456d061f622da72bcdc39f92ddcf5564974c98243d3c2a36347f89
+# env_hash: 7eff59e7c47ffdc388ca688b54cda5ef46e10139a9d2008da5be68118bd2f2fe
 
 @EXPLICIT
 
@@ -10,6 +10,7 @@ https://conda.anaconda.org/conda-forge/win-64/vc-14.1-h869be7e_1.tar.bz2#4fae573
 https://conda.anaconda.org/conda-forge/win-64/openssl-1.1.1h-he774522_0.tar.bz2#21844b16355ef8faa21fca97794d6825
 https://conda.anaconda.org/conda-forge/win-64/sqlite-3.33.0-he774522_1.tar.bz2#d71a870ed0940cdf9f4bcb827d12ead6
 https://conda.anaconda.org/conda-forge/win-64/yaml-0.2.5-he774522_0.tar.bz2#d41c34441d8bbb6d141e691ae7bccf35
+https://conda.anaconda.org/conda-forge/win-64/yarn-1.22.10-0.tar.bz2#4f94f281c5682908afc43f8bf531bc36
 https://conda.anaconda.org/conda-forge/win-64/python-3.8.6-h60c2a47_0_cpython.tar.bz2#b6c4723a2ba9b8f68521404bc0d23462
 https://conda.anaconda.org/conda-forge/noarch/appdirs-1.4.4-pyh9f0ad1d_0.tar.bz2#5f095bc6454094e96f146491fd03633b
 https://conda.anaconda.org/conda-forge/noarch/click-7.1.2-pyh9f0ad1d_0.tar.bz2#bd50a970ce07e660c319fdc4d730d3f1

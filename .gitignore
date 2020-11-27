@@ -1,5 +1,6 @@
 __pycache__/
 _artifacts/
+_robot_magic_*
 .doit*
 .envs/
 .ipynb_checkpoints/
@@ -10,5 +11,5 @@ build/
 dist/
 envs/
 lib/
+node_modules/
 Untitled*.*
-_robot_magic_*
