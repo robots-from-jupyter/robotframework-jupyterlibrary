@@ -56,16 +56,24 @@ def run_tests(attempt=0, extra_args=None):
     ]
 
     if out_dir.exists():
-        print("trying to clean out {}".format(out_dir), flush=True)
+        print(">>> trying to clean out {}".format(out_dir), flush=True)
         try:
             shutil.rmtree(out_dir)
         except Exception as err:
             print(
-                "Error deleting {}, hopefully harmless: {}".format(out_dir, err),
+                "... error, hopefully harmless: {}".format(err),
                 flush=True,
             )
 
-    out_dir.mkdir(parents=True)
+    if not out_dir.exists():
+        print(">>> trying to prepare output directory: {}".format(out_dir), flush=True)
+        try:
+            out_dir.mkdir(parents=True)
+        except Exception as err:
+            print(
+                "... Error, hopefully harmless: {}".format(err),
+                flush=True,
+            )
 
     str_args = [*map(str, args)]
     print(">>> pabot args:", " ".join(str_args), flush=True)
