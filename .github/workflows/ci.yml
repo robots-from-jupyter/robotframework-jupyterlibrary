@@ -70,7 +70,7 @@ jobs:
           path: ./build/docs/html
         if: always()
 
-  combine:
+  report:
     if: always()
     needs: [test]
     runs-on: ubuntu-20.04
@@ -81,6 +81,7 @@ jobs:
           path: artifacts/
       - if: always()
         run: find artifacts/
+      - run: mv "artifacts/* atest */*" build/test/output
       - if: always()
         uses: actions/checkout@v2
       - if: always()
@@ -100,13 +101,15 @@ jobs:
           environment-file: .github/locks/lint/linux-64/conda.lock
           use-only-tar-bz2: true
       - if: always()
-        run: python dodo.py combine
+        run: python dodo.py report || python dodo.py report
       - if: always()
         uses: actions/upload-artifact@v2
         with:
           name: COMBINED ${{ github.run_number }}
           path: |
             ./build/test/output
+            ./dist
+            ./docs
             !./build/test/output/**/pabot_results
 
   test:

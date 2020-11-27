@@ -152,7 +152,7 @@ def task_lint():
     yield dict(
         name="prettier",
         actions=[
-            [*run_in, "yarn", "prettier"],
+            [*run_in, "yarn", "--silent", "prettier"],
         ],
         file_dep=[*P.ALL_PRETTIER, P.YARN_INTEGRITY],
     )
@@ -165,13 +165,13 @@ def task_js():
     env_lock = P.CONDA_LISTS[env]
 
     yield dict(
-        name="prettier:pre",
+        name="yarn",
         uptodate=[
             config_changed({k: P.PACKAGE[k] for k in ["devDependencies", "prettier"]})
         ],
         file_dep=[P.YARN_LOCK, env_lock],
         actions=[
-            [*run_in, "yarn", "--prefer-offline", "--ignore-optional"],
+            [*run_in, "yarn", "--silent", "--prefer-offline", "--ignore-optional"],
         ],
         targets=[P.YARN_INTEGRITY],
     )
