@@ -1,5 +1,5 @@
 # platform: osx-64
-# env_hash: e41d56fe46b7c01b628e28d9cefa3506ce2c51f09f80fb15222e790667fed8be
+# env_hash: 12d08a13c929d089e04e140f933b1287921dce1d16f89949c8a50a3c09394fa1
 
 @EXPLICIT
 
@@ -91,4 +91,6 @@ https://conda.anaconda.org/conda-forge/osx-64/nbconvert-6.0.7-py36h79c6626_3.tar
 https://conda.anaconda.org/conda-forge/osx-64/ipykernel-5.3.4-py36hac0dd68_1.tar.bz2#f30d9e0124b0aeda00b4cdeefb2df096
 https://conda.anaconda.org/conda-forge/osx-64/notebook-6.0.3-py36h9f0ad1d_1.tar.bz2#61dad2e5cb3c6e9006c224d9a93a2608
 https://conda.anaconda.org/conda-forge/noarch/jupyterlab_server-1.2.0-py_0.tar.bz2#77d654573f19a836b326fb77ffd86860
+https://conda.anaconda.org/conda-forge/osx-64/widgetsnbextension-3.5.1-py36h79c6626_4.tar.bz2#4fd4c9e381f16caf01d9a5244eeea563
+https://conda.anaconda.org/conda-forge/noarch/ipywidgets-7.5.1-pyh9f0ad1d_1.tar.bz2#a7211644e1cf6a262c675635a78181f4
 https://conda.anaconda.org/conda-forge/noarch/jupyterlab-1.2.16-py_0.tar.bz2#f7de1776f979161029d59fbbcfa35eb5
