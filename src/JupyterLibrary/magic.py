@@ -7,6 +7,7 @@ Install once (per notebook/kernel):
 from pathlib import Path
 from hashlib import sha256
 import shutil
+import tempfile
 
 from pygments import highlight
 from pygments.formatters.html import HtmlFormatter
@@ -27,6 +28,7 @@ from IPython.core.magic import (
 )
 
 import robot
+from robot.tidy import Tidy
 
 
 @magics_class
@@ -80,7 +82,6 @@ class RobotMagics(Magics):
     )
     def robot(self, line, cell):
         """run some Robot Framework code"""
-        ip = get_ipython()
         line = f" {line} "
 
         m = sha256()
@@ -91,101 +92,115 @@ class RobotMagics(Magics):
 
         args = magic_arguments.parse_argstring(self.robot, line)
 
-        # displays = []
-        # widget = None
-
         if args.gui == "display":
             display(Markdown("- _🤖 getting ready..._"))
 
         if args.pretty:
-            lexer = RobotFrameworkLexer()
-            formatter = HtmlFormatter(cssclass=self.PRETTY_CLASS, style=args.style)
-            css = formatter.get_style_defs(f".{self.PRETTY_CLASS}")
-            highlighted = highlight(cell, lexer, formatter)
-            html = HTML(
-                f"""
-                <ul><li>
-                <details>
-                    <summary>Formatted Robot Code</summary>
-                    <style>{css}</style>{highlighted}
-                </details>
-                </li></ul>
-            """
-            )
-
-            if args.gui == "display":
-                display(html)
+            self.pretty(args, cell)
 
         if args.execute:
-            outputdir = Path.cwd() / args.output_dir / content_hash
-            display(Markdown(f"- _🤖 making files in_ `{outputdir}`"))
-            if outputdir.exists():
-                shutil.rmtree(outputdir)
+            self.execute(args, cell, content_hash)
 
-            outputdir.mkdir(parents=True)
+    def execute(self, args, cell, content_hash):
+        """run a cell in the outputdir, in a directory named after the content hash"""
+        ip = get_ipython()
+        outputdir = Path.cwd() / args.output_dir / content_hash
+        display(Markdown(f"- _🤖 making files in_ `{outputdir}`"))
+        if outputdir.exists():
+            shutil.rmtree(outputdir)
 
-            robot_file = outputdir / "it.robot"
+        outputdir.mkdir(parents=True)
 
-            robot_file.write_text(cell)
+        robot_file = outputdir / "it.robot"
 
-            display(Markdown("- _🤖 running!_"))
-            stdout_file = outputdir / "stdout.txt"
-            stderr_file = outputdir / "stderr.txt"
+        robot_file.write_text(cell)
 
-            robot_args = ip.user_ns[args.arg] if args.arg else {}
+        display(Markdown("- _🤖 running!_"))
+        stdout_file = outputdir / "stdout.txt"
+        stderr_file = outputdir / "stderr.txt"
 
-            with open(stdout_file, "w+") as stdout:
-                with open(stderr_file, "w+") as stderr:
-                    rc = robot.run(
-                        robot_file,
-                        exit=False,
-                        outputdir=outputdir,
-                        stderr=stderr,
-                        stdout=stdout,
-                        **robot_args,
-                    )
+        robot_args = ip.user_ns[args.arg] if args.arg else {}
 
-            if args.gui == "display":
-                for outfile in [stdout_file, stderr_file]:
-                    display(
-                        HTML(
-                            f"""
-                            <ul><li>
-                                <code>{outfile.name}</code>
-                                <code><pre>{outfile.read_text() or "empty"}</pre></code>
-                            </li></ul>
-                            """
-                        )
-                    )
-                files = [
-                    f"""<li>
-                        <a href="{p.relative_to(Path.cwd()).as_posix()}"
-                                data-commandlinker-command="filebrowser:open"
-                                data-commandlinker-args="{{}}">
-                            {p.relative_to(outputdir).as_posix()}
-                        </a>
-                    </li>
-                    """
-                    for p in sorted(outputdir.rglob("*"))
-                ]
+        with open(stdout_file, "w+") as stdout:
+            with open(stderr_file, "w+") as stderr:
+                rc = robot.run(
+                    robot_file,
+                    exit=False,
+                    outputdir=outputdir,
+                    stderr=stderr,
+                    stdout=stdout,
+                    **robot_args,
+                )
+
+        if args.gui == "display":
+            for outfile in [stdout_file, stderr_file]:
                 display(
                     HTML(
+                        f"""
+                        <ul><li>
+                            <code>{outfile.name}</code>
+                            <code><pre>{outfile.read_text() or "empty"}</pre></code>
+                        </li></ul>
                         """
-                    <ul><li><details>
-                        <summary>{} Files</summary>
-                        <ul>{}</ul>
-                    </li></ul>
-                """.format(
-                            len(files), "\n".join(files)
-                        )
                     )
                 )
-                display(Markdown(f"- _🤖 returned {rc}_"))
+            files = [
+                f"""<li>
+                    <a href="{p.relative_to(Path.cwd()).as_posix()}"
+                            data-commandlinker-command="filebrowser:open"
+                            data-commandlinker-args="{{}}">
+                        {p.relative_to(outputdir).as_posix()}
+                    </a>
+                </li>
+                """
+                for p in sorted(outputdir.rglob("*"))
+            ]
+            display(
+                HTML(
+                    """
+                <ul><li><details>
+                    <summary>{} Files</summary>
+                    <ul>{}</ul>
+                </li></ul>
+            """.format(
+                        len(files), "\n".join(files)
+                    )
+                )
+            )
+            display(Markdown(f"- _🤖 returned {rc}_"))
 
-            if rc:
-                raise RuntimeError(f"robot returned {rc}")
+        if rc:
+            raise RuntimeError(f"robot returned {rc}")
+
+    def pretty(self, args, cell):
+        """pretty-print the robot text"""
+        tidier = Tidy()
+
+        with tempfile.TemporaryDirectory() as td:
+            tdp = Path(td)
+            it = tdp / "it.robot"
+            it.write_text(cell)
+            tidier.inplace(str(it))
+            cell = it.read_text()
+
+        lexer = RobotFrameworkLexer()
+        formatter = HtmlFormatter(cssclass=self.PRETTY_CLASS, style=args.style)
+        css = formatter.get_style_defs(f".{self.PRETTY_CLASS}")
+        highlighted = highlight(cell, lexer, formatter)
+        html = HTML(
+            f"""
+            <ul><li>
+            <details>
+                <summary>Formatted Robot Code</summary>
+                <style>{css}</style>{highlighted}
+            </details>
+            </li></ul>
+        """
+        )
+
+        if args.gui == "display":
+            display(html)
 
 
 def load_ipython_extension(ip):
-    ip = get_ipython()
     ip.register_magics(RobotMagics)

@@ -78,14 +78,7 @@ jobs:
       - if: always()
         uses: actions/download-artifact@v2
         with:
-          path: artifacts/
-      - if: always()
-        run: find artifacts/
-      - if: always()
-        run: |
-          set -eux
-          mkdir -p build/test/output
-          cp -r artifacts/*/* build/test/output/
+          path: build/test/output
       - if: always()
         uses: actions/checkout@v2
       - if: always()
@@ -109,11 +102,9 @@ jobs:
       - if: always()
         uses: actions/upload-artifact@v2
         with:
-          name: COMBINED ${{ github.run_number }}
+          name: _COMBINED ${{ github.run_number }}
           path: |
             ./build/test/output
-            ./dist
-            ./docs
             !./build/test/output/**/pabot_results
 
   test:
