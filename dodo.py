@@ -162,11 +162,7 @@ def task_js():
     env = "lint"
 
     run_in = P.RUN_IN[env]
-    pym = [*run_in, *P.PYM]
     env_lock = P.CONDA_LISTS[env]
-
-    app_dir = ["--app-dir", P.APP_DIR]
-    lab_ext = [*pym, "jupyter", "labextension"]
 
     yield dict(
         name="prettier:pre",
@@ -180,12 +176,6 @@ def task_js():
         targets=[P.YARN_INTEGRITY],
     )
 
-    yield dict(
-        name="labext",
-        uptodate=[config_changed({"labextensions": P.LAB_EXTENSIONS})],
-        actions=[[*lab_ext, "install", *app_dir, *P.LAB_EXTENSIONS, "--no-build"]],
-    )
-
 
 def task_lab():
     """start a jupyter lab server (with all other extensions)"""
@@ -195,9 +185,17 @@ def task_lab():
     run_in = P.RUN_IN[env]
     pym = [*run_in, *P.PYM]
 
+    if P.IN_BINDER:
+        app_dir = []
+    else:
+        app_dir = ["--app-dir", P.APP_DIR]
+
+    lab = [*pym, "jupyter", "lab"]
+    lab_ext = [*pym, "jupyter", "labextension"]
+
     def _lab():
         p = subprocess.Popen(
-            [*pym, "jupyter", "lab", "--no-browser", "--debug"], stdin=subprocess.PIPE
+            [*lab, *app_dir, "--no-browser", "--debug"], stdin=subprocess.PIPE
         )
         try:
             p.wait()
@@ -211,10 +209,21 @@ def task_lab():
         print("maybe check your process log")
 
     yield dict(
+        name="ext",
+        uptodate=[config_changed({"labextensions": P.LAB_EXTENSIONS})],
+        actions=[
+            [*lab_ext, "install", *app_dir, *P.LAB_EXTENSIONS, "--no-build"],
+            [*lab, "build", *app_dir, "--debug"],
+        ],
+        file_dep=[frozen],
+        targets=[P.APP_INDEX],
+    )
+
+    yield dict(
         name="serve",
         uptodate=[lambda: False],
         actions=[PythonInteractiveAction(_lab)],
-        file_dep=[frozen],
+        file_dep=[P.APP_INDEX],
     )
 
 

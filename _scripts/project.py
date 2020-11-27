@@ -106,6 +106,11 @@ LAB_EXTENSIONS = sorted(
     }
 )
 APP_DIR = ROOT / "_lab"
+APP_MODULES = APP_DIR / "labextensions"
+ALL_APP_MODULES = [*APP_MODULES.glob("*.tgz")]
+
+# fixed name, but contains a link to main.<hash>.js
+APP_INDEX = APP_DIR / "static" / "index.html"
 
 # partial environments
 GITHUB = ROOT / ".github"
