@@ -1,5 +1,9 @@
 from pathlib import Path
 
+import platform
+import os
+import sys
+
 try:
     __import__("conda_lock")
     CAN_CONDA_LOCK = True
@@ -18,12 +22,11 @@ for _yaml in ["yaml", "ruamel_yaml", "ruamel.yaml"]:
 
 assert safe_load, "need at least a yaml parser"
 
-import platform
-import os
 
 CI = int(os.environ.get("CI", "0"))
 BINDER = int(os.environ.get("BINDER", "0"))
 PLATFORM = platform.system()
+BROWSER = os.environ.get("BROWSER", "headlessfirefox")
 
 CONDA_EXE = os.environ.get("CONDA_EXE")
 
@@ -38,6 +41,16 @@ THIS_CONDA_SUBDIR = {
     "Darwin": "osx-64",
     "Windows": "win-64",
 }[PLATFORM]
+THIS_PYTHON = "".join(map(str, sys.version_info[:2]))
+
+THIS_LAB = None
+try:
+    from jupyterlab import __version__ as THIS_LAB
+except:
+    pass
+
+if CI:
+    print(f"{THIS_CONDA_SUBDIR}_py{THIS_PYTHON}_lab{THIS_LAB}")
 
 # commands
 PY = ["python"]
@@ -67,7 +80,8 @@ ROBOT_SRC = [*SRC.rglob("*.robot")]
 # things we build
 BUILD = ROOT / "build"
 BUILD.exists() or BUILD.mkdir()
-ATEST_OUTPUT = BUILD / "test" / "output" / "output.xml"
+ATEST_OUT = BUILD / "test/output"
+ATEST_OUT_XML = "output.xml"
 
 DIST = ROOT / "dist"
 IMPORTABLE = "robotframework_jupyterlibrary"
@@ -116,7 +130,7 @@ EXCLUDES = {
 }
 
 ENVENTURES = {
-    ("test", pf, py, lab): LOCKS / "test" / pf / f"py{py}" / f"lab{lab}" / "conda.lock"
+    ("test", pf, py, lab): LOCKS / "test" / pf / py / lab / "conda.lock"
     for pf in PLATFORMS
     for lab in LABS
     for py in PYTHONS
@@ -144,8 +158,8 @@ ENV_DEPS = {
 [
     ENV_DEPS[flow, pf, py, lab].extend(
         [
-            *([ENV_SPECS / f"py_{py}.yml"] if py else []),
-            *([ENV_SPECS / f"lab_{lab}.yml"] if lab else []),
+            *([ENV_SPECS / f"{py}.yml"] if py else []),
+            *([ENV_SPECS / f"{lab}.yml"] if lab else []),
         ]
     )
     for (flow, pf, py, lab), target in ENVENTURES.items()
@@ -164,3 +178,55 @@ ALL_DOCS_SRC = [
     ]
     if ".ipynb_checkpoints" not in str(p)
 ]
+
+
+def get_atest_stem(attempt=1, extra_args=None, lockfile=None, browser=None):
+    """get the directory in ATEST_OUT for this platform/apps"""
+    browser = browser or BROWSER
+    extra_args = extra_args or []
+
+    if not lockfile:
+        lockfile = get_lockfile("test")
+
+    stem = str(lockfile.parent.relative_to(LOCKS / "test")) + f"_{attempt}_{browser}"
+
+    if "--dryrun" in extra_args:
+        stem += "_dry_run"
+
+    return stem
+
+
+def get_lockfile(env):
+    lockfile = None
+
+    env_var_lock = os.environ.get("RFJL_LOCKFILE")
+
+    if env_var_lock is not None:
+        eflow, epf, epy, elab = [
+            (v if v != "" else None) for v in env_var_lock.split(":")
+        ]
+        try:
+            lockfile = [
+                target
+                for (flow, pf, py, lab), target in ENVENTURES.items()
+                if (flow == env == eflow)
+                and (
+                    (pf == epf)
+                    and (lab == elab if lab else True)
+                    and (py == epy if py else True)
+                )
+            ][-1]
+        except:
+            pass
+
+    if lockfile is None:
+        try:
+            lockfile = [
+                target
+                for (flow, pf, py, lab), target in ENVENTURES.items()
+                if flow == env and pf == THIS_CONDA_SUBDIR
+            ][-1]
+        except:
+            return
+
+    return lockfile

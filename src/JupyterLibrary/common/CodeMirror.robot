@@ -3,11 +3,11 @@ Documentation     Common behaviors for CodeMirror instances
 
 *** Keywords ***
 Set CodeMirror Value
-    [Arguments]    ${css}    ${code}
+    [Arguments]    ${css}    @{code}
     [Documentation]    Set the value in the CodeMirror attached to the element
     ...    that matches a ``css`` selector to be the given ``text``.
     Select All CodeMirror Text    ${css}
-    Replace CodeMirror Selection    ${css}    ${code}
+    Replace CodeMirror Selection    ${css}    @{code}
 
 Select All CodeMirror Text
     [Arguments]    ${css}
@@ -22,10 +22,11 @@ Execute CodeMirror Command
     Call CodeMirror Method    ${css}    execCommand("${cmd}")
 
 Replace CodeMirror Selection
-    [Arguments]    ${css}    ${code}
+    [Arguments]    ${css}    @{code}
     [Documentation]    Replace all of the text in the CodeMirror attached to the element
     ...    that matches a ``css`` selector with the given ``text``.
-    Call CodeMirror Method    ${css}    replaceSelection(`${code}`)
+    ${value} =    Evaluate    """\n""".join(${code})
+    Call CodeMirror Method    ${css}    replaceSelection(`${value}`)
 
 Call CodeMirror Method
     [Arguments]    ${css}    ${js}

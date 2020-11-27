@@ -78,37 +78,7 @@ def task_docs():
 
 
 def _make_env(env):
-    lockfile = None
-
-    env_var_lock = os.environ.get("RFJL_LOCKFILE")
-
-    if env_var_lock is not None:
-        eflow, epf, epy, elab = [
-            (v if v != "" else None) for v in env_var_lock.split(":")
-        ]
-        try:
-            lockfile = [
-                target
-                for (flow, pf, py, lab), target in P.ENVENTURES.items()
-                if (flow == env == eflow)
-                and (
-                    (pf == epf)
-                    and (lab == elab if lab else True)
-                    and (py == epy if py else True)
-                )
-            ][-1]
-        except:
-            pass
-
-    if lockfile is None:
-        try:
-            lockfile = [
-                target
-                for (flow, pf, py, lab), target in P.ENVENTURES.items()
-                if flow == env and pf == P.THIS_CONDA_SUBDIR
-            ][-1]
-        except:
-            return
+    lockfile = P.get_lockfile(env)
 
     explicit_list = P.BUILD / env / lockfile.name
 
@@ -249,12 +219,14 @@ def task_test():
     """run tests"""
     env = "test"
 
+    stem = P.get_atest_stem(lockfile=P.get_lockfile(env), browser=P.BROWSER)
+
     yield dict(
         name="atest",
         uptodate=[config_changed(os.environ.get("ATEST_ARGS", ""))],
         actions=[[*P.RUN_IN[env], *P.PYM, "_scripts.atest"]],
-        file_dep=[*P.PY_SRC, *P.ALL_ROBOT, P.PIP_LISTS[env]],
-        targets=[P.ATEST_OUTPUT],
+        file_dep=[*P.PY_SRC, *P.ALL_ROBOT, P.PIP_LISTS[env], P.SCRIPTS / "atest.py"],
+        targets=[P.ATEST_OUT / stem / P.ATEST_OUT_XML],
     )
 
 
@@ -262,10 +234,11 @@ if P.CAN_CONDA_LOCK:
 
     def task_lock():
         """generate conda lock files for all the excursions"""
-        for (flow, pf, py, lab), target in P.ENVENTURES.items():
-            file_dep = P.ENV_DEPS[flow, pf, py, lab]
+        for key, target in P.ENVENTURES.items():
+            (flow, pf, py, lab) = key
+            file_dep = P.ENV_DEPS[key]
             yield dict(
-                name=f"{flow}_{pf}__py{py}__lab{lab}".replace(".", "_"),
+                name="__".join([p for p in key if p]).replace(".", "_"),
                 actions=[[*P.SCRIPT_LOCK, target]],
                 file_dep=file_dep,
                 targets=[target],
