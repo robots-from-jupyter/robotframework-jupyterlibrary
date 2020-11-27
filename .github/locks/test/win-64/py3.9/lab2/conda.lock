@@ -1,5 +1,5 @@
 # platform: win-64
-# env_hash: 07a5f33fc2cab76c1564004b937f9999665cde7c8e4022d45861b11cc01d31ef
+# env_hash: 2f4b1dbf03b998aca884f1cf4be9c07c536cad82d7853523acc3b812e9fd4c96
 
 @EXPLICIT
 
@@ -11,6 +11,7 @@ https://conda.anaconda.org/conda-forge/win-64/vs2015_runtime-14.16.27012-h30e32a
 https://conda.anaconda.org/conda-forge/win-64/winpty-0.4.3-4.tar.bz2#1cee351bf20b830d991dbe0bc8cd7dfe
 https://conda.anaconda.org/msys2/win-64/m2w64-gmp-6.1.0-2.tar.bz2#fec04371463ec68eb8f5752a22c5b030
 https://conda.anaconda.org/msys2/win-64/m2w64-libwinpthread-git-5.0.0.4634.697f757-2.tar.bz2#67e61e700eb27424979778fae9293f13
+https://conda.anaconda.org/conda-forge/win-64/nodejs-14.15.1-h57928b3_0.tar.bz2#d864e5c8a3de3ccf10a5cfc841084c39
 https://conda.anaconda.org/conda-forge/win-64/vc-14.1-h869be7e_1.tar.bz2#4fae57303daa91367eca263374e4a638
 https://conda.anaconda.org/conda-forge/win-64/firefox-78.5.0esr-h0e60522_0.tar.bz2#6a65ef34e897b5d390a62a951f29ebbe
 https://conda.anaconda.org/conda-forge/win-64/geckodriver-0.28.0-h39d44d4_0.tar.bz2#65667cc9324458b9ec3ed7eb823bbc5c

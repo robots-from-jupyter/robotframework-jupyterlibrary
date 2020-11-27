@@ -7,6 +7,8 @@ dependencies:
   - doit
   - pip
   - pyyaml
+  # really nothing for it
+  - nodejs >=10,!=11.*,!=13.*,!=15.*,!=17.*
   # hard deps
   - robotframework >=3.2
   - robotframework-seleniumlibrary >=4.5

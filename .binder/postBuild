@@ -1,3 +1,15 @@
 #!/usr/bin/env bash
-export BINDER=1
+
+# some things we just don't need to do on binder
+export IN_BINDER=1
+
+# we already know which python and lab we want
+export RFJL_LOCKFILE=test/osx-64/py3.9/lab2
+
+conda create \
+    --prefix "${NB_PYTHON_PREFIX}" \
+    --file ".github/locks/${RFJL_LOCKFILE}/conda.lock"
+
+source activate ${NB_PYTHON_PREFIX}
+
 doit

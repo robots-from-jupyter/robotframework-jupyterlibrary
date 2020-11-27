@@ -96,6 +96,17 @@ DOCS = ROOT / "docs"
 DOCS_CONF_PY = DOCS / "conf.py"
 DOCS_BUILDINFO = BUILD / "docs" / "html" / ".buildinfo"
 
+# demo
+LABEXTXT = BINDER / "labex.txt"
+LAB_EXTENSIONS = sorted(
+    {
+        ext.strip()
+        for ext in LABEXTXT.read_text().strip().splitlines()
+        if not ext.strip().startswith("#")
+    }
+)
+APP_DIR = ROOT / "_lab"
+
 # partial environments
 GITHUB = ROOT / ".github"
 WORKFLOWS = GITHUB / "workflows"

@@ -150,6 +150,25 @@ def task_lint():
     )
 
     yield dict(
+        name="prettier",
+        actions=[
+            [*run_in, "yarn", "prettier"],
+        ],
+        file_dep=[*P.ALL_PRETTIER, P.YARN_INTEGRITY],
+    )
+
+
+def task_js():
+    env = "lint"
+
+    run_in = P.RUN_IN[env]
+    pym = [*run_in, *P.PYM]
+    env_lock = P.CONDA_LISTS[env]
+
+    app_dir = ["--app-dir", P.APP_DIR]
+    lab_ext = [*pym, "jupyter", "labextension"]
+
+    yield dict(
         name="prettier:pre",
         uptodate=[
             config_changed({k: P.PACKAGE[k] for k in ["devDependencies", "prettier"]})
@@ -162,11 +181,9 @@ def task_lint():
     )
 
     yield dict(
-        name="prettier",
-        actions=[
-            [*run_in, "yarn", "prettier"],
-        ],
-        file_dep=[*P.ALL_PRETTIER, P.YARN_INTEGRITY],
+        name="labext",
+        uptodate=[config_changed({"labextensions": P.LAB_EXTENSIONS})],
+        actions=[[*lab_ext, "install", *app_dir, *P.LAB_EXTENSIONS, "--no-build"]],
     )
 
 

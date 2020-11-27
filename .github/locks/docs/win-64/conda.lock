@@ -1,15 +1,16 @@
 # platform: win-64
-# env_hash: 75f6c83cff403af1d5d230a8b61ae2f4aa586f013ba112afa17c2f77a9a758bc
+# env_hash: 6dba06b3bdf69faaa6e13c483ee15549c780c08b0be816fee1b946e86ffb7eb7
 
 @EXPLICIT
 
 https://conda.anaconda.org/conda-forge/win-64/ca-certificates-2020.11.8-h5b45459_0.tar.bz2#21fea8c142c35d2967cb0300e5056980
 https://conda.anaconda.org/conda-forge/win-64/pandoc-2.11.2-h8ffe710_0.tar.bz2#c851ffee6cf05f784fab5d2f3faee63c
 https://conda.anaconda.org/conda-forge/win-64/vs2015_runtime-14.16.27012-h30e32a0_2.tar.bz2#37a0bcc72c5e97f5602dca37eb3f8314
+https://conda.anaconda.org/conda-forge/win-64/nodejs-14.15.1-h57928b3_0.tar.bz2#d864e5c8a3de3ccf10a5cfc841084c39
 https://conda.anaconda.org/conda-forge/win-64/vc-14.1-h869be7e_1.tar.bz2#4fae57303daa91367eca263374e4a638
 https://conda.anaconda.org/conda-forge/win-64/libsodium-1.0.18-h62dcd97_1.tar.bz2#5e0709275ea686866988ac69c3850d35
 https://conda.anaconda.org/conda-forge/win-64/openssl-1.1.1h-he774522_0.tar.bz2#21844b16355ef8faa21fca97794d6825
-https://conda.anaconda.org/conda-forge/win-64/python-3.6.11-h9303ea8_2_cpython.tar.bz2#42a6e8c961a5a6a7698001001552721e
+https://conda.anaconda.org/conda-forge/win-64/python-3.6.11-h39d44d4_3_cpython.tar.bz2#25a19060a8bb755be6e5b394b5a7f508
 https://conda.anaconda.org/conda-forge/win-64/yaml-0.2.5-he774522_0.tar.bz2#d41c34441d8bbb6d141e691ae7bccf35
 https://conda.anaconda.org/conda-forge/noarch/alabaster-0.7.12-py_0.tar.bz2#2489a97287f90176ecdc3ca982b4b0a0
 https://conda.anaconda.org/conda-forge/win-64/argh-0.26.2-py36_1001.tar.bz2#63235fcc33cc799badae253d8331b558

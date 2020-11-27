@@ -1,11 +1,12 @@
 # platform: osx-64
-# env_hash: 3bd5c753a88cb2e589fb6e4302d6bd98b14f52b4b4395516fce69c4bac2d4589
+# env_hash: bc694b60f7b02f913e45f7f797b5541bb9b3edf0411a9fdf02e687d9d3838c8b
 
 @EXPLICIT
 
 https://conda.anaconda.org/conda-forge/osx-64/ca-certificates-2020.11.8-h033912b_0.tar.bz2#80ae143af10fb5c662a3ef1579948c30
 https://conda.anaconda.org/conda-forge/osx-64/libcxx-11.0.0-h4c3b8ed_1.tar.bz2#6a22f1c899bcf110c39cd6d959a8555e
 https://conda.anaconda.org/conda-forge/osx-64/libsodium-1.0.18-hbcb3906_1.tar.bz2#24632c09ed931af617fe6d5292919cab
+https://conda.anaconda.org/conda-forge/osx-64/libuv-1.40.0-haf1e3a3_0.tar.bz2#a03a7242a8eb9ea9f75310020d30ac5e
 https://conda.anaconda.org/conda-forge/osx-64/ncurses-6.2-h2e338ed_4.tar.bz2#9cef1910395d1543527583e73dba30f1
 https://conda.anaconda.org/conda-forge/osx-64/pandoc-2.11.2-hc929b4f_0.tar.bz2#b23d8cf47c28ee3d46bba52baadf9a20
 https://conda.anaconda.org/conda-forge/noarch/tzdata-2020d-h516909a_0.tar.bz2#153abe529c372caadf52bde5e07656e3
@@ -14,11 +15,13 @@ https://conda.anaconda.org/conda-forge/osx-64/yaml-0.2.5-haf1e3a3_0.tar.bz2#84c2
 https://conda.anaconda.org/conda-forge/osx-64/zlib-1.2.11-h7795811_1010.tar.bz2#7d39e47e16ed0107f37c7224d5b5be8b
 https://conda.anaconda.org/conda-forge/osx-64/firefox-78.5.0esr-h74dc148_0.tar.bz2#3140d230f8e2cb02ab12600a488a34ac
 https://conda.anaconda.org/conda-forge/osx-64/geckodriver-0.28.0-h2e338ed_0.tar.bz2#4ad3d0ddaf4a6fd8dee051b1f8b2e2f5
+https://conda.anaconda.org/conda-forge/osx-64/icu-68.1-h74dc148_0.tar.bz2#e4e7f8580abd1275ea2250fe606b66ac
 https://conda.anaconda.org/conda-forge/osx-64/libffi-3.2.1-hb1e8313_1007.tar.bz2#be8b6ba3b6710a89ab891bbed151659c
 https://conda.anaconda.org/conda-forge/osx-64/openssl-1.1.1h-haf1e3a3_0.tar.bz2#6be73e185e6a92a29571dd9a2dfb5251
 https://conda.anaconda.org/conda-forge/osx-64/readline-8.0-h0678c8f_2.tar.bz2#8f69d684fce8e73328995d7efb77816a
 https://conda.anaconda.org/conda-forge/osx-64/tk-8.6.10-hb0a8c7a_1.tar.bz2#f7477bf81dcfc7b4dddc7b3790a99a0c
 https://conda.anaconda.org/conda-forge/osx-64/zeromq-4.3.3-h74dc148_3.tar.bz2#365c52e91cb00d96d15bef9eddf9f7f8
+https://conda.anaconda.org/conda-forge/osx-64/nodejs-14.15.1-heaeed3d_0.tar.bz2#ab7d3bb7b92c6b6f8a3e8b7f33019ff4
 https://conda.anaconda.org/conda-forge/osx-64/sqlite-3.33.0-h960bd1c_1.tar.bz2#d86a1d10a189d4c000a61971110f4f55
 https://conda.anaconda.org/conda-forge/osx-64/python-3.9.0-ha017127_4_cpython.tar.bz2#5a6a63b875fb25c6ef03075518c6db3b
 https://conda.anaconda.org/conda-forge/noarch/async_generator-1.10-py_0.tar.bz2#d56c596e61b1c4952acf0a9920856c12

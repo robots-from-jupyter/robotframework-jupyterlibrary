@@ -1,5 +1,5 @@
 # platform: linux-64
-# env_hash: 79580380590780c5787b3380fa312ea121c1aee47e0aab11b09b5d1cad639d67
+# env_hash: 7cb8a900b48f1d9fb5379fd3e70121283aa391ef7a98987fd42dc5a8be8d30d3
 
 @EXPLICIT
 
@@ -13,13 +13,16 @@ https://conda.anaconda.org/conda-forge/linux-64/_openmp_mutex-4.5-1_gnu.tar.bz2#
 https://conda.anaconda.org/conda-forge/linux-64/libgcc-ng-9.3.0-h5dbcf3e_17.tar.bz2#fc9f5adabc4d55cd4b491332adc413e0
 https://conda.anaconda.org/conda-forge/linux-64/firefox-78.5.0esr-h58526e2_0.tar.bz2#ba18675ac28989197e04c52c99c1a045
 https://conda.anaconda.org/conda-forge/linux-64/geckodriver-0.28.0-h58526e2_0.tar.bz2#0fb35501dac09115f4a7891c575a79e6
+https://conda.anaconda.org/conda-forge/linux-64/icu-68.1-h58526e2_0.tar.bz2#fc7a4271dc2a7f4fd78cd63695baf7c3
 https://conda.anaconda.org/conda-forge/linux-64/libffi-3.2.1-he1b5a44_1007.tar.bz2#11389072d7d6036fd811c3d9460475cd
 https://conda.anaconda.org/conda-forge/linux-64/libsodium-1.0.18-h516909a_1.tar.bz2#e1ca1a4b82f7b51b29318f80cebae84a
+https://conda.anaconda.org/conda-forge/linux-64/libuv-1.40.0-hd18ef5c_0.tar.bz2#1b13a5d453ff9c552252af8fae5e15ff
 https://conda.anaconda.org/conda-forge/linux-64/ncurses-6.2-h58526e2_4.tar.bz2#509f2a21c4a09214cd737a480dfd80c9
 https://conda.anaconda.org/conda-forge/linux-64/openssl-1.1.1h-h516909a_0.tar.bz2#3a99e0cb8f325dbf8f616da2d2fb6d4f
 https://conda.anaconda.org/conda-forge/linux-64/xz-5.2.5-h516909a_1.tar.bz2#33f601066901f3e1a85af3522a8113f9
 https://conda.anaconda.org/conda-forge/linux-64/yaml-0.2.5-h516909a_0.tar.bz2#03a530e925414902547cf48da7756db8
 https://conda.anaconda.org/conda-forge/linux-64/zlib-1.2.11-h516909a_1010.tar.bz2#339cc5584e6d26bc73a875ba900028c3
+https://conda.anaconda.org/conda-forge/linux-64/nodejs-14.15.1-h25f6087_0.tar.bz2#81f0fc302b7e637943c8a3334ed7b1fd
 https://conda.anaconda.org/conda-forge/linux-64/readline-8.0-he28a2e2_2.tar.bz2#4d0ae8d473f863696088f76800ef9d38
 https://conda.anaconda.org/conda-forge/linux-64/tk-8.6.10-hed695b0_1.tar.bz2#7ef837cd455bd0f19f49b8b62d4cb568
 https://conda.anaconda.org/conda-forge/linux-64/zeromq-4.3.3-h58526e2_3.tar.bz2#6272fa8d98bd79c7978da0f7d2bb28da

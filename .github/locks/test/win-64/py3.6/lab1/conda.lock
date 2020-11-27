@@ -1,5 +1,5 @@
 # platform: win-64
-# env_hash: 5b19d143b3e876e25bcd4e9a57c607dcf93375304947bf76ed3a1b52dc007eb7
+# env_hash: 83d600488b36e23de5a63c05ee65bde1f9294b856c82efe20667290e9e2d9a33
 
 @EXPLICIT
 
@@ -10,13 +10,14 @@ https://conda.anaconda.org/conda-forge/win-64/vs2015_runtime-14.16.27012-h30e32a
 https://conda.anaconda.org/conda-forge/win-64/winpty-0.4.3-4.tar.bz2#1cee351bf20b830d991dbe0bc8cd7dfe
 https://conda.anaconda.org/msys2/win-64/m2w64-gmp-6.1.0-2.tar.bz2#fec04371463ec68eb8f5752a22c5b030
 https://conda.anaconda.org/msys2/win-64/m2w64-libwinpthread-git-5.0.0.4634.697f757-2.tar.bz2#67e61e700eb27424979778fae9293f13
+https://conda.anaconda.org/conda-forge/win-64/nodejs-14.15.1-h57928b3_0.tar.bz2#d864e5c8a3de3ccf10a5cfc841084c39
 https://conda.anaconda.org/conda-forge/win-64/vc-14.1-h869be7e_1.tar.bz2#4fae57303daa91367eca263374e4a638
 https://conda.anaconda.org/conda-forge/win-64/firefox-78.5.0esr-h0e60522_0.tar.bz2#6a65ef34e897b5d390a62a951f29ebbe
 https://conda.anaconda.org/conda-forge/win-64/geckodriver-0.28.0-h39d44d4_0.tar.bz2#65667cc9324458b9ec3ed7eb823bbc5c
 https://conda.anaconda.org/conda-forge/win-64/libsodium-1.0.18-h62dcd97_1.tar.bz2#5e0709275ea686866988ac69c3850d35
 https://conda.anaconda.org/msys2/win-64/m2w64-gcc-libs-core-5.3.0-7.tar.bz2#276d396bfe8d958f71173b7134f739fa
 https://conda.anaconda.org/conda-forge/win-64/openssl-1.1.1h-he774522_0.tar.bz2#21844b16355ef8faa21fca97794d6825
-https://conda.anaconda.org/conda-forge/win-64/python-3.6.11-h9303ea8_2_cpython.tar.bz2#42a6e8c961a5a6a7698001001552721e
+https://conda.anaconda.org/conda-forge/win-64/python-3.6.11-h39d44d4_3_cpython.tar.bz2#25a19060a8bb755be6e5b394b5a7f508
 https://conda.anaconda.org/conda-forge/win-64/yaml-0.2.5-he774522_0.tar.bz2#d41c34441d8bbb6d141e691ae7bccf35
 https://conda.anaconda.org/conda-forge/noarch/async_generator-1.10-py_0.tar.bz2#d56c596e61b1c4952acf0a9920856c12
 https://conda.anaconda.org/conda-forge/noarch/attrs-20.3.0-pyhd3deb0d_0.tar.bz2#5b319abb055eefcfa344bc21378ca23f
