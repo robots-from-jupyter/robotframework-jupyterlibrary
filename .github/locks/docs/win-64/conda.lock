@@ -1,5 +1,5 @@
 # platform: win-64
-# env_hash: df88cfaa733f3604d0bdf8d6ede520fe2eb716e4135127bee68249cae8b671c9
+# env_hash: 75f6c83cff403af1d5d230a8b61ae2f4aa586f013ba112afa17c2f77a9a758bc
 
 @EXPLICIT
 
@@ -7,15 +7,10 @@ https://conda.anaconda.org/conda-forge/win-64/ca-certificates-2020.11.8-h5b45459
 https://conda.anaconda.org/conda-forge/win-64/pandoc-2.11.2-h8ffe710_0.tar.bz2#c851ffee6cf05f784fab5d2f3faee63c
 https://conda.anaconda.org/conda-forge/win-64/vs2015_runtime-14.16.27012-h30e32a0_2.tar.bz2#37a0bcc72c5e97f5602dca37eb3f8314
 https://conda.anaconda.org/conda-forge/win-64/vc-14.1-h869be7e_1.tar.bz2#4fae57303daa91367eca263374e4a638
-https://conda.anaconda.org/conda-forge/win-64/jpeg-9d-he774522_0.tar.bz2#093a3f2034d3002ee017859e388cc8a1
 https://conda.anaconda.org/conda-forge/win-64/libsodium-1.0.18-h62dcd97_1.tar.bz2#5e0709275ea686866988ac69c3850d35
-https://conda.anaconda.org/conda-forge/win-64/lz4-c-1.9.2-h62dcd97_2.tar.bz2#a90475bc5d6e86b41360b614b20aa973
 https://conda.anaconda.org/conda-forge/win-64/openssl-1.1.1h-he774522_0.tar.bz2#21844b16355ef8faa21fca97794d6825
 https://conda.anaconda.org/conda-forge/win-64/python-3.6.11-h9303ea8_2_cpython.tar.bz2#42a6e8c961a5a6a7698001001552721e
-https://conda.anaconda.org/conda-forge/win-64/tk-8.6.10-he774522_1.tar.bz2#34a906fb55a5f0820d87b93da4dbb596
-https://conda.anaconda.org/conda-forge/win-64/xz-5.2.5-h62dcd97_1.tar.bz2#eabcbfedd14d7c18a514afca09ea0ebb
 https://conda.anaconda.org/conda-forge/win-64/yaml-0.2.5-he774522_0.tar.bz2#d41c34441d8bbb6d141e691ae7bccf35
-https://conda.anaconda.org/conda-forge/win-64/zlib-1.2.11-h62dcd97_1010.tar.bz2#a4cdf389c5f73e60a0ca121ff77c22a9
 https://conda.anaconda.org/conda-forge/noarch/alabaster-0.7.12-py_0.tar.bz2#2489a97287f90176ecdc3ca982b4b0a0
 https://conda.anaconda.org/conda-forge/win-64/argh-0.26.2-py36_1001.tar.bz2#63235fcc33cc799badae253d8331b558
 https://conda.anaconda.org/conda-forge/noarch/async_generator-1.10-py_0.tar.bz2#d56c596e61b1c4952acf0a9920856c12
@@ -29,9 +24,7 @@ https://conda.anaconda.org/conda-forge/noarch/defusedxml-0.6.0-py_0.tar.bz2#37e1
 https://conda.anaconda.org/conda-forge/noarch/idna-2.10-pyh9f0ad1d_0.tar.bz2#f95a12b4f435aae6680fe55ae2eb1b06
 https://conda.anaconda.org/conda-forge/noarch/imagesize-1.2.0-py_0.tar.bz2#5879bd2c4b399a5072468e5fe587bf1b
 https://conda.anaconda.org/conda-forge/win-64/ipython_genutils-0.2.0-py36_0.tar.bz2#7c0917d47b84d70c1da17ed71747c590
-https://conda.anaconda.org/conda-forge/win-64/libpng-1.6.37-ha81a0f5_2.tar.bz2#cc8f11542031225ef813cbc7b60713fc
 https://conda.anaconda.org/conda-forge/noarch/nest-asyncio-1.4.3-pyhd8ed1ab_0.tar.bz2#a1f2fda4d88c624810bf2029aa4c0827
-https://conda.anaconda.org/conda-forge/noarch/olefile-0.46-pyh9f0ad1d_1.tar.bz2#0b2e68acc8c78c8cc392b90983481f58
 https://conda.anaconda.org/conda-forge/win-64/pandocfilters-1.4.2-py36_0.tar.bz2#e6942f055a10c5ee4255836876f0dead
 https://conda.anaconda.org/conda-forge/noarch/parso-0.7.1-pyh9f0ad1d_0.tar.bz2#f66647d1ec805566d72ac26f62b19c01
 https://conda.anaconda.org/conda-forge/win-64/pathtools-0.1.2-py36_0.tar.bz2#cc9e936fc83193c7f71ae9c8ee6e44ad
@@ -54,7 +47,6 @@ https://conda.anaconda.org/conda-forge/win-64/webencodings-0.5.1-py36_0.tar.bz2#
 https://conda.anaconda.org/conda-forge/noarch/wheel-0.35.1-pyh9f0ad1d_0.tar.bz2#126827869be32f21872a2b30ebe2b038
 https://conda.anaconda.org/conda-forge/win-64/zeromq-4.3.3-h0e60522_3.tar.bz2#3f14354fbaa50a70595d6d1a54292996
 https://conda.anaconda.org/conda-forge/noarch/zipp-3.4.0-py_0.tar.bz2#0df927d2e46244cef8fd75d7ec2ba51c
-https://conda.anaconda.org/conda-forge/win-64/zstd-1.4.5-h1f3a1b7_2.tar.bz2#b35d995f210429648e920844701b57a9
 https://conda.anaconda.org/conda-forge/noarch/babel-2.9.0-pyhd3deb0d_0.tar.bz2#1cb532c9a6fd4e56a9f0906b87c17b76
 https://conda.anaconda.org/conda-forge/win-64/certifi-2020.11.8-py36ha15d459_0.tar.bz2#e59976ec9ce2d60ff6b1e49f04b57706
 https://conda.anaconda.org/conda-forge/win-64/cffi-1.14.4-py36he58ceb7_0.tar.bz2#e332020ea3ca37aff0b7a4cc2e6697cd
@@ -62,10 +54,8 @@ https://conda.anaconda.org/conda-forge/win-64/chardet-3.0.4-py36hd36e781_1008.ta
 https://conda.anaconda.org/conda-forge/win-64/docutils-0.16-py36hd36e781_2.tar.bz2#c88aa34374401aed15b8564e4d7d9c84
 https://conda.anaconda.org/conda-forge/win-64/doit-0.33.1-py36h9f0ad1d_1.tar.bz2#eda38f9e8dc256068db9f41d2c26febb
 https://conda.anaconda.org/conda-forge/win-64/entrypoints-0.3-py36h9f0ad1d_1002.tar.bz2#2b77a25e6a38ae845abff3e0d6c695bd
-https://conda.anaconda.org/conda-forge/win-64/freetype-2.10.4-hd328e21_0.tar.bz2#2a8e3917bc23b5619d77d3b559d70e01
 https://conda.anaconda.org/conda-forge/noarch/importlib-metadata-3.1.0-pyhd8ed1ab_0.tar.bz2#97a4bcec44626ddea360efdf7d5ad816
 https://conda.anaconda.org/conda-forge/win-64/jedi-0.17.2-py36ha15d459_1.tar.bz2#490ace8303a86ab3f83340b5d3da4ff7
-https://conda.anaconda.org/conda-forge/win-64/libtiff-4.1.0-hc10be44_6.tar.bz2#a9dcdf2d500c7ae524a58d4249a0197a
 https://conda.anaconda.org/conda-forge/win-64/markupsafe-1.1.1-py36hc753bc4_2.tar.bz2#9e36106ae933f25f38ba10f0d4c45572
 https://conda.anaconda.org/conda-forge/win-64/mistune-0.8.4-py36h779f372_1002.tar.bz2#0d10ecf686c4bd79b45897dbd8bedd8b
 https://conda.anaconda.org/conda-forge/noarch/packaging-20.4-pyh9f0ad1d_0.tar.bz2#6d160f7346ac815500b5475d9a0f88a9
@@ -84,7 +74,6 @@ https://conda.anaconda.org/conda-forge/win-64/brotlipy-0.7.0-py36hc753bc4_1001.t
 https://conda.anaconda.org/conda-forge/win-64/cryptography-3.2.1-py36he58ceb7_0.tar.bz2#13f6f3a96795e8f12c5aff025561ab8c
 https://conda.anaconda.org/conda-forge/noarch/importlib_metadata-3.1.0-hd8ed1ab_0.tar.bz2#182b3a7c361dfc0de2ed1abf90fd61c8
 https://conda.anaconda.org/conda-forge/win-64/jupyter_core-4.7.0-py36ha15d459_0.tar.bz2#f6e94f062740c05871eff07ac9f58dc3
-https://conda.anaconda.org/conda-forge/win-64/pillow-8.0.1-py36he4e95fe_0.tar.bz2#f64dfef4ef32126bb6ba02c5bc38d6c0
 https://conda.anaconda.org/conda-forge/win-64/pysocks-1.7.1-py36hd36e781_2.tar.bz2#d26259b7eeccf43768a208820955bf85
 https://conda.anaconda.org/conda-forge/win-64/setuptools-49.6.0-py36hd36e781_2.tar.bz2#5ede4e74bcbf71d32c473552da946c72
 https://conda.anaconda.org/conda-forge/win-64/watchdog-0.10.4-py36ha15d459_0.tar.bz2#ec1fecb0aaf2930343808428950fe2e1

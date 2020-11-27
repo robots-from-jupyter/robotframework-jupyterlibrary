@@ -10,4 +10,3 @@ dependencies:
   # hard deps
   - robotframework >=3.2
   - robotframework-seleniumlibrary >=4.5
-  - pillow

@@ -1,5 +1,5 @@
 # platform: win-64
-# env_hash: 2f0d5c5e2e848eb69b7f2c9b2ee4619b25115517cb6c285a34436aa081b8661d
+# env_hash: 18be129d6a456d061f622da72bcdc39f92ddcf5564974c98243d3c2a36347f89
 
 @EXPLICIT
 
@@ -7,26 +7,16 @@ https://conda.anaconda.org/conda-forge/win-64/ca-certificates-2020.11.8-h5b45459
 https://conda.anaconda.org/conda-forge/win-64/vs2015_runtime-14.16.27012-h30e32a0_2.tar.bz2#37a0bcc72c5e97f5602dca37eb3f8314
 https://conda.anaconda.org/conda-forge/win-64/nodejs-14.15.1-h57928b3_0.tar.bz2#d864e5c8a3de3ccf10a5cfc841084c39
 https://conda.anaconda.org/conda-forge/win-64/vc-14.1-h869be7e_1.tar.bz2#4fae57303daa91367eca263374e4a638
-https://conda.anaconda.org/conda-forge/win-64/jpeg-9d-he774522_0.tar.bz2#093a3f2034d3002ee017859e388cc8a1
-https://conda.anaconda.org/conda-forge/win-64/lz4-c-1.9.2-h62dcd97_2.tar.bz2#a90475bc5d6e86b41360b614b20aa973
 https://conda.anaconda.org/conda-forge/win-64/openssl-1.1.1h-he774522_0.tar.bz2#21844b16355ef8faa21fca97794d6825
 https://conda.anaconda.org/conda-forge/win-64/sqlite-3.33.0-he774522_1.tar.bz2#d71a870ed0940cdf9f4bcb827d12ead6
-https://conda.anaconda.org/conda-forge/win-64/tk-8.6.10-he774522_1.tar.bz2#34a906fb55a5f0820d87b93da4dbb596
-https://conda.anaconda.org/conda-forge/win-64/xz-5.2.5-h62dcd97_1.tar.bz2#eabcbfedd14d7c18a514afca09ea0ebb
 https://conda.anaconda.org/conda-forge/win-64/yaml-0.2.5-he774522_0.tar.bz2#d41c34441d8bbb6d141e691ae7bccf35
-https://conda.anaconda.org/conda-forge/win-64/zlib-1.2.11-h62dcd97_1010.tar.bz2#a4cdf389c5f73e60a0ca121ff77c22a9
-https://conda.anaconda.org/conda-forge/win-64/libpng-1.6.37-ha81a0f5_2.tar.bz2#cc8f11542031225ef813cbc7b60713fc
 https://conda.anaconda.org/conda-forge/win-64/python-3.8.6-h60c2a47_0_cpython.tar.bz2#b6c4723a2ba9b8f68521404bc0d23462
-https://conda.anaconda.org/conda-forge/win-64/zstd-1.4.5-h1f3a1b7_2.tar.bz2#b35d995f210429648e920844701b57a9
 https://conda.anaconda.org/conda-forge/noarch/appdirs-1.4.4-pyh9f0ad1d_0.tar.bz2#5f095bc6454094e96f146491fd03633b
 https://conda.anaconda.org/conda-forge/noarch/click-7.1.2-pyh9f0ad1d_0.tar.bz2#bd50a970ce07e660c319fdc4d730d3f1
 https://conda.anaconda.org/conda-forge/noarch/cloudpickle-1.6.0-py_0.tar.bz2#76d764d8881719e305f6fa368dc2b65e
 https://conda.anaconda.org/conda-forge/win-64/dataclasses-0.7-py38_0.tar.bz2#01e24a611001e4de5d30c8d3eb2e1ae2
-https://conda.anaconda.org/conda-forge/win-64/freetype-2.10.4-hd328e21_0.tar.bz2#2a8e3917bc23b5619d77d3b559d70e01
 https://conda.anaconda.org/conda-forge/noarch/idna-2.10-pyh9f0ad1d_0.tar.bz2#f95a12b4f435aae6680fe55ae2eb1b06
-https://conda.anaconda.org/conda-forge/win-64/libtiff-4.1.0-hc10be44_6.tar.bz2#a9dcdf2d500c7ae524a58d4249a0197a
 https://conda.anaconda.org/conda-forge/noarch/mccabe-0.6.1-py_1.tar.bz2#a326cb400c1ccd91789f3e7d02124d61
-https://conda.anaconda.org/conda-forge/noarch/olefile-0.46-pyh9f0ad1d_1.tar.bz2#0b2e68acc8c78c8cc392b90983481f58
 https://conda.anaconda.org/conda-forge/noarch/pathspec-0.8.1-pyhd3deb0d_0.tar.bz2#fcd2fbb062b55d14a77e664c89ee17a6
 https://conda.anaconda.org/conda-forge/noarch/pycodestyle-2.6.0-pyh9f0ad1d_0.tar.bz2#a08d6f5a610c7194da158add79f2b018
 https://conda.anaconda.org/conda-forge/noarch/pycparser-2.20-pyh9f0ad1d_2.tar.bz2#aa798d50ffd182a0f6f31478c7f434f6
@@ -43,7 +33,6 @@ https://conda.anaconda.org/conda-forge/win-64/cffi-1.14.4-py38hd8c33c5_0.tar.bz2
 https://conda.anaconda.org/conda-forge/win-64/doit-0.33.1-py38h32f6830_1.tar.bz2#8b263b9225a12d7d926b3266bcbd2d00
 https://conda.anaconda.org/conda-forge/noarch/importlib-metadata-3.1.0-pyhd8ed1ab_0.tar.bz2#97a4bcec44626ddea360efdf7d5ad816
 https://conda.anaconda.org/conda-forge/win-64/mypy_extensions-0.4.3-py38h32f6830_2.tar.bz2#f749c2b175569eaf350b025cde50ee48
-https://conda.anaconda.org/conda-forge/win-64/pillow-8.0.1-py38hf7ce48b_0.tar.bz2#16e4e66d1cf4304ef66c94a899db93be
 https://conda.anaconda.org/conda-forge/win-64/pyyaml-5.3.1-py38hab1e662_1.tar.bz2#25ce237676e0d4f8029d3440c2f4afc6
 https://conda.anaconda.org/conda-forge/win-64/regex-2020.11.13-py38h294d835_0.tar.bz2#b0fc6e573333bf715f53ebe373bc0c27
 https://conda.anaconda.org/conda-forge/noarch/robotframework-lint-1.1-pyh9f0ad1d_0.tar.bz2#c3fa280c4a10c06e83f23193ef4ea5cc
