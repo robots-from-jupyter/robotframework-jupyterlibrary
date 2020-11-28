@@ -110,9 +110,7 @@ jobs:
 
   test:
     name: |-
-      ${{ matrix.conda-subdir }}_
-      ${{ matrix.python-version }}_
-      ${{ matrix.lab-version }}
+      ${{ matrix.conda-subdir }}_${{ matrix.python-version }}_${{ matrix.lab-version }}
     runs-on: ${{ matrix.vm }}
     needs: [build]
     strategy:
