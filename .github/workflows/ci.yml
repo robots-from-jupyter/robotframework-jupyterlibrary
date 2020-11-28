@@ -78,9 +78,9 @@ jobs:
       - if: always()
         uses: actions/download-artifact@v2
         with:
-          path: build/test/output
+          path: ./build/test/output
       - if: always()
-        run: ls -lathr build/test/output/**/output.xml
+        run: find ./build/test/output | grep output.xml
       - if: always()
         uses: actions/checkout@v2
       - if: always()
