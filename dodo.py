@@ -233,8 +233,13 @@ def _make_setup(env):
     pym = [*run_in, *P.PYM]
     file_dep = [P.CONDA_LISTS[env], *P.SETUP_CRUFT]
 
-    if P.CI:
-        pip_args = ["--find-links", P.DIST, "--no-index-url", P.SETUP["name"]]
+    if P.INSTALL_ARTIFACT:
+        pip_args = [
+            "--find-links",
+            P.DIST,
+            "--no-index-url",
+            P.SETUP["metadata"]["name"],
+        ]
     else:
         pip_args = ["-e", "."]
 

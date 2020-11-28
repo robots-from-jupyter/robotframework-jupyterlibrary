@@ -41,7 +41,7 @@ jobs:
       - run: python dodo.py lint build || python dodo.py lint build
       - uses: actions/upload-artifact@v2
         with:
-          name: ${{ job.status }} dist ${{ github.run_number }}
+          name: dist ${{ github.run_number }}
           path: ./dist
 
   docs:
@@ -113,6 +113,8 @@ jobs:
       ${{ matrix.conda-subdir }}_${{ matrix.python-version }}_${{ matrix.lab-version }}
     runs-on: ${{ matrix.vm }}
     needs: [build]
+    env:
+      INSTALL_ARTIFACT: 1
     strategy:
       max-parallel: 6
       # TODO: probably remove
@@ -159,6 +161,11 @@ jobs:
           auto-update-conda: true
           environment-file: ${{ steps.lock.outputs.file }}
           use-only-tar-bz2: true
+      - if: always()
+        uses: actions/download-artifact@v2
+        with:
+          name: dist ${{ github.run_number }}
+          path: ./dist
       - name: doit (unix)
         if: ${{ matrix.os != 'windows' }}
         run: python dodo.py test || python dodo.py test

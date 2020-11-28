@@ -25,6 +25,7 @@ assert safe_load, "need at least a yaml parser"
 
 
 CI = int(os.environ.get("CI", "0"))
+INSTALL_ARTIFACT = int(os.environ.get("INSTALL_ARTIFACT", "0"))
 IN_BINDER = int(os.environ.get("IN_BINDER", "0"))
 PLATFORM = platform.system()
 BROWSER = os.environ.get("BROWSER", "headlessfirefox")
