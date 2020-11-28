@@ -107,12 +107,12 @@ jobs:
           name: _COMBINED ${{ github.run_number }}
           path: |
             ./build/test/output
-            !./build/test/output/**/pabot_results
 
   test:
-    name:
-      ${{ matrix.conda-subdir }}_{{ matrix.python-version }}_{{
-      matrix.lab-version }}
+    name: |-
+      ${{ matrix.conda-subdir }}_
+      ${{ matrix.python-version }}_
+      ${{ matrix.lab-version }}
     runs-on: ${{ matrix.vm }}
     needs: [build]
     strategy:
@@ -179,5 +179,4 @@ jobs:
             }} ${{ matrix.lab-version }} ${{ github.run_number }}
           path: |
             ./build/test/output
-            !./build/test/output/**/pabot_results
         if: always()
