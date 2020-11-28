@@ -235,9 +235,9 @@ def _make_setup(env):
 
     if P.INSTALL_ARTIFACT:
         pip_args = [
+            "--no-index",
             "--find-links",
             P.DIST,
-            "--no-index-url",
             P.SETUP["metadata"]["name"],
         ]
     else:
