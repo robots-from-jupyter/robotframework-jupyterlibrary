@@ -231,27 +231,26 @@ def _make_setup(env):
     frozen = P.PIP_LISTS[env]
     run_in = P.RUN_IN[env]
     pym = [*run_in, *P.PYM]
+    file_dep = [P.CONDA_LISTS[env], *P.SETUP_CRUFT]
+
+    if P.CI:
+        pip_args = ["--find-links", P.DIST, "--no-index-url", P.SETUP["name"]]
+    else:
+        pip_args = ["-e", "."]
 
     yield dict(
         name=env,
         actions=[
-            [
-                *pym,
-                "pip",
-                "install",
-                "-e",
-                ".",
-                "--no-deps",
-                "--ignore-installed",
-            ],
+            lambda: frozen.unlink() if frozen.exists() else None,
+            [*pym, "pip", "install", "--no-deps", "--ignore-installed", *pip_args],
             [*pym, "pip", "check"],
             lambda: [
                 frozen.write_bytes(subprocess.check_output([*pym, "pip", "freeze"])),
                 None,
             ][-1],
         ],
-        file_dep=[P.CONDA_LISTS[env]],
         targets=[frozen],
+        file_dep=file_dep,
     )
 
 
@@ -287,7 +286,10 @@ def task_report():
     yield dict(
         name="rebot",
         actions=[[*pym, "_scripts.combine"]],
-        file_dep=[p for p in P.ATEST_OUT.rglob(P.ATEST_OUT_XML) if p != final],
+        file_dep=[
+            P.SCRIPTS / "combine.py",
+            *[p for p in P.ATEST_OUT.rglob(P.ATEST_OUT_XML) if p != final],
+        ],
         targets=[final],
     )
 

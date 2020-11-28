@@ -17,6 +17,13 @@ NON_CRITICAL = [
     # ["client:nteract_on_jupyter"],
 ]
 
+PABOT_DEFAULTS = [
+    "--testlevelsplit",
+    "--processes",
+    "4",
+    "--artifactsinsubfolders",
+]
+
 
 def run_tests(attempt=0, extra_args=None):
     extra_args = extra_args or []
@@ -36,8 +43,8 @@ def run_tests(attempt=0, extra_args=None):
 
     args = [
         "pabot",
-        "--testlevelsplit",
-        "--artifactsinsubfolders",
+        *PABOT_DEFAULTS,
+        *extra_args,
         "--outputdir",
         out_dir,
         "--variable",
@@ -51,7 +58,6 @@ def run_tests(attempt=0, extra_args=None):
         "--xunitskipnoncritical",
         "--xunit",
         ".".join(["xunit", "xml"]),
-        *extra_args,
         ".",
     ]
 

@@ -3,6 +3,7 @@ from pathlib import Path
 import platform
 import os
 import sys
+from configparser import ConfigParser
 
 try:
     __import__("conda_lock")
@@ -67,10 +68,16 @@ SRC = ROOT / "src" / "JupyterLibrary"
 VERSION_FILE = SRC / "VERSION"
 VERSION = VERSION_FILE.read_text().strip()
 PY_SRC = [*SRC.rglob("*.py")]
+SETUP_CFG = ROOT / "setup.cfg"
+
+_cfg_parser = ConfigParser()
+_cfg_parser.read(SETUP_CFG)
+
+SETUP = {k: dict(_cfg_parser[k]) for k in _cfg_parser.sections()}
 SETUP_CRUFT = [
     ROOT / "setup.py",
     ROOT / "MANIFEST.in",
-    ROOT / "setup.cfg",
+    SETUP_CFG,
     VERSION_FILE,
 ]
 BINDER = ROOT / ".binder"

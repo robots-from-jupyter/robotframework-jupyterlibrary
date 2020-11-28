@@ -7,8 +7,9 @@ from . import project as P
 def combine():
     final = P.ATEST_OUT / P.ATEST_OUT_XML
 
-    all_files = [*P.ATEST_OUT.rglob(P.ATEST_OUT_XML)]
-    print(all_files)
+    all_files = sorted(P.ATEST_OUT.rglob(P.ATEST_OUT_XML))
+    all_output_dirs = sorted({p.parent for p in all_files})
+    [print(f"- {p.relative_to(P.ATEST_OUT)}") for p in all_output_dirs]
 
     all_robot = [
         p
@@ -19,6 +20,10 @@ def combine():
         "python",
         "-m",
         "robot.rebot",
+        "--name",
+        P.SETUP["metadata"]["name"],
+        "--metadata",
+        f"""version:{P.VERSION}""",
         "--outputdir",
         P.ATEST_OUT,
         "--output",
