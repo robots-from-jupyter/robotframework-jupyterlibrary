@@ -7,6 +7,9 @@ from . import project as P
 def combine():
     final = P.ATEST_OUT / P.ATEST_OUT_XML
 
+    all_files = [*P.ATEST_OUT.rglob(P.ATEST_OUT_XML)]
+    print(all_files)
+
     all_robot = [
         p
         for p in P.ATEST_OUT.rglob(P.ATEST_OUT_XML)
@@ -16,8 +19,6 @@ def combine():
         "python",
         "-m",
         "robot.rebot",
-        "--name",
-        "JupyterLibrary",
         "--outputdir",
         P.ATEST_OUT,
         "--output",

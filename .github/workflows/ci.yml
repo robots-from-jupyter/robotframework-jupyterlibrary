@@ -80,6 +80,8 @@ jobs:
         with:
           path: build/test/output
       - if: always()
+        run: ls -lathr build/test/output/**/output.xml
+      - if: always()
         uses: actions/checkout@v2
       - if: always()
         uses: actions/cache@v1
@@ -108,6 +110,9 @@ jobs:
             !./build/test/output/**/pabot_results
 
   test:
+    name:
+      ${{ matrix.conda-subdir }}_{{ matrix.python-version }}_{{
+      matrix.lab-version }}
     runs-on: ${{ matrix.vm }}
     needs: [build]
     strategy:
