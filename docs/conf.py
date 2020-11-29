@@ -4,6 +4,7 @@
 """
 import subprocess
 import sys
+import os
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -12,6 +13,8 @@ import nbsphinx
 # you have to have run `python -m pip install -e`
 import JupyterLibrary
 from JupyterLibrary.core import CLIENTS, COMMON
+
+os.environ["IN_SPHINX"] = "1"
 
 
 def setup(app):
