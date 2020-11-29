@@ -11,7 +11,7 @@ https://conda.anaconda.org/conda-forge/linux-64/libgomp-9.3.0-h5dbcf3e_17.tar.bz
 https://conda.anaconda.org/conda-forge/linux-64/_openmp_mutex-4.5-1_gnu.tar.bz2#561e277319a41d4f24f5c05a9ef63c04
 https://conda.anaconda.org/conda-forge/linux-64/libgcc-ng-9.3.0-h5dbcf3e_17.tar.bz2#fc9f5adabc4d55cd4b491332adc413e0
 https://conda.anaconda.org/conda-forge/linux-64/icu-68.1-h58526e2_0.tar.bz2#fc7a4271dc2a7f4fd78cd63695baf7c3
-https://conda.anaconda.org/conda-forge/linux-64/libffi-3.2.1-he1b5a44_1007.tar.bz2#11389072d7d6036fd811c3d9460475cd
+https://conda.anaconda.org/conda-forge/linux-64/libffi-3.3-h58526e2_1.tar.bz2#8e42ee98679696e0ddfde5521c98da60
 https://conda.anaconda.org/conda-forge/linux-64/libuv-1.40.0-hd18ef5c_0.tar.bz2#1b13a5d453ff9c552252af8fae5e15ff
 https://conda.anaconda.org/conda-forge/linux-64/ncurses-6.2-h58526e2_4.tar.bz2#509f2a21c4a09214cd737a480dfd80c9
 https://conda.anaconda.org/conda-forge/linux-64/openssl-1.1.1h-h516909a_0.tar.bz2#3a99e0cb8f325dbf8f616da2d2fb6d4f
@@ -23,7 +23,7 @@ https://conda.anaconda.org/conda-forge/linux-64/readline-8.0-he28a2e2_2.tar.bz2#
 https://conda.anaconda.org/conda-forge/linux-64/tk-8.6.10-hed695b0_1.tar.bz2#7ef837cd455bd0f19f49b8b62d4cb568
 https://conda.anaconda.org/conda-forge/linux-64/sqlite-3.33.0-h4cf870e_1.tar.bz2#1968ff6c4b8fbd2903f6672e292d932d
 https://conda.anaconda.org/conda-forge/linux-64/yarn-1.22.10-0.tar.bz2#a2a4efe3536edf0798dd258834de62bc
-https://conda.anaconda.org/conda-forge/linux-64/python-3.8.6-h852b56e_0_cpython.tar.bz2#dd65401dfb61ac030edc0dc4d15c2c51
+https://conda.anaconda.org/conda-forge/linux-64/python-3.8.6-hffdb5ce_1_cpython.tar.bz2#8a33708324a714c7b69d4bd49774166f
 https://conda.anaconda.org/conda-forge/noarch/appdirs-1.4.4-pyh9f0ad1d_0.tar.bz2#5f095bc6454094e96f146491fd03633b
 https://conda.anaconda.org/conda-forge/noarch/click-7.1.2-pyh9f0ad1d_0.tar.bz2#bd50a970ce07e660c319fdc4d730d3f1
 https://conda.anaconda.org/conda-forge/noarch/cloudpickle-1.6.0-py_0.tar.bz2#76d764d8881719e305f6fa368dc2b65e
@@ -42,7 +42,7 @@ https://conda.anaconda.org/conda-forge/noarch/typing_extensions-3.7.4.3-py_0.tar
 https://conda.anaconda.org/conda-forge/noarch/wheel-0.35.1-pyh9f0ad1d_0.tar.bz2#126827869be32f21872a2b30ebe2b038
 https://conda.anaconda.org/conda-forge/noarch/zipp-3.4.0-py_0.tar.bz2#0df927d2e46244cef8fd75d7ec2ba51c
 https://conda.anaconda.org/conda-forge/linux-64/certifi-2020.11.8-py38h578d9bd_0.tar.bz2#dddc61aa1e0e87871d79c6cf951b8482
-https://conda.anaconda.org/conda-forge/linux-64/cffi-1.14.4-py38ha312104_0.tar.bz2#8f82b87522fbb1d4b24e8b5e2b1d0501
+https://conda.anaconda.org/conda-forge/linux-64/cffi-1.14.4-py38ha65f79e_1.tar.bz2#070203fb16eb5a01aa74a875084fd7f2
 https://conda.anaconda.org/conda-forge/noarch/importlib-metadata-3.1.0-pyhd8ed1ab_0.tar.bz2#97a4bcec44626ddea360efdf7d5ad816
 https://conda.anaconda.org/conda-forge/linux-64/mypy_extensions-0.4.3-py38h32f6830_2.tar.bz2#6e3e78137fde56d8bc77daf99bf986f5
 https://conda.anaconda.org/conda-forge/linux-64/pyinotify-0.9.6-py38h32f6830_1002.tar.bz2#de46392fc6fb5f50921b0240c71e9d70

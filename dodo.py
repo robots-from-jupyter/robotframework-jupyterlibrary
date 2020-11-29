@@ -181,17 +181,37 @@ def task_lab():
     """start a jupyter lab server (with all other extensions)"""
 
     env = "test"
+    lockfile = P.get_lockfile(env)
+    str_lock = str(lockfile)
+    needs_build = "lab1" in str_lock or "lab2" in str_lock
+
     frozen = P.PIP_LISTS[env]
     run_in = P.RUN_IN[env]
     pym = [*run_in, *P.PYM]
 
-    if P.IN_BINDER:
-        app_dir = []
-    else:
+    app_dir = []
+
+    if needs_build and not P.IN_BINDER:
         app_dir = ["--app-dir", P.APP_DIR]
 
     lab = [*pym, "jupyter", "lab"]
+
     lab_ext = [*pym, "jupyter", "labextension"]
+
+    serve_deps = [frozen]
+
+    if needs_build:
+        yield dict(
+            name="ext",
+            uptodate=[config_changed({"labextensions": P.LAB_EXTENSIONS})],
+            actions=[
+                [*lab_ext, "install", *app_dir, *P.LAB_EXTENSIONS, "--no-build"],
+                [*lab, "build", *app_dir, "--debug"],
+            ],
+            file_dep=[frozen],
+            targets=[P.APP_INDEX],
+        )
+        serve_deps += [P.APP_INDEX]
 
     def _lab():
         p = subprocess.Popen(
@@ -209,21 +229,10 @@ def task_lab():
         print("maybe check your process log")
 
     yield dict(
-        name="ext",
-        uptodate=[config_changed({"labextensions": P.LAB_EXTENSIONS})],
-        actions=[
-            [*lab_ext, "install", *app_dir, *P.LAB_EXTENSIONS, "--no-build"],
-            [*lab, "build", *app_dir, "--debug"],
-        ],
-        file_dep=[frozen],
-        targets=[P.APP_INDEX],
-    )
-
-    yield dict(
         name="serve",
         uptodate=[lambda: False],
         actions=[PythonInteractiveAction(_lab)],
-        file_dep=[P.APP_INDEX],
+        file_dep=serve_deps,
     )
 
 

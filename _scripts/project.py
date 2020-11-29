@@ -1,3 +1,5 @@
+""" project paths, files and utilities, used by `dodo.py` and `_scripts/`
+"""
 from pathlib import Path
 
 import platform
@@ -145,18 +147,41 @@ LABS = TEST_MATRIX["lab-version"]
 PLATFORMS = TEST_MATRIX["conda-subdir"]
 
 EXCLUDES = {
-    ("test", ex["conda-subdir"], ex["python-version"], ex["lab-version"]): True
+    (
+        "test",
+        ex.get("conda-subdir"),
+        ex.get("python-version"),
+        ex.get("lab-version"),
+    ): True
     for ex in TEST_MATRIX.get("exclude", [])
 }
+
+
+def _is_excluded(flow, pf, py, lab):
+    for flow_, pf_, py_, lab_ in EXCLUDES.keys():
+        if flow_ is not None:
+            if flow_ != flow:
+                continue
+        if pf_ is not None:
+            if pf_ != pf:
+                continue
+        if py_ is not None:
+            if py_ != py:
+                continue
+        if lab_ is not None:
+            if lab_ != lab:
+                continue
+        return True
+    return False
+
 
 ENVENTURES = {
     ("test", pf, py, lab): LOCKS / "test" / pf / py / lab / "conda.lock"
     for pf in PLATFORMS
     for lab in LABS
     for py in PYTHONS
-    if not EXCLUDES.get(("test", pf, py, lab))
+    if not _is_excluded("test", pf, py, lab)
 }
-
 
 ENVENTURES.update(
     {("lint", pf, None, None): LOCKS / "lint" / pf / "conda.lock" for pf in PLATFORMS}
@@ -263,7 +288,7 @@ def get_lockfile(env):
                 target
                 for (flow, pf, py, lab), target in ENVENTURES.items()
                 if flow == env and pf == THIS_CONDA_SUBDIR
-            ][-1]
+            ][0]
         except:
             return
 
