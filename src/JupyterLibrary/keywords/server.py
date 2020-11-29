@@ -166,7 +166,7 @@ class ServerKeywords(LibraryComponent):
 
     @keyword
     def terminate_all_jupyter_servers(self):
-        """Close all Jupyter servers started by JupyterLibrary"""
+        """Close all Jupyter servers started by this Library"""
         plib = BuiltIn().get_library_instance("Process")
 
         self.wait_for_jupyter_server_to_be_ready()
