@@ -40,11 +40,10 @@ jobs:
       - run: python dodo.py lint build || python dodo.py lint build
       - uses: actions/upload-artifact@v2
         with:
-          name: dist ${{ github.run_number }}
+          name: dist_${{ job.status }}_${{ github.run_number }}
           path: ./dist
 
   docs:
-    needs: [test]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -65,7 +64,7 @@ jobs:
       - run: python dodo.py docs || python dodo.py docs
       - uses: actions/upload-artifact@v2
         with:
-          name: ${{ job.status }} docs ${{ github.run_number }}
+          name: docs_${{ job.status }}_${{ github.run_number }}
           path: ./build/docs/html
         if: always()
 
@@ -152,9 +151,26 @@ jobs:
       - name: upload test output
         uses: actions/upload-artifact@v2
         with:
-          name:
-            ${{ job.status }} atest ${{ matrix.os }} ${{ matrix.python-version
-            }} ${{ matrix.lab-version }} ${{ github.run_number }}
+          name: |
+            test_${{ job.status }}_${{ matrix.os }}_${{ matrix.python-version }}_${{ matrix.lab-version }}_${{ github.run_number }}
           path: |
             ./build/test/output
         if: always()
+
+  report:
+    if: always()
+    needs: [test]
+    runs-on: ubuntu-20.04
+    steps:
+      - if: always()
+        uses: actions/download-artifact@v2
+        with:
+          path: ./artifacts
+      - if: always()
+        run: find ./artifacts
+      - if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: _COMBINED ${{ github.run_number }}
+          path: |
+            ./artifacts

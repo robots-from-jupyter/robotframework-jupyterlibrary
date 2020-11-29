@@ -245,7 +245,21 @@ def get_atest_stem(attempt=1, extra_args=None, lockfile=None, browser=None):
     if not lockfile:
         lockfile = get_lockfile("test")
 
-    stem = str(lockfile.parent.relative_to(LOCKS / "test")) + f"_{attempt}_{browser}"
+    if not lockfile:
+        raise RuntimeError(["Couldn't get lockfile", attempt, extra_args, browser])
+
+    stem = None
+
+    for env in ["lint", "test"]:
+        try:
+            stem = (
+                str(lockfile.parent.relative_to(LOCKS / env)) + f"_{attempt}_{browser}"
+            )
+        except:
+            pass
+
+    if not stem:
+        raise RuntimeError(["could not get stem", lockfile])
 
     if "--dryrun" in extra_args:
         stem += "_dry_run"

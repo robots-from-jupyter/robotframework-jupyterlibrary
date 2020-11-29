@@ -275,7 +275,7 @@ def task_setup():
 
 
 def task_test():
-    """run tests"""
+    """ (dry)run tests"""
     env = "test"
     pym = [*P.RUN_IN[env], *P.PYM]
 
