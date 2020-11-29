@@ -159,7 +159,7 @@ jobs:
 
   report:
     if: always()
-    needs: [test]
+    needs: [test, build, docs]
     runs-on: ubuntu-20.04
     steps:
       - if: always()
