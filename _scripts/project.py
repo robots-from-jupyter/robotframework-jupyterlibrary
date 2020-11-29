@@ -242,6 +242,16 @@ ALL_PRETTIER = [
 ]
 
 
+class OK:
+    black = BUILD / ".ok.black"
+    pyflakes = BUILD / ".ok.pyflakes"
+    robot_tidy = BUILD / ".ok.robot.tidy"
+    prettier = BUILD / ".ok.prettier"
+    atest = BUILD / ".ok.atest"
+    robot_dry_run = BUILD / ".ok.robot.dryrun"
+    robot = BUILD / ".ok.robot"
+
+
 def get_atest_stem(attempt=1, extra_args=None, lockfile=None, browser=None):
     """get the directory in ATEST_OUT for this platform/apps"""
     browser = browser or BROWSER
@@ -281,7 +291,6 @@ def get_lockfile(env):
     """
     lockfile = None
 
-
     env_var_lock = os.environ.get("RFJL_LOCKDIR")
 
     if env_var_lock is not None:
@@ -313,3 +322,11 @@ def get_lockfile(env):
             return
 
     return lockfile
+
+
+def get_ok_actions(p):
+    """create a pair of doit `actions` for working with a canary/ok file"""
+    return [
+        lambda: p.unlink() if p.exists() else None,
+        lambda: [p.parent.mkdir(exist_ok=True, parents=True), p.touch(), None][-1],
+    ]

@@ -30,8 +30,7 @@ def task_release():
     """the full set of tasks needed for a new release"""
     return dict(
         actions=[["echo", "ok"]],
-        task_dep=["lint", "test"],
-        file_dep=[P.SHA256SUMS, P.DOCS_BUILDINFO],
+        file_dep=[P.SHA256SUMS, P.DOCS_BUILDINFO, P.OK.pyflakes, P.OK.robot],
     )
 
 
@@ -133,31 +132,42 @@ def task_lint():
     run_in = P.RUN_IN[env]
     pym = [*run_in, *P.PYM]
 
+    clean, touch = P.get_ok_actions(P.OK.black)
+
     yield dict(
         name="black",
-        actions=[[*pym, "black", "--quiet", *P.ALL_PY]],
+        actions=[clean, [*pym, "black", "--quiet", *P.ALL_PY], touch],
         file_dep=[*P.ALL_PY, env_lock],
+        targets=[P.OK.black],
     )
+
+    clean, touch = P.get_ok_actions(P.OK.pyflakes)
 
     yield dict(
         name="pyflakes",
-        task_dep=["lint:black"],
-        actions=[[*pym, "pyflakes", *P.ALL_PY]],
-        file_dep=[*P.ALL_PY, env_lock],
+        actions=[clean, [*pym, "pyflakes", *P.ALL_PY], touch],
+        file_dep=[*P.ALL_PY, env_lock, P.OK.black],
+        targets=[P.OK.pyflakes],
     )
+
+    clean, touch = P.get_ok_actions(P.OK.robot_tidy)
 
     yield dict(
         name="robot:tidy",
-        actions=[[*pym, "robot.tidy", "--recursive", it] for it in [P.SRC, P.ATEST]],
+        actions=[clean]
+        + [[*pym, "robot.tidy", "--recursive", it] for it in [P.SRC, P.ATEST]]
+        + [touch],
         file_dep=[*P.ALL_ROBOT, env_lock],
+        targets=[P.OK.robot_tidy],
     )
+
+    clean, touch = P.get_ok_actions(P.OK.prettier)
 
     yield dict(
         name="prettier",
-        actions=[
-            [*run_in, "yarn", "--silent", "prettier"],
-        ],
+        actions=[clean, [*run_in, "yarn", "--silent", "prettier"], touch],
         file_dep=[*P.ALL_PRETTIER, P.YARN_INTEGRITY],
+        targets=[P.OK.prettier],
     )
 
 
@@ -290,20 +300,24 @@ def task_test():
     dry_target = P.ATEST_OUT / dry_run_stem / P.ATEST_OUT_XML
     real_target = P.ATEST_OUT / real_stem / P.ATEST_OUT_XML
 
+    clean, touch = P.get_ok_actions(P.OK.robot_dry_run)
+
     yield dict(
         name="dryrun",
         uptodate=[config_changed(os.environ.get("ATEST_ARGS", ""))],
-        actions=[[*pym, "_scripts.atest", "--dryrun"]],
+        actions=[clean, [*pym, "_scripts.atest", "--dryrun"], touch],
         file_dep=[*P.PY_SRC, *P.ALL_ROBOT, P.PIP_LISTS[env], P.SCRIPTS / "atest.py"],
-        targets=[dry_target],
+        targets=[dry_target, P.OK.robot_dry_run],
     )
+
+    clean, touch = P.get_ok_actions(P.OK.robot)
 
     yield dict(
         name="atest",
         uptodate=[config_changed(os.environ.get("ATEST_ARGS", ""))],
-        actions=[[*pym, "_scripts.atest"]],
-        file_dep=[dry_target],
-        targets=[real_target],
+        actions=[clean, [*pym, "_scripts.atest"], touch],
+        file_dep=[P.OK.robot_dry_run],
+        targets=[real_target, P.OK.robot],
     )
 
 
