@@ -1,5 +1,4 @@
 *** Settings ***
-Documentation     Various selectors for JupyterLab Icons (in their various forms)
 Resource          JupyterLibrary/clients/jupyterlab/PageInfo.robot
 
 *** Variables ***

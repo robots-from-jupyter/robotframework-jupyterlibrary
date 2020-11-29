@@ -1,9 +1,6 @@
 *** Settings ***
 Resource          JupyterLibrary/clients/jupyterlab/Selectors.robot
 Resource          JupyterLibrary/clients/jupyterlab/PageInfo.robot
-Documentation     Keywords for working with the JupyterLab web application
-...               You should have already started a Jupyter Server, such as with
-...               *Wait For New Jupyter Server To Be Ready*.
 
 *** Keywords ***
 Open JupyterLab

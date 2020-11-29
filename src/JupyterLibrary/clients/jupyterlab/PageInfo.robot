@@ -1,5 +1,4 @@
 *** Settings ***
-Documentation     Utilities for working with JupyterLab PageInfo Metadata
 #
 # Example pageInfo
 #
