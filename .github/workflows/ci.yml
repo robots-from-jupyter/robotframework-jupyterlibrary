@@ -171,6 +171,6 @@ jobs:
       - if: always()
         uses: actions/upload-artifact@v2
         with:
-          name: _COMBINED ${{ github.run_number }}
+          name: _COMBINED_${{ github.run_number }}
           path: |
             ./artifacts
