@@ -19,8 +19,8 @@ NON_CRITICAL = [
 
 PABOT_DEFAULTS = [
     "--testlevelsplit",
-    "--processes",
-    "4",
+    # "--processes",
+    # "4",
     "--artifactsinsubfolders",
 ]
 
@@ -35,15 +35,19 @@ def run_tests(attempt=0, extra_args=None):
     for non_critical in NON_CRITICAL:
         extra_args += ["--noncritical", "AND".join(non_critical)]
 
-    if attempt != 1:
+    if attempt <= 1:
         prev_stem = P.get_atest_stem(attempt=attempt - 1, extra_args=extra_args)
         previous = P.ATEST_OUT / prev_stem / P.ATEST_OUT_XML
         if previous.exists():
             extra_args += ["--rerunfailed", str(previous)]
 
+    runner = ["pabot", *PABOT_DEFAULTS]
+
+    if "--dryrun" in extra_args:
+        runner = ["robot"]
+
     args = [
-        "pabot",
-        *PABOT_DEFAULTS,
+        *runner,
         *extra_args,
         "--outputdir",
         out_dir,
@@ -82,7 +86,7 @@ def run_tests(attempt=0, extra_args=None):
             )
 
     str_args = [*map(str, args)]
-    print(">>> pabot args:", " ".join(str_args), flush=True)
+    print(">>> ", " ".join(str_args), flush=True)
 
     proc = subprocess.Popen(str_args, cwd=P.ATEST)
 

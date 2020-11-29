@@ -12,4 +12,5 @@ Maybe Open JupyterLab Sidebar
     [Documentation]    Attempt to open a JupyterLab sidebar with the given ``title``
     ...    (if not already open).
     Maybe Close JupyterLab Sidebar
-    Click Element    css:${JLAB CSS SIDEBAR TAB}\[title^="${title}"]
+    Run Keyword and Ignore Error
+    ...    Click Element    css:${JLAB CSS SIDEBAR TAB}\[title^="${title}"]

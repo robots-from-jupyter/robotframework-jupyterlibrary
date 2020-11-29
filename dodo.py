@@ -279,14 +279,28 @@ def task_test():
     env = "test"
     pym = [*P.RUN_IN[env], *P.PYM]
 
-    stem = P.get_atest_stem(lockfile=P.get_lockfile(env), browser=P.BROWSER)
+    dry_run_stem = P.get_atest_stem(
+        extra_args=["--dryrun"], lockfile=P.get_lockfile(env), browser=P.BROWSER
+    )
+    real_stem = P.get_atest_stem(lockfile=P.get_lockfile(env), browser=P.BROWSER)
+
+    dry_target = P.ATEST_OUT / dry_run_stem / P.ATEST_OUT_XML
+    real_target = P.ATEST_OUT / real_stem / P.ATEST_OUT_XML
+
+    yield dict(
+        name="dryrun",
+        uptodate=[config_changed(os.environ.get("ATEST_ARGS", ""))],
+        actions=[[*pym, "_scripts.atest", "--dryrun"]],
+        file_dep=[*P.PY_SRC, *P.ALL_ROBOT, P.PIP_LISTS[env], P.SCRIPTS / "atest.py"],
+        targets=[dry_target],
+    )
 
     yield dict(
         name="atest",
         uptodate=[config_changed(os.environ.get("ATEST_ARGS", ""))],
         actions=[[*pym, "_scripts.atest"]],
-        file_dep=[*P.PY_SRC, *P.ALL_ROBOT, P.PIP_LISTS[env], P.SCRIPTS / "atest.py"],
-        targets=[P.ATEST_OUT / stem / P.ATEST_OUT_XML],
+        file_dep=[dry_target],
+        targets=[real_target],
     )
 
 

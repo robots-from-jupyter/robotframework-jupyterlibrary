@@ -38,6 +38,7 @@ Click JupyterLab Menu
     Wait Until Page Contains Element    ${xpath}
     Mouse Over    ${xpath}
     Click Element    ${xpath}
+    Run Keyword and Ignore Error    Mouse Over    ${xpath}
 
 Click JupyterLab Menu Item
     [Arguments]    ${label}
@@ -46,6 +47,7 @@ Click JupyterLab Menu Item
     Wait Until Page Contains Element    ${item}
     Mouse Over    ${item}
     Click Element    ${item}
+    Run Keyword and Ignore Error    Mouse Over    ${item}
 
 Open With JupyterLab Menu
     [Arguments]    ${menu}    @{submenus}

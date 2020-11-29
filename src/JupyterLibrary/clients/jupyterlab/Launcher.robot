@@ -9,7 +9,9 @@ Launch a new JupyterLab Document
     ...    animation is complete.
     Wait Until Page Contains Element    xpath:${JLAB XP CARD}    timeout=10s
     Click Element    xpath:${JLAB XP CARD}\[@title='${kernel}'][@data-category='${category}']
-    Run Keyword And Ignore Error    timeout=2s    Wait Until Page Contains Element    css:${JLAB CSS SPINNER}
-    Run Keyword And Ignore Error    timeout=5s    Wait Until Page Does Not Contain Element    css:${JLAB CSS SPINNER}
+    Run Keyword And Ignore Error
+    ...    Wait Until Page Contains Element    css:${JLAB CSS SPINNER}
+    Run Keyword And Ignore Error
+    ...    Wait Until Page Does Not Contain Element    css:${JLAB CSS SPINNER}
     Wait Until Page Contains Element    css:${JLAB CSS ACTIVE INPUT}
     Sleep    0.5s
