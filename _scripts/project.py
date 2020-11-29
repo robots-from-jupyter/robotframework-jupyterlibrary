@@ -275,17 +275,18 @@ def get_atest_stem(attempt=1, extra_args=None, lockfile=None, browser=None):
 def get_lockfile(env):
     """
 
-    e.g.
+    using the POSIX path in .github/locks, e.g.
 
         RFJL_LOCKDIR=test/linux-64/py3.9/lab3 doit test
     """
     lockfile = None
 
+
     env_var_lock = os.environ.get("RFJL_LOCKDIR")
 
     if env_var_lock is not None:
         eflow, epf, epy, elab = [
-            (v if v != "" else None) for v in env_var_lock.split("_")
+            (v if v != "" else None) for v in env_var_lock.split("/")
         ]
         try:
             lockfile = [
