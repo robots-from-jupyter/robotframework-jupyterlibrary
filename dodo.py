@@ -30,7 +30,13 @@ def task_release():
     """the full set of tasks needed for a new release"""
     return dict(
         actions=[["echo", "ok"]],
-        file_dep=[P.SHA256SUMS, P.DOCS_BUILDINFO, P.OK.pyflakes, P.OK.robot],
+        file_dep=[
+            P.SHA256SUMS,
+            P.DOCS_BUILDINFO,
+            P.OK.pyflakes,
+            P.OK.robot,
+            P.OK.prettier,
+        ],
     )
 
 

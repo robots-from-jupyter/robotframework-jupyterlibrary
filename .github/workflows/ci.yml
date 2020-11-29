@@ -76,6 +76,7 @@ jobs:
     env:
       INSTALL_ARTIFACT: 1
     strategy:
+      fail-fast: false
       max-parallel: 8
       # this is probably the single-source of truth of what we support
       # - the matrix is parsed in project.py
