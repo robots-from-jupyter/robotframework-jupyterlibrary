@@ -128,7 +128,12 @@ ENVS = ROOT / ".envs"
 ENV_NAMES = ["test", "lint", "docs"]
 
 CONDA_RUN = [CONDA_EXE, "run"]
-if CI:
+
+if IN_BINDER:
+    RUN_IN = {
+        env: [*CONDA_RUN, "-p", os.environ["NB_PYTHON_PREFIX"]] for env in ENV_NAMES
+    }
+elif CI:
     RUN_IN = {env: [*CONDA_RUN, "-n", env] for env in ENV_NAMES}
 else:
     RUN_IN = {

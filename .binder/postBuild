@@ -4,7 +4,7 @@
 export IN_BINDER=1
 
 # we already know which python and lab we want
-export RFJL_LOCKFILE=test/osx-64/py3.9/lab2
+export RFJL_LOCKFILE=test/linux-64/py3.9/lab3
 
 conda create \
     --prefix "${NB_PYTHON_PREFIX}" \
