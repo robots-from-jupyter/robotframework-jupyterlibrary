@@ -3,13 +3,8 @@ from pathlib import Path
 import platform
 import os
 import sys
+import shutil
 from configparser import ConfigParser
-
-try:
-    __import__("conda_lock")
-    CAN_CONDA_LOCK = True
-except:
-    CAN_CONDA_LOCK = False
 
 for _yaml in ["yaml", "ruamel_yaml", "ruamel.yaml"]:
     try:
@@ -29,6 +24,7 @@ INSTALL_ARTIFACT = int(os.environ.get("INSTALL_ARTIFACT", "0"))
 IN_BINDER = int(os.environ.get("IN_BINDER", "0"))
 PLATFORM = platform.system()
 BROWSER = os.environ.get("BROWSER", "headlessfirefox")
+CAN_CONDA_LOCK = shutil.which("conda-lock") is not None
 
 CONDA_EXE = os.environ.get("CONDA_EXE")
 

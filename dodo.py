@@ -27,7 +27,7 @@ def task_release():
     """the full set of tasks needed for a new release"""
     return dict(
         actions=[["echo", "ok"]],
-        task_dep=["lint", "test", "report"],
+        task_dep=["lint", "test"],
         file_dep=[P.SHA256SUMS, P.DOCS_BUILDINFO],
     )
 
@@ -278,24 +278,6 @@ def task_test():
         actions=[[*pym, "_scripts.atest"]],
         file_dep=[*P.PY_SRC, *P.ALL_ROBOT, P.PIP_LISTS[env], P.SCRIPTS / "atest.py"],
         targets=[P.ATEST_OUT / stem / P.ATEST_OUT_XML],
-    )
-
-
-def task_report():
-    """report on other generated artifacts"""
-    env = "lint"
-    pym = [*P.RUN_IN[env], *P.PYM]
-
-    final = P.ATEST_OUT / P.ATEST_OUT_XML
-
-    yield dict(
-        name="rebot",
-        actions=[[*pym, "_scripts.combine"]],
-        file_dep=[
-            P.SCRIPTS / "combine.py",
-            *[p for p in P.ATEST_OUT.rglob(P.ATEST_OUT_XML) if p != final],
-        ],
-        targets=[final],
     )
 
 

@@ -69,44 +69,6 @@ jobs:
           path: ./build/docs/html
         if: always()
 
-  report:
-    if: always()
-    needs: [test]
-    runs-on: ubuntu-20.04
-    steps:
-      - if: always()
-        uses: actions/download-artifact@v2
-        with:
-          path: ./build/test/output
-      - if: always()
-        run: find ./build/test/output | grep output.xml
-      - if: always()
-        uses: actions/checkout@v2
-      - if: always()
-        uses: actions/cache@v1
-        with:
-          path: ~/conda_pkgs_dir
-          key:
-            ${{ runner.os }}-conda-lint-${{
-            hashFiles('.github/locks/lint/linux-64/conda.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-conda-lint-
-      - if: always()
-        uses: conda-incubator/setup-miniconda@v2
-        with:
-          activate-environment: lint
-          auto-update-conda: true
-          environment-file: .github/locks/lint/linux-64/conda.lock
-          use-only-tar-bz2: true
-      - if: always()
-        run: python dodo.py report || python dodo.py report
-      - if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: _COMBINED ${{ github.run_number }}
-          path: |
-            ./build/test/output
-
   test:
     name: |-
       ${{ matrix.conda-subdir }}_${{ matrix.python-version }}_${{ matrix.lab-version }}
