@@ -31,6 +31,12 @@ import robot
 from robot.tidy import Tidy
 
 
+try:
+    import ipywidgets
+except:
+    ipywidgets = None
+
+
 @magics_class
 class RobotMagics(Magics):
     """
@@ -92,14 +98,33 @@ class RobotMagics(Magics):
 
         args = magic_arguments.parse_argstring(self.robot, line)
 
-        if args.gui == "display":
-            display(Markdown("- _🤖 getting ready..._"))
+        if ipywidgets and args.gui.lower() in ["widget", "w", "widgets"]:
+            self.widget(args, cell, content_hash)
+        else:
+            if args.pretty:
+                html = self.pretty(args, cell)
+                if args.gui == "display":
+                    display(html)
+
+            if args.execute:
+                self.execute(args, cell, content_hash)
+
+    def widget(self, args, cell, content_hash):
+        log = ipywidgets.HTML()
+        titles = ["Log"]
+        children = [log]
+        tabs = ipywidgets.Tab(children)
+        tabs.titles = titles
 
         if args.pretty:
-            self.pretty(args, cell)
+            out = ipywidgets.Output()
 
-        if args.execute:
-            self.execute(args, cell, content_hash)
+            with out:
+                display(self.pretty(args, cell))
+
+            tabs.children = [*tabs.children, out]
+            tabs.titles = [*tabs.titles, "Pretty"]
+        display(tabs)
 
     def execute(self, args, cell, content_hash):
         """run a cell in the outputdir, in a directory named after the content hash"""
@@ -198,8 +223,7 @@ class RobotMagics(Magics):
         """
         )
 
-        if args.gui == "display":
-            display(html)
+        return html
 
 
 def load_ipython_extension(ip):
