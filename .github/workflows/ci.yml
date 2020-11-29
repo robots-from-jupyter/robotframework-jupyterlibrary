@@ -136,7 +136,7 @@ jobs:
       - if: always()
         uses: actions/download-artifact@v2
         with:
-          name: dist ${{ github.run_number }}
+          name: dist_${{ github.run_number }}
           path: ./dist
       - name: doit (unix)
         if: ${{ matrix.os != 'windows' }}
