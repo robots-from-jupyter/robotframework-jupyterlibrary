@@ -288,7 +288,7 @@ def get_lockfile(env):
                 target
                 for (flow, pf, py, lab), target in ENVENTURES.items()
                 if flow == env and pf == THIS_CONDA_SUBDIR
-            ][0]
+            ][-1]
         except:
             return
 
