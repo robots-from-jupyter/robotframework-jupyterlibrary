@@ -7,6 +7,8 @@ import doit
 from doit.tools import PythonInteractiveAction, config_changed
 
 from _scripts import project as P
+from _scripts.reporter import GithubActionsReporter
+
 
 os.environ["PYTHONIOENCODING"] = "utf-8"
 
@@ -15,6 +17,7 @@ DOIT_CONFIG = {
     "verbosity": 2,
     "par_type": "thread",
     "default_tasks": ["binder"],
+    "reporter": GithubActionsReporter,
 }
 
 
