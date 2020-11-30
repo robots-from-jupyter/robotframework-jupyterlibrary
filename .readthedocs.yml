@@ -9,7 +9,7 @@ formats:
   - epub
 
 conda:
-  environment: docs/environment.yml
+  environment: docs/rtd.yml
 
 python:
   install:
