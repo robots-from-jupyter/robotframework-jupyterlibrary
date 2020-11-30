@@ -75,7 +75,44 @@ def task_docs():
     """build HTML docs"""
     env = "docs"
     run_in = P.RUN_IN[env]
+    lockfile = P.get_lockfile(env)
     frozen = P.PIP_LISTS[env]
+
+    header, tarballs = lockfile.read_text().split("@EXPLICIT")
+
+    clean, touch = P.get_ok_actions(P.RTD_ENV)
+
+    header = (
+        f"# Probably don't edit by hand! \n"
+        f"#\n"
+        f"# This was generated from {lockfile.relative_to(P.ROOT)}\n"
+        f"#\n"
+        f"#   doit docs:rtdenv\n"
+        f"#\n"
+    ) + header
+
+    def _env_from_lock():
+        P.RTD_ENV.write_text(
+            header
+            + P.safe_dump(
+                dict(
+                    name="rtd",
+                    channels=["conda-forge", "nodefaults"],
+                    dependencies=[
+                        line.strip() for line in tarballs.strip().splitlines()
+                    ],
+                )
+            )
+        )
+
+    yield dict(
+        name="rtd:env",
+        doc="generate a readthedocs-compatible env",
+        file_dep=[lockfile],
+        uptodate=[config_changed(header)],
+        actions=[clean, _env_from_lock],
+        targets=[P.RTD_ENV],
+    )
 
     yield dict(
         name="sphinx",
