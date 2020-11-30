@@ -1,3 +1,7 @@
+# TODO:
+#
+# - change `ubuntu-20.04` to `-latest` once it stops throwing warnings
+
 name: CI
 
 on:
@@ -17,6 +21,7 @@ env:
 
 defaults:
   run:
+    # NOTE: some key windows steps _need_ to be run with `cmd /C CALL {0}`
     shell: bash -l {0}
 
 jobs:
@@ -69,6 +74,27 @@ jobs:
           path: ./build/docs/html
         if: always()
 
+  lint:
+    needs: [docs]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v1
+        with:
+          path: ~/conda_pkgs_dir
+          key:
+            ${{ runner.os }}-conda-lint-${{
+            hashFiles('.github/locks/lint/linux-64/conda.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-conda-lint-
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          activate-environment: lint
+          auto-update-conda: true
+          environment-file: .github/locks/lint/linux-64/conda.lock
+          use-only-tar-bz2: true
+      - run: python dodo.py lint || python dodo.py lint
+
   test:
     name: |-
       ${{ matrix.conda-subdir }}_${{ matrix.python-version }}_${{ matrix.lab-version }}
@@ -78,16 +104,19 @@ jobs:
       INSTALL_ARTIFACT: 1
     strategy:
       fail-fast: false
-      max-parallel: 8
-      # this is probably the single-source of truth of what we support
-      # - the matrix is parsed in project.py
-      # - the excursions are in env_specs, e.g. lab1.yml
-      # - to regenerate the specs, requires `conda-lock`, `mamba` suggested:
-      #
-      #   rm -rf .github/locks
-      #   doit -n4 lock
-      #
+      # TODO: consider restoring
+      # max-parallel: 8
       matrix:
+        # The Matrix
+        #
+        # This is the single source-of-truth of what we currently support
+        # - the matrix (with excludes) is parsed in project.py
+        # - the excursions are in env_specs, e.g. lab1.yml
+        # - to regenerate the specs, requires `conda-lock`:
+        #
+        #   rm -rf .github/locks
+        #   doit -n4 lock
+        #
         conda-subdir: [win-64, osx-64, linux-64]
         python-version: [py3.6, py3.8, py3.9]
         lab-version: [lab1, lab2, lab3]
