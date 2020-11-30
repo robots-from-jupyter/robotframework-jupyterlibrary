@@ -308,11 +308,13 @@ def task_test():
 
     clean, touch = P.get_ok_actions(P.OK.robot_dry_run)
 
+    robot_deps = [*P.PY_SRC, *P.ALL_ROBOT, P.PIP_LISTS[env], P.SCRIPTS / "atest.py"]
+
     yield dict(
         name="dryrun",
         uptodate=[config_changed(os.environ.get("ATEST_ARGS", ""))],
         actions=[clean, [*pym, "_scripts.atest", "--dryrun"], touch],
-        file_dep=[*P.PY_SRC, *P.ALL_ROBOT, P.PIP_LISTS[env], P.SCRIPTS / "atest.py"],
+        file_dep=robot_deps,
         targets=[dry_target, P.OK.robot_dry_run],
     )
 
@@ -322,8 +324,19 @@ def task_test():
         name="atest",
         uptodate=[config_changed(os.environ.get("ATEST_ARGS", ""))],
         actions=[clean, [*pym, "_scripts.atest"], touch],
-        file_dep=[P.OK.robot_dry_run],
+        file_dep=[P.OK.robot_dry_run, *robot_deps],
         targets=[real_target, P.OK.robot],
+    )
+
+    # Presently not running this on CI
+    yield dict(
+        name="combine",
+        actions=[[*pym, "_scripts.combine"]],
+        file_dep=[
+            real_target,
+            *P.ATEST_OUT.rglob(P.ATEST_OUT_XML),
+            P.SCRIPTS / "combine.py",
+        ],
     )
 
 

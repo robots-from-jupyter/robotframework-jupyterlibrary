@@ -19,9 +19,11 @@ NON_CRITICAL = [
 
 PABOT_DEFAULTS = [
     "--testlevelsplit",
-    # "--processes",
-    # "4",
+    "--processes",
+    "4",
     "--artifactsinsubfolders",
+    "--artifacts",
+    "png,log,txt",
 ]
 
 
@@ -35,7 +37,7 @@ def run_tests(attempt=0, extra_args=None):
     for non_critical in NON_CRITICAL:
         extra_args += ["--noncritical", "AND".join(non_critical)]
 
-    if attempt <= 1:
+    if attempt > 1:
         prev_stem = P.get_atest_stem(attempt=attempt - 1, extra_args=extra_args)
         previous = P.ATEST_OUT / prev_stem / P.ATEST_OUT_XML
         if previous.exists():
@@ -49,6 +51,8 @@ def run_tests(attempt=0, extra_args=None):
     args = [
         *runner,
         *extra_args,
+        "--name",
+        f"""{P.PLATFORM} py{P.THIS_PYTHON} lab{P.THIS_LAB.split(".")[0]}""",
         "--outputdir",
         out_dir,
         "--variable",
@@ -59,6 +63,8 @@ def run_tests(attempt=0, extra_args=None):
         f"LAB:{P.THIS_LAB}",
         "--variable",
         f"PY:{P.THIS_PYTHON}",
+        "--randomize",
+        "all",
         "--xunitskipnoncritical",
         "--xunit",
         ".".join(["xunit", "xml"]),

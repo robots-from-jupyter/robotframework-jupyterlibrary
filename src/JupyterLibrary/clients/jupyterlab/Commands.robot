@@ -28,3 +28,8 @@ Reset JupyterLab and Close
     ...    open in the current browser, then close the browser.
     Execute JupyterLab Command    Reset Application State
     Close Browser
+
+Close All JupyterLab Tabs
+    Maybe accept a JupyterLab prompt
+    Execute JupyterLab Command  Close All Tabs
+    Maybe accept a JupyterLab prompt
