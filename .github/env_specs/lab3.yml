@@ -1,0 +1,15 @@
+# TODO: fully support in the matrix
+
+channels:
+  - conda-forge/label/jupyterlab_widgets_rc
+  - conda-forge/label/jupyterlab_server_rc
+  - conda-forge/label/jupyterlab_rc
+  - conda-forge
+  - nodefaults
+
+dependencies:
+  - ipywidgets
+  - jupyter_server =1.0.7
+  - jupyterlab >=3.0.0rc7
+  - jupyterlab_server >=2.0.0rc1
+  - jupyterlab_widgets >=1.0.0a6

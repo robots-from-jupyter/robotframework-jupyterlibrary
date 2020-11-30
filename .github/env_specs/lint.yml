@@ -1,0 +1,6 @@
+dependencies:
+  - black
+  - flake8
+  - isort <5
+  - robotframework-lint
+  - yarn <2

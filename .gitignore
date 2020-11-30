@@ -1,9 +1,16 @@
 __pycache__/
 _artifacts/
+_robot_magic_*
+.doit*
+.envs/
 .ipynb_checkpoints/
+.pabotsuitenames
 *.egg-info
+*.html
 build/
+dist/
 envs/
 lib/
+node_modules/
 Untitled*.*
-*.html
+_lab/

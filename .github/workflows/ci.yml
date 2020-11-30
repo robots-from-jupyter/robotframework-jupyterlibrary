@@ -1,0 +1,186 @@
+# TODO:
+#
+# - change `ubuntu-20.04` to `-latest` once it stops throwing warnings
+
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+env:
+  PIP_DISABLE_PIP_VERSION_CHECK: 1
+  PYTHONIOENCODING: utf-8
+  PYTHONUNBUFFERED: 1
+  ATEST_RETRIES: 4
+  CI: 1
+
+defaults:
+  run:
+    # NOTE: some key windows steps _need_ to be run with `cmd /C CALL {0}`
+    shell: bash -l {0}
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v1
+        with:
+          path: ~/conda_pkgs_dir
+          key:
+            ${{ runner.os }}-conda-lint-${{
+            hashFiles('.github/locks/lint/linux-64/conda.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-conda-lint-
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          activate-environment: lint
+          auto-update-conda: true
+          environment-file: .github/locks/lint/linux-64/conda.lock
+          use-only-tar-bz2: true
+      - run: python dodo.py lint build || python dodo.py lint build
+      - uses: actions/upload-artifact@v2
+        with:
+          name: dist_${{ github.run_number }}
+          path: ./dist
+
+  docs:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v1
+        with:
+          path: ~/conda_pkgs_dir
+          key:
+            ${{ runner.os }}-conda-docs-${{
+            hashFiles('.github/locks/docs/linux-64/conda.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-conda-docs-
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          activate-environment: docs
+          auto-update-conda: true
+          environment-file: .github/locks/docs/linux-64/conda.lock
+          use-only-tar-bz2: true
+      - run: python dodo.py docs || python dodo.py docs
+      - uses: actions/upload-artifact@v2
+        with:
+          name: docs_${{ job.status }}_${{ github.run_number }}
+          path: ./build/docs/html
+        if: always()
+
+  test:
+    name: |-
+      ${{ matrix.conda-subdir }}_${{ matrix.python-version }}_${{ matrix.lab-version }}
+    runs-on: ${{ matrix.vm }}
+    needs: [build]
+    env:
+      INSTALL_ARTIFACT: 1
+    strategy:
+      fail-fast: false
+      # TODO: consider restoring
+      # max-parallel: 8
+      matrix:
+        # The Matrix
+        #
+        # This is the single source-of-truth of what we currently support
+        # - the matrix (with excludes) is parsed in project.py
+        # - the excursions are in env_specs, e.g. lab1.yml
+        # - to regenerate the specs, requires `conda-lock`:
+        #
+        #   rm -rf .github/locks
+        #   doit -n4 lock
+        #
+        conda-subdir: [win-64, osx-64, linux-64]
+        python-version: [py3.6, py3.8, py3.9]
+        lab-version: [lab1, lab2, lab3]
+        include:
+          - conda-subdir: linux-64
+            os: ubuntu
+            vm: ubuntu-20.04
+          - conda-subdir: osx-64
+            os: macos
+            vm: macos-latest
+          - conda-subdir: win-64
+            os: windows
+            vm: windows-latest
+        exclude:
+          - python-version: py3.6
+            lab-version: lab3
+          - conda-subdir: win-64
+            lab-version: lab3
+
+    steps:
+      - name: configure git
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@v2
+      - name: get conda lockfile
+        id: lock
+        run: |
+          echo "::set-output name=file::${{
+            format(
+              '.github/locks/test/{0}/{1}/{2}/conda.lock',
+              matrix.conda-subdir,
+              matrix.python-version,
+              matrix.lab-version
+            ) }}"
+      - uses: actions/cache@v1
+        with:
+          path: ~/conda_pkgs_dir
+          key:
+            ${{ runner.os }}-conda-${{ matrix.python-version }}-${{
+            hashFiles(steps.lock.outputs.file) }}
+          restore-keys: |
+            ${{ runner.os }}-conda-${{ matrix.python-version }}-
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          activate-environment: test
+          auto-update-conda: true
+          environment-file: ${{ steps.lock.outputs.file }}
+          use-only-tar-bz2: true
+      - if: always()
+        uses: actions/download-artifact@v2
+        with:
+          name: dist_${{ github.run_number }}
+          path: ./dist
+      - name: doit (unix)
+        if: ${{ matrix.os != 'windows' }}
+        run: python dodo.py test || python dodo.py test
+      - name: doit (windows)
+        if: ${{ matrix.os == 'windows' }}
+        env:
+          CONDA_EXE: C:\Miniconda\envs\Script\conda.exe
+        run:
+          call conda activate test && python dodo.py test || python dodo.py test
+        shell: cmd /C CALL {0}
+      - name: upload test output
+        uses: actions/upload-artifact@v2
+        with:
+          name: |
+            test_${{ job.status }}_${{ matrix.os }}_${{ matrix.python-version }}_${{ matrix.lab-version }}_${{ github.run_number }}
+          path: |
+            ./build/test/output
+        if: always()
+
+  report:
+    if: always()
+    needs: [test, build, docs]
+    runs-on: ubuntu-20.04
+    steps:
+      - if: always()
+        uses: actions/download-artifact@v2
+        with:
+          path: ./artifacts
+      - if: always()
+        run: find ./artifacts
+      - if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: _COMBINED_${{ github.run_number }}
+          path: |
+            ./artifacts

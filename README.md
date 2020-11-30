@@ -1,15 +1,17 @@
 # robotframework-jupyterlibrary
-> A [Robot Framework][] library for automating (testing of) [Jupyter][] end-user applications and extensions
 
-[Robot Framework]: http://robotframework.org
-[Jupyter]: https://jupyter.org
+> A [Robot Framework][] library for automating (testing of) [Jupyter][] end-user
+> applications and extensions
 
-| pip                     | conda                   | docs                    | demo                        | pipes                         |
-|:-----------------------:|:-----------------------:|:-----------------------:|:---------------------------:|:-----------------------------:|
-| [![pip-badge][]][pip]   | TODO                    | [![docs-badge][]][docs] | [![binder-badge][]][binder] | [![pipeline-badge]][pipeline] |
+[robot framework]: http://robotframework.org
+[jupyter]: https://jupyter.org
 
+|          pip          | conda |          docs           |            demo             |             pipes             |
+| :-------------------: | :---: | :---------------------: | :-------------------------: | :---------------------------: |
+| [![pip-badge][]][pip] | TODO  | [![docs-badge][]][docs] | [![binder-badge][]][binder] | [![worfklow-badge]][workflow] |
 
 # Using
+
 Write `.robot` files that use `JupyterLibrary` keywords.
 
 ```robotframework
@@ -30,8 +32,8 @@ A Notebook in JupyterLab
 
 See the [acceptance tests][] for examples.
 
-
 # Installation
+
 ```bash
 pip install robotframework-jupyterlibrary
 ```
@@ -66,27 +68,30 @@ conda install -c conda-forge robotframework-jupyterlibrary
       python -m scripts.atest
 
 # Free Software
+
 JupyterLibrary is Free Software under the BSD-3-Clause License. It contains code
 from a number of other projects:
 
-- [SeleniumLibrary][] ([APL-2.0][selibrary-license])
-  - backport of `Press Keys`
 - [Jyve][] ([BSD-3-Clause][jyve-license])
   - Initial implementations of robot keywords
 
-[acceptance tests]: https://github.com/robots-from-jupyter/robotframework-jupyterlab
-[Miniconda3]: https://conda.io/miniconda.html
+[acceptance tests]:
+  https://github.com/robots-from-jupyter/robotframework-jupyterlab
+[miniconda3]: https://conda.io/miniconda.html
 [binder-badge]: https://mybinder.org/badge_logo.svg
-[binder]: https://mybinder.org/v2/gh/robots-from-jupyter/robotframework-jupyterlibrary/master?urlpath=lab/tree/README.md
-[pipeline-badge]: https://dev.azure.com/robots-from-jupyter/robots-from-jupyter/_apis/build/status/robots-from-jupyter.robotframework-jupyterlibrary?branchName=master
-[pipeline]: https://dev.azure.com/robots-from-jupyter/robots-from-jupyter/_build/latest?definitionId=4
-[docs-badge]: https://readthedocs.org/projects/robotframework-jupyterlibrary/badge/?version=latest
+[binder]:
+  https://mybinder.org/v2/gh/robots-from-jupyter/robotframework-jupyterlibrary/master?urlpath=lab/tree/README.md
+[workflow-badge]:
+  https://github.com/bollwyvl/robotframework-jupyterlibrary/workflows/CI/badge.svg
+[workflow]:
+  https://github.com/bollwyvl/robotframework-jupyterlibrary/actions?query=branch%3Amaster+workflow%3ACI
+[docs-badge]:
+  https://readthedocs.org/projects/robotframework-jupyterlibrary/badge/?version=latest
 [pip-badge]: https://img.shields.io/pypi/v/robotframework-jupyterlibrary.svg
 [pip]: https://pypi.org/project/robotframework-jupyterlibrary
 [docs]: https://robotframework-jupyterlibrary.readthedocs.io
-
-[SeleniumLibrary]: https://github.com/robotframework/SeleniumLibrary
-[selibrary-license]: https://github.com/robotframework/SeleniumLibrary/blob/master/LICENSE.txt
-
-[Jyve]: https://github.com/deathbeds/jyve
+[seleniumlibrary]: https://github.com/robotframework/SeleniumLibrary
+[selibrary-license]:
+  https://github.com/robotframework/SeleniumLibrary/blob/master/LICENSE.txt
+[jyve]: https://github.com/deathbeds/jyve
 [jyve-license]: https://github.com/deathbeds/jyve/blob/master/LICENSE

@@ -1,0 +1,3 @@
+dependencies:
+  - jupyterlab >=1,<2
+  - ipywidgets

@@ -8,7 +8,7 @@ from uuid import uuid4
 
 from robot.libraries.BuiltIn import BuiltIn
 from SeleniumLibrary.base import LibraryComponent, keyword
-from six.moves.urllib.request import urlopen
+from urllib.request import urlopen
 
 
 class ServerKeywords(LibraryComponent):
@@ -30,13 +30,13 @@ class ServerKeywords(LibraryComponent):
         *args,
         **config,
     ):
-        """ Start a Jupyter server
+        """Start a Jupyter server
 
-            If not configured, the HOME environment variable and current
-            working directory will be set to avoid leaking configuration
-            between between runs (or the test instance) itself. These
-            directories will be cleaned up after the server process is
-            terminated.
+        If not configured, the HOME environment variable and current
+        working directory will be set to avoid leaking configuration
+        between between runs (or the test instance) itself. These
+        directories will be cleaned up after the server process is
+        terminated.
         """
         command = command or "jupyter-notebook"
         port = port or self.get_unused_port()
@@ -79,8 +79,7 @@ class ServerKeywords(LibraryComponent):
 
     @keyword
     def build_jupyter_server_arguments(self, port, base_url, token):
-        """ Some default jupyter arguments
-        """
+        """Some default jupyter arguments"""
         return [
             "--no-browser",
             "--debug",
@@ -91,8 +90,7 @@ class ServerKeywords(LibraryComponent):
 
     @keyword
     def copy_files_to_jupyter_directory(self, *sources, **kwargs):
-        """ Copy some files into the (temporary) jupyter server root
-        """
+        """Copy some files into the (temporary) jupyter server root"""
         nbserver = kwargs.get("nbserver", self._handles[-1])
         notebook_dir = self._notebook_dirs[nbserver]
         BuiltIn().import_library("OperatingSystem")
@@ -101,9 +99,9 @@ class ServerKeywords(LibraryComponent):
 
     @keyword
     def copy_files_from_jupyter_directory(self, *src_and_dest, **kwargs):
-        """ Copy some files from the (temporary) jupyter server root
+        """Copy some files from the (temporary) jupyter server root
 
-            Patterns will have the notebook directory prepended
+        Patterns will have the notebook directory prepended
         """
         nbserver = kwargs.get("nbserver", self._handles[-1])
         notebook_dir = self._notebook_dirs[nbserver]
@@ -120,8 +118,7 @@ class ServerKeywords(LibraryComponent):
 
     @keyword
     def wait_for_jupyter_server_to_be_ready(self, *nbservers, **kwargs):
-        """  Wait for the most-recently started Jupyter server to be ready
-        """
+        """Wait for the most-recently started Jupyter server to be ready"""
         interval = float(kwargs.get("interval", 0.5))
         retries = int(kwargs.get("retries", 60))
 
@@ -169,8 +166,7 @@ class ServerKeywords(LibraryComponent):
 
     @keyword
     def terminate_all_jupyter_servers(self):
-        """ Close all Jupyter servers started by JupyterLibrary
-        """
+        """Close all Jupyter servers started by this Library"""
         plib = BuiltIn().get_library_instance("Process")
 
         self.wait_for_jupyter_server_to_be_ready()

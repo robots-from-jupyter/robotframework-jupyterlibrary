@@ -4,18 +4,21 @@
 """
 import subprocess
 import sys
+import os
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
 import nbsphinx
 
 # you have to have run `python -m pip install -e`
+import JupyterLibrary
 from JupyterLibrary.core import CLIENTS, COMMON
+
+os.environ["IN_SPHINX"] = "1"
 
 
 def setup(app):
-    """ Runs before the "normal business" of sphinx. Don't go too crazy here.
-    """
+    """Runs before the "normal business" of sphinx. Don't go too crazy here."""
     here = Path(__file__).parent
 
     subprocess.check_call(
@@ -84,12 +87,12 @@ nbsphinx.RST_TEMPLATE = nbsphinx.RST_TEMPLATE.replace(
 
 # -- Project information -----------------------------------------------------
 
-project = "JupyterLibrary"
+project = JupyterLibrary.__name__
 copyright = "2018, Nick Bollweg"
 author = "Nick Bollweg"
 
 # The short X.Y version
-version = ""
+version = JupyterLibrary.__version__
 # The full version, including alpha/beta/rc tags
 release = ""
 
