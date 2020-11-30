@@ -8,7 +8,7 @@ from uuid import uuid4
 
 from robot.libraries.BuiltIn import BuiltIn
 from SeleniumLibrary.base import LibraryComponent, keyword
-from six.moves.urllib.request import urlopen
+from urllib.request import urlopen
 
 
 class ServerKeywords(LibraryComponent):

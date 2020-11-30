@@ -8,7 +8,7 @@
 
 |          pip          | conda |          docs           |            demo             |             pipes             |
 | :-------------------: | :---: | :---------------------: | :-------------------------: | :---------------------------: |
-| [![pip-badge][]][pip] | TODO  | [![docs-badge][]][docs] | [![binder-badge][]][binder] | [![pipeline-badge]][pipeline] |
+| [![pip-badge][]][pip] | TODO  | [![docs-badge][]][docs] | [![binder-badge][]][binder] | [![worfklow-badge]][workflow] |
 
 # Using
 
@@ -72,8 +72,6 @@ conda install -c conda-forge robotframework-jupyterlibrary
 JupyterLibrary is Free Software under the BSD-3-Clause License. It contains code
 from a number of other projects:
 
-- [SeleniumLibrary][] ([APL-2.0][selibrary-license])
-  - backport of `Press Keys`
 - [Jyve][] ([BSD-3-Clause][jyve-license])
   - Initial implementations of robot keywords
 
@@ -83,10 +81,10 @@ from a number of other projects:
 [binder-badge]: https://mybinder.org/badge_logo.svg
 [binder]:
   https://mybinder.org/v2/gh/robots-from-jupyter/robotframework-jupyterlibrary/master?urlpath=lab/tree/README.md
-[pipeline-badge]:
-  https://dev.azure.com/robots-from-jupyter/robots-from-jupyter/_apis/build/status/robots-from-jupyter.robotframework-jupyterlibrary?branchName=master
-[pipeline]:
-  https://dev.azure.com/robots-from-jupyter/robots-from-jupyter/_build/latest?definitionId=4
+[workflow-badge]:
+  https://github.com/bollwyvl/robotframework-jupyterlibrary/workflows/CI/badge.svg
+[workflow]:
+  https://github.com/bollwyvl/robotframework-jupyterlibrary/actions?query=branch%3Amaster+workflow%3ACI
 [docs-badge]:
   https://readthedocs.org/projects/robotframework-jupyterlibrary/badge/?version=latest
 [pip-badge]: https://img.shields.io/pypi/v/robotframework-jupyterlibrary.svg
