@@ -23,7 +23,7 @@ Open JupyterLab
 
 Wait for JupyterLab Splash Screen
     [Documentation]    Wait for the JupyterLab splash animation
-    Wait Until Page Contains Element    css:#${JLAB ID SPLASH}  timeout=10s
+    Wait Until Page Contains Element    css:#${JLAB ID SPLASH}    timeout=10s
     Wait Until Page Does Not Contain Element    css:#${JLAB ID SPLASH}    timeout=10s
     Sleep    2s
 

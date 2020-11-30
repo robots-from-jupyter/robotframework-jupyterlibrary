@@ -15,5 +15,3 @@ python:
   install:
     - method: pip
       path: .
-    - method: setuptools
-      path: package

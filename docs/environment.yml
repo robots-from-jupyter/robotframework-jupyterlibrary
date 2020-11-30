@@ -4,7 +4,6 @@ name: rtd
 channels:
   - conda-forge
   - nodefaults
-  - msys2
 
 dependencies:
   # enough stuff to run doit

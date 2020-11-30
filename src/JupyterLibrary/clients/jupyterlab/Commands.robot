@@ -31,5 +31,5 @@ Reset JupyterLab and Close
 
 Close All JupyterLab Tabs
     Maybe accept a JupyterLab prompt
-    Execute JupyterLab Command  Close All Tabs
+    Execute JupyterLab Command    Close All Tabs
     Maybe accept a JupyterLab prompt
