@@ -37,6 +37,9 @@ except:
     ipywidgets = None
 
 
+ENC = dict(encoding="utf-8")
+
+
 @magics_class
 class RobotMagics(Magics):
     """
@@ -85,6 +88,12 @@ class RobotMagics(Magics):
         "--arg",
         default=None,
         help="name of a variable in user_ns to use for robot.run arguments",
+    )
+    @magic_arguments.argument(
+        "-n",
+        "--name",
+        default=None,
+        help="name of the suite. default: Untitled_<hash>",
     )
     def robot(self, line, cell):
         """run some Robot Framework code"""
@@ -139,9 +148,11 @@ class RobotMagics(Magics):
 
         outputdir.mkdir(parents=True)
 
-        robot_file = outputdir / "🤖.robot"
+        name = args.name or f"Untitled_{content_hash}"
 
-        robot_file.write_text(cell)
+        robot_file = outputdir / f"{name}.robot"
+
+        robot_file.write_text(cell, **ENC)
 
         display(Markdown("- _🤖 running!_"))
         stdout_file = outputdir / "stdout.txt"
@@ -167,7 +178,7 @@ class RobotMagics(Magics):
                         f"""
                         <ul><li>
                             <code>{outfile.name}</code>
-                            <code><pre>{outfile.read_text() or "empty"}</pre></code>
+                            <code><pre>{outfile.read_text(**ENC) or "empty"}</pre></code>
                         </li></ul>
                         """
                     )
@@ -206,10 +217,10 @@ class RobotMagics(Magics):
 
         with tempfile.TemporaryDirectory() as td:
             tdp = Path(td)
-            it = tdp / "🤖.robot"
-            it.write_text(cell)
+            it = tdp / "ugly.robot"
+            it.write_text(cell, **ENC)
             tidier.inplace(str(it))
-            cell = it.read_text()
+            cell = it.read_text(**ENC)
 
         lexer = RobotFrameworkLexer()
         formatter = HtmlFormatter(cssclass=self.PRETTY_CLASS, style=args.style)
