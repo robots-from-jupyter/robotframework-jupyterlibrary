@@ -12,9 +12,10 @@ for _yaml in ["yaml", "ruamel_yaml", "ruamel.yaml"]:
     try:
         yaml = __import__(_yaml)
         if _yaml == "ruamel.yaml":
-            safe_load = yaml.yaml.safe_load
-        else:
-            safe_load = yaml.safe_load
+            yaml = yaml.yaml
+        safe_load = yaml.safe_load
+        safe_dump = yaml.safe_dump
+        break
     except ImportError:
         pass
 
@@ -65,6 +66,7 @@ DODO = ROOT / "dodo.py"
 
 SRC = ROOT / "src" / "JupyterLibrary"
 VERSION_FILE = SRC / "VERSION"
+LICENSE = ROOT / "LICENSE"
 VERSION = VERSION_FILE.read_text().strip()
 PY_SRC = [*SRC.rglob("*.py")]
 SETUP_CFG = ROOT / "setup.cfg"
@@ -78,6 +80,7 @@ SETUP_CRUFT = [
     ROOT / "MANIFEST.in",
     SETUP_CFG,
     VERSION_FILE,
+    LICENSE,
 ]
 BINDER = ROOT / ".binder"
 ATEST = ROOT / "atest"
@@ -99,6 +102,7 @@ SHA256SUMS = DIST / "SHA256SUMS"
 
 # docs
 DOCS = ROOT / "docs"
+RTD_ENV = DOCS / "rtd.yml"
 DOCS_CONF_PY = DOCS / "conf.py"
 DOCS_BUILDINFO = BUILD / "docs" / "html" / ".buildinfo"
 
@@ -237,6 +241,8 @@ ALL_PRETTIER = [
     *ROOT.glob("*.md"),
     *ROOT.glob("*.json"),
     *ROOT.glob("*.yml"),
+    *DOCS.glob("*.yml"),
+    *DOCS.rglob("*.css"),
     *GITHUB.rglob("*.yml"),
     *BINDER.rglob("*.yml"),
 ]

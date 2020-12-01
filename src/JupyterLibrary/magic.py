@@ -37,6 +37,9 @@ except:
     ipywidgets = None
 
 
+ENC = dict(encoding="utf-8")
+
+
 @magics_class
 class RobotMagics(Magics):
     """
@@ -54,10 +57,10 @@ class RobotMagics(Magics):
     @cell_magic
     @magic_arguments.magic_arguments()
     @magic_arguments.argument(
-        "output_dir",
-        default="_robot_magic_",
-        nargs="?",
-        help="""Name of directory to update (default:.robot-magic) """,
+        "-o",
+        "--output-dir",
+        default=None,
+        help="""Name of directory to update (default:cwd/_robot_magic_) """,
     )
     @magic_arguments.argument(
         "-e", "--execute", default=True, help="""run the robot test"""
@@ -85,6 +88,12 @@ class RobotMagics(Magics):
         "--arg",
         default=None,
         help="name of a variable in user_ns to use for robot.run arguments",
+    )
+    @magic_arguments.argument(
+        "-n",
+        "--name",
+        default=None,
+        help="name of the suite. default: Untitled_<hash>",
     )
     def robot(self, line, cell):
         """run some Robot Framework code"""
@@ -129,16 +138,21 @@ class RobotMagics(Magics):
     def execute(self, args, cell, content_hash):
         """run a cell in the outputdir, in a directory named after the content hash"""
         ip = get_ipython()
-        outputdir = Path.cwd() / args.output_dir / content_hash
+        if args.output_dir:
+            outputdir = Path(args.output_dir).resolve() / "_robot_magic_" / content_hash
+        else:
+            outputdir = Path.cwd() / "_robot_magic_" / content_hash
         display(Markdown(f"- _🤖 making files in_ `{outputdir}`"))
         if outputdir.exists():
             shutil.rmtree(outputdir)
 
         outputdir.mkdir(parents=True)
 
-        robot_file = outputdir / "it.robot"
+        name = args.name or f"Untitled_{content_hash}"
 
-        robot_file.write_text(cell)
+        robot_file = outputdir / f"{name}.robot"
+
+        robot_file.write_text(cell, **ENC)
 
         display(Markdown("- _🤖 running!_"))
         stdout_file = outputdir / "stdout.txt"
@@ -164,7 +178,7 @@ class RobotMagics(Magics):
                         f"""
                         <ul><li>
                             <code>{outfile.name}</code>
-                            <code><pre>{outfile.read_text() or "empty"}</pre></code>
+                            <code><pre>{outfile.read_text(**ENC) or "empty"}</pre></code>
                         </li></ul>
                         """
                     )
@@ -203,10 +217,10 @@ class RobotMagics(Magics):
 
         with tempfile.TemporaryDirectory() as td:
             tdp = Path(td)
-            it = tdp / "it.robot"
-            it.write_text(cell)
+            it = tdp / "ugly.robot"
+            it.write_text(cell, **ENC)
             tidier.inplace(str(it))
-            cell = it.read_text()
+            cell = it.read_text(**ENC)
 
         lexer = RobotFrameworkLexer()
         formatter = HtmlFormatter(cssclass=self.PRETTY_CLASS, style=args.style)
