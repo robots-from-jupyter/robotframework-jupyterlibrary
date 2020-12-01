@@ -54,10 +54,10 @@ class RobotMagics(Magics):
     @cell_magic
     @magic_arguments.magic_arguments()
     @magic_arguments.argument(
-        "output_dir",
+        "-o",
+        "--output-dir",
         default="_robot_magic_",
-        nargs="?",
-        help="""Name of directory to update (default:.robot-magic) """,
+        help="""Name of directory to update (default:_robot_magic_) """,
     )
     @magic_arguments.argument(
         "-e", "--execute", default=True, help="""run the robot test"""
@@ -136,7 +136,7 @@ class RobotMagics(Magics):
 
         outputdir.mkdir(parents=True)
 
-        robot_file = outputdir / "it.robot"
+        robot_file = outputdir / "🤖.robot"
 
         robot_file.write_text(cell)
 
@@ -203,7 +203,7 @@ class RobotMagics(Magics):
 
         with tempfile.TemporaryDirectory() as td:
             tdp = Path(td)
-            it = tdp / "it.robot"
+            it = tdp / "🤖.robot"
             it.write_text(cell)
             tidier.inplace(str(it))
             cell = it.read_text()
