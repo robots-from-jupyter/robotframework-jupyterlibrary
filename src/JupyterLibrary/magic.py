@@ -56,8 +56,8 @@ class RobotMagics(Magics):
     @magic_arguments.argument(
         "-o",
         "--output-dir",
-        default="_robot_magic_",
-        help="""Name of directory to update (default:_robot_magic_) """,
+        default=None,
+        help="""Name of directory to update (default:cwd/_robot_magic_) """,
     )
     @magic_arguments.argument(
         "-e", "--execute", default=True, help="""run the robot test"""
@@ -129,7 +129,10 @@ class RobotMagics(Magics):
     def execute(self, args, cell, content_hash):
         """run a cell in the outputdir, in a directory named after the content hash"""
         ip = get_ipython()
-        outputdir = Path.cwd() / args.output_dir / content_hash
+        if args.output_dir:
+            outputdir = Path(args.output_dir).resolve() / "_robot_magic_" / content_hash
+        else:
+            outputdir = Path.cwd() / "_robot_magic_" / content_hash
         display(Markdown(f"- _🤖 making files in_ `{outputdir}`"))
         if outputdir.exists():
             shutil.rmtree(outputdir)
