@@ -30,6 +30,8 @@ A Notebook in JupyterLab
     Capture Page Screenshot
 ```
 
+> or use [magics][] in notebooks.
+
 See the [acceptance tests][] for examples.
 
 # Installation
@@ -82,7 +84,7 @@ contains code from a number of other projects:
 [miniforge]: https://github.com/conda-forge/miniforge/releases
 [binder-badge]: https://mybinder.org/badge_logo.svg
 [binder]:
-  https://mybinder.org/v2/gh/robots-from-jupyter/robotframework-jupyterlibrary/master?urlpath=lab/tree/README.md
+  https://mybinder.org/v2/gh/robots-from-jupyter/robotframework-jupyterlibrary/master?urlpath=lab/tree/docs/MAGIC.ipynb
 [workflow-badge]:
   https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/workflows/CI/badge.svg
 [workflow]:
@@ -101,3 +103,5 @@ contains code from a number of other projects:
   https://github.com/robotframework/SeleniumLibrary/blob/master/LICENSE.txt
 [jyve]: https://github.com/deathbeds/jyve
 [jyve-license]: https://github.com/deathbeds/jyve/blob/master/LICENSE
+[magics]:
+  https://robotframework-jupyterlibrary.readthedocs.io/en/latest/MAGIC.html

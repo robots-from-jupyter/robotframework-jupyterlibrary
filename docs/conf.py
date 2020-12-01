@@ -1,6 +1,4 @@
 """ Documentation configuration and workflow for JupyterLibrary
-
-    Unlike the JupyterLibrary core, this may use Python3 syntax.
 """
 import subprocess
 import sys
@@ -15,6 +13,7 @@ import nbsphinx
 import JupyterLibrary
 from JupyterLibrary.core import CLIENTS, COMMON
 
+# not really in use yet...
 os.environ["IN_SPHINX"] = "1"
 
 _parser = ConfigParser()
@@ -94,7 +93,7 @@ nbsphinx.RST_TEMPLATE = nbsphinx.RST_TEMPLATE.replace(
 
 # -- Project information -----------------------------------------------------
 
-project = JupyterLibrary.__name__
+project = CONF["metadata"]["name"]
 copyright = f"""{YEAR}, {CONF["metadata"]["author"]}"""
 author = CONF["metadata"]["author"]
 

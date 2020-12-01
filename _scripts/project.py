@@ -66,6 +66,7 @@ DODO = ROOT / "dodo.py"
 
 SRC = ROOT / "src" / "JupyterLibrary"
 VERSION_FILE = SRC / "VERSION"
+LICENSE = ROOT / "LICENSE"
 VERSION = VERSION_FILE.read_text().strip()
 PY_SRC = [*SRC.rglob("*.py")]
 SETUP_CFG = ROOT / "setup.cfg"
@@ -79,6 +80,7 @@ SETUP_CRUFT = [
     ROOT / "MANIFEST.in",
     SETUP_CFG,
     VERSION_FILE,
+    LICENSE,
 ]
 BINDER = ROOT / ".binder"
 ATEST = ROOT / "atest"
