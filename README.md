@@ -90,7 +90,7 @@ contains code from a number of other projects:
 [workflow]:
   https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/actions?query=workflow%3ACI+branch%3Amaster
 [docs-badge]:
-  https://readthedocs.org/projects/robotframework-jupyterlibrary/badge/?version=latest
+  https://readthedocs.org/projects/robotframework-jupyterlibrary/badge/?version=stable
 [pip-badge]: https://img.shields.io/pypi/v/robotframework-jupyterlibrary.svg
 [pip]: https://pypi.org/project/robotframework-jupyterlibrary
 [conda-forge]:
@@ -104,4 +104,4 @@ contains code from a number of other projects:
 [jyve]: https://github.com/deathbeds/jyve
 [jyve-license]: https://github.com/deathbeds/jyve/blob/master/LICENSE
 [magics]:
-  https://robotframework-jupyterlibrary.readthedocs.io/en/latest/MAGIC.html
+  https://robotframework-jupyterlibrary.readthedocs.io/en/stable/MAGIC.html
