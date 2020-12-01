@@ -5,9 +5,10 @@
 import subprocess
 import sys
 import os
+from datetime import datetime
 from pathlib import Path
 from tempfile import TemporaryDirectory
-
+from configparser import ConfigParser
 import nbsphinx
 
 # you have to have run `python -m pip install -e`
@@ -15,6 +16,12 @@ import JupyterLibrary
 from JupyterLibrary.core import CLIENTS, COMMON
 
 os.environ["IN_SPHINX"] = "1"
+
+_parser = ConfigParser()
+_parser.read(Path(__file__).parent.parent / "setup.cfg")
+
+CONF = {k: _parser[k] for k in _parser.sections()}
+YEAR = datetime.now().year
 
 
 def setup(app):
@@ -88,13 +95,13 @@ nbsphinx.RST_TEMPLATE = nbsphinx.RST_TEMPLATE.replace(
 # -- Project information -----------------------------------------------------
 
 project = JupyterLibrary.__name__
-copyright = "2018, Nick Bollweg"
-author = "Nick Bollweg"
+copyright = f"""{YEAR}, {CONF["metadata"]["author"]}"""
+author = CONF["metadata"]["author"]
 
 # The short X.Y version
-version = JupyterLibrary.__version__
+version = ".".join(JupyterLibrary.__version__.split(".")[:2])
 # The full version, including alpha/beta/rc tags
-release = ""
+release = JupyterLibrary.__version__
 
 
 # -- General configuration ---------------------------------------------------
@@ -178,7 +185,7 @@ html_static_path = ["_static"]
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = "jupyterlibrarydoc"
+htmlhelp_basename = f"""{CONF["metadata"]["name"]}-doc"""
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -204,9 +211,9 @@ latex_elements = {
 latex_documents = [
     (
         master_doc,
-        "jupyterlibrary.tex",
-        "JupyterLibrary Documentation",
-        "Nick Bollweg",
+        f"""{CONF["metadata"]["name"]}.tex""",
+        f"""{CONF["metadata"]["name"]} Documentation""",
+        CONF["metadata"]["author"],
         "manual",
     )
 ]
@@ -217,7 +224,13 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, "jupyterlibrary", "JupyterLibrary Documentation", [author], 1)
+    (
+        master_doc,
+        CONF["metadata"]["name"],
+        f"""{CONF["metadata"]["name"]} Documentation""",
+        [author],
+        1,
+    )
 ]
 
 
@@ -230,10 +243,10 @@ texinfo_documents = [
     (
         master_doc,
         "jupyterlibrary",
-        "JupyterLibrary Documentation",
+        f"""{CONF["metadata"]["name"]} Documentation""",
         author,
-        "jupyterlibrary",
-        "One line description of project.",
+        CONF["metadata"]["name"],
+        CONF["metadata"]["description"],
         "Miscellaneous",
     )
 ]

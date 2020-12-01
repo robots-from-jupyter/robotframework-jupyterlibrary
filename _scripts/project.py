@@ -239,6 +239,8 @@ ALL_PRETTIER = [
     *ROOT.glob("*.md"),
     *ROOT.glob("*.json"),
     *ROOT.glob("*.yml"),
+    *DOCS.glob("*.yml"),
+    *DOCS.rglob("*.css"),
     *GITHUB.rglob("*.yml"),
     *BINDER.rglob("*.yml"),
 ]

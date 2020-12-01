@@ -1,13 +1,20 @@
 :root {
-  --rf-blue: rgb(0,192,181);
+  --rf-blue: rgb(0, 192, 181);
 }
 @font-face {
-  font-family: "OCR-A";
-  src: url("../fonts/OCRA.woff2") format("woff2");
+  font-family: 'OCR-A';
+  src: url('../fonts/OCRA.woff2') format('woff2');
 }
 
-h1, h2, h3, h4, h5, h6, .icon.icon-home, .wy-breadcrumbs {
-  font-family: "OCR-A", monospace;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.icon.icon-home,
+.wy-breadcrumbs {
+  font-family: 'OCR-A', monospace;
   text-transform: uppercase;
 }
 
@@ -16,15 +23,22 @@ h1, h2, h3, h4, h5, h6, .icon.icon-home, .wy-breadcrumbs {
   margin-left: 0;
   font-size: 120%;
   font-style: italic;
-  background: linear-gradient(to right, #eee 10px, #fff 0)
+  background: linear-gradient(to right, #eee 10px, #fff 0);
 }
 
-h1 {
-  font-size: 350%;
+h1,
+h1 .headerlink {
+  font-size: 300%;
 }
 
-h2 {
+h2,
+h2 .headerlink {
   font-size: 200%;
+}
+
+h3,
+h3 .headerlink {
+  font-size: 150%;
 }
 
 p {
@@ -46,7 +60,8 @@ iframe {
   border: 0;
 }
 
-a:hover, a:active {
+a:hover,
+a:active {
   text-decoration: underline;
   color: var(--rf-blue);
 }
@@ -57,7 +72,8 @@ a:hover, a:active {
   background-color: transparent;
 }
 
-div.nbinput div.prompt, div.nboutput div.prompt {
+div.nbinput div.prompt,
+div.nboutput div.prompt {
   display: none;
 }
 
@@ -65,24 +81,22 @@ div.nbinput div.prompt, div.nboutput div.prompt {
   max-width: unset;
 }
 
-
-#rtd-search-form input[type=text],
+#rtd-search-form input[type='text'],
 .rst-content blockquote {
   border: 0;
   border-radius: 0;
   --notchSize: 9px;
 
-  clip-path:
-    polygon(
-      0% var(--notchSize),
-      var(--notchSize) 0%,
-      calc(100% - var(--notchSize)) 0%,
-      100% var(--notchSize),
-      100% calc(100% - var(--notchSize)),
-      calc(100% - var(--notchSize)) 100%,
-      var(--notchSize) 100%,
-      0% calc(100% - var(--notchSize))
-    );
+  clip-path: polygon(
+    0% var(--notchSize),
+    var(--notchSize) 0%,
+    calc(100% - var(--notchSize)) 0%,
+    100% var(--notchSize),
+    100% calc(100% - var(--notchSize)),
+    calc(100% - var(--notchSize)) 100%,
+    var(--notchSize) 100%,
+    0% calc(100% - var(--notchSize))
+  );
 }
 
 .rst-content .section .toctree-wrapper > ul {
@@ -102,7 +116,7 @@ div.nbinput div.prompt, div.nboutput div.prompt {
 }
 
 .rst-content .section .toctree-wrapper .toctree-l1 > a {
-  font-family: "OCR-A", monospace;
+  font-family: 'OCR-A', monospace;
   text-transform: uppercase;
   font-size: 150%;
 }
