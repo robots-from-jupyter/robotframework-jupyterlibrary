@@ -12,7 +12,8 @@
 
 # Using
 
-Write `.robot` files that use `JupyterLibrary` keywords.
+Write `.robot` files that use `JupyterLibrary` [keywords][]... or use [magics][]
+in notebooks.
 
 ```robotframework
 *** Settings ***
@@ -30,8 +31,6 @@ A Notebook in JupyterLab
     Capture Page Screenshot
 ```
 
-> or use [magics][] in notebooks.
-
 See the [acceptance tests][] for examples.
 
 # Installation
@@ -46,28 +45,7 @@ Or
 conda install -c conda-forge robotframework-jupyterlibrary
 ```
 
-## Development Installation
-
-- get Firefox
-  - Chrome works, too, but more fickle
-- get [Miniforge][] (as in Python 3.6+)
-- clone this repo...
-
-      git clone https://github.com/robots-from-jupyter/robotframework-jupyterlibrary
-      cd robotframework-jupyterlibrary
-
-- update and activate...
-
-      conda env update
-      conda activate robotframework-jupyterlibrary
-
-- then...
-
-      pip install -e . --no-deps --ignore-installed
-
-- run the tests...
-
-      python -m scripts.atest
+Or see the [contributing guide][contributing] for a development install.
 
 # Free Software
 
@@ -98,10 +76,11 @@ contains code from a number of other projects:
 [conda-forge-badge]:
   https://img.shields.io/conda/vn/conda-forge/robotframework-jupyterlibrary.svg
 [docs]: https://robotframework-jupyterlibrary.readthedocs.io
-[seleniumlibrary]: https://github.com/robotframework/SeleniumLibrary
-[selibrary-license]:
-  https://github.com/robotframework/SeleniumLibrary/blob/master/LICENSE.txt
 [jyve]: https://github.com/deathbeds/jyve
 [jyve-license]: https://github.com/deathbeds/jyve/blob/master/LICENSE
 [magics]:
   https://robotframework-jupyterlibrary.readthedocs.io/en/stable/MAGIC.html
+[keywords]:
+  https://robotframework-jupyterlibrary.readthedocs.io/en/stable/KEYWORDS.html
+[contributing]:
+  https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/blob/master/CONTRIBUTING.md

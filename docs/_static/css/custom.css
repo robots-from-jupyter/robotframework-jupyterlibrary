@@ -96,6 +96,16 @@ a:active {
   background-color: transparent;
 }
 
+body div.nbinput.container div[class*='highlight'],
+body div.nboutput.container div[class*='highlight'] {
+  background-color: black;
+  padding: 0.25em;
+}
+
+body div.nboutput.container div[class*='highlight'] {
+  margin-bottom: 1em;
+}
+
 div.nbinput div.prompt,
 div.nboutput div.prompt {
   display: none;

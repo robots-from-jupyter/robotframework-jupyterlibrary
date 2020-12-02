@@ -215,6 +215,7 @@ def task_lint():
 
 
 def task_js():
+    """javascript cruft"""
     env = "lint"
 
     run_in = P.RUN_IN[env]
@@ -305,11 +306,14 @@ def _make_setup(env):
             P.DIST,
             P.SETUP["metadata"]["name"],
         ]
+        doc = f"[{env}] install from dist"
     else:
         pip_args = ["-e", "."]
+        doc = f"[{env}] python development install"
 
     yield dict(
         name=env,
+        doc=doc,
         actions=[
             lambda: frozen.unlink() if frozen.exists() else None,
             [*pym, "pip", "install", "--no-deps", "--ignore-installed", *pip_args],
@@ -359,6 +363,7 @@ def task_test():
 
     yield dict(
         name="atest",
+        doc="run acceptance tests with robot",
         uptodate=[config_changed(os.environ.get("ATEST_ARGS", ""))],
         actions=[clean, [*pym, "_scripts.atest"], touch],
         file_dep=[P.OK.robot_dry_run, *robot_deps],
@@ -368,6 +373,7 @@ def task_test():
     # Presently not running this on CI
     yield dict(
         name="combine",
+        doc="combine all robot outputs into a single HTML report",
         actions=[[*pym, "_scripts.combine"]],
         file_dep=[
             real_target,
