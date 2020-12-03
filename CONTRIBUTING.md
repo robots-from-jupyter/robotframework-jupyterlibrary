@@ -41,8 +41,8 @@ doit lock
 ```
 
 > Bootstrapping from _no_ lockfiles requires an external provider of
-> `conda-lock`, but the lock environment itself will be created and used for the
-> next task.
+> `conda-lock`. It may require running `doit lock` a few times to get a stable
+> set of environment solutions.
 
 #### Reproducing CI failures
 

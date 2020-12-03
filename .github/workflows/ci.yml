@@ -51,6 +51,7 @@ jobs:
 
   conda-build:
     runs-on: ubuntu-20.04
+    needs: [build]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v1
@@ -67,6 +68,10 @@ jobs:
           auto-update-conda: true
           environment-file: .github/locks/meta/linux-64/conda.lock
           use-only-tar-bz2: true
+      - uses: actions/download-artifact@v2
+        with:
+          name: dist_${{ github.run_number }}
+          path: ./dist
       - run: python dodo.py conda_build || python dodo.py conda_build
       - uses: actions/upload-artifact@v2
         with:

@@ -432,38 +432,46 @@ def task_test():
     )
 
 
-def task_lock():
-    """generate conda lock files for all the excursions"""
-    if not P.THIS_META_ENV_LOCK.exists() and not P.CAN_CONDA_LOCK:
-        raise RuntimeError(
-            f"{P.THIS_META_ENV_LOCK} is missing: this, or `conda-lock` on path"
-            " is needed to bootstrap meta env"
-        )
+def _make_lock_task_name(key):
+    return "__".join([p for p in key if p]).replace(".", "_")
 
-    def _make_lock_task_name(key):
-        return "__".join([p for p in key if p]).replace(".", "_")
 
-    def _make_lock_task(key, target):
-        (flow, pf, py, lab) = key
+def _make_lock_task(key, target):
+    (flow, pf, py, lab) = key
 
-        lock_dep = [*P.ENV_DEPS[key]]
-        lock_args = [*P.SCRIPT_LOCK]
+    task = dict(
+        name=_make_lock_task_name(key),
+        actions=[[*P.SCRIPT_LOCK, target]],
+        file_dep=[*P.ENV_DEPS[key]],
+        targets=[target],
+    )
 
-        if flow == "meta" and P.THIS_META_ENV_LOCK == target:
-            pass
-        else:
-            lock_args = [*P.RUN_IN["meta"], *lock_args]
-            lock_dep += [P.THIS_META_ENV_LOCK, P.CONDA_LISTS["meta"]]
+    if P.THIS_META_ENV_LOCK != target:
+        task["actions"][0] = [*P.RUN_IN["meta"], *task["actions"][0]]
+        task["task_dep"] = ["env:meta"]
 
-        return dict(
-            name=_make_lock_task_name(key),
-            actions=[[*lock_args, target]],
-            file_dep=lock_dep,
-            targets=[target],
-        )
+    return task
 
-    for key, target in P.ENVENTURES.items():
-        yield _make_lock_task(key, target)
+
+# at some point, we'll want a scheduled excursion just for locking
+if not P.CI:
+
+    def task_lock():
+        """generate conda lock files for all the excursions"""
+        meta_lock_exists = P.THIS_META_ENV_LOCK.exists()
+        can_bootstrap = P.CAN_CONDA_LOCK
+
+        if not (meta_lock_exists or can_bootstrap):
+            raise RuntimeError(
+                f"{P.THIS_META_ENV_LOCK} is missing: this, or `conda-lock` on path"
+                " is needed to bootstrap the lock environment"
+            )
+
+        for key, target in P.ENVENTURES.items():
+            if not meta_lock_exists and target != P.THIS_META_ENV_LOCK:
+                continue
+
+            yield _make_lock_task(key, target)
 
 
 if __name__ == "__main__":
