@@ -71,6 +71,48 @@ def task_build():
     )
 
 
+def task_conda_build():
+    """build conda package"""
+
+    def _template():
+        sums = {
+            line.split("  ")[1]: line.split("  ")[0]
+            for line in P.SHA256SUMS.read_text().splitlines()
+            if line.strip()
+        }
+
+        P.META_YAML.write_text(
+            P.META_YAML_IN.read_text()
+            .replace("REPLACE_THIS_VERSION", P.VERSION)
+            .replace("REPLACE_THIS_PATH", P.SDIST.as_uri())
+            .replace("REPLACE_THIS_SHA256", sums[P.SDIST.name])
+        )
+
+    yield dict(
+        name="recipe",
+        file_dep=[P.META_YAML_IN, P.SDIST, P.VERSION_FILE],
+        targets=[P.META_YAML],
+        actions=[_template],
+    )
+
+    yield dict(
+        name="build",
+        file_dep=[P.META_YAML, P.SDIST, P.SHA256SUMS],
+        actions=[
+            [
+                P.CONDA_EXE,
+                "build",
+                "-c",
+                "conda-forge",
+                "--output-folder",
+                P.CONDA_BLD,
+                P.RECIPE,
+            ]
+        ],
+        targets=[P.CONDA_PKG],
+    )
+
+
 def task_docs():
     """build HTML docs"""
     env = "docs"
@@ -78,7 +120,11 @@ def task_docs():
     lockfile = P.get_lockfile(env)
     frozen = P.PIP_LISTS[env]
 
-    header, tarballs = lockfile.read_text().split("@EXPLICIT")
+    try:
+        header, tarballs = lockfile.read_text().split("@EXPLICIT")
+    except:
+        header = "# NO LOCKFILE"
+        tarballs = []
 
     clean, touch = P.get_ok_actions(P.RTD_ENV)
 
@@ -383,19 +429,40 @@ def task_test():
     )
 
 
-if P.CAN_CONDA_LOCK:
+def task_lock():
+    """generate conda lock files for all the excursions"""
 
-    def task_lock():
-        """generate conda lock files for all the excursions"""
-        for key, target in P.ENVENTURES.items():
-            (flow, pf, py, lab) = key
-            file_dep = P.ENV_DEPS[key]
-            yield dict(
-                name="__".join([p for p in key if p]).replace(".", "_"),
-                actions=[[*P.SCRIPT_LOCK, target]],
-                file_dep=file_dep,
-                targets=[target],
-            )
+    env = "meta"
+    args = [*P.SCRIPT_LOCK]
+    file_dep = []
+
+    if not P.THIS_META_ENV_LOCK.exists() and not P.CAN_CONDA_LOCK:
+        raise RuntimeError(
+            f"{P.THIS_META_ENV_LOCK} is missing: this, or `conda-lock` on path"
+            " is needed to bootstrap meta env"
+        )
+
+    lock_lock = []
+    lock_env_list = []
+
+    if P.THIS_META_ENV_LOCK.exists():
+        args = [*P.RUN_IN[env], *args]
+        lock_lock = P.THIS_META_ENV_LOCK
+        lock_env_list = P.CONDA_LISTS[env]
+
+    for key, target in P.ENVENTURES.items():
+        (flow, pf, py, lab) = key
+        task = dict(
+            name="__".join([p for p in key if p]).replace(".", "_"),
+            actions=[[*args, target]],
+            file_dep=[
+                *file_dep,
+                *P.ENV_DEPS[key],
+                *([] if target == lock_lock else [lock_lock, lock_env_list]),
+            ],
+            targets=[target],
+        )
+        yield task
 
 
 if __name__ == "__main__":

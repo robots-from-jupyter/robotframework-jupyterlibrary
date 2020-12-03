@@ -1,5 +1,6 @@
 __pycache__/
 _artifacts/
+_lab/
 _robot_magic_*
 .doit*
 .envs/
@@ -13,4 +14,4 @@ envs/
 lib/
 node_modules/
 Untitled*.*
-_lab/
+.github/recipe/meta.yaml

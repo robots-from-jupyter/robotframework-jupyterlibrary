@@ -21,7 +21,7 @@ https://conda.anaconda.org/conda-forge/osx-64/readline-8.0-h0678c8f_2.tar.bz2#8f
 https://conda.anaconda.org/conda-forge/osx-64/tk-8.6.10-hb0a8c7a_1.tar.bz2#f7477bf81dcfc7b4dddc7b3790a99a0c
 https://conda.anaconda.org/conda-forge/osx-64/zeromq-4.3.3-h74dc148_3.tar.bz2#365c52e91cb00d96d15bef9eddf9f7f8
 https://conda.anaconda.org/conda-forge/osx-64/nodejs-14.15.1-heaeed3d_0.tar.bz2#ab7d3bb7b92c6b6f8a3e8b7f33019ff4
-https://conda.anaconda.org/conda-forge/osx-64/sqlite-3.33.0-h960bd1c_1.tar.bz2#d86a1d10a189d4c000a61971110f4f55
+https://conda.anaconda.org/conda-forge/osx-64/sqlite-3.34.0-h17101e1_0.tar.bz2#9e9694f119bb1a2362a0cc0249651835
 https://conda.anaconda.org/conda-forge/osx-64/python-3.8.6-h3b7b5d6_1_cpython.tar.bz2#3fd08a5192b00e12ad9c04b3acc9ab1c
 https://conda.anaconda.org/conda-forge/noarch/async_generator-1.10-py_0.tar.bz2#d56c596e61b1c4952acf0a9920856c12
 https://conda.anaconda.org/conda-forge/noarch/attrs-20.3.0-pyhd3deb0d_0.tar.bz2#5b319abb055eefcfa344bc21378ca23f
@@ -46,14 +46,14 @@ https://conda.anaconda.org/conda-forge/noarch/send2trash-1.5.0-py_0.tar.bz2#c377
 https://conda.anaconda.org/conda-forge/noarch/six-1.15.0-pyh9f0ad1d_0.tar.bz2#1eec421f0f1f39e579e44e4a5ce646a2
 https://conda.anaconda.org/conda-forge/noarch/testpath-0.4.4-py_0.tar.bz2#3b98fff4d5342bebde2ecaa314f796f9
 https://conda.anaconda.org/conda-forge/noarch/webencodings-0.5.1-py_1.tar.bz2#3563be4c5611a44210d9ba0c16113136
-https://conda.anaconda.org/conda-forge/noarch/wheel-0.35.1-pyh9f0ad1d_0.tar.bz2#126827869be32f21872a2b30ebe2b038
+https://conda.anaconda.org/conda-forge/noarch/wheel-0.36.0-pyhd3deb0d_0.tar.bz2#f144bcd310e543bd9c8aa17c8ba1ee02
 https://conda.anaconda.org/conda-forge/noarch/zipp-3.4.0-py_0.tar.bz2#0df927d2e46244cef8fd75d7ec2ba51c
-https://conda.anaconda.org/conda-forge/osx-64/appnope-0.1.0-py38h50d1736_1003.tar.bz2#e13604b169012d9d1c08c191d5cdb3cc
+https://conda.anaconda.org/conda-forge/osx-64/appnope-0.1.2-py38h50d1736_0.tar.bz2#59544280b8ccc657a25ffdf742df5b6e
 https://conda.anaconda.org/conda-forge/osx-64/certifi-2020.11.8-py38h50d1736_0.tar.bz2#81ff368f40962d5041c16356b279f393
 https://conda.anaconda.org/conda-forge/osx-64/cffi-1.14.4-py38h979bc6b_1.tar.bz2#e648f242bf242deb64206104cb8cbf1f
 https://conda.anaconda.org/conda-forge/osx-64/chardet-3.0.4-py38h5347e94_1008.tar.bz2#63b433075e840f92c6f33abff8cf564a
 https://conda.anaconda.org/conda-forge/osx-64/entrypoints-0.3-py38h32f6830_1002.tar.bz2#9c7780ba3fe9fd2c15ea2830705de3a2
-https://conda.anaconda.org/conda-forge/noarch/importlib-metadata-3.1.0-pyhd8ed1ab_0.tar.bz2#97a4bcec44626ddea360efdf7d5ad816
+https://conda.anaconda.org/conda-forge/noarch/importlib-metadata-3.1.1-pyhd8ed1ab_0.tar.bz2#e22162ed945059586d1b6b603d07c48e
 https://conda.anaconda.org/conda-forge/osx-64/jedi-0.17.2-py38h50d1736_1.tar.bz2#17def26d8c7368853581d4a81e3043b3
 https://conda.anaconda.org/conda-forge/osx-64/macfsevents-0.8.1-py38h4d0b108_1001.tar.bz2#cf030199ecebc197ee1475efdf5ac965
 https://conda.anaconda.org/conda-forge/osx-64/markupsafe-1.1.1-py38h94c058a_2.tar.bz2#4fe723b88b05abb9e79b2cd4906fc406
@@ -74,7 +74,7 @@ https://conda.anaconda.org/conda-forge/osx-64/argon2-cffi-20.1.0-py38h7e3306e_2.
 https://conda.anaconda.org/conda-forge/osx-64/brotlipy-0.7.0-py38h94c058a_1001.tar.bz2#e75b32a4f716a68f0437ad606f4078e1
 https://conda.anaconda.org/conda-forge/osx-64/cryptography-3.2.1-py38h5c1d3f9_0.tar.bz2#cba1a84ebaed4b2583d1cf918a6eb8f5
 https://conda.anaconda.org/conda-forge/osx-64/doit-0.33.1-py38h32f6830_1.tar.bz2#15dba72dfa4453ebafe25a9fd526811a
-https://conda.anaconda.org/conda-forge/noarch/importlib_metadata-3.1.0-hd8ed1ab_0.tar.bz2#182b3a7c361dfc0de2ed1abf90fd61c8
+https://conda.anaconda.org/conda-forge/noarch/importlib_metadata-3.1.1-hd8ed1ab_0.tar.bz2#a884b1bcaa2d48a6bc299dcba787db7a
 https://conda.anaconda.org/conda-forge/osx-64/jupyter_core-4.7.0-py38h50d1736_0.tar.bz2#3b207eb36704052c8b3263679f63b5af
 https://conda.anaconda.org/conda-forge/osx-64/setuptools-49.6.0-py38h5347e94_2.tar.bz2#d60492e2803bc7f3c85544532868cee1
 https://conda.anaconda.org/conda-forge/osx-64/terminado-0.9.1-py38h50d1736_1.tar.bz2#9eeb5eb53bce12e00bb55d5bc9ca4d48

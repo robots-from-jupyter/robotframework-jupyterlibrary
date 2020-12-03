@@ -8,7 +8,7 @@ https://conda.anaconda.org/conda-forge/win-64/vs2015_runtime-14.16.27012-h30e32a
 https://conda.anaconda.org/conda-forge/win-64/nodejs-14.15.1-h57928b3_0.tar.bz2#d864e5c8a3de3ccf10a5cfc841084c39
 https://conda.anaconda.org/conda-forge/win-64/vc-14.1-h869be7e_1.tar.bz2#4fae57303daa91367eca263374e4a638
 https://conda.anaconda.org/conda-forge/win-64/openssl-1.1.1h-he774522_0.tar.bz2#21844b16355ef8faa21fca97794d6825
-https://conda.anaconda.org/conda-forge/win-64/sqlite-3.33.0-he774522_1.tar.bz2#d71a870ed0940cdf9f4bcb827d12ead6
+https://conda.anaconda.org/conda-forge/win-64/sqlite-3.34.0-h8ffe710_0.tar.bz2#0887d420b945a5342cd03429d475658c
 https://conda.anaconda.org/conda-forge/win-64/yaml-0.2.5-he774522_0.tar.bz2#d41c34441d8bbb6d141e691ae7bccf35
 https://conda.anaconda.org/conda-forge/win-64/yarn-1.22.10-0.tar.bz2#4f94f281c5682908afc43f8bf531bc36
 https://conda.anaconda.org/conda-forge/win-64/python-3.8.6-h7840368_1_cpython.tar.bz2#07903b905072cd232a326225aa7fe247
@@ -27,12 +27,12 @@ https://conda.anaconda.org/conda-forge/noarch/robotframework-3.2.2-pyh9f0ad1d_0.
 https://conda.anaconda.org/conda-forge/noarch/six-1.15.0-pyh9f0ad1d_0.tar.bz2#1eec421f0f1f39e579e44e4a5ce646a2
 https://conda.anaconda.org/conda-forge/noarch/toml-0.10.2-pyhd8ed1ab_0.tar.bz2#f832c45a477c78bebd107098db465095
 https://conda.anaconda.org/conda-forge/noarch/typing_extensions-3.7.4.3-py_0.tar.bz2#12b96e382730541a4b332420227055ae
-https://conda.anaconda.org/conda-forge/noarch/wheel-0.35.1-pyh9f0ad1d_0.tar.bz2#126827869be32f21872a2b30ebe2b038
+https://conda.anaconda.org/conda-forge/noarch/wheel-0.36.0-pyhd3deb0d_0.tar.bz2#f144bcd310e543bd9c8aa17c8ba1ee02
 https://conda.anaconda.org/conda-forge/noarch/zipp-3.4.0-py_0.tar.bz2#0df927d2e46244cef8fd75d7ec2ba51c
 https://conda.anaconda.org/conda-forge/win-64/certifi-2020.11.8-py38haa244fe_0.tar.bz2#1e3a88f8db13d19c4d23422e2f8f0e6c
 https://conda.anaconda.org/conda-forge/win-64/cffi-1.14.4-py38hd8c33c5_1.tar.bz2#2eafaa5f8f4f7e43cfb6dbee50bcb792
 https://conda.anaconda.org/conda-forge/win-64/doit-0.33.1-py38h32f6830_1.tar.bz2#8b263b9225a12d7d926b3266bcbd2d00
-https://conda.anaconda.org/conda-forge/noarch/importlib-metadata-3.1.0-pyhd8ed1ab_0.tar.bz2#97a4bcec44626ddea360efdf7d5ad816
+https://conda.anaconda.org/conda-forge/noarch/importlib-metadata-3.1.1-pyhd8ed1ab_0.tar.bz2#e22162ed945059586d1b6b603d07c48e
 https://conda.anaconda.org/conda-forge/win-64/mypy_extensions-0.4.3-py38h32f6830_2.tar.bz2#f749c2b175569eaf350b025cde50ee48
 https://conda.anaconda.org/conda-forge/win-64/pyyaml-5.3.1-py38hab1e662_1.tar.bz2#25ce237676e0d4f8029d3440c2f4afc6
 https://conda.anaconda.org/conda-forge/win-64/regex-2020.11.13-py38h294d835_0.tar.bz2#b0fc6e573333bf715f53ebe373bc0c27
