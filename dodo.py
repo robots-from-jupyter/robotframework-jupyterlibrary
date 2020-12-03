@@ -89,23 +89,33 @@ def task_conda_build():
             if line.strip()
         }
 
-        P.META_YAML.write_text(
+        recipe_text = (
             P.META_YAML_IN.read_text()
             .replace("REPLACE_THIS_VERSION", P.VERSION)
             .replace("REPLACE_THIS_PATH", P.SDIST.as_uri())
             .replace("REPLACE_THIS_SHA256", sums[P.SDIST.name])
         )
 
+        print(recipe_text)
+
+        P.META_YAML.write_text(recipe_text)
+
+    if P.CI:
+        # we _don't_ want to force irreproducibly re-building the tarball
+        file_dep = [P.META_YAML_IN, P.VERSION_FILE]
+    else:
+        file_dep = [P.META_YAML_IN, P.SDIST, P.VERSION_FILE, P.SHA256SUMS]
+
     yield dict(
         name="recipe",
-        file_dep=[P.META_YAML_IN, P.SDIST, P.VERSION_FILE],
+        file_dep=file_dep,
         targets=[P.META_YAML],
         actions=[_template],
     )
 
     yield dict(
         name="build",
-        file_dep=[P.META_YAML, P.SDIST, P.SHA256SUMS],
+        file_dep=[P.META_YAML],
         actions=[
             [
                 P.CONDA_EXE,
