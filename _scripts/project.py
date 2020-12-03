@@ -22,9 +22,9 @@ for _yaml in ["yaml", "ruamel_yaml", "ruamel.yaml"]:
 assert safe_load, "need at least a yaml parser"
 
 
-CI = int(os.environ.get("CI", "0"))
-INSTALL_ARTIFACT = int(os.environ.get("INSTALL_ARTIFACT", "0"))
-IN_BINDER = int(os.environ.get("IN_BINDER", "0"))
+CI = safe_load(os.environ.get("CI", "0"))
+INSTALL_ARTIFACT = safe_load(os.environ.get("INSTALL_ARTIFACT", "0"))
+IN_BINDER = safe_load(os.environ.get("IN_BINDER", "0"))
 PLATFORM = platform.system()
 BROWSER = os.environ.get("BROWSER", "headlessfirefox")
 CAN_CONDA_LOCK = shutil.which("conda-lock") is not None
