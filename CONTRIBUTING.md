@@ -35,12 +35,14 @@ doit release
 
 > After adding/changing any dependencies in `.github/env_specs`, the _lockfiles_
 > need to be refreshed in `.github/locks` and committed.
->
-> Requires `conda-lock`, and optionally `mamba` for faster solves
 
 ```shell
 doit lock
 ```
+
+> Bootstrapping from _no_ lockfiles requires an external provider of
+> `conda-lock`. It may require running `doit lock` a few times to get a stable
+> set of environment solutions.
 
 #### Reproducing CI failures
 
@@ -67,3 +69,18 @@ doit release
 
 This will recreate the `test` environment with the specified lockfile, and
 repeat all the steps.
+
+#### Releasing
+
+- ensure `VERSION` has been increased appropriately
+- ensure `HISTORY.ipynb` is up-to-date
+- (usually) grab the `dist` assets from CI, unpack into `./dist`
+- make a GitHub release, adding the `.tar.gz`, `.whl`, and `SHA256SUMS`
+- upload to PyPI
+
+  ```bash
+  doit publish
+  ```
+
+- do a post-mortem issue
+- bump `VERSION` to a working status

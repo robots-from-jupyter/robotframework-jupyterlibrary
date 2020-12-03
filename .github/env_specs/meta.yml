@@ -1,0 +1,15 @@
+channels:
+  - conda-forge
+  - msys2
+  - nodefaults
+
+dependencies:
+  - conda >=4.9.2,<4.9.3
+  - conda-build >=3.20,<3.21
+  - conda-lock
+  - conda-verify
+  - doit
+  - mamba >=0.7.3
+  - pip
+  - ripgrep
+  - twine

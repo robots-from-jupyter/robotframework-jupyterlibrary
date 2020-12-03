@@ -22,9 +22,9 @@ for _yaml in ["yaml", "ruamel_yaml", "ruamel.yaml"]:
 assert safe_load, "need at least a yaml parser"
 
 
-CI = int(os.environ.get("CI", "0"))
-INSTALL_ARTIFACT = int(os.environ.get("INSTALL_ARTIFACT", "0"))
-IN_BINDER = int(os.environ.get("IN_BINDER", "0"))
+CI = safe_load(os.environ.get("CI", "0"))
+INSTALL_ARTIFACT = safe_load(os.environ.get("INSTALL_ARTIFACT", "0"))
+IN_BINDER = safe_load(os.environ.get("IN_BINDER", "0"))
 PLATFORM = platform.system()
 BROWSER = os.environ.get("BROWSER", "headlessfirefox")
 CAN_CONDA_LOCK = shutil.which("conda-lock") is not None
@@ -129,7 +129,7 @@ LOCKS = GITHUB / "locks"
 ENV_SPECS = GITHUB / "env_specs"
 ENVS = ROOT / ".envs"
 
-ENV_NAMES = ["test", "lint", "docs"]
+ENV_NAMES = ["test", "lint", "docs", "meta"]
 
 CONDA_RUN = [CONDA_EXE, "run"]
 
@@ -145,7 +145,8 @@ else:
         for env in ENV_NAMES
     }
 
-CONDA_LISTS = {env: BUILD / env / "conda.lock" for env in ENV_NAMES}
+LOCK_NAME = "conda.lock"
+CONDA_LISTS = {env: BUILD / env / LOCK_NAME for env in ENV_NAMES}
 PIP_LISTS = {env: BUILD / env / "pip.freeze" for env in ENV_NAMES}
 
 WORKFLOW_CI = WORKFLOWS / "ci.yml"
@@ -185,7 +186,7 @@ def _is_excluded(flow, pf, py, lab):
 
 
 ENVENTURES = {
-    ("test", pf, py, lab): LOCKS / "test" / pf / py / lab / "conda.lock"
+    ("test", pf, py, lab): LOCKS / "test" / pf / py / lab / LOCK_NAME
     for pf in PLATFORMS
     for lab in LABS
     for py in PYTHONS
@@ -193,16 +194,23 @@ ENVENTURES = {
 }
 
 ENVENTURES.update(
-    {("lint", pf, None, None): LOCKS / "lint" / pf / "conda.lock" for pf in PLATFORMS}
+    {("lint", pf, None, None): LOCKS / "lint" / pf / LOCK_NAME for pf in PLATFORMS}
 )
 
 ENVENTURES.update(
-    {("docs", pf, None, None): LOCKS / "docs" / pf / "conda.lock" for pf in PLATFORMS}
+    {("docs", pf, None, None): LOCKS / "docs" / pf / LOCK_NAME for pf in PLATFORMS}
 )
+
+ENVENTURES.update(
+    {("meta", pf, None, None): LOCKS / "meta" / pf / LOCK_NAME for pf in PLATFORMS}
+)
+
+THIS_META_ENV_LOCK = LOCKS / "meta" / THIS_CONDA_SUBDIR / LOCK_NAME
+THIS_META_ENV_HISTORY = ENVS / "meta" / "conda-meta" / "history"
 
 ENV_DEPS = {
     (flow, pf, py, lab): [
-        ENV_SPECS / "_base.yml",
+        *([ENV_SPECS / "_base.yml"] if flow not in ["meta"] else []),
         ENV_SPECS / f"{flow}.yml",
     ]
     for (flow, pf, py, lab), target in ENVENTURES.items()
@@ -246,6 +254,15 @@ ALL_PRETTIER = [
     *GITHUB.rglob("*.yml"),
     *BINDER.rglob("*.yml"),
 ]
+
+# conda testing
+RECIPE = GITHUB / "recipe"
+META_YAML_IN = RECIPE / "meta.yaml.in"
+META_YAML = GITHUB / "recipe" / "meta.yaml"
+CONDA_BLD = DIST / "conda-bld"
+CONDA_PKG = (
+    CONDA_BLD / "noarch" / f"""{IMPORTABLE.replace("_", "-")}-{VERSION}-py_0.tar.bz2"""
+)
 
 
 class OK:

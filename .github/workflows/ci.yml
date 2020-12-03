@@ -33,6 +33,30 @@ jobs:
         with:
           path: ~/conda_pkgs_dir
           key:
+            ${{ runner.os }}-conda-meta-${{
+            hashFiles('.github/locks/meta/linux-64/conda.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-conda-meta-
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          activate-environment: meta
+          auto-update-conda: true
+          environment-file: .github/locks/meta/linux-64/conda.lock
+          use-only-tar-bz2: true
+      - run: python dodo.py build || python dodo.py build
+      - uses: actions/upload-artifact@v2
+        with:
+          name: dist_${{ github.run_number }}
+          path: ./dist
+
+  lint:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v1
+        with:
+          path: ~/conda_pkgs_dir
+          key:
             ${{ runner.os }}-conda-lint-${{
             hashFiles('.github/locks/lint/linux-64/conda.lock') }}
           restore-keys: |
@@ -43,11 +67,36 @@ jobs:
           auto-update-conda: true
           environment-file: .github/locks/lint/linux-64/conda.lock
           use-only-tar-bz2: true
-      - run: python dodo.py lint build || python dodo.py lint build
-      - uses: actions/upload-artifact@v2
+      - run: python dodo.py lint || python dodo.py lint
+
+  conda-build:
+    runs-on: ubuntu-20.04
+    needs: [build, lint, docs]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v1
+        with:
+          path: ~/conda_pkgs_dir
+          key:
+            ${{ runner.os }}-conda-meta-${{
+            hashFiles('.github/locks/meta/linux-64/conda.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-conda-meta-
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          activate-environment: meta
+          auto-update-conda: true
+          environment-file: .github/locks/meta/linux-64/conda.lock
+          use-only-tar-bz2: true
+      - uses: actions/download-artifact@v2
         with:
           name: dist_${{ github.run_number }}
           path: ./dist
+      - run: python dodo.py conda_build || python dodo.py conda_build
+      - uses: actions/upload-artifact@v2
+        with:
+          name: conda-bld_${{ github.run_number }}
+          path: ./dist/conda-bld
 
   docs:
     runs-on: ubuntu-20.04
@@ -169,7 +218,7 @@ jobs:
 
   report:
     if: always()
-    needs: [test, build, docs]
+    needs: [test, conda-build]
     runs-on: ubuntu-20.04
     steps:
       - if: always()

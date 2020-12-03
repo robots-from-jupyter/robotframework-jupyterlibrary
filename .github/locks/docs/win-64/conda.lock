@@ -45,7 +45,7 @@ https://conda.anaconda.org/conda-forge/noarch/sphinxcontrib-qthelp-1.0.3-py_0.ta
 https://conda.anaconda.org/conda-forge/noarch/sphinxcontrib-serializinghtml-1.1.4-py_0.tar.bz2#8ea6a8036e28dba8827d35c764709358
 https://conda.anaconda.org/conda-forge/noarch/testpath-0.4.4-py_0.tar.bz2#3b98fff4d5342bebde2ecaa314f796f9
 https://conda.anaconda.org/conda-forge/win-64/webencodings-0.5.1-py36_0.tar.bz2#101c444711dff0ea867743b52d2393db
-https://conda.anaconda.org/conda-forge/noarch/wheel-0.35.1-pyh9f0ad1d_0.tar.bz2#126827869be32f21872a2b30ebe2b038
+https://conda.anaconda.org/conda-forge/noarch/wheel-0.36.0-pyhd3deb0d_0.tar.bz2#f144bcd310e543bd9c8aa17c8ba1ee02
 https://conda.anaconda.org/conda-forge/win-64/zeromq-4.3.3-h0e60522_3.tar.bz2#3f14354fbaa50a70595d6d1a54292996
 https://conda.anaconda.org/conda-forge/noarch/zipp-3.4.0-py_0.tar.bz2#0df927d2e46244cef8fd75d7ec2ba51c
 https://conda.anaconda.org/conda-forge/noarch/babel-2.9.0-pyhd3deb0d_0.tar.bz2#1cb532c9a6fd4e56a9f0906b87c17b76
@@ -55,7 +55,7 @@ https://conda.anaconda.org/conda-forge/win-64/chardet-3.0.4-py36hd36e781_1008.ta
 https://conda.anaconda.org/conda-forge/win-64/docutils-0.16-py36hd36e781_2.tar.bz2#c88aa34374401aed15b8564e4d7d9c84
 https://conda.anaconda.org/conda-forge/win-64/doit-0.33.1-py36h9f0ad1d_1.tar.bz2#eda38f9e8dc256068db9f41d2c26febb
 https://conda.anaconda.org/conda-forge/win-64/entrypoints-0.3-py36h9f0ad1d_1002.tar.bz2#2b77a25e6a38ae845abff3e0d6c695bd
-https://conda.anaconda.org/conda-forge/noarch/importlib-metadata-3.1.0-pyhd8ed1ab_0.tar.bz2#97a4bcec44626ddea360efdf7d5ad816
+https://conda.anaconda.org/conda-forge/noarch/importlib-metadata-3.1.1-pyhd8ed1ab_0.tar.bz2#e22162ed945059586d1b6b603d07c48e
 https://conda.anaconda.org/conda-forge/win-64/jedi-0.17.2-py36ha15d459_1.tar.bz2#490ace8303a86ab3f83340b5d3da4ff7
 https://conda.anaconda.org/conda-forge/win-64/markupsafe-1.1.1-py36hc753bc4_2.tar.bz2#9e36106ae933f25f38ba10f0d4c45572
 https://conda.anaconda.org/conda-forge/win-64/mistune-0.8.4-py36h779f372_1002.tar.bz2#0d10ecf686c4bd79b45897dbd8bedd8b
@@ -73,7 +73,7 @@ https://conda.anaconda.org/conda-forge/win-64/win_inet_pton-1.1.0-py36h9f0ad1d_1
 https://conda.anaconda.org/conda-forge/win-64/wincertstore-0.2-py36h9f0ad1d_1005.tar.bz2#62292c9b3716b2e17a5b59b69492c7df
 https://conda.anaconda.org/conda-forge/win-64/brotlipy-0.7.0-py36hc753bc4_1001.tar.bz2#03adcc452e95ce7558630b1b28225de6
 https://conda.anaconda.org/conda-forge/win-64/cryptography-3.2.1-py36he58ceb7_0.tar.bz2#13f6f3a96795e8f12c5aff025561ab8c
-https://conda.anaconda.org/conda-forge/noarch/importlib_metadata-3.1.0-hd8ed1ab_0.tar.bz2#182b3a7c361dfc0de2ed1abf90fd61c8
+https://conda.anaconda.org/conda-forge/noarch/importlib_metadata-3.1.1-hd8ed1ab_0.tar.bz2#a884b1bcaa2d48a6bc299dcba787db7a
 https://conda.anaconda.org/conda-forge/win-64/jupyter_core-4.7.0-py36ha15d459_0.tar.bz2#f6e94f062740c05871eff07ac9f58dc3
 https://conda.anaconda.org/conda-forge/win-64/pysocks-1.7.1-py36hd36e781_2.tar.bz2#d26259b7eeccf43768a208820955bf85
 https://conda.anaconda.org/conda-forge/win-64/setuptools-49.6.0-py36hd36e781_2.tar.bz2#5ede4e74bcbf71d32c473552da946c72
@@ -84,7 +84,7 @@ https://conda.anaconda.org/conda-forge/noarch/jinja2-2.11.2-pyh9f0ad1d_0.tar.bz2
 https://conda.anaconda.org/conda-forge/win-64/jsonschema-3.2.0-py36h9f0ad1d_1.tar.bz2#4dfe69fb8ad8543e4654ea881f19c8e8
 https://conda.anaconda.org/conda-forge/noarch/jupyter_client-6.1.7-py_0.tar.bz2#bcaa486602c05413da0808b82898f60a
 https://conda.anaconda.org/conda-forge/noarch/livereload-2.6.3-pyh9f0ad1d_0.tar.bz2#b7190e3ec3eff52839434bf4698e2d62
-https://conda.anaconda.org/conda-forge/noarch/pip-20.3-pyhd8ed1ab_0.tar.bz2#2a937297e76fcdc01a6591f68bd9a7c1
+https://conda.anaconda.org/conda-forge/noarch/pip-20.3.1-pyhd8ed1ab_0.tar.bz2#bd6aa73eed4afc399688200778a609f6
 https://conda.anaconda.org/conda-forge/noarch/pygments-2.7.2-py_0.tar.bz2#ed1bdce2d0c4353ad0bc22310e271723
 https://conda.anaconda.org/conda-forge/noarch/pyopenssl-20.0.0-pyhd8ed1ab_0.tar.bz2#8fda1084aa3edad26a03e85617bb109f
 https://conda.anaconda.org/conda-forge/noarch/jupyterlab_pygments-0.1.2-pyh9f0ad1d_0.tar.bz2#2cbd910890bb328e8959246a1e16fac7

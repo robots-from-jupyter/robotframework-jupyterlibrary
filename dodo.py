@@ -4,7 +4,7 @@ import subprocess
 from hashlib import sha256
 
 import doit
-from doit.tools import PythonInteractiveAction, config_changed
+from doit.tools import PythonInteractiveAction, config_changed, InteractiveAction
 
 from _scripts import project as P
 from _scripts.reporter import GithubActionsReporter
@@ -40,26 +40,34 @@ def task_release():
     )
 
 
+def _calc_hash():
+    lines = []
+
+    for p in P.HASH_DEPS:
+        lines += ["  ".join([sha256(p.read_bytes()).hexdigest(), p.name])]
+
+    output = "\n".join(lines)
+    return output
+
+
 def task_build():
     """build packages"""
+    env = "meta"
+    env_lock = P.CONDA_LISTS[env]
+    run_in = P.RUN_IN[env]
+
     yield dict(
         name="pypi",
-        actions=[[*P.PY, "setup.py", "sdist", "bdist_wheel"]],
+        actions=[[*run_in, *P.PY, "setup.py", "sdist", "bdist_wheel"]],
         targets=[P.SDIST, P.WHEEL],
-        file_dep=[*P.PY_SRC, *P.ROBOT_SRC, P.VERSION_FILE, *P.SETUP_CRUFT],
+        file_dep=[*P.PY_SRC, *P.ROBOT_SRC, P.VERSION_FILE, *P.SETUP_CRUFT, env_lock],
     )
 
-    def _run_hash():
+    def _update_hash():
         # mimic sha256sum CLI
         if P.SHA256SUMS.exists():
             P.SHA256SUMS.unlink()
-
-        lines = []
-
-        for p in P.HASH_DEPS:
-            lines += ["  ".join([sha256(p.read_bytes()).hexdigest(), p.name])]
-
-        output = "\n".join(lines)
+        output = _calc_hash()
         print(output)
         P.SHA256SUMS.write_text(output)
 
@@ -67,7 +75,59 @@ def task_build():
         name="hash",
         file_dep=P.HASH_DEPS,
         targets=[P.SHA256SUMS],
-        actions=[_run_hash],
+        actions=[_update_hash],
+    )
+
+
+def task_conda_build():
+    """build conda package"""
+
+    def _template():
+        sums = {
+            line.split("  ")[1]: line.split("  ")[0]
+            for line in P.SHA256SUMS.read_text().splitlines()
+            if line.strip()
+        }
+
+        recipe_text = (
+            P.META_YAML_IN.read_text()
+            .replace("REPLACE_THIS_VERSION", P.VERSION)
+            .replace("REPLACE_THIS_PATH", P.SDIST.as_uri())
+            .replace("REPLACE_THIS_SHA256", sums[P.SDIST.name])
+        )
+
+        print(recipe_text)
+
+        P.META_YAML.write_text(recipe_text)
+
+    if P.CI:
+        # we _don't_ want to force irreproducibly re-building the tarball
+        file_dep = [P.META_YAML_IN, P.VERSION_FILE]
+    else:
+        file_dep = [P.META_YAML_IN, P.SDIST, P.VERSION_FILE, P.SHA256SUMS]
+
+    yield dict(
+        name="recipe",
+        file_dep=file_dep,
+        targets=[P.META_YAML],
+        actions=[_template],
+    )
+
+    yield dict(
+        name="build",
+        file_dep=[P.META_YAML],
+        actions=[
+            [
+                P.CONDA_EXE,
+                "build",
+                "-c",
+                "conda-forge",
+                "--output-folder",
+                P.CONDA_BLD,
+                P.RECIPE,
+            ]
+        ],
+        targets=[P.CONDA_PKG],
     )
 
 
@@ -78,20 +138,24 @@ def task_docs():
     lockfile = P.get_lockfile(env)
     frozen = P.PIP_LISTS[env]
 
-    header, tarballs = lockfile.read_text().split("@EXPLICIT")
-
     clean, touch = P.get_ok_actions(P.RTD_ENV)
 
-    header = (
-        f"# Probably don't edit by hand! \n"
-        f"#\n"
-        f"# This was generated from {lockfile.relative_to(P.ROOT)}\n"
-        f"#\n"
-        f"#   doit docs:rtdenv\n"
-        f"#\n"
-    ) + header
-
     def _env_from_lock():
+        try:
+            header, tarballs = lockfile.read_text().split("@EXPLICIT")
+        except:
+            header = "# NO LOCKFILE"
+            tarballs = []
+
+        header = (
+            f"# Probably don't edit by hand! \n"
+            f"#\n"
+            f"# This was generated from {lockfile.relative_to(P.ROOT)}\n"
+            f"#\n"
+            f"#   doit docs:rtdenv\n"
+            f"#\n"
+        ) + header
+
         P.RTD_ENV.write_text(
             header
             + P.safe_dump(
@@ -109,7 +173,6 @@ def task_docs():
         name="rtd:env",
         doc="generate a readthedocs-compatible env",
         file_dep=[lockfile],
-        uptodate=[config_changed(header)],
         actions=[clean, _env_from_lock],
         targets=[P.RTD_ENV],
     )
@@ -383,19 +446,68 @@ def task_test():
     )
 
 
-if P.CAN_CONDA_LOCK:
+def _make_lock_task_name(key):
+    return "__".join([p for p in key if p]).replace(".", "_")
+
+
+def _make_lock_task(key, target):
+    (flow, pf, py, lab) = key
+
+    task = dict(
+        name=_make_lock_task_name(key),
+        actions=[[*P.SCRIPT_LOCK, target]],
+        file_dep=[*P.ENV_DEPS[key]],
+        targets=[target],
+    )
+
+    if P.THIS_META_ENV_LOCK != target:
+        task["actions"][0] = [*P.RUN_IN["meta"], *task["actions"][0]]
+        task["task_dep"] = ["env:meta"]
+
+    return task
+
+
+# at some point, we'll want a scheduled excursion just for locking
+if not P.CI:
 
     def task_lock():
         """generate conda lock files for all the excursions"""
-        for key, target in P.ENVENTURES.items():
-            (flow, pf, py, lab) = key
-            file_dep = P.ENV_DEPS[key]
-            yield dict(
-                name="__".join([p for p in key if p]).replace(".", "_"),
-                actions=[[*P.SCRIPT_LOCK, target]],
-                file_dep=file_dep,
-                targets=[target],
+        meta_lock_exists = P.THIS_META_ENV_LOCK.exists()
+        can_bootstrap = P.CAN_CONDA_LOCK
+
+        if not (meta_lock_exists or can_bootstrap):
+            raise RuntimeError(
+                f"{P.THIS_META_ENV_LOCK} is missing: this, or `conda-lock` on path"
+                " is needed to bootstrap the lock environment"
             )
+
+        for key, target in P.ENVENTURES.items():
+            if not meta_lock_exists and target != P.THIS_META_ENV_LOCK:
+                continue
+
+            yield _make_lock_task(key, target)
+
+    def task_publish():
+        """publish to pypi"""
+
+        def _check_hash():
+            on_disk = P.SHA256SUMS.read_text()
+            calculated = _calc_hash()
+            print("\n--\n".join(["on-disk:", on_disk, "calculated", calculated]))
+
+            if calculated != on_disk:
+                raise RuntimeError("SHA256SUMS do not match:")
+            print("SHA256SUMS are OK")
+
+        return dict(
+            actions=[
+                _check_hash,
+                InteractiveAction(
+                    [*P.RUN_IN["meta"], "twine", "upload", P.SDIST, P.WHEEL],
+                    shell=False,
+                ),
+            ]
+        )
 
 
 if __name__ == "__main__":
