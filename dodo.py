@@ -4,7 +4,7 @@ import subprocess
 from hashlib import sha256
 
 import doit
-from doit.tools import PythonInteractiveAction, config_changed
+from doit.tools import PythonInteractiveAction, config_changed, InteractiveAction
 
 from _scripts import project as P
 from _scripts.reporter import GithubActionsReporter
@@ -40,6 +40,16 @@ def task_release():
     )
 
 
+def _calc_hash():
+    lines = []
+
+    for p in P.HASH_DEPS:
+        lines += ["  ".join([sha256(p.read_bytes()).hexdigest(), p.name])]
+
+    output = "\n".join(lines)
+    return output
+
+
 def task_build():
     """build packages"""
     env = "meta"
@@ -53,17 +63,11 @@ def task_build():
         file_dep=[*P.PY_SRC, *P.ROBOT_SRC, P.VERSION_FILE, *P.SETUP_CRUFT, env_lock],
     )
 
-    def _run_hash():
+    def _update_hash():
         # mimic sha256sum CLI
         if P.SHA256SUMS.exists():
             P.SHA256SUMS.unlink()
-
-        lines = []
-
-        for p in P.HASH_DEPS:
-            lines += ["  ".join([sha256(p.read_bytes()).hexdigest(), p.name])]
-
-        output = "\n".join(lines)
+        output = _calc_hash()
         print(output)
         P.SHA256SUMS.write_text(output)
 
@@ -71,7 +75,7 @@ def task_build():
         name="hash",
         file_dep=P.HASH_DEPS,
         targets=[P.SHA256SUMS],
-        actions=[_run_hash],
+        actions=[_update_hash],
     )
 
 
@@ -472,6 +476,28 @@ if not P.CI:
                 continue
 
             yield _make_lock_task(key, target)
+
+    def task_publish():
+        """publish to pypi"""
+
+        def _check_hash():
+            on_disk = P.SHA256SUMS.read_text()
+            calculated = _calc_hash()
+            print("\n--\n".join(["on-disk:", on_disk, "calculated", calculated]))
+
+            if calculated != on_disk:
+                raise RuntimeError("SHA256SUMS do not match:")
+            print("SHA256SUMS are OK")
+
+        return dict(
+            actions=[
+                _check_hash,
+                InteractiveAction(
+                    [*P.RUN_IN["meta"], "twine", "upload", P.SDIST, P.WHEEL],
+                    shell=False,
+                ),
+            ]
+        )
 
 
 if __name__ == "__main__":

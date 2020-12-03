@@ -69,3 +69,18 @@ doit release
 
 This will recreate the `test` environment with the specified lockfile, and
 repeat all the steps.
+
+#### Releasing
+
+- ensure `VERSION` has been increased appropriately
+- ensure `HISTORY.ipynb` is up-to-date
+- (usually) grab the `dist` assets from CI, unpack into `./dist`
+- make a GitHub release, adding the `.tar.gz`, `.whl`, and `SHA256SUMS`
+- upload to PyPI
+
+  ```bash
+  doit publish
+  ```
+
+- do a post-mortem issue
+- bump `VERSION` to a working status

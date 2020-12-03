@@ -71,7 +71,7 @@ jobs:
 
   conda-build:
     runs-on: ubuntu-20.04
-    needs: [build]
+    needs: [build, lint, docs]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v1
@@ -218,7 +218,7 @@ jobs:
 
   report:
     if: always()
-    needs: [test, build, docs]
+    needs: [test, conda-build]
     runs-on: ubuntu-20.04
     steps:
       - if: always()
