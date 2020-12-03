@@ -35,12 +35,14 @@ doit release
 
 > After adding/changing any dependencies in `.github/env_specs`, the _lockfiles_
 > need to be refreshed in `.github/locks` and committed.
->
-> Requires `conda-lock`, and optionally `mamba` for faster solves
 
 ```shell
 doit lock
 ```
+
+> Bootstrapping from _no_ lockfiles requires an external provider of
+> `conda-lock`, but the lock environment itself will be created and used for the
+> next task.
 
 #### Reproducing CI failures
 
