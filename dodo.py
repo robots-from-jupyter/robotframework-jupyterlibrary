@@ -42,11 +42,15 @@ def task_release():
 
 def task_build():
     """build packages"""
+    env = "meta"
+    env_lock = P.CONDA_LISTS[env]
+    run_in = P.RUN_IN[env]
+
     yield dict(
         name="pypi",
-        actions=[[*P.PY, "setup.py", "sdist", "bdist_wheel"]],
+        actions=[[*run_in, *P.PY, "setup.py", "sdist", "bdist_wheel"]],
         targets=[P.SDIST, P.WHEEL],
-        file_dep=[*P.PY_SRC, *P.ROBOT_SRC, P.VERSION_FILE, *P.SETUP_CRUFT],
+        file_dep=[*P.PY_SRC, *P.ROBOT_SRC, P.VERSION_FILE, *P.SETUP_CRUFT, env_lock],
     )
 
     def _run_hash():
@@ -120,24 +124,24 @@ def task_docs():
     lockfile = P.get_lockfile(env)
     frozen = P.PIP_LISTS[env]
 
-    try:
-        header, tarballs = lockfile.read_text().split("@EXPLICIT")
-    except:
-        header = "# NO LOCKFILE"
-        tarballs = []
-
     clean, touch = P.get_ok_actions(P.RTD_ENV)
 
-    header = (
-        f"# Probably don't edit by hand! \n"
-        f"#\n"
-        f"# This was generated from {lockfile.relative_to(P.ROOT)}\n"
-        f"#\n"
-        f"#   doit docs:rtdenv\n"
-        f"#\n"
-    ) + header
-
     def _env_from_lock():
+        try:
+            header, tarballs = lockfile.read_text().split("@EXPLICIT")
+        except:
+            header = "# NO LOCKFILE"
+            tarballs = []
+
+        header = (
+            f"# Probably don't edit by hand! \n"
+            f"#\n"
+            f"# This was generated from {lockfile.relative_to(P.ROOT)}\n"
+            f"#\n"
+            f"#   doit docs:rtdenv\n"
+            f"#\n"
+        ) + header
+
         P.RTD_ENV.write_text(
             header
             + P.safe_dump(
@@ -155,7 +159,6 @@ def task_docs():
         name="rtd:env",
         doc="generate a readthedocs-compatible env",
         file_dep=[lockfile],
-        uptodate=[config_changed(header)],
         actions=[clean, _env_from_lock],
         targets=[P.RTD_ENV],
     )
@@ -431,38 +434,36 @@ def task_test():
 
 def task_lock():
     """generate conda lock files for all the excursions"""
-
-    env = "meta"
-    args = [*P.SCRIPT_LOCK]
-    file_dep = []
-
     if not P.THIS_META_ENV_LOCK.exists() and not P.CAN_CONDA_LOCK:
         raise RuntimeError(
             f"{P.THIS_META_ENV_LOCK} is missing: this, or `conda-lock` on path"
             " is needed to bootstrap meta env"
         )
 
-    lock_lock = []
-    lock_env_list = []
+    def _make_lock_task_name(key):
+        return "__".join([p for p in key if p]).replace(".", "_")
 
-    if P.THIS_META_ENV_LOCK.exists():
-        args = [*P.RUN_IN[env], *args]
-        lock_lock = P.THIS_META_ENV_LOCK
-        lock_env_list = P.CONDA_LISTS[env]
-
-    for key, target in P.ENVENTURES.items():
+    def _make_lock_task(key, target):
         (flow, pf, py, lab) = key
-        task = dict(
-            name="__".join([p for p in key if p]).replace(".", "_"),
-            actions=[[*args, target]],
-            file_dep=[
-                *file_dep,
-                *P.ENV_DEPS[key],
-                *([] if target == lock_lock else [lock_lock, lock_env_list]),
-            ],
+
+        lock_dep = [*P.ENV_DEPS[key]]
+        lock_args = [*P.SCRIPT_LOCK]
+
+        if flow == "meta" and P.THIS_META_ENV_LOCK == target:
+            pass
+        else:
+            lock_args = [*P.RUN_IN["meta"], *lock_args]
+            lock_dep += [P.THIS_META_ENV_LOCK, P.CONDA_LISTS["meta"]]
+
+        return dict(
+            name=_make_lock_task_name(key),
+            actions=[[*lock_args, target]],
+            file_dep=lock_dep,
             targets=[target],
         )
-        yield task
+
+    for key, target in P.ENVENTURES.items():
+        yield _make_lock_task(key, target)
 
 
 if __name__ == "__main__":
