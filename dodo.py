@@ -468,7 +468,7 @@ def _make_lock_task(key, target):
 
 
 # at some point, we'll want a scheduled excursion just for locking
-if not P.CI:
+if not (P.CI or P.IN_BINDER):
 
     def task_lock():
         """generate conda lock files for all the excursions"""
