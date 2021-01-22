@@ -161,8 +161,6 @@ jobs:
         exclude:
           - python-version: py3.6
             lab-version: lab3
-          - conda-subdir: win-64
-            lab-version: lab3
 
     steps:
       - name: configure git
