@@ -147,7 +147,7 @@ jobs:
         #
         conda-subdir: [win-64, osx-64, linux-64]
         python-version: [py3.6, py3.8, py3.9]
-        lab-version: [lab1, lab2, lab3]
+        lab-version: [lab1, lab2, lab2rc, lab3]
         include:
           - conda-subdir: linux-64
             os: ubuntu

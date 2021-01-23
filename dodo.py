@@ -10,7 +10,10 @@ from _scripts import project as P
 from _scripts.reporter import GithubActionsReporter
 
 
-os.environ["PYTHONIOENCODING"] = "utf-8"
+os.environ.update(
+    PYTHONIOENCODING="utf-8",
+    MAMBA_NO_BANNER="1"
+)
 
 DOIT_CONFIG = {
     "backend": "sqlite3",
