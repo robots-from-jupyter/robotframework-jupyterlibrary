@@ -3,5 +3,6 @@ channels:
   - conda-forge
   - nodefaults
 dependencies:
-  - jupyterlab >=2.3.0rc0,<3
+  #                       v- otherwise you'll pull jupyterlab 3.0.0rc15
+  - jupyterlab >=2.3.0rc0,<3.0.0a0
   - ipywidgets
