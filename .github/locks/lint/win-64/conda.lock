@@ -1,5 +1,5 @@
 # platform: win-64
-# env_hash: a9176c4816fa0497a0fe99609c167161c389785061e7a0439e0b7eb4efb52f9a
+# env_hash: efac8749f5eab27e7eb0490fb999f99790c086462d44817a9e8e808ff64a27cc
 @EXPLICIT
 https://conda.anaconda.org/conda-forge/win-64/ca-certificates-2020.12.5-h5b45459_0.tar.bz2#f36a2988a9f57cffdc43929ba67a3a2a
 https://conda.anaconda.org/conda-forge/win-64/vs2015_runtime-14.28.29325-h5e1d092_0.tar.bz2#4e4fc486090f90e00edfa9c7730e2771
@@ -32,7 +32,7 @@ https://conda.anaconda.org/conda-forge/win-64/cffi-1.14.4-py38hd8c33c5_1.tar.bz2
 https://conda.anaconda.org/conda-forge/win-64/doit-0.33.1-py38h32f6830_1.tar.bz2#8b263b9225a12d7d926b3266bcbd2d00
 https://conda.anaconda.org/conda-forge/win-64/importlib-metadata-3.4.0-py38haa244fe_0.tar.bz2#bbccbcfba1bb7d678a36e1142bf35c7c
 https://conda.anaconda.org/conda-forge/win-64/mypy_extensions-0.4.3-py38haa244fe_3.tar.bz2#0b097de2bfb2cb74c94d62790a0dc206
-https://conda.anaconda.org/conda-forge/win-64/pyyaml-5.3.1-py38h294d835_2.tar.bz2#cd5961cdcb5862492194d116738da5f6
+https://conda.anaconda.org/conda-forge/win-64/pyyaml-5.4.1-py38h294d835_0.tar.bz2#6502967250cd8e7512fc8252c0da28d7
 https://conda.anaconda.org/conda-forge/win-64/regex-2020.11.13-py38h294d835_1.tar.bz2#d77f7eb3df251b610539a37a7e8b3ca8
 https://conda.anaconda.org/conda-forge/noarch/robotframework-lint-1.1-pyh9f0ad1d_0.tar.bz2#c3fa280c4a10c06e83f23193ef4ea5cc
 https://conda.anaconda.org/conda-forge/noarch/robotframework-pythonlibcore-2.2.0-pyhd8ed1ab_0.tar.bz2#29a329f0b817038d27d7bdfb2ca04b5a
@@ -46,7 +46,7 @@ https://conda.anaconda.org/conda-forge/win-64/pysocks-1.7.1-py38haa244fe_3.tar.b
 https://conda.anaconda.org/conda-forge/win-64/setuptools-49.6.0-py38haa244fe_3.tar.bz2#c104ed0b1f9f55efcf872c4af2a6036a
 https://conda.anaconda.org/conda-forge/noarch/flake8-3.8.4-py_0.tar.bz2#138b1704321c115bd10e1966320ac790
 https://conda.anaconda.org/conda-forge/win-64/isort-4.3.21-py38h32f6830_1.tar.bz2#2cba5a24528e0389e31d0e321817f416
-https://conda.anaconda.org/conda-forge/noarch/pip-20.3.3-pyhd8ed1ab_0.tar.bz2#c7e5c449e502567a995e4bd09c538faf
+https://conda.anaconda.org/conda-forge/noarch/pip-21.0-pyhd8ed1ab_0.tar.bz2#dfb99734911ef619b4d4be1748534c8c
 https://conda.anaconda.org/conda-forge/noarch/pyopenssl-20.0.1-pyhd8ed1ab_0.tar.bz2#92371c25994d0f5d28a01c1fb75ebf86
 https://conda.anaconda.org/conda-forge/noarch/urllib3-1.26.2-pyhd8ed1ab_0.tar.bz2#8bb930d172961c9ba9ffd6e10a64b844
 https://conda.anaconda.org/conda-forge/win-64/selenium-3.141.0-py38h294d835_1002.tar.bz2#826ee023ea7bade5a55c730a0b82466c

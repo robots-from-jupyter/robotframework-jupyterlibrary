@@ -1,5 +1,5 @@
 # platform: osx-64
-# env_hash: 12d82253c3a33c2f7fc49926ad0a941e4e0f1f6c469136c2b01f17731582891e
+# env_hash: 1f73d1b1b93cfe11456e24f33a894604e3888cc5a30980d2d8ae957ec2fed96a
 @EXPLICIT
 https://conda.anaconda.org/conda-forge/osx-64/ca-certificates-2020.12.5-h033912b_0.tar.bz2#4483d8ea13bd57b52e3539e741501a7d
 https://conda.anaconda.org/conda-forge/osx-64/libcxx-11.0.1-habf9029_0.tar.bz2#51c221f12b7975d60dae27cd8280efac
@@ -102,4 +102,4 @@ https://conda.anaconda.org/conda-forge/osx-64/notebook-6.2.0-py39h6e9494a_0.tar.
 https://conda.anaconda.org/conda-forge/noarch/jupyterlab_server-1.2.0-py_0.tar.bz2#77d654573f19a836b326fb77ffd86860
 https://conda.anaconda.org/conda-forge/osx-64/widgetsnbextension-3.5.1-py39h6e9494a_4.tar.bz2#b494a8a3cfb8ee5418d5756547d94682
 https://conda.anaconda.org/conda-forge/noarch/ipywidgets-7.6.3-pyhd3deb0d_0.tar.bz2#536a9ed6d9e740f2b83d1a3c388e4388
-https://conda.anaconda.org/conda-forge/noarch/jupyterlab-1.2.16-py_0.tar.bz2#f7de1776f979161029d59fbbcfa35eb5
+https://conda.anaconda.org/conda-forge/label/jupyterlab_rc/noarch/jupyterlab-2.3.0rc0-pyh5fc60ef_0.tar.bz2#bebe24555c3af9d73c7bbffd27fefa8f

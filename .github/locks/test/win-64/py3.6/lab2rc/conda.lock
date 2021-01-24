@@ -1,5 +1,5 @@
 # platform: win-64
-# env_hash: 73113520f550049d037d7d882495e96c62e55b1ef39447d4e1b7d4a45f4f3b8a
+# env_hash: 3f7dc9ae135e42b5ea9c434228d3dd4ab80d405e6e70935dbd539552c21b1bad
 @EXPLICIT
 https://conda.anaconda.org/conda-forge/win-64/ca-certificates-2020.12.5-h5b45459_0.tar.bz2#f36a2988a9f57cffdc43929ba67a3a2a
 https://conda.anaconda.org/conda-forge/win-64/msys2-conda-epoch-20160418-1.tar.bz2#b0309b72560df66f71a9d5e34a5efdfa
@@ -102,4 +102,4 @@ https://conda.anaconda.org/conda-forge/win-64/notebook-6.2.0-py36ha15d459_0.tar.
 https://conda.anaconda.org/conda-forge/noarch/jupyterlab_server-1.2.0-py_0.tar.bz2#77d654573f19a836b326fb77ffd86860
 https://conda.anaconda.org/conda-forge/win-64/widgetsnbextension-3.5.1-py36ha15d459_4.tar.bz2#2c71f6a23d569494cf7e07b261868e31
 https://conda.anaconda.org/conda-forge/noarch/ipywidgets-7.6.3-pyhd3deb0d_0.tar.bz2#536a9ed6d9e740f2b83d1a3c388e4388
-https://conda.anaconda.org/conda-forge/noarch/jupyterlab-2.2.9-pyhd8ed1ab_0.tar.bz2#bd3938453391ba08318f6f1e51467ae3
+https://conda.anaconda.org/conda-forge/label/jupyterlab_rc/noarch/jupyterlab-2.3.0rc0-pyh5fc60ef_0.tar.bz2#bebe24555c3af9d73c7bbffd27fefa8f

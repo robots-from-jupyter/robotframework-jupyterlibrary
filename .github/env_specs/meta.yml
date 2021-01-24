@@ -1,6 +1,5 @@
 channels:
   - conda-forge
-  - msys2
   - nodefaults
 
 dependencies:
@@ -9,7 +8,7 @@ dependencies:
   - conda-lock
   - conda-verify
   - doit
-  - mamba >=0.7.3
+  - mamba >=0.7.8
   - pip
   - ripgrep
   - twine

@@ -1,0 +1,8 @@
+channels:
+  - conda-forge/label/jupyterlab_rc
+  - conda-forge
+  - nodefaults
+dependencies:
+  #                       v- otherwise you'll pull jupyterlab 3.0.0rc15
+  - jupyterlab >=2.3.0rc0,<3.0.0a0
+  - ipywidgets
