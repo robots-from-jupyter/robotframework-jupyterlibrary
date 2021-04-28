@@ -40,8 +40,9 @@ jobs:
       - uses: conda-incubator/setup-miniconda@v2
         with:
           activate-environment: meta
-          auto-update-conda: true
           environment-file: .github/locks/meta/linux-64/conda.lock
+          miniforge-variant: Mambaforge
+          use-mamba: true
           use-only-tar-bz2: true
       - run: python dodo.py build || python dodo.py build
       - uses: actions/upload-artifact@v2
@@ -64,8 +65,9 @@ jobs:
       - uses: conda-incubator/setup-miniconda@v2
         with:
           activate-environment: lint
-          auto-update-conda: true
           environment-file: .github/locks/lint/linux-64/conda.lock
+          miniforge-variant: Mambaforge
+          use-mamba: true
           use-only-tar-bz2: true
       - run: python dodo.py lint || python dodo.py lint
 
@@ -85,8 +87,9 @@ jobs:
       - uses: conda-incubator/setup-miniconda@v2
         with:
           activate-environment: meta
-          auto-update-conda: true
           environment-file: .github/locks/meta/linux-64/conda.lock
+          miniforge-variant: Mambaforge
+          use-mamba: true
           use-only-tar-bz2: true
       - uses: actions/download-artifact@v2
         with:
@@ -113,8 +116,9 @@ jobs:
       - uses: conda-incubator/setup-miniconda@v2
         with:
           activate-environment: docs
-          auto-update-conda: true
           environment-file: .github/locks/docs/linux-64/conda.lock
+          miniforge-variant: Mambaforge
+          use-mamba: true
           use-only-tar-bz2: true
       - run: python dodo.py docs || python dodo.py docs
       - uses: actions/upload-artifact@v2
@@ -147,7 +151,7 @@ jobs:
         #
         conda-subdir: [win-64, osx-64, linux-64]
         python-version: [py3.6, py3.8, py3.9]
-        lab-version: [lab1, lab2, lab2rc, lab3]
+        lab-version: [lab1, lab2, lab3]
         include:
           - conda-subdir: linux-64
             os: ubuntu
@@ -187,8 +191,9 @@ jobs:
       - uses: conda-incubator/setup-miniconda@v2
         with:
           activate-environment: test
-          auto-update-conda: true
           environment-file: ${{ steps.lock.outputs.file }}
+          miniforge-variant: Mambaforge
+          use-mamba: true
           use-only-tar-bz2: true
       - if: always()
         uses: actions/download-artifact@v2

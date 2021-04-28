@@ -1,7 +1,7 @@
 dependencies:
-  - nbsphinx
-  - sphinx
-  - sphinx_rtd_theme
-  - sphinx-autobuild
-  - port-for =0.3.1
   - ipykernel
+  - myst-nb
+  - port-for =0.3.1
+  - pydata-sphinx-theme
+  - sphinx
+  - sphinx-autobuild
