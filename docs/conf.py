@@ -114,7 +114,7 @@ extensions = [
     "sphinx.ext.mathjax",
     "sphinx.ext.todo",
     "sphinx.ext.viewcode",
-    "myst-nb"
+    "myst-nb",
 ]
 
 # Add any paths that contain templates here, relative to this directory.

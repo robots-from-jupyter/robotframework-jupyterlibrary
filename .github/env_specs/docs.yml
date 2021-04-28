@@ -5,3 +5,5 @@ dependencies:
   - pydata-sphinx-theme
   - sphinx
   - sphinx-autobuild
+  # TODO: https://github.com/conda-forge/jupyter-cache-feedstock/pull/5
+  - sqlalchemy <1.4
