@@ -1,11 +1,21 @@
+:root {
+  --pst-color-inline-code: 0, 136, 129;
+  --pst-color-navbar-link: var(--pst-color-inline-code);
+  --pst-font-family-heading: 'OCR-A', var(--pst-font-family-monospace-system);
+}
+
 @font-face {
   font-family: 'OCR-A';
   src: url('../fonts/OCRA.woff2') format('woff2');
 }
 
 .navbar-brand {
-  font-family: 'OCR-A', monospace;
+  font-family: var(--pst-font-family-heading);
   padding: 0.55em;
+}
+
+.navbar-brand p {
+  color: rgba(var(--pst-color-inline-code), 1);
 }
 
 h1,
@@ -14,11 +24,12 @@ h3,
 h4,
 h5,
 h6,
-.icon.icon-home,
-.wy-breadcrumbs,
 #navbar-main-elements a.nav-link.reference {
-  font-family: 'OCR-A', monospace;
   text-transform: uppercase;
+}
+
+#navbar-main-elements a.nav-link.reference {
+  font-family: var(--pst-font-family-heading);
 }
 
 h1 {
@@ -40,6 +51,11 @@ iframe {
 
 p {
   max-width: 48em;
+}
+
+pre {
+  border: 0;
+  box-shadow: 0;
 }
 
 @media (min-width: 1200px) {
@@ -75,6 +91,6 @@ p {
 
 .highlight,
 .highlight pre {
-  background-color: #000;
+  background-color: rgba(0, 0, 0, 0.8);
   color: #fff;
 }
