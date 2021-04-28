@@ -94,3 +94,11 @@ pre {
   background-color: rgba(0, 0, 0, 0.8);
   color: #fff;
 }
+
+.admonition {
+  box-shadow: 0;
+}
+
+div.cell div.cell_input {
+  border-left-color: rgba(var(--pst-color-inline-code), 1);
+}
