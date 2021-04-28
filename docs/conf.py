@@ -69,7 +69,7 @@ def setup(app):
             ]
         )
 
-    # app.add_css_file("css/custom.css")
+    app.add_css_file("css/custom.css")
 
 
 # -- Path setup --------------------------------------------------------------
@@ -141,7 +141,7 @@ language = None
 exclude_patterns = [".ipynb_checkpoints", "**/.ipynb_checkpoints"]
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = "native"
+pygments_style = "material"
 
 
 # -- Options for HTML output -------------------------------------------------
@@ -155,7 +155,22 @@ html_theme = "pydata_sphinx_theme"
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-# html_theme_options = {}
+html_theme_options = {
+    "page_sidebar_items": [],
+    "navbar_center": ["navbar-nav", "navbar-icon-links"],
+    "navbar_end": [],
+    "github_url": CONF["metadata"]["url"],
+}
+
+html_sidebars = {
+    "**": [
+        "search-field",
+        "page-toc",
+        "edit-this-page",
+        "sidebar-nav-bs",
+        "sidebar-ethical-ads",
+    ]
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -172,6 +187,7 @@ html_static_path = ["_static"]
 #
 # html_sidebars = {}
 
+jupyter_execute_notebooks = "force"
 
 # -- Options for HTMLHelp output ---------------------------------------------
 
