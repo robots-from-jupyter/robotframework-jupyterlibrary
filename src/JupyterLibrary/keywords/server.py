@@ -30,13 +30,23 @@ class ServerKeywords(LibraryComponent):
         *args,
         **config,
     ):
-        """Start a Jupyter server
+        """Start a Jupyter server. All arguments are optional.
 
-        If not configured, the HOME environment variable and current
+        | = argument =     | = default =           | = notes =               |
+        | ``command``      | ``jupyter-notebook``  |                         |
+        | ``port``         | an unused port        |                         |
+        | ``base_url``     | ``/@rf/``             |                         |
+        | ``notebook_dir`` | a temporary directory |                         |
+        | ``token``        | a random ``uuid4``    |                         |
+        | ``*args``        |                       | extra server arguments  |
+        | ``**config``     |                       | extra process arguments |
+
+
+        If not configured, the ``$HOME`` environment variable and current
         working directory will be set to avoid leaking configuration
         between between runs (or the test instance) itself. These
         directories will be cleaned up after the server process is
-        terminated.
+        [#Terminate All Jupyter Servers|terminated].
         """
         command = command or "jupyter-notebook"
         port = port or self.get_unused_port()
@@ -90,7 +100,11 @@ class ServerKeywords(LibraryComponent):
 
     @keyword
     def copy_files_to_jupyter_directory(self, *sources, **kwargs):
-        """Copy some files into the (temporary) jupyter server root"""
+        """Copy some files into the (temporary) jupyter server root.
+
+        | = argument = | = default =                       |
+        | ``nbserver`` | the most-recently launched server |
+        """
         nbserver = kwargs.get("nbserver", self._handles[-1])
         notebook_dir = self._notebook_dirs[nbserver]
         BuiltIn().import_library("OperatingSystem")
@@ -100,6 +114,9 @@ class ServerKeywords(LibraryComponent):
     @keyword
     def copy_files_from_jupyter_directory(self, *src_and_dest, **kwargs):
         """Copy some files from the (temporary) jupyter server root
+
+        | = argument = | = default =                       |
+        | ``nbserver`` | the most-recently launched server |
 
         Patterns will have the notebook directory prepended
         """
@@ -113,6 +130,10 @@ class ServerKeywords(LibraryComponent):
 
     @keyword
     def get_jupyter_directory(self, nbserver=None):
+        """
+        | = argument = | = default =                       |
+        | ``nbserver`` | the most-recently launched server |
+        """
         nbserver = nbserver if nbserver is not None else self._handles[-1]
         return self._notebook_dirs[nbserver]
 
@@ -150,23 +171,32 @@ class ServerKeywords(LibraryComponent):
 
     @keyword
     def get_jupyter_server_url(self, nbserver=None):
+        """Get the given (or most recently-launched) server's URL"""
         nbh = nbserver or self._handles[-1]
         return "http://localhost:{}{}".format(self._ports[nbh], self._base_urls[nbh])
 
     @keyword
     def get_jupyter_server_token(self, nbserver=None):
+        """Get the given (or most recently-launched) server's token"""
         nbh = nbserver or self._handles[-1]
         return self._tokens[nbh]
 
     @keyword
     def wait_for_new_jupyter_server_to_be_ready(self, command=None, *args, **config):
+        """Get the given (or most recently-launched) server's token. See
+        [#Start New Jupyter Server|Start New Jupyter Server]
+        """
         handle = self.start_new_jupyter_server(command, *args, **config)
         self.wait_for_jupyter_server_to_be_ready(handle)
         return handle
 
     @keyword
-    def terminate_all_jupyter_servers(self):
-        """Close all Jupyter servers started by this Library"""
+    def terminate_all_jupyter_servers(self, timeout="5s"):
+        """Close all Jupyter servers started by
+        [#Start New Jupyter Server|Start New Jupyter Server],
+        waiting ``timeout`` to ensure all files/processes are freed before
+        cleaning up temporary directories, if any.
+        """
         plib = BuiltIn().get_library_instance("Process")
 
         self.wait_for_jupyter_server_to_be_ready()
@@ -191,8 +221,8 @@ class ServerKeywords(LibraryComponent):
                     BuiltIn().log(err)
 
         # give processes a mo to shutdown
-        if terminated or shutdown:
-            BuiltIn().sleep("5s")
+        if terminated or shutdown and self._tmpdirs:
+            BuiltIn().sleep(timeout)
             for nbh in self._handles:
                 shutil.rmtree(self._tmpdirs[nbh])
 

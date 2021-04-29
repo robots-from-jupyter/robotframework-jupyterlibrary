@@ -65,7 +65,6 @@ def run_tests(attempt=0, extra_args=None):
         f"PY:{P.THIS_PYTHON}",
         "--randomize",
         "all",
-        "--xunitskipnoncritical",
         "--xunit",
         ".".join(["xunit", "xml"]),
         ".",

@@ -3,7 +3,9 @@ Library           platform    WITH NAME    PLATFORM
 
 *** Keywords ***
 Get ACCEL key
-    [Documentation]    Get the "accelerator key" used for shortcuts
+    [Documentation]    Get the platform-specific "accelerator key" used for shortcuts:
+    ...    - ``Ctrl`` on Linux/Windows
+    ...    - ``Cmd`` on MacOS
     ${accel} =    Get Variable Value    ${ACCEL}    ${EMPTY}
     Run Keyword If    not "${accel}"    Update ACCEL Key
     [Return]    ${ACCEL KEY}

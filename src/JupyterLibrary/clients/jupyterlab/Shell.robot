@@ -13,7 +13,7 @@ Open JupyterLab
     [Documentation]    Open JupyterLab, served from the given (or most-recently-started)
     ...    ``nbserver`` in a ``browser`` (or ``headlessfirefox``) or ``url``,
     ...    then wait for the splash screen.
-    ...    Extra ``configuration`` is passed on to SeleniumLibrary's *Open Browser*.
+    ...    Extra ``configuration`` is passed on to SeleniumLibrary's [#Open Browser|Open Browser].
     ${nbserver_url} =    Run Keyword If    not "${url}"    Get Jupyter Server URL    ${nbserver}
     ${token} =    Run Keyword If    not "${url}"    Get Jupyter Server Token    ${nbserver}
     ${final_url} =    Set Variable If    "${url}"    ${url}    ${nbserver_url}lab?token=${token}
@@ -22,16 +22,17 @@ Open JupyterLab
     Tag With JupyterLab Metadata    ${pageinfo tags}    clear=${clear}
 
 Wait for JupyterLab Splash Screen
-    [Arguments]    ${timeout}=10s
-    [Documentation]    Wait for the JupyterLab splash animation
+    [Arguments]    ${timeout}=10s    ${sleep}=2s
+    [Documentation]    Wait for the JupyterLab splash animation, waiting ``timeout``
+    ...    for the splash screen to appear/disappear, then ``sleep``.
     Wait Until Page Contains Element    css:#${JLAB ID SPLASH}    timeout=${timeout}
     Wait Until Page Does Not Contain Element    css:#${JLAB ID SPLASH}    timeout=${timeout}
-    Sleep    2s
+    Sleep    ${sleep}
 
 Click JupyterLab Menu
     [Arguments]    ${label}
-    [Documentation]    Click a top-level JupyterLab menu bar item with by ``label``,
-    ...    e.g. File, Help, etc.
+    [Documentation]    Click a top-level JupyterLab menu bar item by ``label``,
+    ...    e.g. _File_, _Help_, etc.
     ${xpath} =    Set Variable    ${JLAB XP TOP}${JLAB XP MENU LABEL}\[text() = '${label}']
     Wait Until Page Contains Element    ${xpath}
     Mouse Over    ${xpath}
@@ -49,7 +50,7 @@ Click JupyterLab Menu Item
 
 Open With JupyterLab Menu
     [Arguments]    ${menu}    @{submenus}
-    [Documentation]    Click into a ``menu``, then a series of ``submenus``
+    [Documentation]    Click into a ``menu``, then a series of ``submenus``.
     Click JupyterLab Menu    ${menu}
     FOR    ${submenu}    IN    @{submenus}
         Click JupyterLab Menu Item    ${submenu}
