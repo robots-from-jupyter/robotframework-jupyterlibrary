@@ -394,11 +394,13 @@ def _make_setup(env):
 def task_setup():
     """do an editable install of the package"""
     for env in P.ENV_NAMES:
+        if env == "meta":
+            continue
         yield _make_setup(env)
 
 
 def task_test():
-    """ (dry)run tests"""
+    """(dry)run tests"""
     env = "test"
     pym = [*P.RUN_IN[env], *P.PYM]
 

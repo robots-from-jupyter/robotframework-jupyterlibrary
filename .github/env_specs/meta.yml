@@ -3,12 +3,12 @@ channels:
   - nodefaults
 
 dependencies:
-  - conda >=4.9.2,<4.9.3
-  - conda-build >=3.20,<3.21
+  - conda >=4.10,<4.11
+  - conda-build >=3.21,<3.22
   - conda-lock
   - conda-verify
   - doit
-  - mamba >=0.7.8
+  - mamba >=0.12
   - pip
   - ripgrep
   - twine

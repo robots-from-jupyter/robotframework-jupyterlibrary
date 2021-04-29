@@ -7,7 +7,6 @@ from datetime import datetime
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from configparser import ConfigParser
-import nbsphinx
 
 # you have to have run `python -m pip install -e`
 import JupyterLibrary
@@ -73,13 +72,6 @@ def setup(app):
     app.add_css_file("css/custom.css")
 
 
-nbsphinx.RST_TEMPLATE = nbsphinx.RST_TEMPLATE.replace(
-    """{% block input -%}""",
-    """{% block input -%}"""
-    """{% if not cell.metadata.get("jupyter", {}).get("source_hidden", False) -%}""",
-).replace("""{% endblock input %}""", """{%- endif -%}{%- endblock input %}""")
-
-
 # -- Path setup --------------------------------------------------------------
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -113,7 +105,6 @@ release = JupyterLibrary.__version__
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    "nbsphinx",
     "sphinx.ext.autodoc",
     "sphinx.ext.coverage",
     "sphinx.ext.doctest",
@@ -123,6 +114,7 @@ extensions = [
     "sphinx.ext.mathjax",
     "sphinx.ext.todo",
     "sphinx.ext.viewcode",
+    "myst_nb",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -149,7 +141,7 @@ language = None
 exclude_patterns = [".ipynb_checkpoints", "**/.ipynb_checkpoints"]
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = "native"
+pygments_style = "material"
 
 
 # -- Options for HTML output -------------------------------------------------
@@ -157,13 +149,28 @@ pygments_style = "native"
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = "sphinx_rtd_theme"
+html_theme = "pydata_sphinx_theme"
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-# html_theme_options = {}
+html_theme_options = {
+    "page_sidebar_items": [],
+    "navbar_center": ["navbar-nav", "navbar-icon-links"],
+    "navbar_end": [],
+    "github_url": CONF["metadata"]["url"],
+}
+
+html_sidebars = {
+    "**": [
+        "search-field",
+        "page-toc",
+        "edit-this-page",
+        "sidebar-nav-bs",
+        "sidebar-ethical-ads",
+    ]
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -180,6 +187,7 @@ html_static_path = ["_static"]
 #
 # html_sidebars = {}
 
+jupyter_execute_notebooks = "force"
 
 # -- Options for HTMLHelp output ---------------------------------------------
 

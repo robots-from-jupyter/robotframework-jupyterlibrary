@@ -10,7 +10,7 @@
 | :-------------------: | :-----------------------------------: | :---------------------: | :-------------------------: | :-----------------------------: |
 | [![pip-badge][]][pip] | [![conda-forge-badge][]][conda-forge] | [![docs-badge][]][docs] | [![binder-badge][]][binder] | [![workflow-badge][]][workflow] |
 
-# Using
+## Using
 
 Write `.robot` files that use `JupyterLibrary` [keywords][]... or use [magics][]
 in notebooks.
@@ -33,7 +33,7 @@ A Notebook in JupyterLab
 
 See the [acceptance tests][] for examples.
 
-# Installation
+## Installation
 
 ```bash
 pip install robotframework-jupyterlibrary
@@ -47,7 +47,7 @@ conda install -c conda-forge robotframework-jupyterlibrary
 
 Or see the [contributing guide][contributing] for a development install.
 
-# Free Software
+## Free Software
 
 JupyterLibrary is Free Software under the [BSD-3-Clause License][license]. It
 contains code from a number of other projects:

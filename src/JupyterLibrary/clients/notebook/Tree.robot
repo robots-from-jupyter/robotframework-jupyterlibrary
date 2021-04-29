@@ -24,5 +24,5 @@ Launch a new Notebook Classic Notebook
     Click Element    css:${JNC CSS TREE NEW BUTTON}
     Wait Until Page Contains Element    css:${JNC CSS TREE NEW MENU}
     Click Element    css:${JNC CSS TREE NEW MENU} a[title$="${kernel}"]
-    Select Window    NEW
+    Switch Window    NEW
     Wait Until Page Contains Element    css:${JNC CSS NB KERNEL ICON}${JNC CSS NB KERNEL IDLE}    timeout=30s
