@@ -7,7 +7,7 @@ Execute JupyterLab Command
     [Arguments]    ${command}    ${accept}=${True}    ${close}=${True}
     [Documentation]    Use the JupyterLab
     ...    [https://jupyterlab.readthedocs.io/en/stable/user/commands.html|Command Palette]
-    ...    to run a command and ``accept`` any resulting dialogs, then ``close``
+    ...    to run a ``command`` and ``accept`` any resulting dialogs, then ``close``
     ...    the Command Palette.
     Maybe accept a JupyterLab prompt
     Open Command Palette with Hotkeys
@@ -18,6 +18,11 @@ Execute JupyterLab Command
     Run Keyword If    ${close}    Maybe Close JupyterLab Sidebar
 
 Open Command Palette with Hotkeys
+    [Documentation]
+    ...    Open the JupyterLab Command Palette with the platform-specific keyboard
+    ...    shortcuts. Note that the JupyterLab 3 modal command palette is flaky.
+    ...    Enabling the sidebar-based mechanism may help, see:
+    ...    - [#Set JupyterLab Plugin Settings|Set JupyterLab Plugin Settings]
     ${accel} =    Get ACCEL key
     Press Keys    id:main    ${accel}+SHIFT+c
     Wait Until Page Contains Element    css:${JLAB CSS CMD INPUT}

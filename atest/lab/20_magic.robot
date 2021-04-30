@@ -31,5 +31,5 @@ Wait for and Click Text
     ${sel} =    Set Variable    xpath://*[contains(text(), '${canary}')]
     Wait Until Page Contains Element    ${sel}
     Click Element    ${sel}
-    Capture Page Screenshot    lab${/}magic-${NEXT SCREENSHOT}-${canary}.png
+    Capture Page Screenshot    20-00-magic-${NEXT SCREENSHOT}-${canary}.png
     Set Test Variable    ${NEXT SCREENSHOT}    ${NEXT SCREENSHOT.__add__(1)}

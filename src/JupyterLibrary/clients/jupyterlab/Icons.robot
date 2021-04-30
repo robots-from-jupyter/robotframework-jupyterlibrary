@@ -26,7 +26,7 @@ Resource          JupyterLibrary/clients/jupyterlab/PageInfo.robot
 *** Keywords ***    ***
 Get JupyterLab Icon CSS
     [Arguments]    ${icon}
-    [Documentation]    Get a Lab version-specific, but general CSS selector for an icon
+    [Documentation]    Get a Lab version-specific, but general CSS selector for an ``icon``.
     ${version} =    Get JupyterLab Application Version Info
     ${sel} =    Set Variable If    ${version[0].__eq__('1')}
     ...    ${JLAB1 CSS ICONS['${icon}']}
@@ -35,7 +35,7 @@ Get JupyterLab Icon CSS
 
 Get JupyterLab Icon XPath
     [Arguments]    ${icon}
-    [Documentation]    Get a Lab version-specific, but general XPath selector for an icon
+    [Documentation]    Get a Lab version-specific, but general XPath selector for an ``icon``.
     ${version} =    Get JupyterLab Application Version Info
     ${sel} =    Set Variable If    ${version[0].__eq__('1')}
     ...    ${JLAB1 XP ICONS['${icon}']}
