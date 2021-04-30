@@ -7,7 +7,6 @@ Library           JupyterLibrary
 *** Keywords ***
 Set Up JupyterLab Suite
     Wait for New Jupyter Server to be Ready
-    Set Screenshot Directory    ${OUTPUT DIR}${/}lab
 
 Tear Down JupyterLab Suite
     Run Keyword and Ignore Error

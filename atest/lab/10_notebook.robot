@@ -12,7 +12,7 @@ IPython Notebook on Lab
     Add and Run JupyterLab Code Cell    print("hello world")
     Wait Until JupyterLab Kernel Is Idle
     Current JupyterLab Cell Output Should Contain    hello world
-    Capture Page Screenshot    10-00-ipython.png
+    Capture Page Screenshot    lab${/}10-00-ipython.png
     Save JupyterLab Notebook
 
 IPython Notebook Outputs on Lab
@@ -32,7 +32,7 @@ Multiple Notebooks on Lab
     Add and Run JupyterLab Code Cell    print("hello world")
     Wait Until JupyterLab Kernel Is Idle
     Page Should Contain    hello world
-    Capture Page Screenshot    10-20-one-notebook.png
+    Capture Page Screenshot    lab${/}10-20-one-notebook.png
     Launch a new JupyterLab Document
     ${tab1} =    Get JupyterLab Dock Panel Tab    Untitled1.ipynb
     Click Element    ${tab1}
@@ -40,7 +40,7 @@ Multiple Notebooks on Lab
     Wait Until JupyterLab Kernel Is Idle
     Page Should Contain    another world
     Drag And Drop By Offset    ${tab1}    800    500
-    Capture Page Screenshot    10-21-two-notesbook.png
+    Capture Page Screenshot    lab${/}10-21-two-notesbook.png
     Close JupyterLab Dock Panel Tab    Untitled1.ipynb
     Maybe Accept a JupyterLab Prompt
     Page Should Not Contain    yet another world
