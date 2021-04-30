@@ -191,7 +191,7 @@ class ServerKeywords(LibraryComponent):
         return handle
 
     @keyword
-    def terminate_all_jupyter_servers(self, timeout="5s"):
+    def terminate_all_jupyter_servers(self, timeout="6s"):
         """Close all Jupyter servers started by
         [#Start New Jupyter Server|Start New Jupyter Server],
         waiting ``timeout`` to ensure all files/processes are freed before
@@ -215,14 +215,20 @@ class ServerKeywords(LibraryComponent):
         if shutdown:
             for nbh in self._handles:
                 try:
-                    plib.terminate_process(nbh, kill=True)
+                    plib.terminate_process(nbh)
                     terminated += 1
+                except Exception as err:
+                    BuiltIn().log(err)
+            if self._handles:
+                BuiltIn().sleep(timeout)
+            for nbh in self._handles:
+                try:
+                    plib.terminate_process(nbh, kill=True)
                 except Exception as err:
                     BuiltIn().log(err)
 
         # give processes a mo to shutdown
         if terminated or shutdown and self._tmpdirs:
-            BuiltIn().sleep(timeout)
             for nbh in self._handles:
                 shutil.rmtree(self._tmpdirs[nbh])
 
