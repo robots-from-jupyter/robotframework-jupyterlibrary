@@ -60,3 +60,17 @@ Maybe Accept a JupyterLab Prompt
     [Documentation]    Click the accept button in a JupyterLab dialog (if one is open).
     ${accept} =    Get WebElements    css:${JLAB CSS ACCEPT}
     Run Keyword If    ${accept}    Click Element    ${accept[0]}
+
+Get JupyterLab Dock Panel Tab
+    [Arguments]    ${label}    ${n}=1
+    [Documentation]    Get the ``n`` -th JupyterLab Dock Panel Tab with ``label`` as a ``WebElement``.
+    ...    ``n`` is the 1-based index of the like- ``label`` ed tabs.
+    ${els} =    Get WebElements    xpath:${JLAB XP DOCK TAB LABEL}\[. = '${label}']/..
+    [Return]    ${els[${n}-1]}
+
+Close JupyterLab Dock Panel Tab
+    [Arguments]    ${label}    ${n}=1
+    [Documentation]    Close the ``n`` -th JupyterLab Dock Panel Tab with ``label`` as a ``WebElement``.
+    ...    ``n`` is the 1-based index of the like- ``label`` ed tabs.
+    ${tab} =    Get JupyterLab Dock Panel Tab    ${label}    ${n}
+    Click Element    ${tab.find_element_by_xpath('./div[last()]')}

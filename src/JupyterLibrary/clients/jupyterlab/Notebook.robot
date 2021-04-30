@@ -13,12 +13,16 @@ Add and Run JupyterLab Code Cell
     ...    ``n`` is the 1-based index of the notebook, usually in order of opening.
     ${nl} =    Set Variable    \n
     ${add icon} =    Get JupyterLab Icon XPath    add
-    Click Element    xpath://div${JLAB XP NB FRAG}\[${n}]//div${JLAB XP NB TOOLBAR FRAG}//${add icon}
+    ${nb} =    Get WebElement    xpath://div${JLAB XP NB FRAG}\[${n}]
+    # rely on main area widgets all having ids
+    ${nbid} =    Get Element Attribute    ${nb}    id
+    Click Element    ${nb.find_element_by_xpath('''div${JLAB XP NB TOOLBAR FRAG}//${add icon}''')}
     Sleep    0.1s
-    ${cell} =    Get WebElement    css:${JLAB CSS ACTIVE INPUT}
+    ${cell} =    Set Variable
+    ...    ${nb.find_element_by_css_selector('''${JLAB CSS ACTIVE INPUT}'''.replace('''${JLAB CSS ACTIVE DOC}''', ''))}
     Click Element    ${cell}
-    Set CodeMirror Value    ${JLAB CSS ACTIVE INPUT}    @{code}
-    Run Current JupyterLab Code Cell
+    Set CodeMirror Value    \#${nbid}${JLAB CSS ACTIVE INPUT}    @{code}
+    Run Current JupyterLab Code Cell    ${n}
     Click Element    ${cell}
 
 Wait Until JupyterLab Kernel Is Idle
@@ -42,8 +46,8 @@ Run Current JupyterLab Code Cell
     [Documentation]    Run the currently-selected cell(s) in the ``n`` th notebook.
     ...    ``n`` is the 1-based index of the notebook, usually in order of opening.
     ${run icon} =    Get JupyterLab Icon XPath    run
-    ${sel} =    Set Variable
-    ...    xpath://div${JLAB XP NB FRAG}\[${n}]//div${JLAB XP NB TOOLBAR FRAG}//${run icon}
-    Wait Until Page Contains Element    ${sel}
-    Click Element    ${sel}
+    ${nb} =    Get WebElement    xpath://div${JLAB XP NB FRAG}\[${n}]
+    ${run btn} =    Set Variable
+    ...    ${nb.find_element_by_xpath('''div${JLAB XP NB TOOLBAR FRAG}//${run icon}''')}
+    Click Element    ${run btn}
     Sleep    0.5s

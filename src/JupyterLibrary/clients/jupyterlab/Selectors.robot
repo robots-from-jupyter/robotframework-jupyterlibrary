@@ -20,6 +20,7 @@ ${JLAB ID SPLASH}    jupyterlab-splash
 # magic strings
 ${JLAB TEXT BUSY PROMPT}    In [*]:
 # xpath selectors
+${JLAB XP LAUNCHER}    //div[contains(@class, 'jp-Launcher-body')]
 ${JLAB XP CARD}    //div[contains(@class, 'jp-LauncherCard')]
 ${JLAB XP DOCK}    //div[@id='jp-main-dock-panel']
 ${JLAB XP MENU ITEM LABEL}    //div[contains(@class, 'p-Menu-itemLabel')]
@@ -30,5 +31,7 @@ ${JLAB XP NB FRAG}    ${JLAB XP MAIN AREA FRAG}\[contains(@class, 'jp-NotebookPa
 ${JLAB XP NB TOOLBAR FRAG}    [contains(@class, 'jp-NotebookPanel-toolbar')]
 ${JLAB XP NB TOOLBAR}    //div${JLAB XP NB TOOLBAR FRAG}
 ${JLAB XP BUSY KERNEL}    //*[local-name() = 'div' and conttains(@class, 'jp-FilledCircleIcon' or (local-name() = 'svg' and contains(@data-icon, 'ui-components:circle-filled')))]
-# file extensions
-${JLAB FILE EXT SETTINGS}    .jupyterlab-settings
+## dock panel
+${JLAB XP DOCK PANEL}    //*[@id = 'jp-main-dock-panel']
+${JLAB XP DOCK TAB}    ${JLAB XP DOCK PANEL}//ul[contains(@class, 'p-TabBar-content')]/li[contains(@class, 'p-TabBar-tab')]
+${JLAB XP DOCK TAB LABEL}    ${JLAB XP DOCK TAB}/div[contains(@class, 'p-TabBar-tabLabel')]
