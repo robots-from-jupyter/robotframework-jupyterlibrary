@@ -21,7 +21,7 @@ IPython Notebook Outputs on Lab
         Add and Run JupyterLab Code Cell    print("${i} hello world " * ${i ** 2})
     END
     Wait Until JupyterLab Kernel Is Idle
-    Screenshot Each Output of Active JupyterLab Document    10-10-outputs-
+    Screenshot Each Output of Active JupyterLab Document    10-10-outputs
     Save JupyterLab Notebook
 
 Multiple Notebooks on Lab
