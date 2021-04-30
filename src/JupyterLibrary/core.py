@@ -43,10 +43,10 @@ class JupyterLibrary(SeleniumLibrary):
           the directory where the log file is written is used.
         """
         super(JupyterLibrary, self).__init__(
-            timeout=5.0,
-            implicit_wait=0.0,
-            run_on_failure="Capture Page Screenshot",
-            screenshot_root_directory=None,
+            timeout=timeout,
+            implicit_wait=implicit_wait,
+            run_on_failure=run_on_failure,
+            screenshot_root_directory=screenshot_root_directory,
         )
         self.add_library_components(
             [Component(self) for Component in component_classes]
