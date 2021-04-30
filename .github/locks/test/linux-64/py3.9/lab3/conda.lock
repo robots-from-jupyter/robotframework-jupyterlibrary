@@ -57,7 +57,7 @@ https://conda.anaconda.org/conda-forge/noarch/testpath-0.4.4-py_0.tar.bz2#3b98ff
 https://conda.anaconda.org/conda-forge/noarch/webencodings-0.5.1-py_1.tar.bz2#3563be4c5611a44210d9ba0c16113136
 https://conda.anaconda.org/conda-forge/noarch/wheel-0.36.2-pyhd3deb0d_0.tar.bz2#768bfbe026426d0e76b377997d1f2b98
 https://conda.anaconda.org/conda-forge/noarch/zipp-3.4.1-pyhd8ed1ab_0.tar.bz2#a4fa30eb74a326092b3d8078b1f1aae1
-https://conda.anaconda.org/conda-forge/noarch/babel-2.9.0-pyhd3deb0d_0.tar.bz2#1cb532c9a6fd4e56a9f0906b87c17b76
+https://conda.anaconda.org/conda-forge/noarch/babel-2.9.1-pyh44b312d_0.tar.bz2#74136ed39bfea0832d338df1e58d013e
 https://conda.anaconda.org/conda-forge/linux-64/certifi-2020.12.5-py39hf3d152e_1.tar.bz2#83afa403caafd7ef3162385cca9bce13
 https://conda.anaconda.org/conda-forge/linux-64/cffi-1.14.5-py39he32792d_0.tar.bz2#b561e1fad1fc8bb343064bd5497444bb
 https://conda.anaconda.org/conda-forge/linux-64/chardet-4.0.0-py39hf3d152e_1.tar.bz2#d0da429a3428ffcacaad25595b96a648
@@ -112,7 +112,7 @@ https://conda.anaconda.org/conda-forge/linux-64/ipykernel-5.5.3-py39hef51801_0.t
 https://conda.anaconda.org/conda-forge/linux-64/jupyter_server-1.6.4-py39hf3d152e_0.tar.bz2#49e35c5dca28ce4efde9346ba608d6d7
 https://conda.anaconda.org/conda-forge/noarch/jupyterlab_server-2.5.0-pyhd8ed1ab_0.tar.bz2#5de37a58281ec57b3abc1eecc6db1012
 https://conda.anaconda.org/conda-forge/noarch/notebook-6.3.0-pyha770c72_1.tar.bz2#6a53111a5a62d32abfa21aac8fc55a1b
-https://conda.anaconda.org/conda-forge/noarch/voila-0.2.9-pyhd8ed1ab_0.tar.bz2#fc25ed20c77360028cc38cab6391ea4b
+https://conda.anaconda.org/conda-forge/noarch/voila-0.2.10-pyhd8ed1ab_0.tar.bz2#3ac331314316886a570fe6cbb668dd0c
 https://conda.anaconda.org/conda-forge/noarch/nbclassic-0.2.7-pyhd8ed1ab_0.tar.bz2#cf4723f3178fb1cae4f7bf8e31db0e38
 https://conda.anaconda.org/conda-forge/linux-64/widgetsnbextension-3.5.1-py39hf3d152e_4.tar.bz2#ae54c7d751b678c0021929892d598ecd
 https://conda.anaconda.org/conda-forge/noarch/ipywidgets-7.6.3-pyhd3deb0d_0.tar.bz2#536a9ed6d9e740f2b83d1a3c388e4388
