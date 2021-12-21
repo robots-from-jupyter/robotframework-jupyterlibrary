@@ -42,7 +42,7 @@ Click JupyterLab Menu
 Click JupyterLab Menu Item
     [Arguments]    ${label}
     [Documentation]    Click a currently-visible JupyterLab menu item by ``label``.
-    ${item} =    Set Variable    ${JLAB XP MENU ITEM LABEL}\[text() = '${label}']
+    ${item} =    Set Variable    ${JLAB XP MENU ITEM LABEL}\[text() = '${label}']/..[not(contains(@class,'p-mod-disabled'))]
     Wait Until Page Contains Element    ${item}
     Mouse Over    ${item}
     Click Element    ${item}
