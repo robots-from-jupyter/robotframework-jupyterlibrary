@@ -3,8 +3,9 @@ Resource    JupyterLibrary/clients/notebook/Selectors.robot
 
 *** Keywords ***
 Current Notebook Classic Cell Output Should Contain
+    [Documentation]    Check whether the currently-selected cell's output contains the given text
     [Arguments]    ${expected}
-    Wait until Element Contains    css:${JNC CSS ACTIVE OUTPUT}    ${expected}
+    Wait Until Element Contains    css:${JNC CSS ACTIVE OUTPUT}    ${expected}
 
 Screenshot Each Output Of Active Notebook Classic Cell
     [Documentation]    Capture all of the outputs of the current Cell as screenshots
@@ -30,9 +31,9 @@ Screenshot Each Output Of Active Notebook Classic Document
     [Arguments]    ${prefix}
     ${cells} =    Get WebElements    css:${JNC CSS CELL}
     FOR    ${i}    IN RANGE    ${cells.__len__()}
-        Click element    ${cells[${i}]}
-        Run Keyword And Ignore Error    Click element    ${cells[${i + 1}]}
-        Click element    ${cells[${i}]}
+        Click Element    ${cells[${i}]}
+        Run Keyword And Ignore Error    Click Element    ${cells[${i + 1}]}
+        Click Element    ${cells[${i}]}
         Sleep    0.1s
         Screenshot Each Output Of Active Notebook Classic Cell    ${prefix}_cell_${i}
         Screenshot Markdown Of Active Notebook Classic Cell    ${prefix}_cell_${i}

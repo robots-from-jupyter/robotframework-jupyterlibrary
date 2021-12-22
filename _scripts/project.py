@@ -84,7 +84,7 @@ SETUP_CRUFT = [
 ]
 BINDER = ROOT / ".binder"
 ATEST = ROOT / "atest"
-ROBOT_SRC = [*SRC.rglob("*.robot")]
+ROBOT_SRC = [*SRC.rglob("*.resource")]
 
 # things we build
 BUILD = ROOT / "build"
@@ -228,7 +228,7 @@ ENV_DEPS = {
 ]
 
 # linting
-ALL_ROBOT = [*ATEST.rglob("*.robot"), *ROBOT_SRC]
+ALL_ROBOT = [*ATEST.rglob("*.robot"), *ATEST.rglob("*.resource"), *ROBOT_SRC]
 ALL_PY = [*SCRIPTS.rglob("*.py"), *PY_SRC, DODO, DOCS_CONF_PY]
 ALL_DOCS_SRC = [
     p

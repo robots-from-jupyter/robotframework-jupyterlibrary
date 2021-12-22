@@ -32,9 +32,9 @@ Screenshot Each Output Of Active JupyterLab Document
     [Arguments]    ${prefix}
     ${cells} =    Get WebElements    css:${JLAB CSS ACTIVE DOC CELLS}
     FOR    ${i}    IN RANGE    ${cells.__len__()}
-        Click element    ${cells[${i}]}
-        Run Keyword And Ignore Error    Click element    ${cells[${i + 1}]}
-        Click element    ${cells[${i}]}
+        Click Element    ${cells[${i}]}
+        Run Keyword And Ignore Error    Click Element    ${cells[${i + 1}]}
+        Click Element    ${cells[${i}]}
         Sleep    0.1s
         Screenshot Each Output Of Active JupyterLab Cell    ${prefix}_cell_${i}
         Screenshot Markdown Of Active JupyterLab Cell    ${prefix}_cell_${i}

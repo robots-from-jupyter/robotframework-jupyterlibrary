@@ -41,10 +41,10 @@ def setup(app):
         with TemporaryDirectory() as td:
             tdp = Path(td)
             agg = ""
-            for sub in client.rglob("*.robot"):
+            for sub in sorted(client.rglob("*.resource")):
                 print(f"collecting {sub.relative_to(client)}")
                 agg += sub.read_text()
-            out_file = Path(tdp / f"{client.name}.robot")
+            out_file = Path(tdp / f"{client.name}.resource")
             out_file.write_text(agg)
             subprocess.run(
                 [
@@ -58,7 +58,7 @@ def setup(app):
 
     for common_file in COMMON:
         common = Path(common_file)
-        common_name = common.name.lower().replace(".robot", "")
+        common_name = common.name.lower().replace(".resource", "")
         subprocess.run(
             [
                 sys.executable,

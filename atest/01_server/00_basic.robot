@@ -1,4 +1,6 @@
 *** Settings ***
+Documentation       Verify Jupyter server basics
+
 Library             Process
 Library             OperatingSystem
 Library             JupyterLibrary
@@ -34,7 +36,6 @@ Start three servers
     ${terminated} =    Terminate All Jupyter Servers
     Should Be Equal As Integers    ${terminated}    3    msg=Three servers should have been terminated
     Check A Server Process Log    ${nb1}    ${url1}
-    Check A Server Process Log    ${nb2}    ${url2}
     ${terminated} =    Terminate All Jupyter Servers
     Should Be Equal As Integers    ${terminated}    0    msg=No servers should have been terminated
 

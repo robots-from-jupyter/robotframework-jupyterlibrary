@@ -1,2 +1,2 @@
 include  LICENSE README.md
-recursive-include src/JupyterLibrary *.robot VERSION
+recursive-include src/JupyterLibrary *.resource VERSION

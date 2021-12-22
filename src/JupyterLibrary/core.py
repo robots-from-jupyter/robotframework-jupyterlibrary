@@ -16,7 +16,7 @@ CLIENTS = [
     client for client in glob(join(dirname(__file__), "clients", "*")) if isdir(client)
 ]
 
-COMMON = list(glob(join(dirname(__file__), "common", "*.robot")))
+COMMON = list(glob(join(dirname(__file__), "common", "*.resource")))
 
 component_classes = [server.ServerKeywords]
 
@@ -69,7 +69,7 @@ class JupyterLibraryListener(LibraryListener):
             resources += ["JupyterLibrary/common/{}".format(basename(common))]
 
         for client in CLIENTS:
-            for path in glob(join(client, "*.robot")):
+            for path in glob(join(client, "*.resource")):
                 resources += [
                     "JupyterLibrary/clients/{}/{}".format(
                         basename(client), basename(path)
