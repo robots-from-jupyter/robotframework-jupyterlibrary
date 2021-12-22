@@ -1,9 +1,11 @@
 *** Settings ***
-Library             JupyterLibrary
+Documentation       Test JupyterLab Advanced Settings
+
 Library             Process
+Library             JupyterLibrary
 
 Suite Teardown      Run Keyword And Ignore Error    Close All Browsers
-Test Teardown       Run Keyword And Ignore Error    Reset JupyterLab and Close
+Test Teardown       Run Keyword And Ignore Error    Reset JupyterLab And Close
 
 Default Tags        settings
 

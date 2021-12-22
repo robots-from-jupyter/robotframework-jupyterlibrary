@@ -6,7 +6,7 @@ Library             JupyterLibrary
 
 Suite Teardown      Run Keyword And Ignore Error    Close All Browsers
 Test Setup          Open JupyterLab    ${BROWSER}
-Test Teardown       Run Keyword And Ignore Error    Reset JupyterLab and Close
+Test Teardown       Run Keyword And Ignore Error    Reset JupyterLab And Close
 
 Default Tags        notebook
 

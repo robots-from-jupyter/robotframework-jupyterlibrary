@@ -10,7 +10,7 @@ Launch A New JupyterLab Document
     ${launcher} =    Get WebElements    xpath:${JLAB XP LAUNCHER}
     Run Keyword If    not ${launcher.__len__()}    Execute JupyterLab Command    New Launcher
     Wait Until Page Contains Element    xpath:${JLAB XP CARD}    timeout=${timeout}
-    Click Element    xpath:${JLAB XP CARD}\[startswith(@title, '${kernel}')][@data-category='${category}']
+    Click Element    xpath:${JLAB XP CARD}\[starts-with(@title, '${kernel}')][@data-category='${category}']
     Run Keyword And Ignore Error
     ...    Wait Until Page Contains Element    css:${JLAB CSS SPINNER}
     Run Keyword And Ignore Error

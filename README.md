@@ -18,8 +18,8 @@ in notebooks.
 ```robotframework
 *** Settings ***
 Library           JupyterLibrary
-Suite Setup       Wait for New Jupyter Server to be Ready
-Test Teardown     Reset JupyterLab and Close
+Suite Setup       Wait For New Jupyter Server To Be Ready
+Test Teardown     Reset JupyterLab And Close
 Suite Teardown    Terminate All Jupyter Servers
 
 *** Test Cases ***

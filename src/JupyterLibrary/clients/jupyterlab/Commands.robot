@@ -28,7 +28,7 @@ Open Command Palette with Hotkeys
     Wait Until Page Contains Element    css:${JLAB CSS CMD INPUT}
     Run Keyword And Ignore Error    Click Element    css:${JLAB CSS CMD INPUT}
 
-Reset JupyterLab and Close
+Reset JupyterLab And Close
     [Documentation]    Try to clean up after doing some things to the JupyterLab
     ...    open in the current browser, then close the browser.
     Execute JupyterLab Command    Reset Application State

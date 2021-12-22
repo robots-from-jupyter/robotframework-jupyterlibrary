@@ -24,6 +24,6 @@ Launch A New Notebook Classic Notebook
     [Arguments]    ${kernel}=Python 3
     Click Element    css:${JNC CSS TREE NEW BUTTON}
     Wait Until Page Contains Element    css:${JNC CSS TREE NEW MENU}
-    Click Element    css:${JNC CSS TREE NEW MENU} a[title^="${kernel}"]
+    Click Element    css:${JNC CSS TREE NEW MENU} a[title*="${kernel}"]
     Switch Window    NEW
     Wait Until Page Contains Element    css:${JNC CSS NB KERNEL ICON}${JNC CSS NB KERNEL IDLE}    timeout=30s

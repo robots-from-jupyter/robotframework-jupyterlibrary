@@ -1,6 +1,6 @@
 *** Settings ***
-Library             JupyterLibrary
 Library             Process
+Library             JupyterLibrary
 
 Test Teardown       Close All Browsers
 
