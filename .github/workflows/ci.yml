@@ -1,7 +1,3 @@
-# TODO:
-#
-# - change `ubuntu-20.04` to `-latest` once it stops throwing warnings
-
 name: CI
 
 on:
@@ -26,7 +22,7 @@ defaults:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v1
@@ -51,7 +47,7 @@ jobs:
           path: ./dist
 
   lint:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v1
@@ -72,7 +68,7 @@ jobs:
       - run: python dodo.py lint || python dodo.py lint
 
   conda-build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     needs: [build, lint, docs]
     steps:
       - uses: actions/checkout@v2
@@ -102,7 +98,7 @@ jobs:
           path: ./dist/conda-bld
 
   docs:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v1
@@ -150,21 +146,18 @@ jobs:
         #   doit -n4 lock
         #
         conda-subdir: [win-64, osx-64, linux-64]
-        python-version: [py3.6, py3.8, py3.9]
+        python-version: [py3.7, py3.9, py3.10]
         lab-version: [lab1, lab2, lab3]
         include:
           - conda-subdir: linux-64
             os: ubuntu
-            vm: ubuntu-20.04
+            vm: ubuntu-latest
           - conda-subdir: osx-64
             os: macos
             vm: macos-latest
           - conda-subdir: win-64
             os: windows
             vm: windows-latest
-        exclude:
-          - python-version: py3.6
-            lab-version: lab3
 
     steps:
       - name: configure git
@@ -222,7 +215,7 @@ jobs:
   report:
     if: always()
     needs: [test, conda-build]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - if: always()
         uses: actions/download-artifact@v2

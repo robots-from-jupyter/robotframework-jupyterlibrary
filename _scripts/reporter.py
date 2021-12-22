@@ -23,12 +23,16 @@ class GithubActionsReporter(ConsoleReporter):
 
     def gh_outtro(self, task, emoji):
         title = task.title()
-        start, end = self._gh_timings[title] = [
-            *self._gh_timings[title],
-            datetime.now(),
-        ]
-        delta = end - start
-        sec = str(delta.seconds).rjust(7)
+        try:
+            sec = "??"
+            start, end = self._gh_timings[title] = [
+                *self._gh_timings[title],
+                datetime.now(),
+            ]
+            delta = end - start
+            sec = str(delta.seconds).rjust(7)
+        except:
+            pass
         self.outstream.write(f"{END}\n[{sec}s] {emoji} {task.title()} {emoji}\n")
 
     def add_failure(self, task, exception):
