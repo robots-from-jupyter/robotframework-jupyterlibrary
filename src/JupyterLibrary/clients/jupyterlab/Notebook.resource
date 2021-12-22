@@ -1,6 +1,8 @@
 *** Settings ***
-Resource    JupyterLibrary/clients/jupyterlab/Selectors.resource
-Resource    JupyterLibrary/common/CodeMirror.resource
+Documentation       Notebook keywords for JupyterLab
+
+Resource            JupyterLibrary/clients/jupyterlab/Selectors.resource
+Resource            JupyterLibrary/common/CodeMirror.resource
 
 *** Variables ***
 @{HELLO WORLD}      print("hello world")
@@ -11,7 +13,6 @@ Add And Run JupyterLab Code Cell
     ...    ``code`` is a list of strings to set as lines in the code editor.
     ...    ``n`` is the 1-based index of the notebook, usually in order of opening.
     [Arguments]    @{code}    ${n}=1
-    ${nl} =    Set Variable    \n
     ${add icon} =    Get JupyterLab Icon XPath    add
     ${nb} =    Get WebElement    xpath://div${JLAB XP NB FRAG}\[${n}]
     # rely on main area widgets all having ids

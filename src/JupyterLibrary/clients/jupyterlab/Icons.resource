@@ -1,5 +1,7 @@
 *** Settings ***
-Resource    JupyterLibrary/clients/jupyterlab/PageInfo.resource
+Documentation       Icon keywords for JupyterLab
+
+Resource            JupyterLibrary/clients/jupyterlab/PageInfo.resource
 
 *** Variables ***
 &{JLAB1 CSS ICONS}

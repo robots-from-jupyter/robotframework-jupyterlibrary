@@ -1,5 +1,7 @@
 *** Settings ***
-Resource    JupyterLibrary/clients/notebook/Selectors.resource
+Documentation       Keywords for outputs in Jupyter Classic
+
+Resource            JupyterLibrary/clients/notebook/Selectors.resource
 
 *** Keywords ***
 Current Notebook Classic Cell Output Should Contain

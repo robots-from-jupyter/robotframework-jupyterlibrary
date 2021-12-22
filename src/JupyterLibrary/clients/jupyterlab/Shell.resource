@@ -1,8 +1,12 @@
 *** Settings ***
-Resource    JupyterLibrary/clients/jupyterlab/Selectors.resource
-Resource    JupyterLibrary/clients/jupyterlab/PageInfo.resource
+Documentation       Application shell keywords for JupyterLab
+
+Resource            JupyterLibrary/clients/jupyterlab/Selectors.resource
+Resource            JupyterLibrary/clients/jupyterlab/PageInfo.resource
 
 *** Keywords ***
+# robocop: disable=too-many-arguments
+
 Open JupyterLab
     [Documentation]    Open JupyterLab, served from the given (or most-recently-started)
     ...    ``nbserver`` in a ``browser`` (or ``headlessfirefox``) or ``url``,
@@ -18,10 +22,10 @@ Open JupyterLab
     ${token} =    Run Keyword If    not "${url}"    Get Jupyter Server Token    ${nbserver}
     ${final_url} =    Set Variable If    "${url}"    ${url}    ${nbserver_url}lab?token=${token}
     Open Browser    url=${final_url}    browser=${browser}    &{configuration}
-    Wait for JupyterLab Splash Screen
+    Wait For JupyterLab Splash Screen
     Tag With JupyterLab Metadata    ${pageinfo tags}    clear=${clear}
 
-Wait for JupyterLab Splash Screen
+Wait For JupyterLab Splash Screen
     [Documentation]    Wait for the JupyterLab splash animation, waiting ``timeout``
     ...    for the splash screen to appear/disappear, then ``sleep``.
     [Arguments]    ${timeout}=10s    ${sleep}=2s

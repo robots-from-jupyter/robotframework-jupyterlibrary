@@ -1,5 +1,7 @@
 *** Settings ***
-Resource    JupyterLibrary/clients/jupyterlab/Selectors.resource
+Documentation       Output keywords for JupyterLab
+
+Resource            JupyterLibrary/clients/jupyterlab/Selectors.resource
 
 *** Keywords ***
 Current JupyterLab Cell Output Should Contain

@@ -1,5 +1,7 @@
 *** Settings ***
-Resource    JupyterLibrary/clients/jupyterlab/Selectors.resource
+Documentation       Launcher keywords for JupyterLab
+
+Resource            JupyterLibrary/clients/jupyterlab/Selectors.resource
 
 *** Keywords ***
 Launch A New JupyterLab Document

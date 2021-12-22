@@ -1,6 +1,8 @@
 *** Settings ***
-Resource    JupyterLibrary/clients/jupyterlab/Selectors.resource
-Resource    JupyterLibrary/clients/jupyterlab/Shortcuts.resource
+Documentation       Command keywords for JupyterLab
+
+Resource            JupyterLibrary/clients/jupyterlab/Selectors.resource
+Resource            JupyterLibrary/clients/jupyterlab/Shortcuts.resource
 
 *** Keywords ***
 Execute JupyterLab Command
@@ -9,21 +11,21 @@ Execute JupyterLab Command
     ...    to run a ``command`` and ``accept`` any resulting dialogs, then ``close``
     ...    the Command Palette.
     [Arguments]    ${command}    ${accept}=${True}    ${close}=${True}
-    Maybe accept a JupyterLab prompt
-    Open Command Palette with Hotkeys
+    Maybe Accept A JupyterLab Prompt
+    Open Command Palette With Hotkeys
     Input Text    css:${JLAB CSS CMD INPUT}    ${command}
     Wait Until Page Contains Element    css:${JLAB CSS CMD ITEM}
     Click Element    css:${JLAB CSS CMD ITEM}
     Run Keyword If    ${accept}    Maybe Accept A JupyterLab Prompt
     Run Keyword If    ${close}    Maybe Close JupyterLab Sidebar
 
-Open Command Palette with Hotkeys
+Open Command Palette With Hotkeys
     [Documentation]
     ...    Open the JupyterLab Command Palette with the platform-specific keyboard
     ...    shortcuts. Note that the JupyterLab 3 modal command palette is flaky.
     ...    Enabling the sidebar-based mechanism may help, see:
     ...    - [#Set JupyterLab Plugin Settings|Set JupyterLab Plugin Settings]
-    ${accel} =    Get ACCEL key
+    ${accel} =    Get ACCEL Key
     Press Keys    id:main    ${accel}+SHIFT+c
     Wait Until Page Contains Element    css:${JLAB CSS CMD INPUT}
     Run Keyword And Ignore Error    Click Element    css:${JLAB CSS CMD INPUT}
@@ -35,6 +37,7 @@ Reset JupyterLab And Close
     Close Browser
 
 Close All JupyterLab Tabs
-    Maybe accept a JupyterLab prompt
+    [Documentation]    Attempt to close all the currently-open tabs, accepting any dialogs
+    Maybe Accept A JupyterLab Prompt
     Execute JupyterLab Command    Close All Tabs
-    Maybe accept a JupyterLab prompt
+    Maybe Accept A JupyterLab Prompt

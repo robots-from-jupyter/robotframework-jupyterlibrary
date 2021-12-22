@@ -1,8 +1,10 @@
 *** Settings ***
-Library     platform    WITH NAME    PLATFORM
+Documentation       Keyboard shortcut keywords for JupyterLab
+
+Library             platform    WITH NAME    PLATFORM
 
 *** Keywords ***
-Get ACCEL key
+Get ACCEL Key
     [Documentation]    Get the platform-specific "accelerator key" used for shortcuts:
     ...    - ``Ctrl`` on Linux/Windows
     ...    - ``Cmd`` on MacOS
@@ -12,6 +14,6 @@ Get ACCEL key
 
 Update ACCEL Key
     [Documentation]    Cache the "accelerator key"
-    ${system} =    PLATFORM.system
+    ${system} =    PLATFORM.System
     ${accel} =    Evaluate    "COMMAND" if "${system}" == "Darwin" else "CTRL"
     Set Global Variable    ${ACCEL KEY}    ${accel}

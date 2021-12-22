@@ -1,6 +1,8 @@
 *** Settings ***
-Library     OperatingSystem
-Resource    JupyterLibrary/clients/jupyterlab/PageInfo.resource
+Documentation       Settings keywords for JupyterLab
+
+Library             OperatingSystem
+Resource            JupyterLibrary/clients/jupyterlab/PageInfo.resource
 
 *** Variables ***
 ${JLAB FILE EXT SETTINGS}       .jupyterlab-settings

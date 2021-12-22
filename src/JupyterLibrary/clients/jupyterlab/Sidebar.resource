@@ -1,5 +1,7 @@
 *** Settings ***
-Resource    JupyterLibrary/clients/jupyterlab/Selectors.resource
+Documentation       Sidebar keywords for JupyterLab
+
+Resource            JupyterLibrary/clients/jupyterlab/Selectors.resource
 
 *** Keywords ***
 Maybe Close JupyterLab Sidebar

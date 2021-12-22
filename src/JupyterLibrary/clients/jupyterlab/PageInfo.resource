@@ -1,7 +1,9 @@
 *** Settings ***
-Resource    JupyterLibrary/clients/jupyterlab/Selectors.resource
-Library     json    WITH NAME    JSON
-Library     String
+Documentation       Page config keywords for JupyterLab
+
+Resource            JupyterLibrary/clients/jupyterlab/Selectors.resource
+Library             String
+Library             json    WITH NAME    JSON
 
 *** Variables ***
 ${JLAB XP PAGEINFO}                 script[contains(@id, 'jupyter-config-data')]
