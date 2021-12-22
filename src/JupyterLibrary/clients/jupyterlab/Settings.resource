@@ -1,6 +1,6 @@
 *** Settings ***
 Library     OperatingSystem
-Resource    ./PageInfo.robot
+Resource    JupyterLibrary/clients/jupyterlab/PageInfo.resource
 
 *** Variables ***
 ${JLAB FILE EXT SETTINGS}       .jupyterlab-settings

@@ -1,6 +1,6 @@
 *** Settings ***
-Resource    JupyterLibrary/clients/jupyterlab/Selectors.robot
-Resource    JupyterLibrary/common/CodeMirror.robot
+Resource    JupyterLibrary/clients/jupyterlab/Selectors.resource
+Resource    JupyterLibrary/common/CodeMirror.resource
 
 *** Variables ***
 @{HELLO WORLD}      print("hello world")

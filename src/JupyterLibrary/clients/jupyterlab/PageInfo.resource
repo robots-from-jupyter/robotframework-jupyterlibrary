@@ -1,5 +1,5 @@
 *** Settings ***
-Resource    JupyterLibrary/clients/jupyterlab/Selectors.robot
+Resource    JupyterLibrary/clients/jupyterlab/Selectors.resource
 Library     json    WITH NAME    JSON
 Library     String
 

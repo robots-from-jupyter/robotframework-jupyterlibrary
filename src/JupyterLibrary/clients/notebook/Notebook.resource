@@ -1,6 +1,6 @@
 *** Settings ***
-Resource    JupyterLibrary/clients/notebook/Selectors.robot
-Resource    JupyterLibrary/common/CodeMirror.robot
+Resource    JupyterLibrary/clients/notebook/Selectors.resource
+Resource    JupyterLibrary/common/CodeMirror.resource
 
 *** Keywords ***
 Add And Run Notebook Classic Code Cell

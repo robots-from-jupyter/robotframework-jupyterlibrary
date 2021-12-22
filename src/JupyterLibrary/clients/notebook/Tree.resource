@@ -3,7 +3,7 @@ Documentation       Keywords for working with the Jupyter Notebook Clasic web ap
 ...                 You should have already started a Jupyter Server, such as with
 ...                 *Wait For New Jupyter Server To Be Ready*.
 
-Resource            JupyterLibrary/clients/notebook/Selectors.robot
+Resource            JupyterLibrary/clients/notebook/Selectors.resource
 
 *** Keywords ***
 Open Notebook Classic

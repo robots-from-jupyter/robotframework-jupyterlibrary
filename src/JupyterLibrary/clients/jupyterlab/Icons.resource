@@ -1,5 +1,5 @@
 *** Settings ***
-Resource    JupyterLibrary/clients/jupyterlab/PageInfo.robot
+Resource    JupyterLibrary/clients/jupyterlab/PageInfo.resource
 
 *** Variables ***
 &{JLAB1 CSS ICONS}

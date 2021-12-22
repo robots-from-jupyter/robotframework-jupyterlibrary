@@ -1,6 +1,6 @@
 *** Settings ***
-Resource    JupyterLibrary/clients/jupyterlab/Selectors.robot
-Resource    JupyterLibrary/clients/jupyterlab/PageInfo.robot
+Resource    JupyterLibrary/clients/jupyterlab/Selectors.resource
+Resource    JupyterLibrary/clients/jupyterlab/PageInfo.resource
 
 *** Keywords ***
 Open JupyterLab
