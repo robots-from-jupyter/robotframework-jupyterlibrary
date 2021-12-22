@@ -10,9 +10,9 @@ dependencies:
   - jupyterlab_server >=2.0.0,<3.0.0a0
   # next roadmap item
   - ipywidgets >=7.6,<8.0.0a0 # ...with whatever version of...
-  - voila >=0.2.6,<0.3.0
+  - voila >=0.3.0,<0.4.0
   # ... jupyterlab_widgets     # it brings along
   # incubator: for installability issues, demo purposes)
-  - jupyterlab-classic >=0.1.0,<1.0.0a0
+  - retrolab >=0.3.0,<0.4.0a0
   # developer experience stuff
   - jupyterlab_robotmode >=0.2.0,<1.0.0a0

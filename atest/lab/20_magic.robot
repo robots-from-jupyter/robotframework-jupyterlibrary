@@ -1,32 +1,38 @@
 *** Settings ***
-Suite Teardown    Run Keyword and Ignore Error    Close All Browsers
-Test Teardown     Run Keyword and Ignore Error    Reset JupyterLab and Close
-Default Tags      notebook    magic
-Library           JupyterLibrary
-Library           Process
+Documentation       Tests of the IPython magic
+
+Library             Process
+Library             JupyterLibrary
+
+Suite Teardown      Run Keyword And Ignore Error    Close All Browsers
+Test Teardown       Run Keyword And Ignore Error    Reset JupyterLab And Close
+
+Default Tags        notebook    magic
 
 *** Variables ***
-${LOAD EXT}       %reload_ext JupyterLibrary
-${IND}            ${SPACE.__mul__(4)}
+${LOAD EXT}             %reload_ext JupyterLibrary
+${IND}                  ${SPACE.__mul__(4)}
 @{MAGIC}
-...               %%robot
-...               *** Tasks ***
-...               Log Something
-...               ${IND}Log${IND}Something
-${NEXT SCREENSHOT}    ${0}
+...                     %%robot
+...                     *** Tasks ***
+...                     Log Something
+...                     ${IND}Log${IND}Something
+${NEXT SCREENSHOT}      ${0}
 
 *** Test Cases ***
-IPython Magic on Lab
+IPython Magic On Lab
+    [Documentation]    Verify the IPython magic works in JupyterLab.
     Open JupyterLab    ${BROWSER}
-    Launch a new JupyterLab Document
-    Add and Run JupyterLab Code Cell    ${LOAD EXT}
-    Add and Run JupyterLab Code Cell    @{MAGIC}
-    Wait for and Click Text    Formatted Robot Code
-    Wait for and Click Text    returned 0
+    Launch A New JupyterLab Document
+    Add And Run JupyterLab Code Cell    ${LOAD EXT}
+    Add And Run JupyterLab Code Cell    @{MAGIC}
+    Wait For And Click Text    Formatted Robot Code
+    Wait For And Click Text    returned 0
     Save JupyterLab Notebook
 
 *** Keywords ***
-Wait for and Click Text
+Wait For And Click Text
+    [Documentation]    Verify clicking some text works.
     [Arguments]    ${canary}
     ${sel} =    Set Variable    xpath://*[contains(text(), '${canary}')]
     Wait Until Page Contains Element    ${sel}

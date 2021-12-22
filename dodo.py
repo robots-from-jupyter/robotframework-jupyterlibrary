@@ -119,7 +119,7 @@ def task_conda_build():
         actions=[
             [
                 P.CONDA_EXE,
-                "build",
+                "mambabuild",
                 "-c",
                 "conda-forge",
                 "--output-folder",
@@ -256,15 +256,22 @@ def task_lint():
         targets=[P.OK.pyflakes],
     )
 
-    clean, touch = P.get_ok_actions(P.OK.robot_tidy)
+    clean, touch = P.get_ok_actions(P.OK.robotidy)
 
     yield dict(
-        name="robot:tidy",
-        actions=[clean]
-        + [[*pym, "robot.tidy", "--recursive", it] for it in [P.SRC, P.ATEST]]
-        + [touch],
+        name="robotidy",
+        actions=[clean, [*run_in, *P.ROBOTIDY_ARGS, P.SRC, P.ATEST], touch],
         file_dep=[*P.ALL_ROBOT, env_lock],
-        targets=[P.OK.robot_tidy],
+        targets=[P.OK.robotidy],
+    )
+
+    clean, touch = P.get_ok_actions(P.OK.robocop)
+
+    yield dict(
+        name="robocop",
+        actions=[clean, [*run_in, *P.ROBOCOP_ARGS, P.SRC, P.ATEST], touch],
+        file_dep=[*P.ALL_ROBOT, env_lock, P.OK.robotidy],
+        targets=[P.OK.robocop],
     )
 
     clean, touch = P.get_ok_actions(P.OK.prettier)
