@@ -119,7 +119,7 @@ def task_conda_build():
         actions=[
             [
                 P.CONDA_EXE,
-                "build",
+                "mambabuild",
                 "-c",
                 "conda-forge",
                 "--output-folder",
