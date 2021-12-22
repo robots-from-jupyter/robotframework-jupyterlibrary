@@ -1,13 +1,15 @@
 *** Settings ***
-Suite Setup       Create Directory    ${LOGS}
-Suite Teardown    Terminate All Jupyter Servers
-Force Tags        server
-Library           JupyterLibrary
-Library           Process
-Library           OperatingSystem
+Library             JupyterLibrary
+Library             Process
+Library             OperatingSystem
+
+Suite Setup         Create Directory    ${LOGS}
+Suite Teardown      Terminate All Jupyter Servers
+
+Force Tags          server
 
 *** Variables ***
-${LOGS}           ${OUTPUT_DIR}${/}${OS}${/}${BROWSER}${/}logs${/}
+${LOGS}     ${OUTPUT_DIR}${/}${OS}${/}${BROWSER}${/}logs${/}
 
 *** Test Cases ***
 Start one server

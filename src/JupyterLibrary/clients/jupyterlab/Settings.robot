@@ -1,9 +1,9 @@
 *** Settings ***
-Library           OperatingSystem
-Resource          ./PageInfo.robot
+Library     OperatingSystem
+Resource    ./PageInfo.robot
 
 *** Variables ***
-${JLAB FILE EXT SETTINGS}    .jupyterlab-settings
+${JLAB FILE EXT SETTINGS}       .jupyterlab-settings
 
 *** Keywords ***
 Get JupyterLab User Settings Directory

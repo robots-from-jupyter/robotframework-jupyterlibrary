@@ -1,22 +1,22 @@
 *** Settings ***
-Resource          JupyterLibrary/clients/jupyterlab/Selectors.robot
-Library           json    WITH NAME    JSON
-Library           String
+Resource    JupyterLibrary/clients/jupyterlab/Selectors.robot
+Library     json    WITH NAME    JSON
+Library     String
 
 *** Variables ***
-${JLAB XP PAGEINFO}    script[contains(@id, 'jupyter-config-data')]
+${JLAB XP PAGEINFO}                 script[contains(@id, 'jupyter-config-data')]
 # keep this updated below
-@{JLAB DEFAULT PAGEINFO TAGS}    appName    appVersion    buildAvailable
-...               buildCheck    notebookVersion    devMode
+@{JLAB DEFAULT PAGEINFO TAGS}       appName    appVersion    buildAvailable
+...                                 buildCheck    notebookVersion    devMode
 
 *** Keywords ***
 Get JupyterLab Page Info
-    [Arguments]    ${key}=${EMPTY}    ${clear}=${False}
     [Documentation]    Get one (or all) of the ``pageInfo`` ``key`` s from JupyterLab's HTML ``<head>``.
     ...    Optionally ``clear`` the cached info first.
     ...
     ...    See also:
     ...    - [#Tag With JupyterLab Metadata|Tag With JupyterLab Metadata]
+    [Arguments]    ${key}=${EMPTY}    ${clear}=${False}
     ${pageInfo} =    Get Variable Value    ${JLAB PAGEINFO CACHE}    ${EMPTY}
     Run Keyword If    ${clear} or not ${pageInfo.__len__()}    Update JupyterLab PageInfo Cache
     ${pageInfo} =    Set Variable    ${JLAB PAGEINFO CACHE}
@@ -32,11 +32,11 @@ Update JupyterLab PageInfo Cache
     Set Suite Variable    ${JLAB PAGEINFO CACHE}    ${pageInfo}    children=${True}
 
 Tag With JupyterLab Metadata
-    [Arguments]    ${keys}=${JLAB DEFAULT PAGEINFO TAGS}    ${clear}=${False}
     [Documentation]    Tag the current test (or suite) with ``keys`` from the
     ...    JupyterLab ``pageInfo``.
     ...    The default ``keys``: ``appName`` ``appVersion`` ``buildAvailable``
     ...    ``buildCheck`` ``notebookVersion`` ``devMode``
+    [Arguments]    ${keys}=${JLAB DEFAULT PAGEINFO TAGS}    ${clear}=${False}
     ${info} =    Get JupyterLab Page Info    clear=${clear}
     FOR    ${key}    IN    @{keys}
         ${val} =    Set Variable    ${info.get("${key}")}

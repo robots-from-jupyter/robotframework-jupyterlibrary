@@ -1,8 +1,9 @@
 *** Settings ***
-Suite Teardown    Close All Browsers
-Test Teardown     Reset JupyterLab and Close
-Library           JupyterLibrary
-Library           Process
+Library             JupyterLibrary
+Library             Process
+
+Suite Teardown      Close All Browsers
+Test Teardown       Reset JupyterLab and Close
 
 *** Test Cases ***
 Open JupyterLab

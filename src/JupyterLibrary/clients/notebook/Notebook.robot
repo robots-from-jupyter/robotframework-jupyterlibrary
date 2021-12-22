@@ -1,11 +1,11 @@
 *** Settings ***
-Resource          JupyterLibrary/clients/notebook/Selectors.robot
-Resource          JupyterLibrary/common/CodeMirror.robot
+Resource    JupyterLibrary/clients/notebook/Selectors.robot
+Resource    JupyterLibrary/common/CodeMirror.robot
 
 *** Keywords ***
-Add and Run Notebook Classic Code Cell
-    [Arguments]    ${code}=print("hello world")
+Add And Run Notebook Classic Code Cell
     [Documentation]    Add a ``code`` cell to the currently active notebook and run it.
+    [Arguments]    ${code}=print("hello world")
     Click Element    css:${JNC CSS NB TOOLBAR} ${JNC CSS ICON ADD}
     Sleep    0.1s
     ${cell} =    Get WebElement    css:${JNC CSS ACTIVE INPUT}

@@ -1,5 +1,5 @@
 *** Settings ***
-Library           platform    WITH NAME    PLATFORM
+Library     platform    WITH NAME    PLATFORM
 
 *** Keywords ***
 Get ACCEL key

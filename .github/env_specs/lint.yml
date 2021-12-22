@@ -2,5 +2,6 @@ dependencies:
   - black
   - flake8
   - isort <5
-  - robotframework-lint
+  - robotframework-robocop
+  - robotframework-tidy
   - yarn <2

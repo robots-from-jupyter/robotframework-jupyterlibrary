@@ -264,15 +264,19 @@ CONDA_PKG = (
     CONDA_BLD / "noarch" / f"""{IMPORTABLE.replace("_", "-")}-{VERSION}-py_0.tar.bz2"""
 )
 
+ROBOTIDY_ARGS = ["robotidy", "--configure", "ReplaceRunKeywordIf:enabled=False"]
+ROBOCOP_ARGS = ["robocop", "--configure", "empty-lines-between-sections:empty_lines:1"]
+
 
 class OK:
-    black = BUILD / ".ok.black"
-    pyflakes = BUILD / ".ok.pyflakes"
-    robot_tidy = BUILD / ".ok.robot.tidy"
-    prettier = BUILD / ".ok.prettier"
     atest = BUILD / ".ok.atest"
-    robot_dry_run = BUILD / ".ok.robot.dryrun"
+    black = BUILD / ".ok.black"
+    prettier = BUILD / ".ok.prettier"
+    pyflakes = BUILD / ".ok.pyflakes"
+    robocop = BUILD / ".ok.robocop"
     robot = BUILD / ".ok.robot"
+    robot_dry_run = BUILD / ".ok.robot.dryrun"
+    robotidy = BUILD / ".ok.robotidy"
 
 
 def get_atest_stem(attempt=1, extra_args=None, lockfile=None, browser=None):

@@ -1,5 +1,5 @@
 *** Settings ***
-Library           JupyterLibrary
+Library     JupyterLibrary
 
 *** Test Cases ***
 Just import

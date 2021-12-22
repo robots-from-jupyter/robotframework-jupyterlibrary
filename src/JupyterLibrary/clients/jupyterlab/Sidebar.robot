@@ -1,5 +1,5 @@
 *** Settings ***
-Resource          JupyterLibrary/clients/jupyterlab/Selectors.robot
+Resource    JupyterLibrary/clients/jupyterlab/Selectors.robot
 
 *** Keywords ***
 Maybe Close JupyterLab Sidebar
@@ -8,9 +8,9 @@ Maybe Close JupyterLab Sidebar
     Run Keyword If    ${active}    Click Element    ${active[0]}
 
 Maybe Open JupyterLab Sidebar
-    [Arguments]    ${title}
     [Documentation]    Attempt to open a JupyterLab sidebar with the given ``title``
     ...    (if not already open).
+    [Arguments]    ${title}
     Maybe Close JupyterLab Sidebar
-    Run Keyword and Ignore Error
+    Run Keyword And Ignore Error
     ...    Click Element    css:${JLAB CSS SIDEBAR TAB}\[title^="${title}"]

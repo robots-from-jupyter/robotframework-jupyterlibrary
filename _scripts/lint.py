@@ -19,7 +19,7 @@ def lint():
     check_call(["flake8"] + PY_SRC)
 
     for src in RF_SRC:
-        check_call(["python", "-m", "robot.tidy", "-r", src])
+        check_call(["robotidy", "-r", src])
 
     for nbp in (Path(__file__).parent.parent / "docs").rglob("*.ipynb"):
         nbf = read(str(nbp), NO_CONVERT)

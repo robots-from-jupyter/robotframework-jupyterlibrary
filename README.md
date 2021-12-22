@@ -25,8 +25,8 @@ Suite Teardown    Terminate All Jupyter Servers
 *** Test Cases ***
 A Notebook in JupyterLab
     Open JupyterLab
-    Launch a new JupyterLab Document
-    Add and Run JupyterLab Code Cell
+    Launch A New JupyterLab Document
+    Add And Run JupyterLab Code Cell
     Wait Until JupyterLab Kernel Is Idle
     Capture Page Screenshot
 ```
