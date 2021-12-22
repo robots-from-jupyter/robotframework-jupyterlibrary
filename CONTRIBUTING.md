@@ -2,12 +2,12 @@
 
 ## Get `CONDA_EXE`
 
-- Get [miniforge](https://github.com/conda-forge/miniforge)
+- Get [Mambaforge](https://github.com/conda-forge/miniforge)
 
 ```bash
-conda install -c conda-forge doit
- optional meta-dependencies
-conda install -c conda-forge conda-lock mamba
+mamba install -c conda-forge doit
+# optional meta-dependency
+mamba install -c conda-forge conda-lock
 ```
 
 ## Get the code
@@ -51,19 +51,19 @@ developing, hoping for a better cache hit rate. On the same _operating system_,
 however, any of the pre-solved lockfiles can be used, by specifying the
 `RJFL_LOCKFILE` environment variable.
 
-For example, if `linux-64` running `python3.6` with `jupyterlab 1` failed:
+For example, if `linux-64` running `python3.7` with `jupyterlab 1` failed:
 
 ```bash
 !/usr/bin/env bash
 set -eux
-RFJL_LOCKDIR=test/linux-64/py3.6/lab1 doit release
+RFJL_LOCKDIR=test/linux-64/py3.7/lab1 doit release
 ```
 
 Or, in a `bat` script:
 
 ```bat
 @echo on
-set RFJL_LOCKDIR=test/win-64/py3.9/lab1
+set RFJL_LOCKDIR=test/win-64/py3.7/lab1
 doit release
 ```
 
