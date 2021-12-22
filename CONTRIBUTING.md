@@ -70,17 +70,26 @@ doit release
 This will recreate the `test` environment with the specified lockfile, and
 repeat all the steps.
 
-### Releasing
+## Releasing
 
-- ensure `VERSION` has been increased appropriately
-- ensure `HISTORY.ipynb` is up-to-date
-- (usually) grab the `dist` assets from CI, unpack into `./dist`
-- make a GitHub release, adding the `.tar.gz`, `.whl`, and `SHA256SUMS`
-- upload to PyPI
-
+- [ ] merge all outstanding PRs
+- [ ] start a release issue with a checklist (maybe like this one)
+- [ ] ensure `VERSION` has been increased appropriately
+- [ ] ensure the `HISTORY.ipynb` is up-to-date
+- [ ] validate on binder
+- [ ] validate on ReadTheDocs
+- [ ] wait for a successful build of `master`
+- [ ] download the `dist` archive and unpack somewhere (maybe a fresh `dist`)
+- [ ] create a new release through the GitHub UI
+  - [ ] paste in the relevant `HISTORY` entries
+  - [ ] upload the artifacts
+- [ ] actually upload to pypi.org
   ```bash
   doit publish
   ```
-
-- do a post-mortem issue
-- bump `VERSION` to a working status
+- [ ] postmortem
+  - [ ] handle `conda-forge` feedstock tasks
+  - [ ] validate on binder via simplest-possible gists
+  - [ ] activate the version on ReadTheDocs
+  - [ ] bump `VERSION` to next development version
+  - [ ] update release procedures
