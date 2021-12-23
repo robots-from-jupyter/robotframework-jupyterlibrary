@@ -68,8 +68,8 @@ Maybe Accept A JupyterLab Prompt
 
     # Closing all tabs at once might create a pop-up for each tab. Let's get the
     # Number of open tabs and try closing popups for each one.
-    ${jl_tabs} =    Get WebElements  xpath:${JL_TABBAR_NOT_SELECTED_XPATH}
-    ${len} =    Get Length  ${jl_tabs}
+    ${jl_tabs} =    Get WebElements    xpath:${JL_TABBAR_NOT_SELECTED_XPATH}
+    ${len} =    Get Length    ${jl_tabs}
     FOR    ${index}    IN RANGE    0    2+${len}
       # Check if a popup exists
       ${accept} =    Get WebElements    xpath:${JL_POPUP}
