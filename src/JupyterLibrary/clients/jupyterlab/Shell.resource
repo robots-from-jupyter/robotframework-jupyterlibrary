@@ -62,10 +62,6 @@ Open With JupyterLab Menu
 
 Maybe Accept A JupyterLab Prompt
     [Documentation]    Click the last button in a JupyterLab dialog (if one is open).
-    ### TODO ###
-    # Check if the last button is always the confirmation one
-    # Server unavailable or unreachable modal has "Dismiss" as last button
-
     # Closing all tabs at once might create a pop-up for each tab. Let's get the
     # Number of open tabs and try closing popups for each one.
     ${jl_tabs} =    Get WebElements    xpath:${JL_TABBAR_NOT_SELECTED_XPATH}
