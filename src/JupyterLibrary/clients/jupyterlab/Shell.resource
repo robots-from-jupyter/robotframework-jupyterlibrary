@@ -61,9 +61,21 @@ Open With JupyterLab Menu
     END
 
 Maybe Accept A JupyterLab Prompt
-    [Documentation]    Click the accept button in a JupyterLab dialog (if one is open).
-    ${accept} =    Get WebElements    css:${JLAB CSS ACCEPT}
-    Run Keyword If    ${accept}    Click Element    ${accept[0]}
+    [Documentation]    Click the last button in a JupyterLab dialog (if one is open).
+    ### TODO ###
+    # Check if the last button is always the confirmation one
+    # Server unavailable or unreachable modal has "Dismiss" as last button
+
+    # Closing all tabs at once might create a pop-up for each tab. Let's get the
+    # Number of open tabs and try closing popups for each one.
+    ${jl_tabs} =    Get WebElements  xpath:${JL_TABBAR_NOT_SELECTED_XPATH}
+    ${len} =    Get Length  ${jl_tabs}
+    FOR    ${index}    IN RANGE    0    2+${len}
+      # Check if a popup exists
+      ${accept} =    Get WebElements    xpath:${JL_POPUP}
+      # Click the right most button of the popup
+      Run Keyword If    ${accept}    Click Element    xpath:${JL_POPUP}/button[last()]
+    END
 
 Get JupyterLab Dock Panel Tab
     [Documentation]    Get the ``n`` -th JupyterLab Dock Panel Tab with ``label`` as a ``WebElement``.
