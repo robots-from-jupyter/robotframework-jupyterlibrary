@@ -2,7 +2,7 @@
 
 ## Get `CONDA_EXE`
 
-- Get [Mambaforge](https://github.com/conda-forge/miniforge)
+- Get [Mambaforge](https://conda-forge.org/miniforge/)
 
 ```bash
 mamba install -c conda-forge doit

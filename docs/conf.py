@@ -20,6 +20,8 @@ _parser.read(Path(__file__).parent.parent / "setup.cfg")
 
 CONF = {k: _parser[k] for k in _parser.sections()}
 YEAR = datetime.now().year
+KEYWORDS = "*** Keywords ***"
+VARIABLES = "*** Variables ***"
 
 
 def setup(app):
@@ -38,12 +40,26 @@ def setup(app):
 
     for client_dir in CLIENTS:
         client = Path(client_dir)
+        print(client.name)
         with TemporaryDirectory() as td:
             tdp = Path(td)
-            agg = ""
+            agg = "\n".join(
+                [
+                    "*** Settings ***",
+                    f"Documentation    Keywords for {client.name}",
+                    "",
+                ]
+            )
             for sub in sorted(client.rglob("*.resource")):
-                print(f"collecting {sub.relative_to(client)}")
-                agg += sub.read_text()
+                sub_text = sub.read_text()
+                has_vars = VARIABLES in sub_text
+                has_kw = KEYWORDS in sub_text
+                print(f"... collecting {sub.relative_to(client)}")
+                print(f"    ... keywords?  {has_kw}")
+                print(f"    ... variables? {has_vars}")
+
+                split_on = VARIABLES if has_vars else KEYWORDS
+                agg += "\n".join([split_on, sub_text.split(split_on)[1], ""])
             out_file = Path(tdp / f"{client.name}.resource")
             out_file.write_text(agg)
             subprocess.run(
