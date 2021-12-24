@@ -46,7 +46,7 @@ Click JupyterLab Menu
 Click JupyterLab Menu Item
     [Documentation]    Click a currently-visible JupyterLab menu item by ``label``.
     [Arguments]    ${label}
-    ${item} =    Set Variable    ${JLAB XP MENU ITEM LABEL ENABLED}\[text() = '${label}']
+    ${item} =    Set Variable    ${JLAB XP MENU ITEM LABEL VISIBLE}\[text() = '${label}']
     Wait Until Page Contains Element    ${item}
     Mouse Over    ${item}
     Click Element    ${item}
