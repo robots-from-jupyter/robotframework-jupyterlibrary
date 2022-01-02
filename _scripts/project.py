@@ -104,7 +104,7 @@ SHA256SUMS = DIST / "SHA256SUMS"
 DOCS = ROOT / "docs"
 RTD_ENV = DOCS / "rtd.yml"
 DOCS_CONF_PY = DOCS / "conf.py"
-DOCS_BUILDINFO = BUILD / "docs" / "html" / ".buildinfo"
+DOCS_BUILDINFO = BUILD / "docs/html/.buildinfo"
 
 # demo
 LABEXTXT = BINDER / "labex.txt"
@@ -239,6 +239,8 @@ ALL_DOCS_SRC = [
         DOCS_CONF_PY,
     ]
     if ".ipynb_checkpoints" not in str(p)
+    and "_robot_magic_" not in str(p)
+    and not p.name.endswith(".html")
 ]
 
 PACKAGE_JSON = ROOT / "package.json"

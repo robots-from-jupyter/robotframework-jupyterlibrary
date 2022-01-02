@@ -58,6 +58,7 @@ def task_build():
 
     yield dict(
         name="pypi",
+        doc="build the pypi sdist/wheel",
         actions=[[*run_in, *P.PY, "setup.py", "sdist", "bdist_wheel"]],
         targets=[P.SDIST, P.WHEEL],
         file_dep=[*P.PY_SRC, *P.ROBOT_SRC, P.VERSION_FILE, *P.SETUP_CRUFT, env_lock],
@@ -73,6 +74,7 @@ def task_build():
 
     yield dict(
         name="hash",
+        doc="generate a hash file of all distributions",
         file_dep=P.HASH_DEPS,
         targets=[P.SHA256SUMS],
         actions=[_update_hash],
@@ -108,6 +110,7 @@ def task_conda_build():
 
     yield dict(
         name="recipe",
+        doc="update the conda recipe",
         file_dep=file_dep,
         targets=[P.META_YAML],
         actions=[_template],
@@ -115,6 +118,7 @@ def task_conda_build():
 
     yield dict(
         name="build",
+        doc="use boa to build the conda package",
         file_dep=[P.META_YAML],
         actions=[
             [
@@ -179,8 +183,20 @@ def task_docs():
 
     yield dict(
         name="sphinx",
-        actions=[[*run_in, "sphinx-build", "-M", "html", "docs", "build/docs"]],
-        file_dep=[frozen, *P.ALL_DOCS_SRC, *P.SETUP_CRUFT, *P.ROBOT_SRC],
+        doc="build the docs with sphinx",
+        actions=[
+            [
+                *run_in,
+                "sphinx-build",
+                "-W",
+                "-a",
+                "-b",
+                "html",
+                "docs",
+                "build/docs/html",
+            ]
+        ],
+        file_dep=[frozen, *P.ALL_DOCS_SRC, *P.SETUP_CRUFT, *P.ROBOT_SRC, P.DODO],
         targets=[P.DOCS_BUILDINFO],
     )
 
@@ -217,6 +233,7 @@ def _make_env(env):
 
     yield dict(
         name=env,
+        doc=f"create the local {env} environment",
         file_dep=[lockfile],
         actions=actions,
         targets=[explicit_list],
@@ -242,6 +259,7 @@ def task_lint():
 
     yield dict(
         name="black",
+        doc="ensure python code is well-formatted",
         actions=[clean, [*pym, "black", "--quiet", *P.ALL_PY], touch],
         file_dep=[*P.ALL_PY, env_lock],
         targets=[P.OK.black],
@@ -251,6 +269,7 @@ def task_lint():
 
     yield dict(
         name="pyflakes",
+        doc="ensure python code is well-behaved",
         actions=[clean, [*pym, "pyflakes", *P.ALL_PY], touch],
         file_dep=[*P.ALL_PY, env_lock, P.OK.black],
         targets=[P.OK.pyflakes],
@@ -260,6 +279,7 @@ def task_lint():
 
     yield dict(
         name="robotidy",
+        doc="ensure robot code is well-formatted",
         actions=[clean, [*run_in, *P.ROBOTIDY_ARGS, P.SRC, P.ATEST], touch],
         file_dep=[*P.ALL_ROBOT, env_lock],
         targets=[P.OK.robotidy],
@@ -269,6 +289,7 @@ def task_lint():
 
     yield dict(
         name="robocop",
+        doc="ensure robot code is well-behaved",
         actions=[clean, [*run_in, *P.ROBOCOP_ARGS, P.SRC, P.ATEST], touch],
         file_dep=[*P.ALL_ROBOT, env_lock, P.OK.robotidy],
         targets=[P.OK.robocop],
@@ -278,6 +299,7 @@ def task_lint():
 
     yield dict(
         name="prettier",
+        doc="ensure markdown, YAML, JSON, etc. are well-formatted",
         actions=[clean, [*run_in, "yarn", "--silent", "prettier"], touch],
         file_dep=[*P.ALL_PRETTIER, P.YARN_INTEGRITY],
         targets=[P.OK.prettier],
@@ -293,6 +315,7 @@ def task_js():
 
     yield dict(
         name="yarn",
+        doc="install nodejs dev dependencies",
         uptodate=[
             config_changed({k: P.PACKAGE[k] for k in ["devDependencies", "prettier"]})
         ],
@@ -357,6 +380,7 @@ def task_lab():
 
     yield dict(
         name="serve",
+        doc="runs lab (never stops)",
         uptodate=[lambda: False],
         actions=[PythonInteractiveAction(_lab)],
         file_dep=serve_deps,
@@ -425,6 +449,7 @@ def task_test():
 
     yield dict(
         name="dryrun",
+        doc="pass the tests through the robot machinery, but don't actually _run_ anything",
         uptodate=[config_changed(os.environ.get("ATEST_ARGS", ""))],
         actions=[clean, [*pym, "_scripts.atest", "--dryrun"], touch],
         file_dep=robot_deps,
@@ -462,8 +487,13 @@ def _make_lock_task_name(key):
 def _make_lock_task(key, target):
     (flow, pf, py, lab) = key
 
+    ft = [k for k in [py, lab] if k]
+    if ft:
+        ft = f"(ft. {', '.join(ft)})"
+
     task = dict(
         name=_make_lock_task_name(key),
+        doc=f"lock the {flow} environment for {pf} {ft}".strip(),
         actions=[[*P.SCRIPT_LOCK, target]],
         file_dep=[*P.ENV_DEPS[key]],
         targets=[target],
@@ -497,7 +527,7 @@ if not (P.CI or P.IN_BINDER):
             yield _make_lock_task(key, target)
 
     def task_publish():
-        """publish to pypi"""
+        """publish distributioons"""
 
         def _check_hash():
             on_disk = P.SHA256SUMS.read_text()
@@ -508,14 +538,16 @@ if not (P.CI or P.IN_BINDER):
                 raise RuntimeError("SHA256SUMS do not match:")
             print("SHA256SUMS are OK")
 
-        return dict(
+        yield dict(
+            name="pypi",
+            doc="upload python sdist and wheel to PyPI",
             actions=[
                 _check_hash,
                 InteractiveAction(
                     [*P.RUN_IN["meta"], "twine", "upload", P.SDIST, P.WHEEL],
                     shell=False,
                 ),
-            ]
+            ],
         )
 
 
