@@ -42,15 +42,15 @@ Screenshot Each Output Of Active JupyterLab Document
         Screenshot Markdown Of Active JupyterLab Cell    ${prefix}_cell_${i}
     END
 
-Wait Until a Given JupyterLab Code Cell Is Not Active In a Given Tab
+Wait Until JupyterLab Code Cell Is Idle
   [Documentation]  Waits until the given cell in a specific JL tab no longer has an active prompt "[*]:".
   ...              The cell index starts from 1 and you must count empty and markdown cells too.
-  [Arguments]  ${tab_id_to_wait}  ${cell_n}  ${timeout}=120seconds
+  [Arguments]  ${tab_id_to_wait}  ${cell_n}  ${timeout}=30
   Wait Until Element Is Not Visible  xpath=//div[@aria-labelledby="${tab_id_to_wait}"]/${JLAB XP NOTEBOOK CONTENT}/div[${cell_n}]/${JLAB XP CELL INPUT STATUS ICON}   ${timeout}
 
 Get A JupyterLab Code Cell Output In a Given Tab
    [Documentation]  It returns the output of a given cell in a specific JL tab.
    ...              The cell index starts from 1 and you must count empty and markdown cells too.
    [Arguments]  ${tab_id_to_read}  ${cell_n}
-   ${outputtext}=  Get Text  xpath=//div[@aria-labelledby="${tab_id_to_read}"]/${JLAB XP NOTEBOOK CONTENT}/div[${cell_n}]/${JLAB XP CELL OUTPUT TEXT}}
-   [Return]  ${outputtext}
+   ${output_children}=  Get Web Elements  xpath=//div[@aria-labelledby="${tab_id_to_read}"]/${JLAB XP NOTEBOOK CONTENT}/div[${cell_n}]/${JLAB XP CELL OUTPUT GENERIC}
+   [Return]  ${output_children}

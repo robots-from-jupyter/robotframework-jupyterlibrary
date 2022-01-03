@@ -45,9 +45,11 @@ ${JLAB XP DOCK TAB}                     ${JLAB XP DOCK TABBAR CONTENT}/li[contai
 ${JLAB XP DOCK TAB LABEL}               ${JLAB XP DOCK TAB}/div[contains(@class, 'p-TabBar-tabLabel')]
 ${JLAB XP DOCK TAB SELECTED}            ${JLAB XP DOCK TABBAR CONTENT}/li[contains(@class,"lm-mod-current p-mod-current")]
 # notebook
-${JLAB XP CELL INPUT AREA}              div[contains(@class, p-Cell-inputWrapper)]/div[contains(@class,"jp-Cell-inputArea")]
+${JLAB XP CELL INPUT AREA}              div[contains(@class, "p-Cell-inputWrapper")]/div[contains(@class,"jp-Cell-inputArea")]
 ${JLAB XP CELL INPUT STATUS ICON}       ${JLAB XP CELL INPUT AREA}/div[contains(@class,"jp-InputArea-prompt") and (.="[*]:")]
-${JLAB XP CELL OUTPUT AREA}             div[contains(@class, jp-Cell-outputWrapper)]/div[contains(@class,"jp-Cell-outputArea")]
+${JLAB XP CELL OUTPUT AREA}             div[contains(@class, "jp-Cell-outputWrapper")]/div[contains(@class,"jp-Cell-outputArea")]
 ${JLAB XP CELL OUTPUT TEXT}             ${JLAB XP CELL OUTPUT AREA}//div[contains(@class,"jp-RenderedText")]
-${JLAB XP NOTEBOOK CONTENT}             div[@aria-label="notebook content"]
+${JLAB XP CELL OUTPUT GENERIC}             ${JLAB XP CELL OUTPUT AREA}//div[contains(@class,"jp-Rendered")]
+${JLAB XP NOTEBOOK CONTENT}             div[contains(@class, "jp-NotebookPanel-notebook")]
+
 
