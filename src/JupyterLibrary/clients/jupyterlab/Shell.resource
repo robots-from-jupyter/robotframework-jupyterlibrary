@@ -70,18 +70,13 @@ Maybe Accept A JupyterLab Prompt
 
 Maybe Accept All JupyterLab Prompts
     [Documentation]    Try accepting all JL popups.
-    #${jl_tabs} =    Get WebElements    xpath:${JLAB XP NOT SELECTED XPATH}
-    #${len} =    Get Length    ${jl_tabs}
-    ${total} =    ${0}
+    ${total} =    Set Variable    ${0}
     FOR    ${i}    IN RANGE    9999999
         ${closed} =    Maybe Accept A JupyterLab Prompt
         ${total} =    ${total}+${closed}
         Exit For Loop If    ${closed}==0
     END
     [Return]    ${total}
-    #FOR    ${index}    IN RANGE    0    2+${len}
-    #  Maybe Accept A JupyterLab Prompt
-    #END
 
 Get JupyterLab Dock Panel Tab
     [Documentation]    Get the ``n`` -th JupyterLab Dock Panel Tab with ``label`` as a ``WebElement``.
