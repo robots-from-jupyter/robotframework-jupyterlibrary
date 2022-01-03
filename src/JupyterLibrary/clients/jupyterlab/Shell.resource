@@ -62,16 +62,26 @@ Open With JupyterLab Menu
 
 Maybe Accept A JupyterLab Prompt
     [Documentation]    Click the last button in a JupyterLab dialog (if one is open).
-    # Closing all tabs at once might create a pop-up for each tab. Let's get the
-    # Number of open tabs and try closing popups for each one.
-    ${jl_tabs} =    Get WebElements    xpath:${JL_TABBAR_NOT_SELECTED_XPATH}
-    ${len} =    Get Length    ${jl_tabs}
-    FOR    ${index}    IN RANGE    0    2+${len}
-      # Check if a popup exists
-      ${accept} =    Get WebElements    xpath:${JL_POPUP}
-      # Click the right most button of the popup
-      Run Keyword If    ${accept}    Click Element    xpath:${JL_POPUP}/button[last()]
+    ${accept} =    Get WebElements    xpath:${JLAB POPUP}
+    ${len} =    Get Length    ${accept}
+    # Click the right most button of the popup
+    Run Keyword If    ${accept}    Click Element    xpath:${JLAB POPUP}/button[last()]
+    [Return]    ${len}
+
+Maybe Accept All JupyterLab Prompts
+    [Documentation]    Try accepting all JL popups.
+    #${jl_tabs} =    Get WebElements    xpath:${JLAB XP NOT SELECTED XPATH}
+    #${len} =    Get Length    ${jl_tabs}
+    ${total} =    ${0}
+    FOR    ${i}    IN RANGE    9999999
+        ${closed} =    Maybe Accept A JupyterLab Prompt
+        ${total} =    ${total}+${closed}
+        Exit For Loop If    ${closed}==0
     END
+    [Return]    ${total}
+    #FOR    ${index}    IN RANGE    0    2+${len}
+    #  Maybe Accept A JupyterLab Prompt
+    #END
 
 Get JupyterLab Dock Panel Tab
     [Documentation]    Get the ``n`` -th JupyterLab Dock Panel Tab with ``label`` as a ``WebElement``.
