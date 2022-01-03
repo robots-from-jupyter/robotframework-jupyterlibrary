@@ -52,14 +52,3 @@ Run Current JupyterLab Code Cell
     ...    ${nb.find_element_by_xpath('''div${JLAB XP NB TOOLBAR FRAG}//${run icon}''')}
     Click Element    ${run btn}
     Sleep    0.5s
-
-Get Selected Tab ID
-    [Documentation]    Return the tab ID of the selected notebook tab
-    ${active-nb-tab} =    Get WebElement    xpath:${JLAB XP DOCK TAB SELECTED}
-    ${tab-id} =    Get Element Attribute    ${active-nb-tab}    id
-    [Return]  ${tab-id}
-
-Select Tab By Name
-    [Documentation]    Select a notebook tab by filename
-    [Arguments]    ${filename}
-    Click Element    xpath:${JLAB XP DOCK TABBAR CONTENT}/li/div[.="${filename}"]
