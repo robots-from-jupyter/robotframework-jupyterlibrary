@@ -55,11 +55,11 @@ Run Current JupyterLab Code Cell
 
 Get Selected Tab ID
     [Documentation]    Return the tab ID of the selected notebook tab
-    ${active-nb-tab} =    Get WebElement    xpath:${JL_TABBAR_SELECTED_XPATH}
+    ${active-nb-tab} =    Get WebElement    xpath:${JLAB XP DOCK TAB SELECTED}
     ${tab-id} =    Get Element Attribute    ${active-nb-tab}    id
     [Return]  ${tab-id}
 
 Select Tab By Name
     [Documentation]    Select a notebook tab by filename
     [Arguments]    ${filename}
-    Click Element    xpath:${JL_TABBAR_CONTENT_XPATH}/li/div[.="${filename}"]
+    Click Element    xpath:${JLAB XP DOCK TABBAR CONTENT}/li/div[.="${filename}"]

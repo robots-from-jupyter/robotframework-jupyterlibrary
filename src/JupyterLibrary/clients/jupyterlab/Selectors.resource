@@ -40,5 +40,14 @@ ${JLAB XP NB TOOLBAR}                   //div${JLAB XP NB TOOLBAR FRAG}
 ${JLAB XP BUSY KERNEL}                  //*[local-name() = 'div' and contains(@class, 'jp-FilledCircleIcon' or (local-name() = 'svg' and contains(@data-icon, 'ui-components:circle-filled')))]
 # dock panel
 ${JLAB XP DOCK PANEL}                   //*[@id = 'jp-main-dock-panel']
-${JLAB XP DOCK TAB}                     ${JLAB XP DOCK PANEL}//ul[contains(@class, 'p-TabBar-content')]/li[contains(@class, 'p-TabBar-tab')]
+${JLAB XP DOCK TABBAR CONTENT}          ${JLAB XP DOCK PANEL}//ul[contains(@class, 'p-TabBar-content')]
+${JLAB XP DOCK TAB}                     ${JLAB XP DOCK TABBAR CONTENT}/li[contains(@class, 'p-TabBar-tab')]
 ${JLAB XP DOCK TAB LABEL}               ${JLAB XP DOCK TAB}/div[contains(@class, 'p-TabBar-tabLabel')]
+${JLAB XP DOCK TAB SELECTED}            ${JLAB XP DOCK TABBAR CONTENT}/li[contains(@class,"lm-mod-current p-mod-current")]
+# notebook
+${JLAB XP CELL INPUT AREA}              div[contains(@class, p-Cell-inputWrapper)]/div[contains(@class,"jp-Cell-inputArea")]
+${JLAB XP CELL INPUT STATUS ICON}       ${JLAB XP CELL INPUT AREA}/div[contains(@class,"jp-InputArea-prompt") and (.="[*]:")]
+${JLAB XP CELL OUTPUT AREA}             div[contains(@class, jp-Cell-outputWrapper)]/div[contains(@class,"jp-Cell-outputArea")]
+${JLAB XP CELL OUTPUT TEXT}             ${JLAB XP CELL OUTPUT AREA}//div[contains(@class,"jp-RenderedText")]
+${JLAB XP NOTEBOOK CONTENT}             div[@aria-label="notebook content"]
+
