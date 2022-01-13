@@ -4,3 +4,4 @@ dependencies:
   - ipython >=7,<8
   - robotframework-seleniumlibrary >=4.5,<5
   - selenium <4
+  - robotframework-pythonlibcore <3
