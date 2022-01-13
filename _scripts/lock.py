@@ -12,6 +12,7 @@ parser = ArgumentParser()
 
 CHN = "channels"
 DEP = "dependencies"
+EXP = "@EXPLICIT"
 
 
 def expand_specs(specs):
@@ -61,7 +62,17 @@ def lock(flow, pf, py, lab):
             if return_code == 0:
                 if not output.parent.exists():
                     output.parent.mkdir(parents=True)
-                output.write_text((tdp / f"conda-{pf}.lock").read_text())
+                output.write_text(
+                    "\n".join(
+                        [
+                            EXP,
+                            (tdp / f"conda-{pf}.lock")
+                            .read_text()
+                            .split(EXP)[1]
+                            .strip(),
+                        ]
+                    )
+                )
                 break
     return return_code
 

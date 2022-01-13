@@ -2,5 +2,5 @@ dependencies:
   # the robot stack
   - robotframework-pabot
   # screenshots
-  - firefox =78
+  - firefox
   - geckodriver
