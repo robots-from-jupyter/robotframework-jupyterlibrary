@@ -1,5 +1,3 @@
-# TODO: fully support in the matrix
-
 channels:
   - conda-forge
   - nodefaults
