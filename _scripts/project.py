@@ -212,6 +212,11 @@ ENV_DEPS = {
     (flow, pf, py, lab): [
         *([ENV_SPECS / "_base.yml"] if flow not in ["meta"] else []),
         ENV_SPECS / f"{flow}.yml",
+        *(
+            [ENV_SPECS / f"{flow}-{py}.yml"]
+            if (ENV_SPECS / f"{flow}-{py}.yml").exists()
+            else []
+        ),
     ]
     for (flow, pf, py, lab), target in ENVENTURES.items()
 }

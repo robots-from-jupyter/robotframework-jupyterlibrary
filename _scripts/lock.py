@@ -12,6 +12,7 @@ parser = ArgumentParser()
 
 CHN = "channels"
 DEP = "dependencies"
+EXP = "@EXPLICIT"
 
 
 def expand_specs(specs):
@@ -48,17 +49,32 @@ def lock(flow, pf, py, lab):
 
     print(safe_dump(composite, default_flow_style=False), flush=True)
 
+    return_code = -1
+
     with tempfile.TemporaryDirectory() as td:
         tdp = Path(td)
 
-        env = tdp / "environment.yml"
-        env.write_text(safe_dump(composite, default_flow_style=False))
-        args = [P.CONDA_EXE, "lock", "--platform", pf]
-        subprocess.check_call(args, cwd=td)
-        if not output.parent.exists():
-            output.parent.mkdir(parents=True)
-        output.write_text((tdp / f"conda-{pf}.lock").read_text())
-    return 0
+        for mamba_arg in ["--mamba", "--no-mamba"]:
+            env = tdp / "environment.yml"
+            env.write_text(safe_dump(composite, default_flow_style=False))
+            args = [P.CONDA_EXE, "lock", mamba_arg, "--platform", pf]
+            return_code = subprocess.check_call(args, cwd=td)
+            if return_code == 0:
+                if not output.parent.exists():
+                    output.parent.mkdir(parents=True)
+                output.write_text(
+                    "\n".join(
+                        [
+                            EXP,
+                            (tdp / f"conda-{pf}.lock")
+                            .read_text()
+                            .split(EXP)[1]
+                            .strip(),
+                        ]
+                    )
+                )
+                break
+    return return_code
 
 
 def main(lockfile=None):

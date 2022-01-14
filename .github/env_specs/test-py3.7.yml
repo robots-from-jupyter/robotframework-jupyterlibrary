@@ -1,0 +1,3 @@
+# use firefox LTS
+dependencies:
+  - firefox =91
