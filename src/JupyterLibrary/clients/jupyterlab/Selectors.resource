@@ -38,6 +38,9 @@ ${JLAB XP NB FRAG}                      ${JLAB XP MAIN AREA FRAG}\[contains(@cla
 ${JLAB XP NB TOOLBAR FRAG}              [contains(@class, 'jp-NotebookPanel-toolbar')]
 ${JLAB XP NB TOOLBAR}                   //div${JLAB XP NB TOOLBAR FRAG}
 ${JLAB XP BUSY KERNEL}                  //*[local-name() = 'div' and contains(@class, 'jp-FilledCircleIcon' or (local-name() = 'svg' and contains(@data-icon, 'ui-components:circle-filled')))]
+${JLAB XP CONTENT XPATH}                //div[contains(@class,"p-DockPanel-tabBar")]/ul[@class="p-TabBar-content"]
+${JLAB XP NOT SELECTED XPATH}           ${JLAB XP CONTENT XPATH}/li[not(contains(@class,"p-mod-current"))]
+${JLAB POPUP}                           //div[contains(concat(' ',normalize-space(@class),' '),' jp-Dialog-footer ')]
 # dock panel
 ${JLAB XP DOCK PANEL}                   //*[@id = 'jp-main-dock-panel']
 ${JLAB XP DOCK TAB}                     ${JLAB XP DOCK PANEL}//ul[contains(@class, 'p-TabBar-content')]/li[contains(@class, 'p-TabBar-tab')]

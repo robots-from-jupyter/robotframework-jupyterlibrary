@@ -61,9 +61,22 @@ Open With JupyterLab Menu
     END
 
 Maybe Accept A JupyterLab Prompt
-    [Documentation]    Click the accept button in a JupyterLab dialog (if one is open).
-    ${accept} =    Get WebElements    css:${JLAB CSS ACCEPT}
-    Run Keyword If    ${accept}    Click Element    ${accept[0]}
+    [Documentation]    Click the last button in a JupyterLab dialog (if one is open).
+    ${accept} =    Get WebElements    xpath:${JLAB POPUP}
+    ${len} =    Get Length    ${accept}
+    # Click the right most button of the popup
+    Run Keyword If    ${accept}    Click Element    xpath:${JLAB POPUP}/button[last()]
+    [Return]    ${len}
+
+Maybe Accept All JupyterLab Prompts
+    [Documentation]    Try accepting all JL popups.
+    ${total} =    Set Variable    ${0}
+    FOR    ${i}    IN RANGE    9999999
+        ${closed} =    Maybe Accept A JupyterLab Prompt
+        ${total} =    ${total}+${closed}
+        Exit For Loop If    ${closed}==0
+    END
+    [Return]    ${total}
 
 Get JupyterLab Dock Panel Tab
     [Documentation]    Get the ``n`` -th JupyterLab Dock Panel Tab with ``label`` as a ``WebElement``.
