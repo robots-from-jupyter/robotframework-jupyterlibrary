@@ -78,3 +78,15 @@ Close JupyterLab Dock Panel Tab
     [Arguments]    ${label}    ${n}=1
     ${tab} =    Get JupyterLab Dock Panel Tab    ${label}    ${n}
     Click Element    ${tab.find_element_by_xpath('./div[last()]')}
+
+Get Selected JupyterLab Dock Panel Tab
+    [Documentation]    Return the web element of selected notebook tab and its tab id
+    ...                It can be handful when working with more than one notebook file at time.
+    ${selected_nb_tab} =    Get WebElement    xpath:${JLAB XP DOCK TAB SELECTED}
+    ${tab_id} =    Get Element Attribute    ${selected_nb_tab}    id
+    [Return]  ${selected_nb_tab}  ${tab_id}
+
+Select JupyterLab Dock Panel Tab By FilePath
+    [Documentation]    Select a notebook tab by filepath.
+    [Arguments]      ${filepath}
+    Click Element    xpath:${JLAB XP DOCK TABBAR CONTENT}/li[contains(@title, "${filepath}")]
