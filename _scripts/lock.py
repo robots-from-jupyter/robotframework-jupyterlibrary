@@ -57,7 +57,7 @@ def lock(flow, pf, py, lab):
         for mamba_arg in ["--mamba", "--no-mamba"]:
             env = tdp / "environment.yml"
             env.write_text(safe_dump(composite, default_flow_style=False))
-            args = [P.CONDA_EXE, "lock", mamba_arg, "--platform", pf]
+            args = [P.CONDA_EXE, "lock", mamba_arg, "--platform", pf, "--kind=explicit"]
             return_code = subprocess.check_call(args, cwd=td)
             if return_code == 0:
                 if not output.parent.exists():
