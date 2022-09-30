@@ -7,7 +7,7 @@
     "singleQuote": true
   },
   "devDependencies": {
-    "prettier": "^2.5.1"
+    "prettier": "^2.7.1"
   },
   "scripts": {
     "prettier": "prettier --write --list-different \"./*.{json,md,yml}\" \"{.github,.binder,docs}/**/*.{json,md,yml,css}\""
