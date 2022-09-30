@@ -4,10 +4,11 @@ channels:
 
 dependencies:
   - boa >=0.11,<0.12
-  - conda-lock >=1.1.1
+  - conda >=4.14,<4.15
+  - conda-lock >=1.1.1,<2
   - conda-verify
   - doit
   - mamba >=0.25,<0.26
-  - pip >=0.34
+  - pip
   - ripgrep
   - twine
