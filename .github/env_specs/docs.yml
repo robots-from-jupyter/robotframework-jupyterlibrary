@@ -2,8 +2,8 @@ dependencies:
   - docutils >=0.18
   - ipykernel
   - myst-nb
-  - port-for =0.3.1
-  - pydata-sphinx-theme >=0.11,<0.10
+  - port-for
+  - pydata-sphinx-theme >=0.10,<0.11
   - sphinx >=5.1
   - sphinx-autobuild
   - sphinx-copybutton
