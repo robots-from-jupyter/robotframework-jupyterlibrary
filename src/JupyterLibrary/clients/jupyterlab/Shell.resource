@@ -4,6 +4,7 @@ Documentation       Application shell keywords for JupyterLab
 Resource            JupyterLibrary/clients/jupyterlab/Selectors.resource
 Resource            JupyterLibrary/clients/jupyterlab/PageInfo.resource
 
+
 *** Keywords ***
 # robocop: disable=too-many-arguments
 
@@ -70,7 +71,7 @@ Get JupyterLab Dock Panel Tab
     ...    ``n`` is the 1-based index of the like- ``label`` ed tabs.
     [Arguments]    ${label}    ${n}=1
     ${els} =    Get WebElements    xpath:${JLAB XP DOCK TAB LABEL}\[. = '${label}']/..
-    [Return]    ${els[${n}-1]}
+    RETURN    ${els[${n}-1]}
 
 Close JupyterLab Dock Panel Tab
     [Documentation]    Close the ``n`` -th JupyterLab Dock Panel Tab with ``label`` as a ``WebElement``.

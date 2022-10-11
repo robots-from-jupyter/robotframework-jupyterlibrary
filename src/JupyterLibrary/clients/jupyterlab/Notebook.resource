@@ -4,8 +4,10 @@ Documentation       Notebook keywords for JupyterLab
 Resource            JupyterLibrary/clients/jupyterlab/Selectors.resource
 Resource            JupyterLibrary/common/CodeMirror.resource
 
+
 *** Variables ***
 @{HELLO WORLD}      print("hello world")
+
 
 *** Keywords ***
 Add And Run JupyterLab Code Cell

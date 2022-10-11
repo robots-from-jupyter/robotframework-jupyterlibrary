@@ -3,6 +3,7 @@ Documentation       Sidebar keywords for JupyterLab
 
 Resource            JupyterLibrary/clients/jupyterlab/Selectors.resource
 
+
 *** Keywords ***
 Maybe Close JupyterLab Sidebar
     [Documentation]    Attempt to close the JupyterLab sidebar

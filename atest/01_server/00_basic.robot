@@ -10,8 +10,10 @@ Suite Teardown      Terminate All Jupyter Servers
 
 Force Tags          server
 
+
 *** Variables ***
 ${LOGS}     ${OUTPUT_DIR}${/}${OS}${/}${BROWSER}${/}logs${/}
+
 
 *** Test Cases ***
 Start one server
@@ -54,13 +56,14 @@ Server Files
     File Should Not Exist    ${nbdir}${/}foo.txt
     [Teardown]    Remove File    ${OUTPUT_DIR}${/}foo.txt
 
+
 *** Keywords ***
 Start A Server
     [Documentation]    Start an indexed server.
     [Arguments]    ${idx}
     ${proc} =    Start New Jupyter Server    stdout=${LOGS}3${/}${idx}.log    stderr=STDOUT
     ${url} =    Get Jupyter Server URL    ${proc}
-    [Return]    ${proc}    ${url}
+    RETURN    ${proc}    ${url}
 
 Check A Server Process Log
     [Documentation]    Verify a process log contains the expected value.

@@ -3,6 +3,7 @@ Documentation       Keyboard shortcut keywords for JupyterLab
 
 Library             platform    WITH NAME    PLATFORM
 
+
 *** Keywords ***
 Get ACCEL Key
     [Documentation]    Get the platform-specific "accelerator key" used for shortcuts:
@@ -10,7 +11,7 @@ Get ACCEL Key
     ...    - ``Cmd`` on MacOS
     ${accel} =    Get Variable Value    ${ACCEL}    ${EMPTY}
     Run Keyword If    not "${accel}"    Update ACCEL Key
-    [Return]    ${ACCEL KEY}
+    RETURN    ${ACCEL KEY}
 
 Update ACCEL Key
     [Documentation]    Cache the "accelerator key"

@@ -3,6 +3,7 @@ Documentation       Keywords for outputs in Jupyter Classic
 
 Resource            JupyterLibrary/clients/notebook/Selectors.resource
 
+
 *** Keywords ***
 Current Notebook Classic Cell Output Should Contain
     [Documentation]    Check whether the currently-selected cell's output contains the given text

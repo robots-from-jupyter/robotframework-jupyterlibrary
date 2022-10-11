@@ -5,11 +5,13 @@ Resource            JupyterLibrary/clients/jupyterlab/Selectors.resource
 Library             String
 Library             json    WITH NAME    JSON
 
+
 *** Variables ***
 ${JLAB XP PAGEINFO}                 script[contains(@id, 'jupyter-config-data')]
 # keep this updated below
 @{JLAB DEFAULT PAGEINFO TAGS}       appName    appVersion    buildAvailable
 ...                                 buildCheck    notebookVersion    devMode
+
 
 *** Keywords ***
 Get JupyterLab Page Info
@@ -23,7 +25,7 @@ Get JupyterLab Page Info
     Run Keyword If    ${clear} or not ${pageInfo.__len__()}    Update JupyterLab PageInfo Cache
     ${pageInfo} =    Set Variable    ${JLAB PAGEINFO CACHE}
     ${result} =    Set Variable If    ${key.__len__()}    ${pageInfo.get("${key}")}    ${pageInfo}
-    [Return]    ${result}
+    RETURN    ${result}
 
 Update JupyterLab PageInfo Cache
     [Documentation]    Update the cached JupyterLab ``pageInfo``. _Not usually needed._
@@ -51,4 +53,4 @@ Get JupyterLab Application Version Info
     ...    the cached info first.
     [Arguments]    ${clear}=${False}
     ${version} =    Get JupyterLab Page Info    appVersion    clear=${clear}
-    [Return]    ${version.split(".")}
+    RETURN    ${version.split(".")}

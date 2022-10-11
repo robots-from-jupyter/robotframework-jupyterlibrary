@@ -6,7 +6,6 @@ import tempfile
 from conda.models.match_spec import MatchSpec
 from argparse import ArgumentParser
 
-from ruamel_yaml import safe_load, safe_dump
 
 parser = ArgumentParser()
 
@@ -57,7 +56,7 @@ def lock(flow, pf, py, lab):
                 mamba_arg,
                 f"--platform={pf}",
                 "--kind=explicit",
-                *env_args
+                *env_args,
             ]
             print(">>>", " ".join(args), flush=True)
             return_code = subprocess.call(args, cwd=td)

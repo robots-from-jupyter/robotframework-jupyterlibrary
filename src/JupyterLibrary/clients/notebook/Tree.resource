@@ -5,6 +5,7 @@ Documentation       Keywords for working with the Jupyter Notebook Clasic web ap
 
 Resource            JupyterLibrary/clients/notebook/Selectors.resource
 
+
 *** Keywords ***
 Open Notebook Classic
     [Documentation]    Open Jupyter Notebook Classic, served from the given (or most-recently-started)

@@ -10,6 +10,7 @@ Test Teardown       Run Keyword And Ignore Error    Reset JupyterLab And Close
 
 Default Tags        notebook
 
+
 *** Test Cases ***
 IPython Notebook on Lab
     [Documentation]    Ensure an IPython Notebook works in Lab.
@@ -43,6 +44,7 @@ Multiple Notebooks on Lab
     Maybe Accept A JupyterLab Prompt
     Page Should Not Contain    yet another world
 
+
 *** Keywords ***
 Make The First Notebook
     [Documentation]    Make a simple notebook
@@ -53,7 +55,7 @@ Make The First Notebook
     Page Should Contain    hello world
     Capture Page Screenshot    lab${/}10-20-one-notebook.png
     ${tab} =    Get JupyterLab Dock Panel Tab    Untitled.ipynb
-    [Return]    ${tab}
+    RETURN    ${tab}
 
 Make The Second Notebook
     [Documentation]    Make a another simple notebook
@@ -62,4 +64,4 @@ Make The Second Notebook
     Wait Until JupyterLab Kernel Is Idle
     Page Should Contain    another world
     ${tab} =    Get JupyterLab Dock Panel Tab    Untitled1.ipynb
-    [Return]    ${tab}
+    RETURN    ${tab}

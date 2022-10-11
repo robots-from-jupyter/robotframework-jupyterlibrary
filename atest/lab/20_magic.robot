@@ -9,6 +9,7 @@ Test Teardown       Run Keyword And Ignore Error    Reset JupyterLab And Close
 
 Default Tags        notebook    magic
 
+
 *** Variables ***
 ${LOAD EXT}             %reload_ext JupyterLibrary
 ${IND}                  ${SPACE.__mul__(4)}
@@ -18,6 +19,7 @@ ${IND}                  ${SPACE.__mul__(4)}
 ...                     Log Something
 ...                     ${IND}Log${IND}Something
 ${NEXT SCREENSHOT}      ${0}
+
 
 *** Test Cases ***
 IPython Magic On Lab
@@ -29,6 +31,7 @@ IPython Magic On Lab
     Wait For And Click Text    Formatted Robot Code
     Wait For And Click Text    returned 0
     Save JupyterLab Notebook
+
 
 *** Keywords ***
 Wait For And Click Text

@@ -7,6 +7,7 @@ Library             JupyterLibrary
 Suite Teardown      Close All Browsers
 Test Teardown       Reset JupyterLab And Close
 
+
 *** Test Cases ***
 Open JupyterLab
     [Documentation]    Does Lab open?

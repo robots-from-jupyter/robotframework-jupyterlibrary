@@ -9,6 +9,7 @@ Suite Teardown      Clean Up Everything
 
 Force Tags          os:${os}    browser:${browser}
 
+
 *** Keywords ***
 Clean Up Everything
     [Documentation]    Attempt to gracefully stop all Jupyter servers and browsers

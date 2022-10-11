@@ -274,8 +274,9 @@ CONDA_PKG = (
 ROBOTIDY_ARGS = ["robotidy", "--configure", "ReplaceRunKeywordIf:enabled=False"]
 ROBOCOP_ARGS = [
     "robocop",
-    *("--configure", "empty-lines-between-sections:empty_lines:1"),
+    *("--configure", "empty-lines-between-sections:empty_lines:2"),
     *("--exclude", "if-can-be-used"),
+    *("--exclude", "deprecated-statement"),
 ]
 
 

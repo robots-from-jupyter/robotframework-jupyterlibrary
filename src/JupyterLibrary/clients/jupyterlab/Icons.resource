@@ -3,6 +3,7 @@ Documentation       Icon keywords for JupyterLab
 
 Resource            JupyterLibrary/clients/jupyterlab/PageInfo.resource
 
+
 *** Variables ***
 &{JLAB1 CSS ICONS}
 ...                     add=span[data-icon="add"]
@@ -25,6 +26,7 @@ Resource            JupyterLibrary/clients/jupyterlab/PageInfo.resource
 ...                     filled circle=*[@data-icon='ui-components:circle-filled']
 ...                     empty circle=*[@data-icon='ui-components:circle-empty']
 
+
 *** Keywords ***    ***
 Get JupyterLab Icon CSS
     [Documentation]    Get a Lab version-specific, but general CSS selector for an ``icon``.
@@ -33,7 +35,7 @@ Get JupyterLab Icon CSS
     ${sel} =    Set Variable If    ${version[0].__eq__('1')}
     ...    ${JLAB1 CSS ICONS['${icon}']}
     ...    ${JLAB2 CSS ICONS['${icon}']}
-    [Return]    ${sel}
+    RETURN    ${sel}
 
 Get JupyterLab Icon XPath
     [Documentation]    Get a Lab version-specific, but general XPath selector for an ``icon``.
@@ -42,4 +44,4 @@ Get JupyterLab Icon XPath
     ${sel} =    Set Variable If    ${version[0].__eq__('1')}
     ...    ${JLAB1 XP ICONS['${icon}']}
     ...    ${JLAB2 XP ICONS['${icon}']}
-    [Return]    ${sel}
+    RETURN    ${sel}
