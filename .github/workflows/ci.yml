@@ -150,7 +150,7 @@ jobs:
         #   doit -n4 lock
         #
         conda-subdir: [win-64, osx-64, linux-64]
-        python-version: [py3.7, py3.9, py3.10]
+        python-version: [py3.7, py3.10]
         lab-version: [lab1, lab2, lab3]
         include:
           - conda-subdir: linux-64
