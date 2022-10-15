@@ -110,6 +110,8 @@ version = ".".join(JupyterLibrary.__version__.split(".")[:2])
 # The full version, including alpha/beta/rc tags
 release = JupyterLibrary.__version__
 
+# for now
+language = "en"
 
 # -- General configuration ---------------------------------------------------
 
