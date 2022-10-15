@@ -202,7 +202,7 @@ html_static_path = ["_static"]
 #
 # html_sidebars = {}
 
-jupyter_execute_notebooks = "force"
+nb_execution_mode = "force"
 
 # -- Options for HTMLHelp output ---------------------------------------------
 
