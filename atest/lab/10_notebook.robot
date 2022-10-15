@@ -55,7 +55,7 @@ Make The First Notebook
     Page Should Contain    hello world
     Capture Page Screenshot    lab${/}10-20-one-notebook.png
     ${tab} =    Get JupyterLab Dock Panel Tab    Untitled.ipynb
-    RETURN    ${tab}
+    [Return]    ${tab}
 
 Make The Second Notebook
     [Documentation]    Make a another simple notebook
@@ -64,4 +64,4 @@ Make The Second Notebook
     Wait Until JupyterLab Kernel Is Idle
     Page Should Contain    another world
     ${tab} =    Get JupyterLab Dock Panel Tab    Untitled1.ipynb
-    RETURN    ${tab}
+    [Return]    ${tab}

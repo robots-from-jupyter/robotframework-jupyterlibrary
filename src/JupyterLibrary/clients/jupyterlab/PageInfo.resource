@@ -25,7 +25,7 @@ Get JupyterLab Page Info
     Run Keyword If    ${clear} or not ${pageInfo.__len__()}    Update JupyterLab PageInfo Cache
     ${pageInfo} =    Set Variable    ${JLAB PAGEINFO CACHE}
     ${result} =    Set Variable If    ${key.__len__()}    ${pageInfo.get("${key}")}    ${pageInfo}
-    RETURN    ${result}
+    [Return]    ${result}
 
 Update JupyterLab PageInfo Cache
     [Documentation]    Update the cached JupyterLab ``pageInfo``. _Not usually needed._
@@ -53,4 +53,4 @@ Get JupyterLab Application Version Info
     ...    the cached info first.
     [Arguments]    ${clear}=${False}
     ${version} =    Get JupyterLab Page Info    appVersion    clear=${clear}
-    RETURN    ${version.split(".")}
+    [Return]    ${version.split(".")}

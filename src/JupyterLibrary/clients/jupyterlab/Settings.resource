@@ -16,7 +16,7 @@ Get JupyterLab User Settings Directory
     ...    - Assumes access to the local file system
     ${dir} =    Get JupyterLab Page Info    key=userSettingsDir
     ${dir} =    Normalize Path    ${dir}
-    RETURN    ${dir}
+    [Return]    ${dir}
 
 Get JupyterLab Plugin Settings File
     [Documentation]    Get the full file path (which may or may not exist) for a plugin's settings.
@@ -27,7 +27,7 @@ Get JupyterLab Plugin Settings File
     [Arguments]    ${package}    ${plugin}
     ${settings} =    Get JupyterLab User Settings Directory
     ${path} =    Join Path    ${settings}    ${package}    ${plugin}${JLAB FILE EXT SETTINGS}
-    RETURN    ${path}
+    [Return]    ${path}
 
 Set JupyterLab Plugin Settings
     [Documentation]
@@ -59,7 +59,7 @@ Get JupyterLab Plugin Settings
     ${path} =    Get JupyterLab Plugin Settings File    ${package}    ${plugin}
     ${raw} =    Get File    ${path}
     ${config} =    Evaluate    __import__("json").loads(r"""${raw}""")
-    RETURN    ${config}
+    [Return]    ${config}
 
 Disable JupyterLab Modal Command Palette
     [Documentation]    Disable the modal JupyterLab Command Palette. Can help testability.

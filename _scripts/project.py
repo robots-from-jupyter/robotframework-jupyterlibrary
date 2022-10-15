@@ -271,12 +271,17 @@ CONDA_PKG = (
     CONDA_BLD / "noarch" / f"""{IMPORTABLE.replace("_", "-")}-{VERSION}-py_0.tar.bz2"""
 )
 
-ROBOTIDY_ARGS = ["robotidy", "--configure", "ReplaceRunKeywordIf:enabled=False"]
+ROBOTIDY_ARGS = [
+    "robotidy",
+    "--configure=ReplaceRunKeywordIf:enabled=False",
+    "--target-version=rf4",
+]
 ROBOCOP_ARGS = [
     "robocop",
     *("--configure", "empty-lines-between-sections:empty_lines:2"),
     *("--exclude", "if-can-be-used"),
     *("--exclude", "deprecated-statement"),
+    *("--exclude", "too-many-calls-in-keyword"),
 ]
 
 

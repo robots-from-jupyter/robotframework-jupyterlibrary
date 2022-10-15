@@ -35,7 +35,7 @@ Get JupyterLab Icon CSS
     ${sel} =    Set Variable If    ${version[0].__eq__('1')}
     ...    ${JLAB1 CSS ICONS['${icon}']}
     ...    ${JLAB2 CSS ICONS['${icon}']}
-    RETURN    ${sel}
+    [Return]    ${sel}
 
 Get JupyterLab Icon XPath
     [Documentation]    Get a Lab version-specific, but general XPath selector for an ``icon``.
@@ -44,4 +44,4 @@ Get JupyterLab Icon XPath
     ${sel} =    Set Variable If    ${version[0].__eq__('1')}
     ...    ${JLAB1 XP ICONS['${icon}']}
     ...    ${JLAB2 XP ICONS['${icon}']}
-    RETURN    ${sel}
+    [Return]    ${sel}

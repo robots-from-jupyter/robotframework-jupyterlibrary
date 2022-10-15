@@ -11,7 +11,7 @@ Get ACCEL Key
     ...    - ``Cmd`` on MacOS
     ${accel} =    Get Variable Value    ${ACCEL}    ${EMPTY}
     Run Keyword If    not "${accel}"    Update ACCEL Key
-    RETURN    ${ACCEL KEY}
+    [Return]    ${ACCEL KEY}
 
 Update ACCEL Key
     [Documentation]    Cache the "accelerator key"

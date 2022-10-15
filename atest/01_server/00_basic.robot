@@ -63,7 +63,7 @@ Start A Server
     [Arguments]    ${idx}
     ${proc} =    Start New Jupyter Server    stdout=${LOGS}3${/}${idx}.log    stderr=STDOUT
     ${url} =    Get Jupyter Server URL    ${proc}
-    RETURN    ${proc}    ${url}
+    [Return]    ${proc}    ${url}
 
 Check A Server Process Log
     [Documentation]    Verify a process log contains the expected value.

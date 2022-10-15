@@ -28,7 +28,8 @@ IPython Magic On Lab
     Launch A New JupyterLab Document
     Add And Run JupyterLab Code Cell    ${LOAD EXT}
     Add And Run JupyterLab Code Cell    @{MAGIC}
-    Wait For And Click Text    Formatted Robot Code
+    Log    TODO: https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/issues/54
+    # Wait For And Click Text    Formatted Robot Code
     Wait For And Click Text    returned 0
     Save JupyterLab Notebook
 

@@ -71,11 +71,12 @@ Get JupyterLab Dock Panel Tab
     ...    ``n`` is the 1-based index of the like- ``label`` ed tabs.
     [Arguments]    ${label}    ${n}=1
     ${els} =    Get WebElements    xpath:${JLAB XP DOCK TAB LABEL}\[. = '${label}']/..
-    RETURN    ${els[${n}-1]}
+    [Return]    ${els[${n}-1]}
 
 Close JupyterLab Dock Panel Tab
     [Documentation]    Close the ``n`` -th JupyterLab Dock Panel Tab with ``label`` as a ``WebElement``.
     ...    ``n`` is the 1-based index of the like- ``label`` ed tabs.
     [Arguments]    ${label}    ${n}=1
     ${tab} =    Get JupyterLab Dock Panel Tab    ${label}    ${n}
-    Click Element    ${tab.find_element_by_xpath('./div[last()]')}
+    ${last div} =    Get WebElement Relative To    ${tab}    xpath:./div[last()]
+    Click Element    ${last div}
