@@ -175,6 +175,7 @@ html_theme_options = {
     "navbar_center": ["navbar-nav", "navbar-icon-links"],
     "navbar_end": [],
     "github_url": CONF["metadata"]["url"],
+    "logo": {"text": CONF["metadata"]["name"]},
 }
 
 html_sidebars = {

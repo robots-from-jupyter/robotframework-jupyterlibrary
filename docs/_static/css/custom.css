@@ -102,3 +102,14 @@ pre {
 div.cell div.cell_input {
   border-left-color: rgba(var(--pst-color-inline-code), 1);
 }
+
+/** theme overrides **/
+.bd-content {
+  flex-grow: 1;
+  max-width: 100%;
+}
+
+.bd-main .bd-content .bd-article-container {
+  width: 100%;
+  max-width: 100%;
+}
