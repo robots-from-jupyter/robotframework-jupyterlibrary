@@ -172,10 +172,22 @@ html_theme = "pydata_sphinx_theme"
 #
 html_theme_options = {
     "page_sidebar_items": [],
-    "navbar_center": ["navbar-nav", "navbar-icon-links"],
-    "navbar_end": [],
+    "navbar_center": ["navbar-nav.html"],
     "github_url": CONF["metadata"]["url"],
     "logo": {"text": CONF["metadata"]["name"]},
+    "icon_links": [
+        {
+            "name": "PyPI",
+            "url": "https://pypi.org/project/robotframework-jupyterlibrary",
+            "icon": "fa-brands fa-python",
+        },
+        {
+            "name": "conda-forge",
+            "url": "https://github.com/conda-forge/robotframework-jupyterlibrary-feedstock#about-robotframework-jupyterlibrary",
+            "icon": "_static/anvil.svg",
+            "type": "local",
+        },
+    ],
 }
 
 html_sidebars = {
