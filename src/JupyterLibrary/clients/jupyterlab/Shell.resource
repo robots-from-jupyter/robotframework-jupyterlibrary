@@ -23,7 +23,7 @@ Open JupyterLab
     ${token} =    Run Keyword If    not "${url}"    Get Jupyter Server Token    ${nbserver}
     ${final_url} =    Set Variable If    "${url}"    ${url}    ${nbserver_url}lab?token=${token}
     Open Browser    url=${final_url}    browser=${browser}    &{configuration}
-    Wait For JupyterLab Splash Screen
+    Maybe Wait For JupyterLab Splash Screen
     Tag With JupyterLab Metadata    ${pageinfo tags}    clear=${clear}
 
 Wait For JupyterLab Splash Screen
@@ -33,6 +33,12 @@ Wait For JupyterLab Splash Screen
     Wait Until Page Contains Element    css:#${JLAB ID SPLASH}    timeout=${timeout}
     Wait Until Page Does Not Contain Element    css:#${JLAB ID SPLASH}    timeout=${timeout}
     Sleep    ${sleep}
+
+Maybe Wait For JupyterLab Splash Screen
+    [Documentation]    Wait for the JupyterLab splash animation, waiting ``timeout``
+    ...    for the splash screen to appear/disappear, then ``sleep``. Ignore errors.
+    [Arguments]    ${timeout}=10s    ${sleep}=2s
+    Run Keyword And Ignore Error    Wait For JupyterLab Splash Screen    ${timeout}    ${sleep}
 
 Click JupyterLab Menu
     [Documentation]    Click a top-level JupyterLab menu bar item by ``label``,

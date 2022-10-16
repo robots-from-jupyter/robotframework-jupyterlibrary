@@ -170,25 +170,25 @@ jobs:
       - name: get conda lockfile
         id: lock
         run: |
-          echo "::set-output name=file::${{
+          echo "CI_LOCKFILE=${{
             format(
               '.github/locks/test/{0}/{1}/{2}/conda.lock',
               matrix.conda-subdir,
               matrix.python-version,
               matrix.lab-version
-            ) }}"
+            ) }}" >> $GITHUB_ENV
       - uses: actions/cache@v3
         with:
           path: ~/conda_pkgs_dir
           key:
             ${{ runner.os }}-conda-${{ matrix.python-version }}-${{
-            hashFiles(steps.lock.outputs.file) }}
+            hashFiles(env.CI_LOCKFILE) }}
           restore-keys: |
             ${{ runner.os }}-conda-${{ matrix.python-version }}-
       - uses: conda-incubator/setup-miniconda@v2
         with:
           activate-environment: test
-          environment-file: ${{ steps.lock.outputs.file }}
+          environment-file: ${{ env.CI_LOCKFILE }}
           miniforge-variant: Mambaforge
           use-mamba: true
           use-only-tar-bz2: true
