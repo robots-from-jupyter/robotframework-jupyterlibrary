@@ -467,14 +467,13 @@ def task_test():
         targets=[real_target, P.OK.robot],
     )
 
-    # Presently not running this on CI
     yield dict(
         name="combine",
         doc="combine all robot outputs into a single HTML report",
+        uptodate=[lambda: False],
         actions=[[*pym, "_scripts.combine"]],
         file_dep=[
             real_target,
-            *P.ATEST_OUT.rglob(P.ATEST_OUT_XML),
             P.SCRIPTS / "combine.py",
         ],
     )

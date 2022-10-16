@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # we already know which python and lab we want
-export RFJL_LOCKDIR=test/linux-64/py3.9/lab3
+export RFJL_LOCKDIR=test/linux-64/py3.10/lab3
 
 # some things we just don't need to do on binder
 export IN_BINDER=1

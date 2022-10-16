@@ -271,11 +271,17 @@ CONDA_PKG = (
     CONDA_BLD / "noarch" / f"""{IMPORTABLE.replace("_", "-")}-{VERSION}-py_0.tar.bz2"""
 )
 
-ROBOTIDY_ARGS = ["robotidy", "--configure", "ReplaceRunKeywordIf:enabled=False"]
+ROBOTIDY_ARGS = [
+    "robotidy",
+    "--configure=ReplaceRunKeywordIf:enabled=False",
+    "--target-version=rf4",
+]
 ROBOCOP_ARGS = [
     "robocop",
-    *("--configure", "empty-lines-between-sections:empty_lines:1"),
+    *("--configure", "empty-lines-between-sections:empty_lines:2"),
     *("--exclude", "if-can-be-used"),
+    *("--exclude", "deprecated-statement"),
+    *("--exclude", "too-many-calls-in-keyword"),
 ]
 
 
@@ -325,7 +331,7 @@ def get_lockfile(env):
 
     using the POSIX path in .github/locks, e.g.
 
-        RFJL_LOCKDIR=test/linux-64/py3.9/lab3 doit test
+        RFJL_LOCKDIR=test/linux-64/py3.10/lab3 doit test
     """
     lockfile = None
 

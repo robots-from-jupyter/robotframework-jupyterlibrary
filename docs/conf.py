@@ -110,7 +110,6 @@ version = ".".join(JupyterLibrary.__version__.split(".")[:2])
 # The full version, including alpha/beta/rc tags
 release = JupyterLibrary.__version__
 
-
 # -- General configuration ---------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -149,7 +148,7 @@ master_doc = "index"
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = "en"
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -173,9 +172,22 @@ html_theme = "pydata_sphinx_theme"
 #
 html_theme_options = {
     "page_sidebar_items": [],
-    "navbar_center": ["navbar-nav", "navbar-icon-links"],
-    "navbar_end": [],
+    "navbar_center": ["navbar-nav.html"],
     "github_url": CONF["metadata"]["url"],
+    "logo": {"text": CONF["metadata"]["name"]},
+    "icon_links": [
+        {
+            "name": "PyPI",
+            "url": "https://pypi.org/project/robotframework-jupyterlibrary",
+            "icon": "fa-brands fa-python",
+        },
+        {
+            "name": "conda-forge",
+            "url": "https://github.com/conda-forge/robotframework-jupyterlibrary-feedstock#about-robotframework-jupyterlibrary",
+            "icon": "_static/anvil.svg",
+            "type": "local",
+        },
+    ],
 }
 
 html_sidebars = {
@@ -203,7 +215,7 @@ html_static_path = ["_static"]
 #
 # html_sidebars = {}
 
-jupyter_execute_notebooks = "force"
+nb_execution_mode = "force"
 
 # -- Options for HTMLHelp output ---------------------------------------------
 

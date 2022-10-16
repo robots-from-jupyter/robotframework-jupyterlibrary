@@ -28,8 +28,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v1
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
         with:
           path: ~/conda_pkgs_dir
           key:
@@ -45,7 +45,7 @@ jobs:
           use-mamba: true
           use-only-tar-bz2: true
       - run: python dodo.py build || python dodo.py build
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: dist_${{ github.run_number }}
           path: ./dist
@@ -53,8 +53,8 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v1
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
         with:
           path: ~/conda_pkgs_dir
           key:
@@ -75,8 +75,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build, lint, docs]
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v1
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
         with:
           path: ~/conda_pkgs_dir
           key:
@@ -91,12 +91,12 @@ jobs:
           miniforge-variant: Mambaforge
           use-mamba: true
           use-only-tar-bz2: true
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v3
         with:
           name: dist_${{ github.run_number }}
           path: ./dist
       - run: python dodo.py conda_build || python dodo.py conda_build
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: conda-bld_${{ github.run_number }}
           path: ./dist/conda-bld
@@ -104,8 +104,8 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v1
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
         with:
           path: ~/conda_pkgs_dir
           key:
@@ -121,7 +121,7 @@ jobs:
           use-mamba: true
           use-only-tar-bz2: true
       - run: python dodo.py docs || python dodo.py docs
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: docs_${{ job.status }}_${{ github.run_number }}
           path: ./build/docs/html
@@ -150,7 +150,7 @@ jobs:
         #   doit -n4 lock
         #
         conda-subdir: [win-64, osx-64, linux-64]
-        python-version: [py3.7, py3.9, py3.10]
+        python-version: [py3.7, py3.10]
         lab-version: [lab1, lab2, lab3]
         include:
           - conda-subdir: linux-64
@@ -166,34 +166,34 @@ jobs:
     steps:
       - name: configure git
         run: git config --global core.autocrlf false
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: get conda lockfile
         id: lock
         run: |
-          echo "::set-output name=file::${{
+          echo "CI_LOCKFILE=${{
             format(
               '.github/locks/test/{0}/{1}/{2}/conda.lock',
               matrix.conda-subdir,
               matrix.python-version,
               matrix.lab-version
-            ) }}"
-      - uses: actions/cache@v1
+            ) }}" >> $GITHUB_ENV
+      - uses: actions/cache@v3
         with:
           path: ~/conda_pkgs_dir
           key:
             ${{ runner.os }}-conda-${{ matrix.python-version }}-${{
-            hashFiles(steps.lock.outputs.file) }}
+            hashFiles(env.CI_LOCKFILE) }}
           restore-keys: |
             ${{ runner.os }}-conda-${{ matrix.python-version }}-
       - uses: conda-incubator/setup-miniconda@v2
         with:
           activate-environment: test
-          environment-file: ${{ steps.lock.outputs.file }}
+          environment-file: ${{ env.CI_LOCKFILE }}
           miniforge-variant: Mambaforge
           use-mamba: true
           use-only-tar-bz2: true
       - if: always()
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: dist_${{ github.run_number }}
           path: ./dist
@@ -208,7 +208,7 @@ jobs:
           call conda activate test && python dodo.py test || python dodo.py test
         shell: cmd /C CALL {0}
       - name: upload test output
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: |
             test_${{ job.status }}_${{ matrix.os }}_${{ matrix.python-version }}_${{ matrix.lab-version }}_${{ github.run_number }}
@@ -222,13 +222,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - if: always()
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           path: ./artifacts
       - if: always()
         run: find ./artifacts
       - if: always()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: _COMBINED_${{ github.run_number }}
           path: |

@@ -1,9 +1,9 @@
 dependencies:
+  - docutils >=0.18
   - ipykernel
   - myst-nb
-  - port-for =0.3.1
-  - pydata-sphinx-theme
-  - sphinx
+  - port-for
+  - pydata-sphinx-theme >=0.10,<0.11
+  - sphinx >=5.1
   - sphinx-autobuild
-  # TODO: https://github.com/conda-forge/jupyter-cache-feedstock/pull/5
-  - sqlalchemy <1.4
+  - sphinx-copybutton

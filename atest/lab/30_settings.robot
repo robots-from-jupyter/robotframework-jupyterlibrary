@@ -9,9 +9,11 @@ Test Teardown       Run Keyword And Ignore Error    Reset JupyterLab And Close
 
 Default Tags        settings
 
+
 *** Variables ***
 ${PACKAGE}      @jupyterlab/apputils-extension
 ${PLUGIN}       palette
+
 
 *** Test Cases ***
 Command Palette

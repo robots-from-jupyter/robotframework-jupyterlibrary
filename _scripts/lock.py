@@ -6,7 +6,6 @@ import tempfile
 from conda.models.match_spec import MatchSpec
 from argparse import ArgumentParser
 
-from ruamel_yaml import safe_load, safe_dump
 
 parser = ArgumentParser()
 
@@ -43,11 +42,8 @@ def lock(flow, pf, py, lab):
     output = P.ENVENTURES[flow, pf, py, lab]
     if not output.parent.exists():
         output.parent.mkdir(parents=True)
-    composite = {"name": output.name, CHN: [], DEP: []}
-    for env in P.ENV_DEPS[flow, pf, py, lab]:
-        composite = merge(composite, safe_load(env.read_text()))
 
-    print(safe_dump(composite, default_flow_style=False), flush=True)
+    env_args = [f"--file={env}" for env in P.ENV_DEPS[flow, pf, py, lab]]
 
     return_code = -1
 
@@ -55,10 +51,15 @@ def lock(flow, pf, py, lab):
         tdp = Path(td)
 
         for mamba_arg in ["--mamba", "--no-mamba"]:
-            env = tdp / "environment.yml"
-            env.write_text(safe_dump(composite, default_flow_style=False))
-            args = [P.CONDA_EXE, "lock", mamba_arg, "--platform", pf]
-            return_code = subprocess.check_call(args, cwd=td)
+            args = [
+                "conda-lock",
+                mamba_arg,
+                f"--platform={pf}",
+                "--kind=explicit",
+                *env_args,
+            ]
+            print(">>>", " ".join(args), flush=True)
+            return_code = subprocess.call(args, cwd=td)
             if return_code == 0:
                 if not output.parent.exists():
                     output.parent.mkdir(parents=True)

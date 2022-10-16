@@ -58,17 +58,6 @@ pre {
   box-shadow: 0;
 }
 
-@media (min-width: 1200px) {
-  .container,
-  .container-xl {
-    max-width: 100%;
-  }
-  .col-xl-7 {
-    max-width: inherit;
-    flex: 1;
-  }
-}
-
 #navbar-start {
   font-family: var(--pst-font-family-heading);
   font-size: 1.6em;
@@ -89,16 +78,30 @@ pre {
   display: none;
 }
 
-.highlight,
-.highlight pre {
-  background-color: rgba(0, 0, 0, 0.8);
-  color: #fff;
-}
-
 .admonition {
   box-shadow: 0;
 }
 
 div.cell div.cell_input {
   border-left-color: rgba(var(--pst-color-inline-code), 1);
+}
+
+/** theme overrides **/
+.bd-content {
+  flex-grow: 1;
+  max-width: 100%;
+}
+
+.bd-main .bd-content .bd-article-container {
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 960px) {
+  .bd-page-width {
+    max-width: unset;
+  }
+  .bd-sidebar-primary {
+    max-width: 300px;
+  }
 }

@@ -28,7 +28,14 @@ from IPython.core.magic import (
 )
 
 import robot
-from robot.tidy import Tidy
+
+HAS_CORE_TIDY = False
+try:
+    from robot.tidy import Tidy
+
+    HAS_CORE_TIDY = True
+except ImportError:
+    pass
 
 
 try:
@@ -69,7 +76,10 @@ class RobotMagics(Magics):
         "-p",
         "--pretty",
         default=True,
-        help="""print out syntax highlighted, tidied source""",
+        help=(
+            """print out syntax highlighted, tidied source. """
+            """no effect if ``robot.tidy`` is unavailable"""
+        ),
     )
     @magic_arguments.argument(
         "-s",
@@ -110,8 +120,8 @@ class RobotMagics(Magics):
         if ipywidgets and args.gui.lower() in ["widget", "w", "widgets"]:
             self.widget(args, cell, content_hash)
         else:
-            if args.pretty:
-                html = self.pretty(args, cell)
+            if args.pretty and HAS_CORE_TIDY:
+                html = self.pretty_core(args, cell)
                 if args.gui == "display":
                     display(html)
 
@@ -162,14 +172,16 @@ class RobotMagics(Magics):
 
         with open(stdout_file, "w+") as stdout:
             with open(stderr_file, "w+") as stderr:
-                rc = robot.run(
-                    robot_file,
-                    exit=False,
-                    outputdir=outputdir,
-                    stderr=stderr,
-                    stdout=stdout,
-                    **robot_args,
-                )
+                try:
+                    rc = robot.run(
+                        robot_file,
+                        outputdir=outputdir,
+                        stderr=stderr,
+                        stdout=stdout,
+                        **robot_args,
+                    )
+                except SystemExit:
+                    pass
 
         if args.gui == "display":
             for outfile in [stdout_file, stderr_file]:
@@ -211,7 +223,7 @@ class RobotMagics(Magics):
         if rc:
             raise RuntimeError(f"robot returned {rc}")
 
-    def pretty(self, args, cell):
+    def pretty_core(self, args, cell):
         """pretty-print the robot text"""
         tidier = Tidy()
 

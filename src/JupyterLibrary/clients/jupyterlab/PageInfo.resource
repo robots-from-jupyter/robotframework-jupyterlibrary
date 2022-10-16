@@ -5,11 +5,13 @@ Resource            JupyterLibrary/clients/jupyterlab/Selectors.resource
 Library             String
 Library             json    WITH NAME    JSON
 
+
 *** Variables ***
 ${JLAB XP PAGEINFO}                 script[contains(@id, 'jupyter-config-data')]
 # keep this updated below
 @{JLAB DEFAULT PAGEINFO TAGS}       appName    appVersion    buildAvailable
 ...                                 buildCheck    notebookVersion    devMode
+
 
 *** Keywords ***
 Get JupyterLab Page Info

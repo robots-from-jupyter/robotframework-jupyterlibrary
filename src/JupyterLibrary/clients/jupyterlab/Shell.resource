@@ -4,6 +4,7 @@ Documentation       Application shell keywords for JupyterLab
 Resource            JupyterLibrary/clients/jupyterlab/Selectors.resource
 Resource            JupyterLibrary/clients/jupyterlab/PageInfo.resource
 
+
 *** Keywords ***
 # robocop: disable=too-many-arguments
 
@@ -22,7 +23,7 @@ Open JupyterLab
     ${token} =    Run Keyword If    not "${url}"    Get Jupyter Server Token    ${nbserver}
     ${final_url} =    Set Variable If    "${url}"    ${url}    ${nbserver_url}lab?token=${token}
     Open Browser    url=${final_url}    browser=${browser}    &{configuration}
-    Wait For JupyterLab Splash Screen
+    Maybe Wait For JupyterLab Splash Screen
     Tag With JupyterLab Metadata    ${pageinfo tags}    clear=${clear}
 
 Wait For JupyterLab Splash Screen
@@ -32,6 +33,12 @@ Wait For JupyterLab Splash Screen
     Wait Until Page Contains Element    css:#${JLAB ID SPLASH}    timeout=${timeout}
     Wait Until Page Does Not Contain Element    css:#${JLAB ID SPLASH}    timeout=${timeout}
     Sleep    ${sleep}
+
+Maybe Wait For JupyterLab Splash Screen
+    [Documentation]    Wait for the JupyterLab splash animation, waiting ``timeout``
+    ...    for the splash screen to appear/disappear, then ``sleep``. Ignore errors.
+    [Arguments]    ${timeout}=10s    ${sleep}=2s
+    Run Keyword And Ignore Error    Wait For JupyterLab Splash Screen    ${timeout}    ${sleep}
 
 Click JupyterLab Menu
     [Documentation]    Click a top-level JupyterLab menu bar item by ``label``,
@@ -77,4 +84,5 @@ Close JupyterLab Dock Panel Tab
     ...    ``n`` is the 1-based index of the like- ``label`` ed tabs.
     [Arguments]    ${label}    ${n}=1
     ${tab} =    Get JupyterLab Dock Panel Tab    ${label}    ${n}
-    Click Element    ${tab.find_element_by_xpath('./div[last()]')}
+    ${last div} =    Get WebElement Relative To    ${tab}    xpath:./div[last()]
+    Click Element    ${last div}

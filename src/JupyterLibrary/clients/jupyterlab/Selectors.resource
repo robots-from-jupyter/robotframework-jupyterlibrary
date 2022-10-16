@@ -1,6 +1,7 @@
 *** Settings ***
 Documentation       Common selectors for JupyterLab elements
 
+
 *** Variables ***
 # robocop: disable=line-too-long
 # css selectors
@@ -37,8 +38,10 @@ ${JLAB XP MAIN AREA FRAG}               [contains(@class, 'jp-MainAreaWidget')]
 ${JLAB XP NB FRAG}                      ${JLAB XP MAIN AREA FRAG}\[contains(@class, 'jp-NotebookPanel')]
 ${JLAB XP NB TOOLBAR FRAG}              [contains(@class, 'jp-NotebookPanel-toolbar')]
 ${JLAB XP NB TOOLBAR}                   //div${JLAB XP NB TOOLBAR FRAG}
-${JLAB XP BUSY KERNEL}                  //*[local-name() = 'div' and contains(@class, 'jp-FilledCircleIcon' or (local-name() = 'svg' and contains(@data-icon, 'ui-components:circle-filled')))]
+${JLAB XP BUSY KERNEL}
+...                                     //*[local-name() = 'div' and contains(@class, 'jp-FilledCircleIcon' or (local-name() = 'svg' and contains(@data-icon, 'ui-components:circle-filled')))]
 # dock panel
 ${JLAB XP DOCK PANEL}                   //*[@id = 'jp-main-dock-panel']
-${JLAB XP DOCK TAB}                     ${JLAB XP DOCK PANEL}//ul[contains(@class, 'p-TabBar-content')]/li[contains(@class, 'p-TabBar-tab')]
+${JLAB XP DOCK TAB}
+...                                     ${JLAB XP DOCK PANEL}//ul[contains(@class, 'p-TabBar-content')]/li[contains(@class, 'p-TabBar-tab')]
 ${JLAB XP DOCK TAB LABEL}               ${JLAB XP DOCK TAB}/div[contains(@class, 'p-TabBar-tabLabel')]

@@ -3,6 +3,7 @@ Documentation       Icon keywords for JupyterLab
 
 Resource            JupyterLibrary/clients/jupyterlab/PageInfo.resource
 
+
 *** Variables ***
 &{JLAB1 CSS ICONS}
 ...                     add=span[data-icon="add"]
@@ -24,6 +25,7 @@ Resource            JupyterLibrary/clients/jupyterlab/PageInfo.resource
 ...                     run=*[@data-icon='ui-components:run']
 ...                     filled circle=*[@data-icon='ui-components:circle-filled']
 ...                     empty circle=*[@data-icon='ui-components:circle-empty']
+
 
 *** Keywords ***    ***
 Get JupyterLab Icon CSS

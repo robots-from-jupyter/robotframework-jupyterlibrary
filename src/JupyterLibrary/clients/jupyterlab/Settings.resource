@@ -4,8 +4,10 @@ Documentation       Settings keywords for JupyterLab
 Library             OperatingSystem
 Resource            JupyterLibrary/clients/jupyterlab/PageInfo.resource
 
+
 *** Variables ***
 ${JLAB FILE EXT SETTINGS}       .jupyterlab-settings
+
 
 *** Keywords ***
 Get JupyterLab User Settings Directory

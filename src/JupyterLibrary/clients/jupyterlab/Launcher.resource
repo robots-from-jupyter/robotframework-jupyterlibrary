@@ -3,6 +3,7 @@ Documentation       Launcher keywords for JupyterLab
 
 Resource            JupyterLibrary/clients/jupyterlab/Selectors.resource
 
+
 *** Keywords ***
 Launch A New JupyterLab Document
     [Documentation]    Use the JupyterLab launcher to launch a document of ``category``

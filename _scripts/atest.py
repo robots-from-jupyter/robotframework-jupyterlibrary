@@ -37,7 +37,9 @@ def run_tests(attempt=0, extra_args=None):
     for non_critical in NON_CRITICAL:
         extra_args += ["--noncritical", "AND".join(non_critical)]
 
+    log_level = "INFO"
     if attempt > 1:
+        log_level = "TRACE"
         prev_stem = P.get_atest_stem(attempt=attempt - 1, extra_args=extra_args)
         previous = P.ATEST_OUT / prev_stem / P.ATEST_OUT_XML
         if previous.exists():
@@ -51,6 +53,8 @@ def run_tests(attempt=0, extra_args=None):
     args = [
         *runner,
         *extra_args,
+        "--loglevel",
+        log_level,
         "--name",
         f"""{P.PLATFORM} py{P.THIS_PYTHON} lab{P.THIS_LAB.split(".")[0]}""",
         "--outputdir",

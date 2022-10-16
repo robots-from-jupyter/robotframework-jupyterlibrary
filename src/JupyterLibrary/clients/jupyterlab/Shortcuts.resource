@@ -3,6 +3,7 @@ Documentation       Keyboard shortcut keywords for JupyterLab
 
 Library             platform    WITH NAME    PLATFORM
 
+
 *** Keywords ***
 Get ACCEL Key
     [Documentation]    Get the platform-specific "accelerator key" used for shortcuts:

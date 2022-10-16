@@ -8,6 +8,7 @@ Test Teardown       Close All Browsers
 
 Default Tags        notebook
 
+
 *** Test Cases ***
 IPython Notebook On Classic
     [Documentation]    Do a notebook work correctly on Classic?

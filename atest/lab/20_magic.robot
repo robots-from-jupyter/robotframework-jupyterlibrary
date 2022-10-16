@@ -9,6 +9,7 @@ Test Teardown       Run Keyword And Ignore Error    Reset JupyterLab And Close
 
 Default Tags        notebook    magic
 
+
 *** Variables ***
 ${LOAD EXT}             %reload_ext JupyterLibrary
 ${IND}                  ${SPACE.__mul__(4)}
@@ -19,6 +20,7 @@ ${IND}                  ${SPACE.__mul__(4)}
 ...                     ${IND}Log${IND}Something
 ${NEXT SCREENSHOT}      ${0}
 
+
 *** Test Cases ***
 IPython Magic On Lab
     [Documentation]    Verify the IPython magic works in JupyterLab.
@@ -26,9 +28,11 @@ IPython Magic On Lab
     Launch A New JupyterLab Document
     Add And Run JupyterLab Code Cell    ${LOAD EXT}
     Add And Run JupyterLab Code Cell    @{MAGIC}
-    Wait For And Click Text    Formatted Robot Code
+    Log    TODO: https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/issues/54
+    # Wait For And Click Text    Formatted Robot Code
     Wait For And Click Text    returned 0
     Save JupyterLab Notebook
+
 
 *** Keywords ***
 Wait For And Click Text

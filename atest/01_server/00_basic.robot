@@ -10,8 +10,10 @@ Suite Teardown      Terminate All Jupyter Servers
 
 Force Tags          server
 
+
 *** Variables ***
 ${LOGS}     ${OUTPUT_DIR}${/}${OS}${/}${BROWSER}${/}logs${/}
+
 
 *** Test Cases ***
 Start one server
@@ -53,6 +55,7 @@ Server Files
     Should Be Equal    ${out}    bar
     File Should Not Exist    ${nbdir}${/}foo.txt
     [Teardown]    Remove File    ${OUTPUT_DIR}${/}foo.txt
+
 
 *** Keywords ***
 Start A Server

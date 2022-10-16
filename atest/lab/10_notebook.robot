@@ -10,6 +10,7 @@ Test Teardown       Run Keyword And Ignore Error    Reset JupyterLab And Close
 
 Default Tags        notebook
 
+
 *** Test Cases ***
 IPython Notebook on Lab
     [Documentation]    Ensure an IPython Notebook works in Lab.
@@ -42,6 +43,7 @@ Multiple Notebooks on Lab
     Close JupyterLab Dock Panel Tab    Untitled1.ipynb
     Maybe Accept A JupyterLab Prompt
     Page Should Not Contain    yet another world
+
 
 *** Keywords ***
 Make The First Notebook

@@ -1,4 +1,0 @@
-dependencies:
-  - python >=3.9,<3.10
-  - robotframework-seleniumlibrary >=5,<6
-  - ipython >=8,<9

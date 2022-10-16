@@ -4,8 +4,10 @@ Documentation       Notebook keywords for JupyterLab
 Resource            JupyterLibrary/clients/jupyterlab/Selectors.resource
 Resource            JupyterLibrary/common/CodeMirror.resource
 
+
 *** Variables ***
 @{HELLO WORLD}      print("hello world")
+
 
 *** Keywords ***
 Add And Run JupyterLab Code Cell
@@ -17,10 +19,11 @@ Add And Run JupyterLab Code Cell
     ${nb} =    Get WebElement    xpath://div${JLAB XP NB FRAG}\[${n}]
     # rely on main area widgets all having ids
     ${nbid} =    Get Element Attribute    ${nb}    id
-    Click Element    ${nb.find_element_by_xpath('''div${JLAB XP NB TOOLBAR FRAG}//${add icon}''')}
+    ${icon} =    Get WebElement Relative To    ${nb}    xpath:div${JLAB XP NB TOOLBAR FRAG}//${add icon}
+    Click Element    ${icon}
     Sleep    0.1s
-    ${cell} =    Set Variable
-    ...    ${nb.find_element_by_css_selector('''${JLAB CSS ACTIVE INPUT}'''.replace('''${JLAB CSS ACTIVE DOC}''', ''))}
+    ${cell} =    Get WebElement Relative To    ${nb}
+    ...    css:${JLAB CSS ACTIVE INPUT.replace('''${JLAB CSS ACTIVE DOC}''', '')}
     Click Element    ${cell}
     Set CodeMirror Value    \#${nbid}${JLAB CSS ACTIVE INPUT}    @{code}
     Run Current JupyterLab Code Cell    ${n}
@@ -48,7 +51,6 @@ Run Current JupyterLab Code Cell
     [Arguments]    ${n}=1
     ${run icon} =    Get JupyterLab Icon XPath    run
     ${nb} =    Get WebElement    xpath://div${JLAB XP NB FRAG}\[${n}]
-    ${run btn} =    Set Variable
-    ...    ${nb.find_element_by_xpath('''div${JLAB XP NB TOOLBAR FRAG}//${run icon}''')}
+    ${run btn} =    Get WebElement Relative To    ${nb}    xpath:div${JLAB XP NB TOOLBAR FRAG}//${run icon}
     Click Element    ${run btn}
     Sleep    0.5s
