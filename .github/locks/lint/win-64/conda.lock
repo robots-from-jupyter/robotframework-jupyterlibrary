@@ -31,7 +31,7 @@ https://conda.anaconda.org/conda-forge/noarch/pycparser-2.21-pyhd8ed1ab_0.tar.bz
 https://conda.anaconda.org/conda-forge/noarch/pyflakes-2.5.0-pyhd8ed1ab_0.tar.bz2#1b3bef4313288ae8d35b1dfba4cd84a3
 https://conda.anaconda.org/conda-forge/noarch/pyparsing-3.0.9-pyhd8ed1ab_0.tar.bz2#e8fbc1b54b25f4b08281467bc13b70cc
 https://conda.anaconda.org/conda-forge/win-64/python_abi-3.8-2_cp38.tar.bz2#80b95487563108d4cf92ff6384050751
-https://conda.anaconda.org/conda-forge/noarch/pytz-2022.4-pyhd8ed1ab_0.tar.bz2#fc0dcaf9761d042fb8ac9128ce03fddb
+https://conda.anaconda.org/conda-forge/noarch/pytz-2022.5-pyhd8ed1ab_0.tar.bz2#565724d09157870f0e469b1a0a172a6d
 https://conda.anaconda.org/conda-forge/noarch/robotframework-6.0-pyhd8ed1ab_0.tar.bz2#837cfa1a48c6aec3105628216a2cd1f2
 https://conda.anaconda.org/conda-forge/noarch/setuptools-65.5.0-pyhd8ed1ab_0.tar.bz2#462466739c786f85f9ed555f87099fe1
 https://conda.anaconda.org/conda-forge/noarch/six-1.16.0-pyh6c4a22f_0.tar.bz2#e5f25f8dbc060e9a8d912e432202afc2
@@ -74,6 +74,6 @@ https://conda.anaconda.org/conda-forge/noarch/robotframework-robocop-2.6.0-pyhd8
 https://conda.anaconda.org/conda-forge/noarch/trio-websocket-0.9.2-pyhd8ed1ab_0.tar.bz2#7acf3fc982eef23b24aed10e80d5dc99
 https://conda.anaconda.org/conda-forge/noarch/rich-click-1.4-pyhd8ed1ab_0.tar.bz2#2b8b2a9974170b437c4c3025b9a8e8d8
 https://conda.anaconda.org/conda-forge/noarch/urllib3-1.26.11-pyhd8ed1ab_0.tar.bz2#0738978569b10669bdef41c671252dd1
-https://conda.anaconda.org/conda-forge/noarch/robotframework-tidy-3.3-pyhd8ed1ab_0.tar.bz2#aed388fd86b667c2d3b4215041f2bfa5
+https://conda.anaconda.org/conda-forge/noarch/robotframework-tidy-3.3.1-pyhd8ed1ab_0.tar.bz2#f30f00ca504adae0de123f7c6ef06f2a
 https://conda.anaconda.org/conda-forge/noarch/selenium-4.5.0-pyhd8ed1ab_0.tar.bz2#20e905e5b29efa80f218f9c16693ce41
 https://conda.anaconda.org/conda-forge/noarch/robotframework-seleniumlibrary-6.0.0-pyhd8ed1ab_0.tar.bz2#2acaef9c04081dc3644501ac575953bf

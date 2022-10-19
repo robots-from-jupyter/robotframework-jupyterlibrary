@@ -48,7 +48,7 @@ https://conda.anaconda.org/conda-forge/noarch/pyparsing-3.0.9-pyhd8ed1ab_0.tar.b
 https://conda.anaconda.org/conda-forge/noarch/pysocks-1.7.1-pyha2e5f31_6.tar.bz2#2a7de29fb590ca14b5243c4c812c8025
 https://conda.anaconda.org/conda-forge/noarch/python-fastjsonschema-2.16.2-pyhd8ed1ab_0.tar.bz2#5fe4b6002f505336734ce92961b3e6a0
 https://conda.anaconda.org/conda-forge/osx-64/python_abi-3.10-2_cp310.tar.bz2#502ca4a8b43b424316f380d864832877
-https://conda.anaconda.org/conda-forge/noarch/pytz-2022.4-pyhd8ed1ab_0.tar.bz2#fc0dcaf9761d042fb8ac9128ce03fddb
+https://conda.anaconda.org/conda-forge/noarch/pytz-2022.5-pyhd8ed1ab_0.tar.bz2#565724d09157870f0e469b1a0a172a6d
 https://conda.anaconda.org/conda-forge/noarch/robotframework-6.0-pyhd8ed1ab_0.tar.bz2#837cfa1a48c6aec3105628216a2cd1f2
 https://conda.anaconda.org/conda-forge/noarch/setuptools-65.5.0-pyhd8ed1ab_0.tar.bz2#462466739c786f85f9ed555f87099fe1
 https://conda.anaconda.org/conda-forge/noarch/six-1.16.0-pyh6c4a22f_0.tar.bz2#e5f25f8dbc060e9a8d912e432202afc2
@@ -71,7 +71,7 @@ https://conda.anaconda.org/conda-forge/noarch/asttokens-2.0.8-pyhd8ed1ab_0.tar.b
 https://conda.anaconda.org/conda-forge/noarch/babel-2.10.3-pyhd8ed1ab_0.tar.bz2#72f1c6d03109d7a70087bc1d029a8eda
 https://conda.anaconda.org/conda-forge/noarch/backports.functools_lru_cache-1.6.4-pyhd8ed1ab_0.tar.bz2#c5b3edc62d6309088f4970b3eaaa65a6
 https://conda.anaconda.org/conda-forge/noarch/beautifulsoup4-4.11.1-pyha770c72_0.tar.bz2#eeec8814bd97b2681f708bb127478d7d
-https://conda.anaconda.org/conda-forge/osx-64/cffi-1.15.1-py310h96bbf6e_0.tar.bz2#7247d0e5dc3dc1adb94de8353478a015
+https://conda.anaconda.org/conda-forge/osx-64/cffi-1.15.1-py310ha78151a_1.tar.bz2#295c496bdef0b0d0d2b31a334adf36dc
 https://conda.anaconda.org/conda-forge/osx-64/click-8.1.3-py310h2ec42d9_0.tar.bz2#5e00cb3a5026cb2ed91f2b6c368ee4e8
 https://conda.anaconda.org/conda-forge/osx-64/debugpy-1.6.3-py310h154be8b_0.tar.bz2#e0d704873b52db180a10c3cac638f4d1
 https://conda.anaconda.org/conda-forge/osx-64/docutils-0.19-py310h2ec42d9_0.tar.bz2#d42f3442c61cbb9ba081591561ae3955
