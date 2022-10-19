@@ -53,7 +53,7 @@ https://conda.anaconda.org/conda-forge/noarch/tomli-2.0.1-pyhd8ed1ab_0.tar.bz2#5
 https://conda.anaconda.org/conda-forge/noarch/typing_extensions-4.4.0-pyha770c72_0.tar.bz2#2d93b130d148d7fc77e583677792fc6a
 https://conda.anaconda.org/conda-forge/noarch/wheel-0.37.1-pyhd8ed1ab_0.tar.bz2#1ca02aaf78d9c70d9a81a3bed5752022
 https://conda.anaconda.org/conda-forge/noarch/zipp-3.9.0-pyhd8ed1ab_0.tar.bz2#6f3fd8c9e0ab504010fb4216d5919c24
-https://conda.anaconda.org/conda-forge/linux-64/cffi-1.15.1-py38h4a40e3a_0.tar.bz2#a970d201055ec06a75db83bf25447eb2
+https://conda.anaconda.org/conda-forge/linux-64/cffi-1.15.1-py38h4a40e3a_1.tar.bz2#6f5ad3b721b045237da84ffc0f1e15bf
 https://conda.anaconda.org/conda-forge/linux-64/click-8.1.3-py38h578d9bd_0.tar.bz2#a863b3d0df14d2d5335d917eef8523f6
 https://conda.anaconda.org/conda-forge/linux-64/future-0.18.2-py38h578d9bd_5.tar.bz2#8658059c99ca16e4f5fb322aa23eeac8
 https://conda.anaconda.org/conda-forge/noarch/h11-0.14.0-pyhd8ed1ab_0.tar.bz2#b21ed0883505ba1910994f1df031a428
@@ -79,7 +79,7 @@ https://conda.anaconda.org/conda-forge/linux-64/trio-0.22.0-py38h578d9bd_0.tar.b
 https://conda.anaconda.org/conda-forge/noarch/wsproto-1.2.0-pyhd8ed1ab_0.tar.bz2#00ba804b54f451d102f6a7615f08470d
 https://conda.anaconda.org/conda-forge/noarch/pyopenssl-22.1.0-pyhd8ed1ab_0.tar.bz2#fbfa0a180d48c800f922a10a114a8632
 https://conda.anaconda.org/conda-forge/noarch/rich-12.6.0-pyhd8ed1ab_0.tar.bz2#162ed4cc104133be23e592faa1e055e3
-https://conda.anaconda.org/conda-forge/noarch/robotframework-robocop-2.5.0-pyhd8ed1ab_0.tar.bz2#82376a8ab18c477a439054a9c58595c2
+https://conda.anaconda.org/conda-forge/noarch/robotframework-robocop-2.6.0-pyhd8ed1ab_0.tar.bz2#bc7dad792b185aab3b1c59994f99b970
 https://conda.anaconda.org/conda-forge/noarch/trio-websocket-0.9.2-pyhd8ed1ab_0.tar.bz2#7acf3fc982eef23b24aed10e80d5dc99
 https://conda.anaconda.org/conda-forge/noarch/rich-click-1.4-pyhd8ed1ab_0.tar.bz2#2b8b2a9974170b437c4c3025b9a8e8d8
 https://conda.anaconda.org/conda-forge/noarch/urllib3-1.26.11-pyhd8ed1ab_0.tar.bz2#0738978569b10669bdef41c671252dd1
