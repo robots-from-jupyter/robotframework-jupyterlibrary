@@ -279,8 +279,9 @@ ROBOTIDY_ARGS = [
 ROBOCOP_ARGS = [
     "robocop",
     *("--configure", "empty-lines-between-sections:empty_lines:2"),
-    *("--exclude", "if-can-be-used"),
     *("--exclude", "deprecated-statement"),
+    *("--exclude", "deprecated-with-name"),
+    *("--exclude", "if-can-be-used"),
     *("--exclude", "too-many-calls-in-keyword"),
 ]
 

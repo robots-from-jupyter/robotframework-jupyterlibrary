@@ -9,5 +9,5 @@ dependencies:
   # really nothing for it
   - nodejs >=16,!=17.*,!=19.*
   # hard deps
-  - robotframework >=3.2
+  - robotframework >=4
   - robotframework-seleniumlibrary >=4.5

@@ -1,4 +1,5 @@
 dependencies:
-  - python >=3.10,<3.11
-  - robotframework-seleniumlibrary >=6,<7
   - ipython >=8,<9
+  - python >=3.10,<3.11
+  - robotframework >=6
+  - robotframework-seleniumlibrary >=6,<7
