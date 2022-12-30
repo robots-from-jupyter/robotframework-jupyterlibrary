@@ -12,6 +12,12 @@ PLATFORM_PY_ARGS = {
     # ("Windows", "5.0", "6"): ["--include", "not-supported", "--runemptysuite"]
 }
 
+LAB_MAJOR_ENV_VARS = {
+    1: {"JUPYTER_LIBRARY_APP": "NotebookApp"},
+    2: {"JUPYTER_LIBRARY_APP": "NotebookApp"},
+    3: {"JUPYTER_LIBRARY_APP": "ServerApp"},
+}
+
 NON_CRITICAL = [
     ## Historically supported nteract_on_jupyter
     # ["client:nteract_on_jupyter"],
@@ -19,15 +25,19 @@ NON_CRITICAL = [
 
 PABOT_DEFAULTS = [
     "--testlevelsplit",
-    "--processes",
-    "4",
+    *("--processes", "4"),
     "--artifactsinsubfolders",
-    "--artifacts",
-    "png,log,txt",
+    *("--artifacts", "png,log,txt"),
 ]
 
 
 def run_tests(attempt=0, extra_args=None):
+    env = dict(**os.environ)
+
+    if P.THIS_LAB:
+        lab_major = int(P.THIS_LAB.split(".")[0])
+        env.update(LAB_MAJOR_ENV_VARS.get(lab_major, {}))
+
     extra_args = extra_args or []
     extra_args += PLATFORM_PY_ARGS.get((P.PLATFORM, P.THIS_PYTHON, P.THIS_LAB), [])
 
@@ -97,7 +107,7 @@ def run_tests(attempt=0, extra_args=None):
     str_args = [*map(str, args)]
     print(">>> ", " ".join(str_args), flush=True)
 
-    proc = subprocess.Popen(str_args, cwd=P.ATEST)
+    proc = subprocess.Popen(str_args, cwd=P.ATEST, env=env)
 
     try:
         return proc.wait()

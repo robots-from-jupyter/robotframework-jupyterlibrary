@@ -33,6 +33,21 @@ A Notebook in JupyterLab
 
 See the [acceptance tests][] for examples.
 
+### The App Under Test
+
+Most combinations of `jupyter_server`, `notebook`, `nbclassic` and `jupyterlab` should
+"Just Work".
+
+However, some situations may require setting the environment variable
+`JUPYTER_SERVER_APP` to help the underlying servers get configured properly.
+
+```shell
+JUPYTER_SERVER_APP=NotebookApp robot ...
+JUPYTER_SERVER_APP=ServerApp robot ...
+```
+
+(on windows, use the `set` command to accomplish a similar, temporary effect).
+
 ## Installation
 
 ```bash
