@@ -24,9 +24,9 @@ class ServerKeywords(LibraryComponent):
     @keyword
     def start_new_jupyter_server(
         self,
-        command: typing.Optional[str] = None,
+        command: typing.Optional[str] = "jupyter-notebook",
         port: typing.Optional[int] = None,
-        base_url: typing.Optional[str] = None,
+        base_url: typing.Optional[str] = "/@rf/",
         notebook_dir: typing.Optional[str] = None,
         token: typing.Optional[str] = None,
         *args,
@@ -49,11 +49,13 @@ class ServerKeywords(LibraryComponent):
         between between runs (or the test instance) itself. These
         directories will be cleaned up after the server process is
         [#Terminate All Jupyter Servers|terminated].
+
+        For backwards compatibility, ``command`` still defaults to ``jupyter-notebook``,
+        but ``jupyter-lab`` (or equivalent) should be given if testing
+        ``jupyter_server >=2``.
         """
-        command = command or "jupyter-notebook"
         app_class = "NotebookApp" if "jupyter-notebook" in command else "ServerApp"
         port = port or self.get_unused_port()
-        base_url = base_url or "/@rf/"
         token = str(uuid4()) if token is None else token
 
         BuiltIn().import_library("Process")
