@@ -51,6 +51,7 @@ class ServerKeywords(LibraryComponent):
         [#Terminate All Jupyter Servers|terminated].
         """
         command = command or "jupyter-notebook"
+        app_class = "NotebookApp" if "jupyter-notebook" in command else "ServerApp"
         port = port or self.get_unused_port()
         base_url = base_url or "/@rf/"
         token = str(uuid4()) if token is None else token
@@ -76,7 +77,9 @@ class ServerKeywords(LibraryComponent):
             os.mkdir(notebook_dir)
             config["cwd"] = notebook_dir
 
-        args = args or self.build_jupyter_server_arguments(port, base_url, token)
+        args = args or self.build_jupyter_server_arguments(
+            port, base_url, token, app_class
+        )
 
         handle = plib.start_process(command, *args, **config)
 
@@ -91,15 +94,19 @@ class ServerKeywords(LibraryComponent):
 
     @keyword
     def build_jupyter_server_arguments(
-        self, port: int, base_url: str, token: str
+        self,
+        port: int,
+        base_url: str,
+        token: str,
+        app_class: typing.Optional[str] = "NotebookApp",
     ) -> typing.List[str]:
         """Some default jupyter arguments"""
         return [
             "--no-browser",
             "--debug",
             "--port={}".format(port),
-            "--NotebookApp.token='{}'".format(token),
-            "--NotebookApp.base_url='{}'".format(base_url),
+            f"--{app_class}.token={token}",
+            f"--{app_class}.base_url={base_url}",
         ]
 
     @keyword

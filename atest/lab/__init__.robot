@@ -11,8 +11,8 @@ Force Tags          client:jupyterlab
 
 *** Keywords ***
 Set Up JupyterLab Suite
-    [Documentation]    Get ready to test JupyterLab with a sever
-    Wait For New Jupyter Server To Be Ready
+    [Documentation]    Get ready to test JupyterLab with a server
+    Wait For New Jupyter Server To Be Ready    jupyter-lab
 
 Tear Down JupyterLab Suite
     [Documentation]    Clean up after JupyterLab
