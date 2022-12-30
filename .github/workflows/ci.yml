@@ -172,8 +172,7 @@ jobs:
         if: ${{ matrix.os == 'windows' }}
         env:
           CONDA_EXE: C:\Miniconda\envs\Script\conda.exe
-        run:
-          call conda activate test && python dodo.py test || python dodo.py test
+        run: call conda activate test && python dodo.py test || python dodo.py test
         shell: cmd /C CALL {0}
       - name: upload test output
         uses: actions/upload-artifact@v3

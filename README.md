@@ -12,8 +12,8 @@
 
 ## Using
 
-Write `.robot` files that use `JupyterLibrary` [keywords][]... or use [magics][]
-in notebooks.
+Write `.robot` files that use `JupyterLibrary` [keywords][]... or use [magics][] in
+notebooks.
 
 ```robotframework
 *** Settings ***
@@ -49,8 +49,8 @@ Or see the [contributing guide][contributing] for a development install.
 
 ## Free Software
 
-JupyterLibrary is Free Software under the [BSD-3-Clause License][license]. It
-contains code from a number of other projects:
+JupyterLibrary is Free Software under the [BSD-3-Clause License][license]. It contains
+code from a number of other projects:
 
 - [Jyve][] ([BSD-3-Clause][jyve-license])
   - Initial implementations of robot keywords
@@ -78,9 +78,7 @@ contains code from a number of other projects:
 [docs]: https://robotframework-jupyterlibrary.readthedocs.io
 [jyve]: https://github.com/deathbeds/jyve
 [jyve-license]: https://github.com/deathbeds/jyve/blob/master/LICENSE
-[magics]:
-  https://robotframework-jupyterlibrary.readthedocs.io/en/stable/MAGIC.html
-[keywords]:
-  https://robotframework-jupyterlibrary.readthedocs.io/en/stable/KEYWORDS.html
+[magics]: https://robotframework-jupyterlibrary.readthedocs.io/en/stable/MAGIC.html
+[keywords]: https://robotframework-jupyterlibrary.readthedocs.io/en/stable/KEYWORDS.html
 [contributing]:
   https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/blob/master/CONTRIBUTING.md
