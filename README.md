@@ -18,7 +18,7 @@ notebooks.
 ```robotframework
 *** Settings ***
 Library           JupyterLibrary
-Suite Setup       Wait For New Jupyter Server To Be Ready
+Suite Setup       Wait For New Jupyter Server To Be Ready  command=jupyter-lab
 Test Teardown     Reset JupyterLab And Close
 Suite Teardown    Terminate All Jupyter Servers
 
@@ -40,6 +40,12 @@ pip install robotframework-jupyterlibrary
 ```
 
 Or
+
+```bash
+mamba install -c conda-forge robotframework-jupyterlibrary
+```
+
+Or (if you must):
 
 ```bash
 conda install -c conda-forge robotframework-jupyterlibrary

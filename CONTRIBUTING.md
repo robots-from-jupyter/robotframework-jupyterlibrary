@@ -70,6 +70,19 @@ doit release
 This will recreate the `test` environment with the specified lockfile, and repeat all
 the steps.
 
+### Environment Variables
+
+A number of environment variables control how some of the `doit` tasks function.
+
+|           variable |      default      | note                                               |
+| -----------------: | :---------------: | -------------------------------------------------- |
+|       `ATEST_ARGS` |       `[]`        | a JSON array of tokens to pass to `pabot`          |
+|    `ATEST_RETRIES` |        `0`        | number of times to re-run failing tests            |
+|          `BROWSER` | `headlessfirefox` | which browser to use (only tested with FF)         |
+|        `CONDA_EXE` |      `mamba`      | a custom `conda`-compatible tool to use            |
+|        `IN_BINDER` |        `0`        | skips a number of steps                            |
+| `INSTALL_ARTIFACT` |        ``         | `pip install` a built artifact instead of editable |
+
 ## Releasing
 
 - [ ] merge all outstanding PRs

@@ -24,9 +24,9 @@ class ServerKeywords(LibraryComponent):
     @keyword
     def start_new_jupyter_server(
         self,
-        command: typing.Optional[str] = "jupyter-notebook",
+        command: typing.Optional[str] = None,
         port: typing.Optional[int] = None,
-        base_url: typing.Optional[str] = "/@rf/",
+        base_url: typing.Optional[str] = None,
         notebook_dir: typing.Optional[str] = None,
         token: typing.Optional[str] = None,
         *args,
@@ -49,12 +49,10 @@ class ServerKeywords(LibraryComponent):
         between between runs (or the test instance) itself. These
         directories will be cleaned up after the server process is
         [#Terminate All Jupyter Servers|terminated].
-
-        For backwards compatibility, ``command`` still defaults to ``jupyter-notebook``,
-        but ``jupyter-lab`` (or equivalent) should be given if testing
-        ``jupyter_server >=2``.
         """
+        command = command or "jupyter-notebook"
         app_class = "NotebookApp" if "jupyter-notebook" in command else "ServerApp"
+        base_url = base_url or "/@rf/"
         port = port or self.get_unused_port()
         token = str(uuid4()) if token is None else token
 
@@ -106,7 +104,7 @@ class ServerKeywords(LibraryComponent):
         return [
             "--no-browser",
             "--debug",
-            "--port={}".format(port),
+            f"--port={port}",
             f"--{app_class}.token={token}",
             f"--{app_class}.base_url={base_url}",
         ]
@@ -179,10 +177,9 @@ class ServerKeywords(LibraryComponent):
                 time.sleep(interval)
                 error = _error
 
-        assert ready == len(
-            nbservers
-        ), "Only {} of {} servers were ready after {}s. Last error: {} {}".format(
-            ready, len(nbservers), interval * retries, type(error), error
+        assert ready == len(nbservers), (
+            f"Only {ready} of {len(nbservers)} servers were ready after "
+            f"{interval * retries}s. Last error: {type(error)} {error}"
         )
         return ready
 
@@ -192,7 +189,7 @@ class ServerKeywords(LibraryComponent):
     ) -> str:
         """Get the given (or most recently-launched) server's URL"""
         nbh = nbserver or self._handles[-1]
-        return "http://localhost:{}{}".format(self._ports[nbh], self._base_urls[nbh])
+        return f"http://127.0.0.1:{self._ports[nbh]}{self._base_urls[nbh]}"
 
     @keyword
     def get_jupyter_server_token(
@@ -230,7 +227,7 @@ class ServerKeywords(LibraryComponent):
             url = self.get_jupyter_server_url(nbh)
             token = self.get_jupyter_server_token(nbh)
             try:
-                urlopen("{}api/shutdown?token={}".format(url, token), data=[])
+                urlopen(f"{url}api/shutdown?token={token}", data=[])
                 shutdown += 1
             except Exception as err:
                 BuiltIn().log(err)
