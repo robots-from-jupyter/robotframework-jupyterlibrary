@@ -12,4 +12,4 @@ Force Tags          client:notebook
 *** Keywords ***
 Set Up Classic Suite
     [Documentation]    Configure the top-level app and start the server
-    Wait For New Jupyter Server To Be Ready
+    Wait For New Jupyter Server To Be Ready    jupyter-notebook

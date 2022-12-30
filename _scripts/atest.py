@@ -15,7 +15,6 @@ PLATFORM_PY_ARGS = {
 LAB_MAJOR_ENV_VARS = {
     1: {"JUPYTER_LIBRARY_APP": "NotebookApp"},
     2: {"JUPYTER_LIBRARY_APP": "NotebookApp"},
-    3: {"JUPYTER_LIBRARY_APP": "ServerApp"},
 }
 
 NON_CRITICAL = [
@@ -109,11 +108,23 @@ def run_tests(attempt=0, extra_args=None):
 
     proc = subprocess.Popen(str_args, cwd=P.ATEST, env=env)
 
+    return_code = None
     try:
-        return proc.wait()
+        return_code = proc.wait()
     except KeyboardInterrupt:
         proc.kill()
-        return proc.wait()
+        return_code = proc.wait()
+
+    if return_code != 0:
+        for robot_stdout in out_dir.rglob("robot_stdout.out"):
+            out_text = robot_stdout.read_text(encoding="utf-8")
+            if "FAIL" in out_text:
+                print("\n", robot_stdout, "\n")
+                print(out_text, "\n", "\n", flush=True)
+
+    print("Log:", (out_dir / "log.html").as_uri())
+
+    return return_code
 
 
 def attempt_atest_with_retries(extra_args=None):
