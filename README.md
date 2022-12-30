@@ -18,7 +18,7 @@ notebooks.
 ```robotframework
 *** Settings ***
 Library           JupyterLibrary
-Suite Setup       Wait For New Jupyter Server To Be Ready  command=jupyter-lab
+Suite Setup       Wait For New Jupyter Server To Be Ready  jupyter-lab
 Test Teardown     Reset JupyterLab And Close
 Suite Teardown    Terminate All Jupyter Servers
 

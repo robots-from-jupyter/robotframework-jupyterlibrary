@@ -51,7 +51,10 @@ class ServerKeywords(LibraryComponent):
         [#Terminate All Jupyter Servers|terminated].
         """
         command = command or "jupyter-notebook"
-        app_class = "NotebookApp" if "jupyter-notebook" in command else "ServerApp"
+        app_class = os.environ.get(
+            "JUPYTER_LIBRARY_APP",
+            "NotebookApp" if "jupyter-notebook" in command else "ServerApp",
+        )
         base_url = base_url or "/@rf/"
         port = port or self.get_unused_port()
         token = str(uuid4()) if token is None else token
