@@ -2,7 +2,7 @@
 #
 # This was generated from .github/locks/docs/linux-64/conda.lock
 #
-#   doit docs:rtdenv
+#   doit docs:rtd:env
 #
 channels:
   - conda-forge

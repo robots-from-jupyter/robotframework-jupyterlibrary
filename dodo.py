@@ -156,7 +156,7 @@ def task_docs():
             f"#\n"
             f"# This was generated from {lockfile.relative_to(P.ROOT)}\n"
             f"#\n"
-            f"#   doit docs:rtdenv\n"
+            f"#   doit docs:rtd:env\n"
             f"#\n"
         ) + header
 
