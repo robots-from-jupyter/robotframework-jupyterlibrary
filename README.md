@@ -1,24 +1,24 @@
 # robotframework-jupyterlibrary
 
-> A [Robot Framework][] library for automating (testing of) [Jupyter][] end-user
+> A [Robot Framework] library for automating (testing of) [Jupyter] end-user
 > applications and extensions
 
 [robot framework]: http://robotframework.org
 [jupyter]: https://jupyter.org
 
-|          pip          |                 conda                 |          docs           |            demo             |             actions             |
-| :-------------------: | :-----------------------------------: | :---------------------: | :-------------------------: | :-----------------------------: |
-| [![pip-badge][]][pip] | [![conda-forge-badge][]][conda-forge] | [![docs-badge][]][docs] | [![binder-badge][]][binder] | [![workflow-badge][]][workflow] |
+|         pip         |                conda                |         docs          |           demo            |            actions            |
+| :-----------------: | :---------------------------------: | :-------------------: | :-----------------------: | :---------------------------: |
+| [![pip-badge]][pip] | [![conda-forge-badge]][conda-forge] | [![docs-badge]][docs] | [![binder-badge]][binder] | [![workflow-badge]][workflow] |
 
 ## Using
 
-Write `.robot` files that use `JupyterLibrary` [keywords][]... or use [magics][]
-in notebooks.
+Write `.robot` files that use `JupyterLibrary` [keywords]... or use [magics] in
+notebooks.
 
 ```robotframework
 *** Settings ***
 Library           JupyterLibrary
-Suite Setup       Wait For New Jupyter Server To Be Ready
+Suite Setup       Wait For New Jupyter Server To Be Ready  jupyter-lab
 Test Teardown     Reset JupyterLab And Close
 Suite Teardown    Terminate All Jupyter Servers
 
@@ -31,7 +31,7 @@ A Notebook in JupyterLab
     Capture Page Screenshot
 ```
 
-See the [acceptance tests][] for examples.
+See the [acceptance tests] for examples.
 
 ## Installation
 
@@ -42,6 +42,12 @@ pip install robotframework-jupyterlibrary
 Or
 
 ```bash
+mamba install -c conda-forge robotframework-jupyterlibrary
+```
+
+Or (if you must):
+
+```bash
 conda install -c conda-forge robotframework-jupyterlibrary
 ```
 
@@ -49,10 +55,10 @@ Or see the [contributing guide][contributing] for a development install.
 
 ## Free Software
 
-JupyterLibrary is Free Software under the [BSD-3-Clause License][license]. It
-contains code from a number of other projects:
+JupyterLibrary is Free Software under the [BSD-3-Clause License][license]. It contains
+code from a number of other projects:
 
-- [Jyve][] ([BSD-3-Clause][jyve-license])
+- [Jyve] ([BSD-3-Clause][jyve-license])
   - Initial implementations of robot keywords
 
 [license]:
@@ -78,9 +84,7 @@ contains code from a number of other projects:
 [docs]: https://robotframework-jupyterlibrary.readthedocs.io
 [jyve]: https://github.com/deathbeds/jyve
 [jyve-license]: https://github.com/deathbeds/jyve/blob/master/LICENSE
-[magics]:
-  https://robotframework-jupyterlibrary.readthedocs.io/en/stable/MAGIC.html
-[keywords]:
-  https://robotframework-jupyterlibrary.readthedocs.io/en/stable/KEYWORDS.html
+[magics]: https://robotframework-jupyterlibrary.readthedocs.io/en/stable/MAGIC.html
+[keywords]: https://robotframework-jupyterlibrary.readthedocs.io/en/stable/KEYWORDS.html
 [contributing]:
   https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/blob/master/CONTRIBUTING.md

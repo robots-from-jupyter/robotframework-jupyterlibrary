@@ -33,7 +33,7 @@ class JupyterLibrary(SeleniumLibrary):
         implicit_wait=0.0,
         run_on_failure="Capture Page Screenshot",
         screenshot_root_directory=None,
-        **kwargs
+        **kwargs,
     ):
         """JupyterLibrary can be imported with several optional arguments.
         - ``timeout``:
@@ -51,7 +51,7 @@ class JupyterLibrary(SeleniumLibrary):
             implicit_wait=implicit_wait,
             run_on_failure=run_on_failure,
             screenshot_root_directory=screenshot_root_directory,
-            **kwargs
+            **kwargs,
         )
         self.add_library_components(
             [Component(self) for Component in component_classes]
@@ -69,14 +69,12 @@ class JupyterLibraryListener(LibraryListener):
         resources = []
 
         for common in COMMON:
-            resources += ["JupyterLibrary/common/{}".format(basename(common))]
+            resources += [f"JupyterLibrary/common/{basename(common)}"]
 
         for client in CLIENTS:
             for path in glob(join(client, "*.resource")):
                 resources += [
-                    "JupyterLibrary/clients/{}/{}".format(
-                        basename(client), basename(path)
-                    )
+                    f"JupyterLibrary/clients/{basename(client)}/{basename(path)}"
                 ]
 
         for resource in resources:

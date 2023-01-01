@@ -4,3 +4,4 @@ dependencies:
   # screenshots
   - firefox
   - geckodriver
+  - coverage

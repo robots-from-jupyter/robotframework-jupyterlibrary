@@ -4,10 +4,11 @@
   "version": "0.0.0",
   "prettier": {
     "proseWrap": "always",
-    "singleQuote": true
+    "singleQuote": true,
+    "printWidth": 88
   },
   "devDependencies": {
-    "prettier": "^2.7.1"
+    "prettier": "^2.8.1"
   },
   "scripts": {
     "prettier": "prettier --write --list-different \"./*.{json,md,yml}\" \"{.github,.binder,docs}/**/*.{json,md,yml,css}\""

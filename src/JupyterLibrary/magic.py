@@ -208,14 +208,14 @@ class RobotMagics(Magics):
             ]
             display(
                 HTML(
+                    f"""
+                    <ul><li><details>
+                    <summary>{len(files)} Files</summary>
+                    <ul>
+                    {"".join(files)}
+                    </ul>
+                    </li></ul>
                     """
-                <ul><li><details>
-                    <summary>{} Files</summary>
-                    <ul>{}</ul>
-                </li></ul>
-            """.format(
-                        len(files), "\n".join(files)
-                    )
                 )
             )
             display(Markdown(f"- _🤖 returned {rc}_"))

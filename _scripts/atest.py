@@ -12,6 +12,11 @@ PLATFORM_PY_ARGS = {
     # ("Windows", "5.0", "6"): ["--include", "not-supported", "--runemptysuite"]
 }
 
+LAB_MAJOR_ENV_VARS = {
+    1: {"JUPYTER_LIBRARY_APP": "NotebookApp"},
+    2: {"JUPYTER_LIBRARY_APP": "NotebookApp"},
+}
+
 NON_CRITICAL = [
     ## Historically supported nteract_on_jupyter
     # ["client:nteract_on_jupyter"],
@@ -19,15 +24,19 @@ NON_CRITICAL = [
 
 PABOT_DEFAULTS = [
     "--testlevelsplit",
-    "--processes",
-    "4",
+    *("--processes", "4"),
     "--artifactsinsubfolders",
-    "--artifacts",
-    "png,log,txt",
+    *("--artifacts", "png,log,txt"),
 ]
 
 
 def run_tests(attempt=0, extra_args=None):
+    env = dict(**os.environ)
+
+    if P.THIS_LAB:
+        lab_major = int(P.THIS_LAB.split(".")[0])
+        env.update(LAB_MAJOR_ENV_VARS.get(lab_major, {}))
+
     extra_args = extra_args or []
     extra_args += PLATFORM_PY_ARGS.get((P.PLATFORM, P.THIS_PYTHON, P.THIS_LAB), [])
 
@@ -75,35 +84,47 @@ def run_tests(attempt=0, extra_args=None):
     ]
 
     if out_dir.exists():
-        print(">>> trying to clean out {}".format(out_dir), flush=True)
+        print(f">>> trying to clean out {out_dir}", flush=True)
         try:
             shutil.rmtree(out_dir)
         except Exception as err:
             print(
-                "... error, hopefully harmless: {}".format(err),
+                f"... error, hopefully harmless: {err}",
                 flush=True,
             )
 
     if not out_dir.exists():
-        print(">>> trying to prepare output directory: {}".format(out_dir), flush=True)
+        print(f">>> trying to prepare output directory: {out_dir}", flush=True)
         try:
             out_dir.mkdir(parents=True)
         except Exception as err:
             print(
-                "... Error, hopefully harmless: {}".format(err),
+                f"... Error, hopefully harmless: {err}",
                 flush=True,
             )
 
     str_args = [*map(str, args)]
     print(">>> ", " ".join(str_args), flush=True)
 
-    proc = subprocess.Popen(str_args, cwd=P.ATEST)
+    proc = subprocess.Popen(str_args, cwd=P.ATEST, env=env)
 
+    return_code = None
     try:
-        return proc.wait()
+        return_code = proc.wait()
     except KeyboardInterrupt:
         proc.kill()
-        return proc.wait()
+        return_code = proc.wait()
+
+    if return_code != 0:
+        for robot_stdout in out_dir.rglob("robot_stdout.out"):
+            out_text = robot_stdout.read_text(encoding="utf-8")
+            if "FAIL" in out_text:
+                print("\n", robot_stdout, "\n")
+                print(out_text, "\n", "\n", flush=True)
+
+    print("Log:", (out_dir / "log.html").as_uri())
+
+    return return_code
 
 
 def attempt_atest_with_retries(extra_args=None):
@@ -117,7 +138,7 @@ def attempt_atest_with_retries(extra_args=None):
 
     while error_count != 0 and attempt <= retries:
         attempt += 1
-        print("attempt {} of {}...".format(attempt, retries + 1), flush=True)
+        print(f"attempt {attempt} of {retries + 1}...", flush=True)
         start_time = time.time()
         error_count = run_tests(attempt=attempt, extra_args=extra_args)
         print(

@@ -21,12 +21,54 @@ class ServerKeywords(LibraryComponent):
     _base_urls = {}
     _tokens = {}
 
+    _app_name = None
+
+    @keyword
+    def set_default_jupyter_app_name(
+        self, app_name: typing.Optional[str] = None
+    ) -> typing.Optional[str]:
+        """Set the current ``traitlets.Configurable`` Jupyter Server application,
+        returning the previous value.
+
+        A value of ``None`` (the default) will try to detect the app based on
+        command name, such as:
+
+        - ``jupyter-notebook`` is configured with ``NotebookApp``
+        - ``jupyter-lab`` and most other are configured with ``ServerApp``
+
+        This may also be set externally via the ``JUPYTER_LIBRARY_APP`` environment
+        variable, but any explicit argument will override this.
+
+        See [#Get Jupyter App Name] for more.
+        """
+        old_app_name = self.app_name
+        self.app_name = app_name
+        return old_app_name
+
+    @keyword
+    def get_jupyter_app_name(
+        self, command: typing.Optional[str] = None
+    ) -> typing.Optional[str]:
+        """Get the current ``traitlets.Configurable`` Jupyter Server application,
+        optionally for a specific CLI command.
+
+        See [#Set Default Jupyter App Name] for more.
+        """
+        app_name = os.environ.get("JUPYTER_LIBRARY_APP")
+
+        if self._app_name is not None:
+            app_name = self._app_name
+        elif command is not None and "jupyter-notebook" in command:
+            app_name = "NotebookApp"
+
+        return app_name or "ServerApp"
+
     @keyword
     def start_new_jupyter_server(
         self,
-        command: typing.Optional[str] = None,
+        command: typing.Optional[str] = "jupyter-notebook",
         port: typing.Optional[int] = None,
-        base_url: typing.Optional[str] = None,
+        base_url: typing.Optional[str] = "/@rf/",
         notebook_dir: typing.Optional[str] = None,
         token: typing.Optional[str] = None,
         *args,
@@ -34,25 +76,31 @@ class ServerKeywords(LibraryComponent):
     ) -> subprocess.Popen:
         """Start a Jupyter server. All arguments are optional.
 
-        | = argument =     | = default =           | = notes =               |
-        | ``command``      | ``jupyter-notebook``  |                         |
-        | ``port``         | an unused port        |                         |
-        | ``base_url``     | ``/@rf/``             |                         |
-        | ``notebook_dir`` | a temporary directory |                         |
-        | ``token``        | a random ``uuid4``    |                         |
-        | ``*args``        |                       | extra server arguments  |
-        | ``**config``     |                       | extra process arguments |
+        | = argument =     | = default =           | = notes =                          |
+        | ``command``      | ``jupyter-notebook``  | e.g. ``jupyter-lab``               |
+        | ``port``         | an unused port        |                                    |
+        | ``base_url``     | ``/@rf/``             |                                    |
+        | ``notebook_dir`` | a temporary directory |                                    |
+        | ``token``        | a random ``uuid4``    |                                    |
+        | ``*args``        |                       | extra server arguments             |
+        | ``**config``     |                       | extra process arguments            |
+        | ``app_name``     | ``None`` (detect)     | e.g. ``NotebookApp``, `ServerApp`` |
 
-
-        If not configured, the ``$HOME`` environment variable and current
+        If not configured, the ``%{HOME}`` environment variable and current
         working directory will be set to avoid leaking configuration
         between between runs (or the test instance) itself. These
         directories will be cleaned up after the server process is
         [#Terminate All Jupyter Servers|terminated].
+
+        The ``app_name`` argument is as described for the [#Get Jupyter App Name|app name],
+        with the default being to autodetect from the command and environment.
         """
-        command = command or "jupyter-notebook"
+        app_name = (
+            config.pop("app_name", None)
+            or config.get("env:JUPYTER_LIBRARY_APP")
+            or self.get_jupyter_app_name(command)
+        )
         port = port or self.get_unused_port()
-        base_url = base_url or "/@rf/"
         token = str(uuid4()) if token is None else token
 
         BuiltIn().import_library("Process")
@@ -76,7 +124,9 @@ class ServerKeywords(LibraryComponent):
             os.mkdir(notebook_dir)
             config["cwd"] = notebook_dir
 
-        args = args or self.build_jupyter_server_arguments(port, base_url, token)
+        args = args or self.build_jupyter_server_arguments(
+            port, base_url, token, app_name
+        )
 
         handle = plib.start_process(command, *args, **config)
 
@@ -91,15 +141,23 @@ class ServerKeywords(LibraryComponent):
 
     @keyword
     def build_jupyter_server_arguments(
-        self, port: int, base_url: str, token: str
+        self,
+        port: int,
+        base_url: str,
+        token: str,
+        app_name: typing.Optional[str] = None,
     ) -> typing.List[str]:
-        """Some default jupyter arguments"""
+        """Build Some default Jupyter application arguments.
+
+        If the ``app_name`` is not provided, it will be detected based on the rules
+        in [#Get Jupyter App Name]."""
+        app_name = app_name or self.get_jupyter_app_name()
         return [
             "--no-browser",
             "--debug",
-            "--port={}".format(port),
-            "--NotebookApp.token='{}'".format(token),
-            "--NotebookApp.base_url='{}'".format(base_url),
+            f"--port={port}",
+            f"--{app_name}.token={token}",
+            f"--{app_name}.base_url={base_url}",
         ]
 
     @keyword
@@ -170,10 +228,9 @@ class ServerKeywords(LibraryComponent):
                 time.sleep(interval)
                 error = _error
 
-        assert ready == len(
-            nbservers
-        ), "Only {} of {} servers were ready after {}s. Last error: {} {}".format(
-            ready, len(nbservers), interval * retries, type(error), error
+        assert ready == len(nbservers), (
+            f"Only {ready} of {len(nbservers)} servers were ready after "
+            f"{interval * retries}s. Last error: {type(error)} {error}"
         )
         return ready
 
@@ -183,7 +240,7 @@ class ServerKeywords(LibraryComponent):
     ) -> str:
         """Get the given (or most recently-launched) server's URL"""
         nbh = nbserver or self._handles[-1]
-        return "http://localhost:{}{}".format(self._ports[nbh], self._base_urls[nbh])
+        return f"http://127.0.0.1:{self._ports[nbh]}{self._base_urls[nbh]}"
 
     @keyword
     def get_jupyter_server_token(
@@ -221,7 +278,7 @@ class ServerKeywords(LibraryComponent):
             url = self.get_jupyter_server_url(nbh)
             token = self.get_jupyter_server_token(nbh)
             try:
-                urlopen("{}api/shutdown?token={}".format(url, token), data=[])
+                urlopen(f"{url}api/shutdown?token={token}", data=[])
                 shutdown += 1
             except Exception as err:
                 BuiltIn().log(err)

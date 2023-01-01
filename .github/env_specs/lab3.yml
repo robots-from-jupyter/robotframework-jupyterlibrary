@@ -9,7 +9,5 @@ dependencies:
   # next roadmap item
   - ipywidgets >=8,<9 # ...with whatever version of...
   # ... jupyterlab_widgets     # it brings along
-  # incubator: for installability issues, demo purposes)
-  - retrolab >=0.3.0,<0.4.0a0
   # developer experience stuff
   - jupyterlab_robotmode >=0.2.0,<1.0.0a0

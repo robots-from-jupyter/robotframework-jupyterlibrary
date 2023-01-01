@@ -332,7 +332,7 @@ def get_lockfile(env):
 
     using the POSIX path in .github/locks, e.g.
 
-        RFJL_LOCKDIR=test/linux-64/py3.10/lab3 doit test
+        RFJL_LOCKDIR=test/linux-64/py3.11/lab3 doit test
     """
     lockfile = None
 
