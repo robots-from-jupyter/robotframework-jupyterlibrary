@@ -30,14 +30,16 @@ class ServerKeywords(LibraryComponent):
         """Set the current ``traitlets.Configurable`` Jupyter Server application,
         returning the previous value.
 
-        A value of ``None`` (the default) will try to detect based on the application name,
-        commonly:
+        A value of ``None`` (the default) will try to detect the app based on
+        command name, such as:
 
-        - ``NotebookApp`` for  ``jupyter-notebook``
-        - most other resolving to ``ServerApp``
+        - ``jupyter-notebook`` is configured with ``NotebookApp``
+        - ``jupyter-lab`` and most other are configured with ``ServerApp``
 
         This may also be set externally via the ``JUPYTER_LIBRARY_APP`` environment
-        variable, but any explicit argument overrides this.
+        variable, but any explicit argument will override this.
+
+        See [#Get Jupyter App Name] for more.
         """
         old_app_name = self.app_name
         self.app_name = app_name
@@ -47,10 +49,10 @@ class ServerKeywords(LibraryComponent):
     def get_jupyter_app_name(
         self, command: typing.Optional[str] = None
     ) -> typing.Optional[str]:
-        """Get the current ``traitlets.Configurable`` Jupyter Server app name,
+        """Get the current ``traitlets.Configurable`` Jupyter Server application,
         optionally for a specific CLI command.
 
-        See [#Set Default Jupyter App Namme] for
+        See [#Set Default Jupyter App Name] for more.
         """
         app_name = os.environ.get("JUPYTER_LIBRARY_APP")
 
@@ -82,10 +84,9 @@ class ServerKeywords(LibraryComponent):
         | ``token``        | a random ``uuid4``    |                                    |
         | ``*args``        |                       | extra server arguments             |
         | ``**config``     |                       | extra process arguments            |
-        | ``app_name``     | autodetect            | e.g. ``NotebookApp``, `ServerApp`` |
+        | ``app_name``     | ``None`` (detect)     | e.g. ``NotebookApp``, `ServerApp`` |
 
-
-        If not configured, the ``$HOME`` environment variable and current
+        If not configured, the ``%{HOME}`` environment variable and current
         working directory will be set to avoid leaking configuration
         between between runs (or the test instance) itself. These
         directories will be cleaned up after the server process is
@@ -146,7 +147,10 @@ class ServerKeywords(LibraryComponent):
         token: str,
         app_name: typing.Optional[str] = None,
     ) -> typing.List[str]:
-        """Some default jupyter arguments"""
+        """Build Some default Jupyter application arguments.
+
+        If the ``app_name`` is not provided, it will be detected based on the rules
+        in [#Get Jupyter App Name]."""
         app_name = app_name or self.get_jupyter_app_name()
         return [
             "--no-browser",

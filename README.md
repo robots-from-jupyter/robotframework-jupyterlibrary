@@ -1,18 +1,18 @@
 # robotframework-jupyterlibrary
 
-> A [Robot Framework][] library for automating (testing of) [Jupyter][] end-user
+> A [Robot Framework] library for automating (testing of) [Jupyter] end-user
 > applications and extensions
 
 [robot framework]: http://robotframework.org
 [jupyter]: https://jupyter.org
 
-|          pip          |                 conda                 |          docs           |            demo             |             actions             |
-| :-------------------: | :-----------------------------------: | :---------------------: | :-------------------------: | :-----------------------------: |
-| [![pip-badge][]][pip] | [![conda-forge-badge][]][conda-forge] | [![docs-badge][]][docs] | [![binder-badge][]][binder] | [![workflow-badge][]][workflow] |
+|         pip         |                conda                |         docs          |           demo            |            actions            |
+| :-----------------: | :---------------------------------: | :-------------------: | :-----------------------: | :---------------------------: |
+| [![pip-badge]][pip] | [![conda-forge-badge]][conda-forge] | [![docs-badge]][docs] | [![binder-badge]][binder] | [![workflow-badge]][workflow] |
 
 ## Using
 
-Write `.robot` files that use `JupyterLibrary` [keywords][]... or use [magics][] in
+Write `.robot` files that use `JupyterLibrary` [keywords]... or use [magics] in
 notebooks.
 
 ```robotframework
@@ -31,22 +31,7 @@ A Notebook in JupyterLab
     Capture Page Screenshot
 ```
 
-See the [acceptance tests][] for examples.
-
-### The App Under Test
-
-Most combinations of `jupyter_server`, `notebook`, `nbclassic` and `jupyterlab` should
-"Just Work".
-
-However, some situations may require setting the environment variable
-`JUPYTER_SERVER_APP` to help the underlying servers get configured properly.
-
-```shell
-JUPYTER_SERVER_APP=NotebookApp robot ...
-JUPYTER_SERVER_APP=ServerApp robot ...
-```
-
-(on windows, use the `set` command to accomplish a similar, temporary effect).
+See the [acceptance tests] for examples.
 
 ## Installation
 
@@ -73,7 +58,7 @@ Or see the [contributing guide][contributing] for a development install.
 JupyterLibrary is Free Software under the [BSD-3-Clause License][license]. It contains
 code from a number of other projects:
 
-- [Jyve][] ([BSD-3-Clause][jyve-license])
+- [Jyve] ([BSD-3-Clause][jyve-license])
   - Initial implementations of robot keywords
 
 [license]:
