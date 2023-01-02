@@ -39,7 +39,7 @@ jobs:
       - run: python dodo.py build || python dodo.py build
       - uses: actions/upload-artifact@v3
         with:
-          name: dist_${{ github.run_number }}
+          name: rfjl_${{ github.run_number }}_dist
           path: ./dist
       - name: Rename uncached conda packages
         shell: bash
@@ -73,12 +73,12 @@ jobs:
           use-mamba: true
       - uses: actions/download-artifact@v3
         with:
-          name: dist_${{ github.run_number }}
+          name: rfjl_${{ github.run_number }}_dist
           path: ./dist
       - run: python dodo.py conda_build || python dodo.py conda_build
       - uses: actions/upload-artifact@v3
         with:
-          name: conda-bld_${{ github.run_number }}
+          name: rfjl_${{ github.run_number }}_conda-bld
           path: ./dist/conda-bld
       - name: Rename uncached conda packages
         shell: bash
@@ -97,7 +97,7 @@ jobs:
       - run: python dodo.py docs || python dodo.py docs
       - uses: actions/upload-artifact@v3
         with:
-          name: docs_${{ job.status }}_${{ github.run_number }}
+          name: rfjl_${{ github.run_number }}_docs_${{ job.status }}
           path: ./build/docs/html
         if: always()
       - name: Rename uncached conda packages
@@ -163,7 +163,7 @@ jobs:
       - if: always()
         uses: actions/download-artifact@v3
         with:
-          name: dist_${{ github.run_number }}
+          name: rfjl_${{ github.run_number }}_dist
           path: ./dist
       - name: doit (unix)
         if: ${{ matrix.os != 'windows' }}
@@ -178,7 +178,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: |
-            test_${{ job.status }}_${{ matrix.os }}_${{ matrix.python-version }}_${{ matrix.lab-version }}_${{ github.run_number }}
+            rfjl_${{ github.run_number }}_test_${{ job.status }}_${{ matrix.os }}_${{ matrix.python-version }}_${{ matrix.lab-version }}
           path: |
             ./build/test/output
         if: always()
@@ -200,6 +200,6 @@ jobs:
       - if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: _COMBINED_${{ github.run_number }}
+          name: rfjl_${{ github.run_number }}__COMBINED
           path: |
             ./artifacts
