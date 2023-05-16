@@ -1,6 +1,7 @@
 channels:
   - conda-forge
   - nodefaults
+  - conda-forge/label/notebook_beta
 dependencies:
   # enough stuff to run doit
   - doit-with-toml
