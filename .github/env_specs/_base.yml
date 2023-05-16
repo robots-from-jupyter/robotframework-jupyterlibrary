@@ -3,11 +3,11 @@ channels:
   - nodefaults
 dependencies:
   # enough stuff to run doit
-  - doit
+  - doit-with-toml
   - pip
   - pyyaml
   # really nothing for it
-  - nodejs >=16,!=17.*,!=19.*
+  - nodejs >=18,<19
   # hard deps
   - robotframework >=4
   - robotframework-seleniumlibrary >=4.5
