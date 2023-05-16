@@ -290,7 +290,7 @@ class OK:
     atest = BUILD / ".ok.atest"
     black = BUILD / ".ok.black"
     prettier = BUILD / ".ok.prettier"
-    pyflakes = BUILD / ".ok.pyflakes"
+    ruff = BUILD / ".ok.ruff"
     robocop = BUILD / ".ok.robocop"
     robot = BUILD / ".ok.robot"
     robot_dry_run = BUILD / ".ok.robot.dryrun"

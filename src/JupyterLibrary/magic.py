@@ -40,7 +40,7 @@ except ImportError:
 
 try:
     import ipywidgets
-except:
+except ImportError:
     ipywidgets = None
 
 

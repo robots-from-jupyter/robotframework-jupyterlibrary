@@ -33,7 +33,7 @@ def task_release():
         file_dep=[
             P.SHA256SUMS,
             P.DOCS_BUILDINFO,
-            P.OK.pyflakes,
+            P.OK.ruff,
             P.OK.robot,
             P.OK.prettier,
         ],
@@ -265,14 +265,14 @@ def task_lint():
         targets=[P.OK.black],
     )
 
-    clean, touch = P.get_ok_actions(P.OK.pyflakes)
+    clean, touch = P.get_ok_actions(P.OK.ruff)
 
     yield dict(
-        name="pyflakes",
+        name="ruff",
         doc="ensure python code is well-behaved",
-        actions=[clean, [*pym, "pyflakes", *P.ALL_PY], touch],
+        actions=[clean, [*pym, "ruff", *P.ALL_PY], touch],
         file_dep=[*P.ALL_PY, env_lock, P.OK.black],
-        targets=[P.OK.pyflakes],
+        targets=[P.OK.ruff],
     )
 
     clean, touch = P.get_ok_actions(P.OK.robotidy)
