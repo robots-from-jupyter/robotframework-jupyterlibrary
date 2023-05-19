@@ -29,6 +29,8 @@ from pygments.lexers.robotframework import RobotFrameworkLexer
 from pygments.styles import get_all_styles
 
 HAS_CORE_TIDY = False
+HAS_WIDGETS = False
+
 try:
     from robot.tidy import Tidy
 
@@ -39,8 +41,10 @@ except ImportError:
 
 try:
     import ipywidgets
+
+    HAS_WIDGETS = True
 except ImportError:
-    ipywidgets = None
+    pass
 
 
 ENC = {"encoding": "utf-8"}
@@ -120,8 +124,8 @@ class RobotMagics(Magics):
 
         args = magic_arguments.parse_argstring(self.robot, line)
 
-        if ipywidgets and args.gui.lower() in ["widget", "w", "widgets"]:
-            self.widget(args, cell, content_hash)
+        if HAS_WIDGETS and args.gui.lower() in ["widget", "w", "widgets"]:
+            self.widget(args, cell)
         else:
             if args.pretty and HAS_CORE_TIDY:
                 html = self.pretty_core(args, cell)
@@ -131,7 +135,8 @@ class RobotMagics(Magics):
             if args.execute:
                 self.execute(args, cell, content_hash)
 
-    def widget(self, args, cell, content_hash):
+    def widget(self, args, cell):
+        """Display a widget of files built during a run."""
         log = ipywidgets.HTML()
         titles = ["Log"]
         children = [log]
@@ -148,7 +153,7 @@ class RobotMagics(Magics):
             tabs.titles = [*tabs.titles, "Pretty"]
         display(tabs)
 
-    def execute(self, args, cell, content_hash):
+    def execute(self, args, cell: str, content_hash: str):
         """Run a cell in the outputdir, in a directory named after the content hash."""
         ip = get_ipython()
         if args.output_dir:
@@ -173,26 +178,27 @@ class RobotMagics(Magics):
 
         robot_args = ip.user_ns[args.arg] if args.arg else {}
 
-        with open(stdout_file, "w+") as stdout, open(stderr_file, "w+") as stderr:
-            with contextlib.suppress(SystemExit):
-                rc = robot.run(
-                    robot_file,
-                    outputdir=outputdir,
-                    stderr=stderr,
-                    stdout=stdout,
-                    **robot_args,
-                )
+        with contextlib.suppress(SystemExit), stdout_file.open(
+            "w+",
+        ) as stdout, stderr_file.open(
+            "w+",
+        ) as stderr:
+            rc = robot.run(
+                robot_file,
+                outputdir=outputdir,
+                stderr=stderr,
+                stdout=stdout,
+                **robot_args,
+            )
 
         if args.gui == "display":
             for outfile in [stdout_file, stderr_file]:
                 display(
                     HTML(
-                        f"""
-                        <ul><li>
+                        f"""<ul><li>
                             <code>{outfile.name}</code>
                             <code><pre>{outfile.read_text(**ENC) or "empty"}</pre></code>
-                        </li></ul>
-                        """,
+                        </li></ul>""",
                     ),
                 )
             files = [
@@ -202,20 +208,17 @@ class RobotMagics(Magics):
                             data-commandlinker-args="{{}}">
                         {p.relative_to(outputdir).as_posix()}
                     </a>
-                </li>
-                """
+                </li>"""
                 for p in sorted(outputdir.rglob("*"))
             ]
             display(
                 HTML(
-                    f"""
-                    <ul><li><details>
+                    f"""<ul><li><details>
                     <summary>{len(files)} Files</summary>
                     <ul>
                     {"".join(files)}
                     </ul>
-                    </li></ul>
-                    """,
+                    </li></ul>""",
                 ),
             )
             display(Markdown(f"- _🤖 returned {rc}_"))
@@ -239,15 +242,11 @@ class RobotMagics(Magics):
         formatter = HtmlFormatter(cssclass=self.PRETTY_CLASS, style=args.style)
         css = formatter.get_style_defs(f".{self.PRETTY_CLASS}")
         highlighted = highlight(cell, lexer, formatter)
-        html = HTML(
-            f"""
-            <ul><li>
+        return HTML(
+            f"""<ul><li>
             <details>
                 <summary>Formatted Robot Code</summary>
                 <style>{css}</style>{highlighted}
             </details>
-            </li></ul>
-        """,
+            </li></ul>""",
         )
-
-        return html

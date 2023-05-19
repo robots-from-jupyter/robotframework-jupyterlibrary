@@ -7,13 +7,17 @@ from SeleniumLibrary.base import LibraryComponent, keyword
 
 
 class WebElementKeywords(LibraryComponent):
+
+    """A component for working with WebElements."""
+
     @keyword(name="Get WebElement Relative To")
     def get_webelement_relative_to(
         self,
         element: WebElement,
         locator: Union[WebElement, str],
     ) -> WebElement:
-        """Returns the first WebElement relative to ``element`` matching the given ``locator``.
+        """Get the first WebElement relative to ``element`` matching the given ``locator``.
+
         See the `Locating elements` section for details about the locator
         syntax.
         """
@@ -25,8 +29,8 @@ class WebElementKeywords(LibraryComponent):
         element: WebElement,
         locator: Union[WebElement, str],
     ) -> List[WebElement]:
-        """Returns a list of WebElement objects relative to ``element` matching the ``locator``.
-        See the `Locating elements` section for details about the locator
-        syntax.
+        """Get a list of WebElement objects relative to ``element` matching the ``locator``.
+
+        See the `Locating elements` section for details about the locator syntax.
         """
         return self.element_finder.find_elements(locator=locator, parent=element)

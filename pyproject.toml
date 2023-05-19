@@ -11,6 +11,7 @@ ignore = [
   # keep 3.8 compat
   "UP006",
   "UP007",
+  "UP035",
 ]
 select = [
   "A",
@@ -68,3 +69,4 @@ select = [
 "conf.py" = ["T201", "A001", "INP001", "S603", "DTZ005"]
 "dodo.py" = ["E722", "E501", "T201", "S603", "RET504", "N812"]
 "JupyterLibrary/__init__.py" = ["N999"]
+"server.py" = ["PLR0913", "BLE001", "PLR0912", "C901", "S310"]
