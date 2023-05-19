@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation       Keywords for outputs in Jupyter Classic
 
-Resource            JupyterLibrary/clients/notebook/Selectors.resource
+Resource            JupyterLibrary/clients/classic/Selectors.resource
 
 
 *** Keywords ***

@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation       Notebook keywords for Jupyter Classic
 
-Resource            JupyterLibrary/clients/notebook/Selectors.resource
+Resource            JupyterLibrary/clients/classic/Selectors.resource
 Resource            JupyterLibrary/common/CodeMirror.resource
 
 

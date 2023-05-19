@@ -171,7 +171,6 @@ html_theme = "pydata_sphinx_theme"
 # documentation.
 #
 html_theme_options = {
-    "page_sidebar_items": [],
     "navbar_center": ["navbar-nav.html"],
     "github_url": CONF["metadata"]["url"],
     "logo": {"text": CONF["metadata"]["name"]},
