@@ -53,4 +53,5 @@ Get JupyterLab Application Version Info
     ...    the cached info first.
     [Arguments]    ${clear}=${False}
     ${version} =    Get JupyterLab Page Info    appVersion    clear=${clear}
-    [Return]    ${version.split(".")}
+    ${version_info} =    Set Variable    ${version.split(".")}
+    [Return]    ${version_info}

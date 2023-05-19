@@ -51,19 +51,19 @@ hoping for a better cache hit rate. On the same _operating system_, however, any
 pre-solved lockfiles can be used, by specifying the `RJFL_LOCKFILE` environment
 variable.
 
-For example, if `linux-64` running `python3.7` with `jupyterlab 1` failed:
+For example, if `linux-64` running `python3.8` with `jupyterlab 3` failed:
 
 ```bash
 !/usr/bin/env bash
 set -eux
-RFJL_LOCKDIR=test/linux-64/py3.7/lab1 doit release
+RFJL_LOCKDIR=test/linux-64/py3.8/lab3 doit release
 ```
 
 Or, in a `bat` script:
 
 ```bat
 @echo on
-set RFJL_LOCKDIR=test/win-64/py3.7/lab1
+set RFJL_LOCKDIR=test/win-64/py3.8/lab3
 doit release
 ```
 

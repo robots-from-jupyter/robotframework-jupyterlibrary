@@ -3,6 +3,7 @@ Documentation       Application shell keywords for JupyterLab
 
 Resource            JupyterLibrary/clients/jupyterlab/Selectors.resource
 Resource            JupyterLibrary/clients/jupyterlab/PageInfo.resource
+Resource            JupyterLibrary/clients/jupyterlab/Version.resource
 
 
 *** Keywords ***
@@ -25,6 +26,9 @@ Open JupyterLab
     Open Browser    url=${final_url}    browser=${browser}    &{configuration}
     Maybe Wait For JupyterLab Splash Screen
     Tag With JupyterLab Metadata    ${pageinfo tags}    clear=${clear}
+    LOG    ${JLAB CSS ACTIVE INPUT}
+    Update Globals For JupyterLab Version
+    LOG    ${JLAB CSS ACTIVE INPUT}
 
 Wait For JupyterLab Splash Screen
     [Documentation]    Wait for the JupyterLab splash animation, waiting ``timeout``
