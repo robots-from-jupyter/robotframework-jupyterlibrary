@@ -1,5 +1,4 @@
-"""Handle working with WebElements
-"""
+"""Handle working with WebElements."""
 
 from typing import List, Union
 
@@ -10,7 +9,9 @@ from SeleniumLibrary.base import LibraryComponent, keyword
 class WebElementKeywords(LibraryComponent):
     @keyword(name="Get WebElement Relative To")
     def get_webelement_relative_to(
-        self, element: WebElement, locator: Union[WebElement, str]
+        self,
+        element: WebElement,
+        locator: Union[WebElement, str],
     ) -> WebElement:
         """Returns the first WebElement relative to ``element`` matching the given ``locator``.
         See the `Locating elements` section for details about the locator
@@ -20,7 +21,9 @@ class WebElementKeywords(LibraryComponent):
 
     @keyword(name="Get WebElements Relative To")
     def get_webelements_relative_to(
-        self, element: WebElement, locator: Union[WebElement, str]
+        self,
+        element: WebElement,
+        locator: Union[WebElement, str],
     ) -> List[WebElement]:
         """Returns a list of WebElement objects relative to ``element` matching the ``locator``.
         See the `Locating elements` section for details about the locator

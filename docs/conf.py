@@ -1,12 +1,11 @@
-""" Documentation configuration and workflow for JupyterLibrary
-"""
+"""Documentation configuration and workflow for JupyterLibrary."""
+import os
 import subprocess
 import sys
-import os
+from configparser import ConfigParser
 from datetime import datetime
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from configparser import ConfigParser
 
 # you have to have run `python -m pip install -e`
 import JupyterLibrary
@@ -25,7 +24,7 @@ VARIABLES = "*** Variables ***"
 
 
 def setup(app):
-    """Runs before the "normal business" of sphinx. Don't go too crazy here."""
+    """Run before the "normal business" of sphinx. Don't go too crazy here."""
     here = Path(__file__).parent
 
     subprocess.check_call(
@@ -35,7 +34,7 @@ def setup(app):
             "robot.libdoc",
             "JupyterLibrary",
             str(here / "_static" / "JupyterLibrary.html"),
-        ]
+        ],
     )
 
     for client_dir in CLIENTS:
@@ -48,7 +47,7 @@ def setup(app):
                     "*** Settings ***",
                     f"Documentation    Keywords for {client.name}",
                     "",
-                ]
+                ],
             )
             for sub in sorted(client.rglob("*.resource")):
                 sub_text = sub.read_text()
@@ -69,7 +68,7 @@ def setup(app):
                     "robot.libdoc",
                     str(out_file),
                     str(here / "_static" / f"{client.name}.html"),
-                ]
+                ],
             )
 
     for common_file in COMMON:
@@ -82,7 +81,7 @@ def setup(app):
                 "robot.libdoc",
                 common,
                 str(here / "_static" / f"{common_name}.html"),
-            ]
+            ],
         )
 
     app.add_css_file("css/custom.css")
@@ -94,9 +93,6 @@ def setup(app):
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
 
 
 # -- Project information -----------------------------------------------------
@@ -114,7 +110,6 @@ release = JupyterLibrary.__version__
 
 # If your documentation needs a minimal Sphinx version, state it here.
 #
-# needs_sphinx = '1.0'
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
@@ -196,7 +191,7 @@ html_sidebars = {
         "edit-this-page",
         "sidebar-nav-bs",
         "sidebar-ethical-ads",
-    ]
+    ],
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
@@ -212,7 +207,6 @@ html_static_path = ["_static"]
 # default: ``['localtoc.html', 'relations.html', 'sourcelink.html',
 # 'searchbox.html']``.
 #
-# html_sidebars = {}
 
 nb_execution_mode = "force"
 
@@ -227,16 +221,12 @@ htmlhelp_basename = f"""{CONF["metadata"]["name"]}-doc"""
 latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
     #
-    # 'papersize': 'letterpaper',
     # The font size ('10pt', '11pt' or '12pt').
     #
-    # 'pointsize': '10pt',
     # Additional stuff for the LaTeX preamble.
     #
-    # 'preamble': '',
     # Latex figure (float) alignment
     #
-    # 'figure_align': 'htbp',
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
@@ -249,7 +239,7 @@ latex_documents = [
         f"""{CONF["metadata"]["name"]} Documentation""",
         CONF["metadata"]["author"],
         "manual",
-    )
+    ),
 ]
 
 
@@ -264,7 +254,7 @@ man_pages = [
         f"""{CONF["metadata"]["name"]} Documentation""",
         [author],
         1,
-    )
+    ),
 ]
 
 
@@ -282,7 +272,7 @@ texinfo_documents = [
         CONF["metadata"]["name"],
         CONF["metadata"]["description"],
         "Miscellaneous",
-    )
+    ),
 ]
 
 
@@ -294,11 +284,9 @@ epub_title = project
 # The unique identifier of the text. This can be a ISBN number
 # or the project homepage.
 #
-# epub_identifier = ''
 
 # A unique identification for the text.
 #
-# epub_uid = ''
 
 # A list of files that should not be packed into the epub file.
 epub_exclude_files = ["search.html"]

@@ -1,9 +1,8 @@
-from doit.reporter import ConsoleReporter
-
 from datetime import datetime
 
-from . import project as P
+from doit.reporter import ConsoleReporter
 
+from . import project as P
 
 START = "::group::" if P.CI else ""
 END = "::endgroup::" if P.CI else ""

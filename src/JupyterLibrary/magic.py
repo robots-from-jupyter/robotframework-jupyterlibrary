@@ -1,33 +1,32 @@
-""" a lightweight robot runner
+"""a lightweight robot runner.
 
 Install once (per notebook/kernel):
 
     %reload_ext JupyterLibrary
 """
-from pathlib import Path
-from hashlib import sha256
+import contextlib
 import shutil
 import tempfile
+from hashlib import sha256
+from pathlib import Path
 
+import robot
+from IPython import get_ipython
+from IPython.core import magic_arguments
+from IPython.core.magic import (
+    Magics,
+    cell_magic,
+    magics_class,
+)
+from IPython.display import (
+    HTML,
+    Markdown,
+    display,
+)
 from pygments import highlight
 from pygments.formatters.html import HtmlFormatter
 from pygments.lexers.robotframework import RobotFrameworkLexer
 from pygments.styles import get_all_styles
-
-from IPython import get_ipython
-from IPython.display import (
-    display,
-    HTML,
-    Markdown,
-)
-from IPython.core import magic_arguments
-from IPython.core.magic import (
-    Magics,
-    magics_class,
-    cell_magic,
-)
-
-import robot
 
 HAS_CORE_TIDY = False
 try:
@@ -44,15 +43,16 @@ except ImportError:
     ipywidgets = None
 
 
-ENC = dict(encoding="utf-8")
+ENC = {"encoding": "utf-8"}
 
 
 @magics_class
 class RobotMagics(Magics):
-    """
-    Run Robot Framework code
+
+    """Run Robot Framework code.
 
     Example:
+    -------
         %%robot --
         *** Tasks ***
         Just Log Something
@@ -70,7 +70,10 @@ class RobotMagics(Magics):
         help="""Name of directory to update (default:cwd/_robot_magic_) """,
     )
     @magic_arguments.argument(
-        "-e", "--execute", default=True, help="""run the robot test"""
+        "-e",
+        "--execute",
+        default=True,
+        help="""run the robot test""",
     )
     @magic_arguments.argument(
         "-p",
@@ -106,7 +109,7 @@ class RobotMagics(Magics):
         help="name of the suite. default: Untitled_<hash>",
     )
     def robot(self, line, cell):
-        """run some Robot Framework code"""
+        """Run some Robot Framework code."""
         line = f" {line} "
 
         m = sha256()
@@ -146,7 +149,7 @@ class RobotMagics(Magics):
         display(tabs)
 
     def execute(self, args, cell, content_hash):
-        """run a cell in the outputdir, in a directory named after the content hash"""
+        """Run a cell in the outputdir, in a directory named after the content hash."""
         ip = get_ipython()
         if args.output_dir:
             outputdir = Path(args.output_dir).resolve() / "_robot_magic_" / content_hash
@@ -170,18 +173,15 @@ class RobotMagics(Magics):
 
         robot_args = ip.user_ns[args.arg] if args.arg else {}
 
-        with open(stdout_file, "w+") as stdout:
-            with open(stderr_file, "w+") as stderr:
-                try:
-                    rc = robot.run(
-                        robot_file,
-                        outputdir=outputdir,
-                        stderr=stderr,
-                        stdout=stdout,
-                        **robot_args,
-                    )
-                except SystemExit:
-                    pass
+        with open(stdout_file, "w+") as stdout, open(stderr_file, "w+") as stderr:
+            with contextlib.suppress(SystemExit):
+                rc = robot.run(
+                    robot_file,
+                    outputdir=outputdir,
+                    stderr=stderr,
+                    stdout=stdout,
+                    **robot_args,
+                )
 
         if args.gui == "display":
             for outfile in [stdout_file, stderr_file]:
@@ -192,8 +192,8 @@ class RobotMagics(Magics):
                             <code>{outfile.name}</code>
                             <code><pre>{outfile.read_text(**ENC) or "empty"}</pre></code>
                         </li></ul>
-                        """
-                    )
+                        """,
+                    ),
                 )
             files = [
                 f"""<li>
@@ -215,16 +215,17 @@ class RobotMagics(Magics):
                     {"".join(files)}
                     </ul>
                     </li></ul>
-                    """
-                )
+                    """,
+                ),
             )
             display(Markdown(f"- _🤖 returned {rc}_"))
 
         if rc:
-            raise RuntimeError(f"robot returned {rc}")
+            msg = f"robot returned {rc}"
+            raise RuntimeError(msg)
 
     def pretty_core(self, args, cell):
-        """pretty-print the robot text"""
+        """pretty-print the robot text."""
         tidier = Tidy()
 
         with tempfile.TemporaryDirectory() as td:
@@ -246,7 +247,7 @@ class RobotMagics(Magics):
                 <style>{css}</style>{highlighted}
             </details>
             </li></ul>
-        """
+        """,
         )
 
         return html

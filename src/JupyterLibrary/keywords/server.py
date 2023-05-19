@@ -1,16 +1,16 @@
 import os
 import shutil
 import socket
-import tempfile
-import typing
-import time
 import subprocess
+import tempfile
+import time
+import typing
 from os.path import join
+from urllib.request import urlopen
 from uuid import uuid4
 
 from robot.libraries.BuiltIn import BuiltIn
 from SeleniumLibrary.base import LibraryComponent, keyword
-from urllib.request import urlopen
 
 
 class ServerKeywords(LibraryComponent):
@@ -25,7 +25,8 @@ class ServerKeywords(LibraryComponent):
 
     @keyword
     def set_default_jupyter_app_name(
-        self, app_name: typing.Optional[str] = None
+        self,
+        app_name: typing.Optional[str] = None,
     ) -> typing.Optional[str]:
         """Set the current ``traitlets.Configurable`` Jupyter Server application,
         returning the previous value.
@@ -47,7 +48,8 @@ class ServerKeywords(LibraryComponent):
 
     @keyword
     def get_jupyter_app_name(
-        self, command: typing.Optional[str] = None
+        self,
+        command: typing.Optional[str] = None,
     ) -> typing.Optional[str]:
         """Get the current ``traitlets.Configurable`` Jupyter Server application,
         optionally for a specific CLI command.
@@ -125,7 +127,10 @@ class ServerKeywords(LibraryComponent):
             config["cwd"] = notebook_dir
 
         args = args or self.build_jupyter_server_arguments(
-            port, base_url, token, app_name
+            port,
+            base_url,
+            token,
+            app_name,
         )
 
         handle = plib.start_process(command, *args, **config)
@@ -150,7 +155,8 @@ class ServerKeywords(LibraryComponent):
         """Build Some default Jupyter application arguments.
 
         If the ``app_name`` is not provided, it will be detected based on the rules
-        in [#Get Jupyter App Name]."""
+        in [#Get Jupyter App Name].
+        """
         app_name = app_name or self.get_jupyter_app_name()
         return [
             "--no-browser",
@@ -171,11 +177,11 @@ class ServerKeywords(LibraryComponent):
         notebook_dir = self._notebook_dirs[nbserver]
         BuiltIn().import_library("OperatingSystem")
         osli = BuiltIn().get_library_instance("OperatingSystem")
-        return osli.copy_files(*(list(sources) + [notebook_dir]))
+        return osli.copy_files(*([*list(sources), notebook_dir]))
 
     @keyword
     def copy_files_from_jupyter_directory(self, *src_and_dest: str, **kwargs) -> None:
-        """Copy some files from the (temporary) jupyter server root
+        """Copy some files from the (temporary) jupyter server root.
 
         | = argument = | = default =                       |
         | ``nbserver`` | the most-recently launched server |
@@ -188,24 +194,26 @@ class ServerKeywords(LibraryComponent):
         osli = BuiltIn().get_library_instance("OperatingSystem")
         sources = [join(notebook_dir, src) for src in src_and_dest[:-1]]
         dest = src_and_dest[-1]
-        return osli.copy_files(*sources + [dest])
+        return osli.copy_files(*[*sources, dest])
 
     @keyword
     def get_jupyter_directory(
-        self, nbserver: typing.Optional[subprocess.Popen] = None
+        self,
+        nbserver: typing.Optional[subprocess.Popen] = None,
     ) -> str:
-        """
-        | = argument = | = default =                       |
-        | ``nbserver`` | the most-recently launched server |
+        """| = argument = | = default =                       |
+        | ``nbserver`` | the most-recently launched server |.
         """
         nbserver = nbserver if nbserver is not None else self._handles[-1]
         return self._notebook_dirs[nbserver]
 
     @keyword
     def wait_for_jupyter_server_to_be_ready(
-        self, *nbservers: subprocess.Popen, **kwargs
+        self,
+        *nbservers: subprocess.Popen,
+        **kwargs,
     ) -> int:
-        """Wait for the most-recently started Jupyter server to be ready"""
+        """Wait for the most-recently started Jupyter server to be ready."""
         interval = float(kwargs.get("interval", 0.5))
         retries = int(kwargs.get("retries", 60))
 
@@ -236,26 +244,31 @@ class ServerKeywords(LibraryComponent):
 
     @keyword
     def get_jupyter_server_url(
-        self, nbserver: typing.Optional[subprocess.Popen] = None
+        self,
+        nbserver: typing.Optional[subprocess.Popen] = None,
     ) -> str:
-        """Get the given (or most recently-launched) server's URL"""
+        """Get the given (or most recently-launched) server's URL."""
         nbh = nbserver or self._handles[-1]
         return f"http://127.0.0.1:{self._ports[nbh]}{self._base_urls[nbh]}"
 
     @keyword
     def get_jupyter_server_token(
-        self, nbserver: typing.Optional[subprocess.Popen] = None
+        self,
+        nbserver: typing.Optional[subprocess.Popen] = None,
     ) -> str:
-        """Get the given (or most recently-launched) server's token"""
+        """Get the given (or most recently-launched) server's token."""
         nbh = nbserver or self._handles[-1]
         return self._tokens[nbh]
 
     @keyword
     def wait_for_new_jupyter_server_to_be_ready(
-        self, command: typing.Optional[str] = None, *args, **config
+        self,
+        command: typing.Optional[str] = None,
+        *args,
+        **config,
     ) -> subprocess.Popen:
         """Get the given (or most recently-launched) server's token. See
-        [#Start New Jupyter Server|Start New Jupyter Server]
+        [#Start New Jupyter Server|Start New Jupyter Server].
         """
         handle = self.start_new_jupyter_server(command, *args, **config)
         self.wait_for_jupyter_server_to_be_ready(handle)

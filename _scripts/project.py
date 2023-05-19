@@ -1,12 +1,11 @@
-""" project paths, files and utilities, used by `dodo.py` and `_scripts/`
-"""
-from pathlib import Path
-
-import platform
+"""project paths, files and utilities, used by `dodo.py` and `_scripts/`."""
+import contextlib
 import os
-import sys
+import platform
 import shutil
+import sys
 from configparser import ConfigParser
+from pathlib import Path
 
 for _yaml in ["yaml", "ruamel_yaml", "ruamel.yaml"]:
     try:
@@ -45,10 +44,9 @@ THIS_CONDA_SUBDIR = {
 THIS_PYTHON = "".join(map(str, sys.version_info[:2]))
 
 THIS_LAB = None
-try:
+with contextlib.suppress(Exception):
     from jupyterlab import __version__ as THIS_LAB
-except:
-    pass
+
 
 if CI:
     print(f"{THIS_CONDA_SUBDIR}_py{THIS_PYTHON}_lab{THIS_LAB}")
@@ -70,6 +68,7 @@ LICENSE = ROOT / "LICENSE"
 VERSION = VERSION_FILE.read_text().strip()
 PY_SRC = [*SRC.rglob("*.py")]
 SETUP_CFG = ROOT / "setup.cfg"
+PPT = ROOT / "pyproject.toml"
 
 _cfg_parser = ConfigParser()
 _cfg_parser.read(SETUP_CFG)
@@ -113,7 +112,7 @@ LAB_EXTENSIONS = sorted(
         ext.strip()
         for ext in LABEXTXT.read_text().strip().splitlines()
         if not ext.strip().startswith("#")
-    }
+    },
 )
 APP_DIR = ROOT / "_lab"
 APP_MODULES = APP_DIR / "labextensions"
@@ -168,19 +167,15 @@ EXCLUDES = {
 
 
 def _is_excluded(flow, pf, py, lab):
-    for flow_, pf_, py_, lab_ in EXCLUDES.keys():
-        if flow_ is not None:
-            if flow_ != flow:
-                continue
-        if pf_ is not None:
-            if pf_ != pf:
-                continue
-        if py_ is not None:
-            if py_ != py:
-                continue
-        if lab_ is not None:
-            if lab_ != lab:
-                continue
+    for flow_, pf_, py_, lab_ in EXCLUDES:
+        if flow_ is not None and flow_ != flow:
+            continue
+        if pf_ is not None and pf_ != pf:
+            continue
+        if py_ is not None and py_ != py:
+            continue
+        if lab_ is not None and lab_ != lab:
+            continue
         return True
     return False
 
@@ -194,15 +189,15 @@ ENVENTURES = {
 }
 
 ENVENTURES.update(
-    {("lint", pf, None, None): LOCKS / "lint" / pf / LOCK_NAME for pf in PLATFORMS}
+    {("lint", pf, None, None): LOCKS / "lint" / pf / LOCK_NAME for pf in PLATFORMS},
 )
 
 ENVENTURES.update(
-    {("docs", pf, None, None): LOCKS / "docs" / pf / LOCK_NAME for pf in PLATFORMS}
+    {("docs", pf, None, None): LOCKS / "docs" / pf / LOCK_NAME for pf in PLATFORMS},
 )
 
 ENVENTURES.update(
-    {("meta", pf, None, None): LOCKS / "meta" / pf / LOCK_NAME for pf in PLATFORMS}
+    {("meta", pf, None, None): LOCKS / "meta" / pf / LOCK_NAME for pf in PLATFORMS},
 )
 
 THIS_META_ENV_LOCK = LOCKS / "meta" / THIS_CONDA_SUBDIR / LOCK_NAME
@@ -227,7 +222,7 @@ ENV_DEPS = {
         [
             *([ENV_SPECS / f"{py}.yml"] if py else []),
             *([ENV_SPECS / f"{lab}.yml"] if lab else []),
-        ]
+        ],
     )
     for (flow, pf, py, lab), target in ENVENTURES.items()
 ]
@@ -298,7 +293,7 @@ class OK:
 
 
 def get_atest_stem(attempt=1, extra_args=None, lockfile=None, browser=None):
-    """get the directory in ATEST_OUT for this platform/apps"""
+    """Get the directory in ATEST_OUT for this platform/apps."""
     browser = browser or BROWSER
     extra_args = extra_args or []
 
@@ -311,12 +306,10 @@ def get_atest_stem(attempt=1, extra_args=None, lockfile=None, browser=None):
     stem = None
 
     for env in ["lint", "test"]:
-        try:
+        with contextlib.suppress(Exception):
             stem = (
                 str(lockfile.parent.relative_to(LOCKS / env)) + f"_{attempt}_{browser}"
             )
-        except:
-            pass
 
     if not stem:
         raise RuntimeError(["could not get stem", lockfile])
@@ -328,21 +321,19 @@ def get_atest_stem(attempt=1, extra_args=None, lockfile=None, browser=None):
 
 
 def get_lockfile(env):
-    """
+    """Use the POSIX path in .github/locks, e.g.
 
-    using the POSIX path in .github/locks, e.g.
-
-        RFJL_LOCKDIR=test/linux-64/py3.11/lab3 doit test
+    RFJL_LOCKDIR=test/linux-64/py3.11/lab3 doit test
     """
     lockfile = None
 
     env_var_lock = os.environ.get("RFJL_LOCKDIR")
 
     if env_var_lock is not None:
-        eflow, epf, epy, elab = [
+        eflow, epf, epy, elab = (
             (v if v != "" else None) for v in env_var_lock.split("/")
-        ]
-        try:
+        )
+        with contextlib.suppress(Exception):
             lockfile = [
                 target
                 for (flow, pf, py, lab), target in ENVENTURES.items()
@@ -353,8 +344,6 @@ def get_lockfile(env):
                     and (py == epy if py else True)
                 )
             ][-1]
-        except:
-            pass
 
     if lockfile is None:
         try:
@@ -364,13 +353,13 @@ def get_lockfile(env):
                 if flow == env and pf == THIS_CONDA_SUBDIR
             ][-1]
         except:
-            return
+            return None
 
     return lockfile
 
 
 def get_ok_actions(p):
-    """create a pair of doit `actions` for working with a canary/ok file"""
+    """Create a pair of doit `actions` for working with a canary/ok file."""
     return [
         lambda: p.unlink() if p.exists() else None,
         lambda: [p.parent.mkdir(exist_ok=True, parents=True), p.touch(), None][-1],

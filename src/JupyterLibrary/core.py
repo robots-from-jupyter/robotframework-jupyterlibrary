@@ -1,9 +1,5 @@
-""" Core library entrypoint for JupyterLibrary
-
-    We <3 Python3, but for the time being, this module should also run in Python2
-"""
-from glob import glob
-from os.path import basename, dirname, isdir, join
+"""Core library entrypoint for JupyterLibrary."""
+from pathlib import Path
 
 from robot.libraries.BuiltIn import BuiltIn
 from SeleniumLibrary import SeleniumLibrary
@@ -11,12 +7,11 @@ from SeleniumLibrary.utils.librarylistener import LibraryListener
 
 from .keywords import server, webelements
 
+HERE = Path(__file__).parent
 
-CLIENTS = [
-    client for client in glob(join(dirname(__file__), "clients", "*")) if isdir(client)
-]
+CLIENTS = [client for client in sorted(HERE.glob("clients/*")) if client.is_dir()]
 
-COMMON = list(glob(join(dirname(__file__), "common", "*.resource")))
+COMMON = sorted(HERE.glob("common/*.resource"))
 
 component_classes = [
     webelements.WebElementKeywords,
@@ -25,6 +20,7 @@ component_classes = [
 
 
 class JupyterLibrary(SeleniumLibrary):
+
     """JupyterLibrary is a Jupyter testing library for Robot Framework."""
 
     def __init__(
@@ -34,8 +30,10 @@ class JupyterLibrary(SeleniumLibrary):
         run_on_failure="Capture Page Screenshot",
         screenshot_root_directory=None,
         **kwargs,
-    ):
-        """JupyterLibrary can be imported with several optional arguments.
+    ) -> None:
+        """Instantiate a stateful ``JupyterLibrary`` instance.
+
+        JupyterLibrary can be imported with several optional arguments.
         - ``timeout``:
           Default value for `timeouts` used with ``Wait ...`` keywords.
         - ``implicit_wait``:
@@ -46,7 +44,7 @@ class JupyterLibrary(SeleniumLibrary):
           Location where possible screenshots are created. If not given,
           the directory where the log file is written is used.
         """
-        super(JupyterLibrary, self).__init__(
+        super().__init__(
             timeout=timeout,
             implicit_wait=implicit_wait,
             run_on_failure=run_on_failure,
@@ -54,27 +52,29 @@ class JupyterLibrary(SeleniumLibrary):
             **kwargs,
         )
         self.add_library_components(
-            [Component(self) for Component in component_classes]
+            [Component(self) for Component in component_classes],
         )
         self.ROBOT_LIBRARY_LISTENER = JupyterLibraryListener()
 
 
 class JupyterLibraryListener(LibraryListener):
-    """Custom listener to do per-suite imports of resource files"""
+
+    """Custom listener to do per-suite imports of resource files."""
 
     ROBOT_LISTENER_API_VERSION = 2
 
     def start_suite(self, name, attrs):
-        super(JupyterLibraryListener, self).start_suite(name, attrs)
+        """Handle dynamic imports at suite startup."""
+        super().start_suite(name, attrs)
         resources = []
 
         for common in COMMON:
-            resources += [f"JupyterLibrary/common/{basename(common)}"]
+            resources += [f"JupyterLibrary/common/{common.name}"]
 
         for client in CLIENTS:
-            for path in glob(join(client, "*.resource")):
+            for path in sorted(client.rglob("*.resource")):
                 resources += [
-                    f"JupyterLibrary/clients/{basename(client)}/{basename(path)}"
+                    f"JupyterLibrary/{path.relative_to(HERE).as_posix()}",
                 ]
 
         for resource in resources:

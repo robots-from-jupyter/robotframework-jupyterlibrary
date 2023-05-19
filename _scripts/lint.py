@@ -1,22 +1,21 @@
-""" Apply source normalization and checking
+"""Apply source normalization and checking.
 
-    This should run without JupyterLibrary installed, but only needs to
-    work on Python3
+This should run without JupyterLibrary installed, but only needs to
+work on Python3
 """
 from pathlib import Path
 from subprocess import check_call
 
 from nbformat import NO_CONVERT, read, write
 
-
 PY_SRC = ["src", "setup.py", "scripts", "docs"]
 RF_SRC = ["atest", "src"]
 
 
 def lint():
-    check_call(["isort", "-rc"] + PY_SRC)
-    check_call(["black"] + PY_SRC)
-    check_call(["flake8"] + PY_SRC)
+    check_call(["isort", "-rc", *PY_SRC])
+    check_call(["black", *PY_SRC])
+    check_call(["flake8", *PY_SRC])
 
     for src in RF_SRC:
         check_call(["robotidy", "-r", src])

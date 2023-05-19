@@ -1,15 +1,13 @@
-import subprocess
-import sys
 import os
 import shutil
+import subprocess
+import sys
 import time
 
 from . import project as P
 
-
 PLATFORM_PY_ARGS = {
     # e.g. if notebook and ipykernel releases did not yet support python 5.0 with lab 6
-    # ("Windows", "5.0", "6"): ["--include", "not-supported", "--runemptysuite"]
 }
 
 LAB_MAJOR_ENV_VARS = {
@@ -17,9 +15,12 @@ LAB_MAJOR_ENV_VARS = {
     2: {"JUPYTER_LIBRARY_APP": "NotebookApp"},
 }
 
+LAB_MAJOR_ARGS = {
+    4: ["--exclude=client:classic"],
+}
+
 NON_CRITICAL = [
     ## Historically supported nteract_on_jupyter
-    # ["client:nteract_on_jupyter"],
 ]
 
 PABOT_DEFAULTS = [
@@ -33,12 +34,13 @@ PABOT_DEFAULTS = [
 def run_tests(attempt=0, extra_args=None):
     env = dict(**os.environ)
 
+    extra_args = extra_args or []
+    extra_args += PLATFORM_PY_ARGS.get((P.PLATFORM, P.THIS_PYTHON, P.THIS_LAB), [])
+
     if P.THIS_LAB:
         lab_major = int(P.THIS_LAB.split(".")[0])
         env.update(LAB_MAJOR_ENV_VARS.get(lab_major, {}))
-
-    extra_args = extra_args or []
-    extra_args += PLATFORM_PY_ARGS.get((P.PLATFORM, P.THIS_PYTHON, P.THIS_LAB), [])
+        extra_args += LAB_MAJOR_ARGS.get(lab_major, [])
 
     stem = P.get_atest_stem(attempt=attempt, extra_args=extra_args)
     out_dir = P.ATEST_OUT / stem
@@ -128,7 +130,7 @@ def run_tests(attempt=0, extra_args=None):
 
 
 def attempt_atest_with_retries(extra_args=None):
-    """retry the robot tests a number of times"""
+    """Retry the robot tests a number of times."""
     extra_args = list(extra_args or [])
     attempt = 0
     error_count = -1
