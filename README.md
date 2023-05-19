@@ -62,9 +62,9 @@ code from a number of other projects:
   - Initial implementations of robot keywords
 
 [license]:
-  https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/blob/master/LICENSE
+  https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/blob/main/LICENSE
 [acceptance tests]:
-  https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/tree/master/atest
+  https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/tree/main/atest
 [miniforge]: https://github.com/conda-forge/miniforge/releases
 [binder-badge]: https://mybinder.org/badge_logo.svg
 [binder]:
@@ -87,4 +87,4 @@ code from a number of other projects:
 [magics]: https://robotframework-jupyterlibrary.readthedocs.io/en/stable/MAGIC.html
 [keywords]: https://robotframework-jupyterlibrary.readthedocs.io/en/stable/KEYWORDS.html
 [contributing]:
-  https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/blob/master/CONTRIBUTING.md
+  https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/blob/main/CONTRIBUTING.md

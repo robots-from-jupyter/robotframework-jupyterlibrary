@@ -2,7 +2,7 @@
 Thanks for contributing to robotframework-jupyterlibrary!
 Please fill out the following items to submit a pull request.
 See the contributing guidelines for more information:
-https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/blob/master/CONTRIBUTING.md
+https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/blob/main/CONTRIBUTING.md
 -->
 
 ## References
