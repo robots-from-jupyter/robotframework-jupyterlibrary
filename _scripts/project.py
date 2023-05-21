@@ -90,6 +90,10 @@ BUILD = ROOT / "build"
 BUILD.exists() or BUILD.mkdir()
 ATEST_OUT = BUILD / "test/output"
 ATEST_OUT_XML = "output.xml"
+ATEST_COV = ATEST_OUT / ".coverage"
+ATEST_HTMLCOV = ATEST_OUT / "htmlcov"
+ATEST_HTMLCOV_INDEX = ATEST_HTMLCOV / "index.html"
+COV_FAIL_UNDER = 61
 
 DIST = ROOT / "dist"
 IMPORTABLE = "robotframework_jupyterlibrary"

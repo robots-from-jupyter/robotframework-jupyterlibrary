@@ -44,6 +44,7 @@ def run_tests(attempt=0, extra_args=None):
 
     stem = P.get_atest_stem(attempt=attempt, extra_args=extra_args)
     out_dir = P.ATEST_OUT / stem
+    cov_dir = out_dir / "coverage"
 
     for non_critical in NON_CRITICAL:
         extra_args += ["--noncritical", "AND".join(non_critical)]
@@ -56,10 +57,24 @@ def run_tests(attempt=0, extra_args=None):
         if previous.exists():
             extra_args += ["--rerunfailed", str(previous)]
 
-    runner = ["pabot", *PABOT_DEFAULTS]
-
     if "--dryrun" in extra_args:
         runner = ["robot"]
+    else:
+        runner = [
+            "pabot",
+            *PABOT_DEFAULTS,
+            "--command",
+            "coverage",
+            "run",
+            "--branch",
+            "--source=JupyterLibrary",
+            "--parallel-mode",
+            f"--context={P.PLATFORM}-{P.THIS_PYTHON}-{P.THIS_LAB}-{P.BROWSER}-{attempt}",
+            f"--data-file={out_dir}/coverage/.coverage",
+            "-m",
+            "robot",
+            "--end-command",
+        ]
 
     args = [
         *runner,
@@ -98,7 +113,7 @@ def run_tests(attempt=0, extra_args=None):
     if not out_dir.exists():
         print(f">>> trying to prepare output directory: {out_dir}", flush=True)
         try:
-            out_dir.mkdir(parents=True)
+            cov_dir.mkdir(parents=True)
         except Exception as err:
             print(
                 f"... Error, hopefully harmless: {err}",

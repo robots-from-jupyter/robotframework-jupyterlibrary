@@ -472,15 +472,57 @@ def task_test():
         "targets": [real_target, P.OK.robot],
     }
 
+    cov_cmd = [*P.RUN_IN["test"], "coverage"]
+    cov_data = [f"--data-file={P.ATEST_COV}"]
+    all_cov = sorted(P.ATEST_OUT.rglob("coverage/.coverage*"))
+
+    yield {
+        "name": "cov:combine",
+        "doc": "gather coverage",
+        "task_dep": ["test:atest"],
+        "targets": [P.ATEST_COV],
+        "file_dep": [*all_cov],
+        "actions": [[*cov_cmd, "combine", *cov_data, "--keep", *all_cov]],
+    }
+
+    yield {
+        "name": "cov:html",
+        "doc": "generate coverage html",
+        "file_dep": [P.ATEST_COV],
+        "targets": [P.ATEST_HTMLCOV_INDEX],
+        "actions": [
+            [
+                *cov_cmd,
+                "html",
+                "--show-contexts",
+                *cov_data,
+                f"--directory={P.ATEST_HTMLCOV}",
+            ],
+        ],
+    }
+
+    yield {
+        "name": "cov:report",
+        "doc": "emit coverage html",
+        "file_dep": [P.ATEST_COV],
+        "actions": [
+            [
+                *cov_cmd,
+                "report",
+                *cov_data,
+                "--show-missing",
+                "--skip-covered",
+                f"--fail-under={P.COV_FAIL_UNDER}",
+            ],
+        ],
+    }
+
     yield {
         "name": "combine",
         "doc": "combine all robot outputs into a single HTML report",
         "uptodate": [lambda: False],
         "actions": [[*pym, "_scripts.combine"]],
-        "file_dep": [
-            real_target,
-            P.SCRIPTS / "combine.py",
-        ],
+        "file_dep": [real_target, P.SCRIPTS / "combine.py"],
     }
 
 
