@@ -472,9 +472,18 @@ def task_test():
         "targets": [real_target, P.OK.robot],
     }
 
-    cov_cmd = [*P.RUN_IN["test"], "coverage"]
+
+@doit.create_after("test:atest")
+def task_report():
+    """Generate reports of test data."""
+    env = "test"
+    pym = [*P.RUN_IN[env], *P.PYM]
+
+    cov_cmd = [*pym, "coverage"]
     cov_data = [f"--data-file={P.ATEST_COV}"]
     all_cov = sorted(P.ATEST_OUT.rglob("coverage/.coverage*"))
+    real_stem = P.get_atest_stem(lockfile=P.get_lockfile(env), browser=P.BROWSER)
+    real_target = P.ATEST_OUT / real_stem / P.ATEST_OUT_XML
 
     yield {
         "name": "cov:combine",
@@ -486,25 +495,60 @@ def task_test():
     }
 
     yield {
-        "name": "cov:html",
+        "name": "cov:html:rfsl",
         "doc": "generate coverage html",
         "file_dep": [P.ATEST_COV],
-        "targets": [P.ATEST_HTMLCOV_INDEX],
+        "targets": [P.ATEST_HTMLCOV_RFSL_INDEX],
         "actions": [
             [
                 *cov_cmd,
                 "html",
                 "--show-contexts",
+                "--include=*/SeleniumLibrary/*",
                 *cov_data,
-                f"--directory={P.ATEST_HTMLCOV}",
+                f"--directory={P.ATEST_HTMLCOV_RFSL}",
+            ],
+        ],
+    }
+
+    yield {
+        "name": "cov:html:se",
+        "doc": "generate coverage html",
+        "file_dep": [P.ATEST_COV],
+        "targets": [P.ATEST_HTMLCOV_SE_INDEX],
+        "actions": [
+            [
+                *cov_cmd,
+                "html",
+                "--show-contexts",
+                "--include=*/selenium/*",
+                *cov_data,
+                f"--directory={P.ATEST_HTMLCOV_SE}",
+            ],
+        ],
+    }
+
+    yield {
+        "name": "cov:html:rfjl",
+        "doc": "generate coverage html",
+        "file_dep": [P.ATEST_COV],
+        "targets": [P.ATEST_HTMLCOV_RFJL_INDEX],
+        "actions": [
+            [
+                *cov_cmd,
+                "html",
+                "--show-contexts",
+                "--include=*/JupyterLibrary/*",
+                *cov_data,
+                f"--directory={P.ATEST_HTMLCOV_RFJL}",
             ],
         ],
     }
 
     yield {
         "name": "cov:report",
-        "doc": "emit coverage html",
-        "file_dep": [P.ATEST_COV],
+        "doc": "emit coverage console report and check",
+        "file_dep": [P.ATEST_COV, P.ATEST_HTMLCOV_RFJL_INDEX],
         "actions": [
             [
                 *cov_cmd,
@@ -512,15 +556,15 @@ def task_test():
                 *cov_data,
                 "--show-missing",
                 "--skip-covered",
-                f"--fail-under={P.COV_FAIL_UNDER}",
+                "--include=*/JupyterLibrary/*",
+                f"--fail-under={P.COV_FAIL_UNDER_RFJL}",
             ],
         ],
     }
 
     yield {
-        "name": "combine",
+        "name": "robot:combine",
         "doc": "combine all robot outputs into a single HTML report",
-        "uptodate": [lambda: False],
         "actions": [[*pym, "_scripts.combine"]],
         "file_dep": [real_target, P.SCRIPTS / "combine.py"],
     }

@@ -67,7 +67,7 @@ def run_tests(attempt=0, extra_args=None):
             "coverage",
             "run",
             "--branch",
-            "--source=JupyterLibrary",
+            "--source=JupyterLibrary,SeleniumLibrary,selenium",
             "--parallel-mode",
             f"--context={P.PLATFORM}-{P.THIS_PYTHON}-{P.THIS_LAB}-{P.BROWSER}-{attempt}",
             f"--data-file={out_dir}/coverage/.coverage",
