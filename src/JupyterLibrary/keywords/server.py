@@ -18,14 +18,14 @@ class ServerKeywords(LibraryComponent):
 
     """A component that extends the core with Jupyter server management."""
 
-    _handles = []
-    _tmpdirs = {}
-    _notebook_dirs = {}
-    _ports = {}
-    _base_urls = {}
-    _tokens = {}
+    _handles: typing.List[str] = []
+    _tmpdirs: typing.Dict[str, str] = {}
+    _notebook_dirs: typing.Dict[str, str] = {}
+    _ports: typing.Dict[str, int] = {}
+    _base_urls: typing.Dict[str, str] = {}
+    _tokens: typing.Dict[str, str] = {}
 
-    _app_name = None
+    _app_name: typing.Optional[str] = None
 
     @keyword
     def set_default_jupyter_app_name(
@@ -139,7 +139,7 @@ class ServerKeywords(LibraryComponent):
 
         self._handles += [handle]
         self._tmpdirs[handle] = str(tmp_path)
-        self._notebook_dirs[handle] = notebook_dir
+        self._notebook_dirs[handle] = str(notebook_dir)
         self._ports[handle] = port
         self._base_urls[handle] = base_url
         self._tokens[handle] = token
@@ -179,7 +179,7 @@ class ServerKeywords(LibraryComponent):
         notebook_dir = self._notebook_dirs[nbserver]
         BuiltIn().import_library("OperatingSystem")
         osli = BuiltIn().get_library_instance("OperatingSystem")
-        return osli.copy_files(*([*list(sources), notebook_dir]))
+        return osli.copy_files(*sorted(sources), notebook_dir)
 
     @keyword
     def copy_files_from_jupyter_directory(self, *src_and_dest: str, **kwargs) -> None:
@@ -196,7 +196,7 @@ class ServerKeywords(LibraryComponent):
         osli = BuiltIn().get_library_instance("OperatingSystem")
         sources = [str(notebook_dir / src) for src in src_and_dest[:-1]]
         dest = src_and_dest[-1]
-        return osli.copy_files(*[*sources, dest])
+        return osli.copy_files(*sources, dest)
 
     @keyword
     def get_jupyter_directory(

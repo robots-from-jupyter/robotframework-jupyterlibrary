@@ -78,6 +78,7 @@ A number of environment variables control how some of the `doit` tasks function.
 | -----------------: | :---------------: | -------------------------------------------------- |
 |       `ATEST_ARGS` |       `[]`        | a JSON array of tokens to pass to `pabot`          |
 |    `ATEST_RETRIES` |        `0`        | number of times to re-run failing tests            |
+|    `ATEST_ATTEMPT` |        `0`        | where to start in the retry order                  |
 |          `BROWSER` | `headlessfirefox` | which browser to use (only tested with FF)         |
 |        `CONDA_EXE` |      `mamba`      | a custom `conda`-compatible tool to use            |
 |        `IN_BINDER` |        `0`        | skips a number of steps                            |
