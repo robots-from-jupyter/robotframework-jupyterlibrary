@@ -18,12 +18,12 @@ class ServerKeywords(LibraryComponent):
 
     """A component that extends the core with Jupyter server management."""
 
-    _handles: typing.List[str] = []
-    _tmpdirs: typing.Dict[str, str] = {}
-    _notebook_dirs: typing.Dict[str, str] = {}
-    _ports: typing.Dict[str, int] = {}
-    _base_urls: typing.Dict[str, str] = {}
-    _tokens: typing.Dict[str, str] = {}
+    _handles: typing.List[subprocess.Popen] = []
+    _tmpdirs: typing.Dict[subprocess.Popen, str] = {}
+    _notebook_dirs: typing.Dict[subprocess.Popen, str] = {}
+    _ports: typing.Dict[subprocess.Popen, int] = {}
+    _base_urls: typing.Dict[subprocess.Popen, str] = {}
+    _tokens: typing.Dict[subprocess.Popen, str] = {}
 
     _app_name: typing.Optional[str] = None
 
