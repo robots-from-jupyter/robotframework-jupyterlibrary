@@ -282,55 +282,92 @@ class ServerKeywords(LibraryComponent):
         return handle
 
     @keyword
-    def terminate_all_jupyter_servers(self, timeout: str = "6s") -> int:
-        """Close all Jupyter servers started by [#Start New Jupyter Server|Start New Jupyter Server].
+    def shut_down_jupyter_server(self, handle=None) -> int:
+        """Gracefully shut down a Jupyter server started by [#Start New Jupyter Server|Start New Jupyter Server].
+
+        If no ``handle`` is given, the last-started server will be shut down.
+        """
+        nbh = handle or self._handles[-1]
+        url = self.get_jupyter_server_url(nbh)
+        token = self.get_jupyter_server_token(nbh)
+
+        try:
+            urlopen(f"{url}api/shutdown?token={token}", data=[])
+        except Exception as err:
+            BuiltIn().log(err)
+            return 0
+
+        self._ports.pop(nbh)
+        self._base_urls.pop(nbh)
+        self._tokens.pop(nbh)
+
+        return 1
+
+    @keyword
+    def clean_up_jupyter_server_files(self, handle=None) -> int:
+        """Clean up the files owned by a started by [#Start New Jupyter Server|Jupyter Server].
+
+        If no ``handle`` is given, the last-started server will be terminated.
+        """
+        nbh = handle or self._handles[-1]
+
+        shutil.rmtree(self._tmpdirs[nbh], ignore_errors=True)
+
+        self._tmpdirs.pop(nbh)
+
+    @keyword
+    def terminate_jupyter_server(self, handle=None) -> int:
+        """Close a Jupyter server started by [#Start New Jupyter Server|Start New Jupyter Server].
+
+        If no ``handle`` is given, the last-started server will be terminated.
 
         Waiting ``timeout`` to ensure all files/processes are freed before
         cleaning up temporary directories, if any.
         """
         plib = BuiltIn().get_library_instance("Process")
 
-        self.wait_for_jupyter_server_to_be_ready()
+        nbh = handle or self._handles[-1]
 
-        terminated = 0
-        shutdown = 0
+        plib.terminate_process(nbh)
+
+        self._handles.remove(nbh)
+
+        return 1
+
+    @keyword
+    def terminate_all_jupyter_servers(self, timeout: str = "6s") -> int:
+        """Close all Jupyter servers started by [#Start New Jupyter Server|Start New Jupyter Server].
+
+        Waiting ``timeout`` after termination to ensure all files/processes are freed before
+        cleaning up temporary directories.
+        """
+        was_shutdown = []
+        was_terminated = []
         for nbh in self._handles:
-            url = self.get_jupyter_server_url(nbh)
-            token = self.get_jupyter_server_token(nbh)
             try:
-                urlopen(f"{url}api/shutdown?token={token}", data=[])
-                shutdown += 1
+                self.shut_down_jupyter_server(nbh)
+                was_shutdown += [nbh]
             except Exception as err:
                 BuiltIn().log(err)
 
-        if shutdown:
-            for nbh in self._handles:
-                try:
-                    plib.terminate_process(nbh)
-                    terminated += 1
-                except Exception as err:
-                    BuiltIn().log(err)
-            if self._handles:
-                BuiltIn().sleep(timeout)
-            for nbh in self._handles:
-                try:
-                    plib.terminate_process(nbh, kill=True)
-                except Exception as err:
-                    BuiltIn().log(err)
+        handles = list(self._handles)
 
-        # give processes a mo to shutdown
-        if terminated or shutdown and self._tmpdirs:
-            for nbh in self._handles:
-                shutil.rmtree(self._tmpdirs[nbh])
+        for nbh in handles:
+            try:
+                self.terminate_jupyter_server(nbh)
+                was_terminated += [nbh]
+            except Exception as err:
+                BuiltIn().log(err)
 
-        self._handles = []
-        self._tmpdirs = {}
-        self._notebook_dirs = {}
-        self._ports = {}
-        self._base_urls = {}
-        self._tokens = {}
+        if was_shutdown or was_terminated:
+            BuiltIn().sleep(timeout)
 
-        return terminated
+        tmpdir_handles = list(self._tmpdirs)
+
+        for nbh in tmpdir_handles:
+            self.clean_up_jupyter_server_files(nbh)
+
+        return len(was_terminated)
 
     @keyword
     def get_unused_port(self) -> int:
