@@ -80,15 +80,16 @@ class ServerKeywords(LibraryComponent):
     ) -> subprocess.Popen:
         """Start a Jupyter server. All arguments are optional.
 
-        | = argument =     | = default =           | = notes =                          |
-        | ``command``      | ``jupyter-notebook``  | e.g. ``jupyter-lab``               |
-        | ``port``         | an unused port        |                                    |
-        | ``base_url``     | ``/@rf/``             |                                    |
-        | ``notebook_dir`` | a temporary directory |                                    |
-        | ``token``        | a random ``uuid4``    |                                    |
-        | ``*args``        |                       | extra server arguments             |
-        | ``**config``     |                       | extra process arguments            |
-        | ``app_name``     | ``None`` (detect)     | e.g. ``NotebookApp``, `ServerApp`` |
+        | = argument =     | = default =           | = notes =                               |
+        | ``command``      | ``jupyter-notebook``  | e.g. ``jupyter-lab``                    |
+        | ``port``         | an unused port        |                                         |
+        | ``base_url``     | ``/@rf/``             |                                         |
+        | ``notebook_dir`` | a temporary directory |                                         |
+        | ``token``        | a random ``uuid4``    |                                         |
+        | ``*args``        |                       | extra server arguments                  |
+        | ``**config``     |                       | extra process arguments                 |
+        | ``app_name``     | ``None`` (detect)     | e.g. ``NotebookApp``, `ServerApp``      |
+        | ``extra_args``   | ``[]``                | extra arguments beyond ```token``, etc. |
 
         If not configured, the ``%{HOME}`` environment variable and current
         working directory will be set to avoid leaking configuration
@@ -98,6 +99,8 @@ class ServerKeywords(LibraryComponent):
 
         The ``app_name`` argument is as described for the [#Get Jupyter App Name|app name],
         with the default being to autodetect from the command and environment.
+
+        ``extra_args`` are passed to ``Start Process`` before the ``token``
         """
         app_name = (
             config.pop("app_name", None)
@@ -135,7 +138,9 @@ class ServerKeywords(LibraryComponent):
             app_name,
         )
 
-        handle = plib.start_process(command, *args, **config)
+        extra_args = config.pop("extra_args", [])
+
+        handle = plib.start_process(command, *extra_args, *args, **config)
 
         self._handles += [handle]
         self._tmpdirs[handle] = str(tmp_path)
@@ -153,20 +158,20 @@ class ServerKeywords(LibraryComponent):
         base_url: str,
         token: str,
         app_name: typing.Optional[str] = None,
-    ) -> typing.List[str]:
+    ) -> typing.Tuple[str]:
         """Build Some default Jupyter application arguments.
 
         If the ``app_name`` is not provided, it will be detected based on the rules
         in [#Get Jupyter App Name].
         """
         app_name = app_name or self.get_jupyter_app_name()
-        return [
+        return (
             "--no-browser",
             "--debug",
             f"--port={port}",
             f"--{app_name}.token={token}",
             f"--{app_name}.base_url={base_url}",
-        ]
+        )
 
     @keyword
     def copy_files_to_jupyter_directory(self, *sources: str, **kwargs) -> None:
@@ -206,9 +211,10 @@ class ServerKeywords(LibraryComponent):
         """Get the Jupyter contents directory.
 
         | = argument = | = default =                       |
-        | ``nbserver`` | the most-recently launched server |.
+        | ``nbserver`` | the most-recently launched server |
         """
         nbserver = nbserver if nbserver is not None else self._handles[-1]
+
         return self._notebook_dirs[nbserver]
 
     @keyword
@@ -282,12 +288,12 @@ class ServerKeywords(LibraryComponent):
         return handle
 
     @keyword
-    def shut_down_jupyter_server(self, handle=None) -> int:
+    def shut_down_jupyter_server(self, nbserver=None) -> int:
         """Gracefully shut down a Jupyter server started by [#Start New Jupyter Server|Start New Jupyter Server].
 
         If no ``handle`` is given, the last-started server will be shut down.
         """
-        nbh = handle or self._handles[-1]
+        nbh = nbserver or self._handles[-1]
         url = self.get_jupyter_server_url(nbh)
         token = self.get_jupyter_server_token(nbh)
 
@@ -304,29 +310,29 @@ class ServerKeywords(LibraryComponent):
         return 1
 
     @keyword
-    def clean_up_jupyter_server_files(self, handle=None) -> int:
+    def clean_up_jupyter_server_files(self, nbserver=None) -> int:
         """Clean up the files owned by a started by [#Start New Jupyter Server|Jupyter Server].
 
         If no ``handle`` is given, the last-started server will be terminated.
         """
-        nbh = handle or self._handles[-1]
+        nbh = nbserver or self._handles[-1]
 
         shutil.rmtree(self._tmpdirs[nbh], ignore_errors=True)
 
         self._tmpdirs.pop(nbh)
 
     @keyword
-    def terminate_jupyter_server(self, handle=None) -> int:
+    def terminate_jupyter_server(self, nbserver=None) -> int:
         """Close a Jupyter server started by [#Start New Jupyter Server|Start New Jupyter Server].
 
-        If no ``handle`` is given, the last-started server will be terminated.
+        If no ``nbserver`` is given, the last-started server will be terminated.
 
         Waiting ``timeout`` to ensure all files/processes are freed before
         cleaning up temporary directories, if any.
         """
         plib = BuiltIn().get_library_instance("Process")
 
-        nbh = handle or self._handles[-1]
+        nbh = nbserver or self._handles[-1]
 
         plib.terminate_process(nbh)
 

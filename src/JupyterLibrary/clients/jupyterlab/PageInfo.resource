@@ -31,7 +31,7 @@ Update JupyterLab PageInfo Cache
     [Documentation]    Update the cached JupyterLab ``pageInfo``. _Not usually needed._
     ${sel} =    Set Variable    xpath://${JLAB XP PAGEINFO}
     Wait Until Page Contains Element    ${sel}
-    ${txt} =    Get Element Attribute    ${sel}    innerHTML
+    ${txt} =    JupyterLibrary.Get Element Attribute    ${sel}    innerHTML
     ${pageInfo} =    JSON.Loads    ${txt}
     Set Suite Variable    ${JLAB PAGEINFO CACHE}    ${pageInfo}    children=${True}
 
