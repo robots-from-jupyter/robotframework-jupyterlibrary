@@ -7,8 +7,10 @@ dependencies:
   - doit-with-toml
   - pip
   - pyyaml
+  - flit >=3.9,<4
+  - tomli
   # really nothing for it
   - nodejs >=18,<19
   # hard deps
-  - robotframework >=4
+  - robotframework >=5
   - robotframework-seleniumlibrary >=4.5

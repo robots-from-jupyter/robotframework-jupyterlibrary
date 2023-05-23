@@ -1,3 +1,56 @@
+[build-system]
+build-backend = "flit_core.buildapi"
+requires = ["flit_core >=3.9,<4"]
+
+[tool.flit.module]
+name = "JupyterLibrary"
+
+[project]
+name = "robotframework-jupyterlibrary"
+version = "0.5.0a0"
+description = "A Robot Framework library for automating (testing of) Jupyter end-user applications and extensions."
+readme = "README.md"
+authors = [{name = "JupyterLibrary contributors", email = "robots-from-jupyter@googlegroups.com"}]
+requires-python = ">=3.8"
+classifiers = [
+    "Framework :: Jupyter",
+    "Framework :: Jupyter :: JupyterLab",
+    "Framework :: Jupyter :: JupyterLab :: 3",
+    "Framework :: Jupyter :: JupyterLab :: 4",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Testing",
+]
+dependencies = [
+  "robotframework >=5",
+  "robotframework-seleniumlibrary >=4.5",
+]
+keywords = [
+  "Interactive",
+  "Jupyter",
+  "notebook",
+  "Testing",
+  "Web",
+]
+[project.optional-dependencies]
+tidy = ["robotframwork-tidy"]
+widgets = ["ipywidgets"]
+[project.urls]
+"Bug Tracker" = "https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/issues"
+"Changelog" = "https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/blob/main/docs/HISTORY.ipynb"
+"CI" = "https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/actions"
+"Documentation" = "https://robotframework-jupyterlibrary.readthedocs.io/en/stable"
+"Releases" = "https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/releases"
+"Source Code" = "https://github.com/robots-from-jupyter/robotframework-jupyterlibrary"
+
 [tool.ruff]
 cache-dir = "build/.cache/ruff"
 ignore = [

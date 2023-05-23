@@ -88,7 +88,7 @@ A number of environment variables control how some of the `doit` tasks function.
 
 - [ ] merge all outstanding PRs
 - [ ] start a release issue with a checklist (maybe like this one)
-- [ ] ensure `VERSION` has been increased appropriately
+- [ ] ensure `pyproject.toml#/project/version` has been increased appropriately
 - [ ] ensure the `HISTORY.ipynb` is up-to-date
 - [ ] validate on binder
 - [ ] validate on ReadTheDocs
@@ -105,5 +105,5 @@ A number of environment variables control how some of the `doit` tasks function.
   - [ ] handle `conda-forge` feedstock tasks
   - [ ] validate on binder via simplest-possible gists
   - [ ] activate the version on ReadTheDocs
-  - [ ] bump `VERSION` to next development version
+  - [ ] bump `pyproject.toml#/project/version` to next development version
   - [ ] update release procedures

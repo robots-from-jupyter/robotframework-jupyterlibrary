@@ -2,7 +2,6 @@
 import os
 import subprocess
 import sys
-from configparser import ConfigParser
 from datetime import datetime
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -11,13 +10,19 @@ from tempfile import TemporaryDirectory
 import JupyterLibrary
 from JupyterLibrary.core import CLIENTS, COMMON
 
+try:
+    import tomllib
+except ImportError:
+    import tomli as tomllib
+
 # not really in use yet...
 os.environ["IN_SPHINX"] = "1"
 
-_parser = ConfigParser()
-_parser.read(Path(__file__).parent.parent / "setup.cfg")
+PROJ = tomllib.loads(
+    (Path(__file__).parent.parent / "pyproject.toml").read_text(encoding="utf-8"),
+)
+NAME = PROJ["project"]["name"]
 
-CONF = {k: _parser[k] for k in _parser.sections()}
 YEAR = datetime.now().year
 KEYWORDS = "*** Keywords ***"
 VARIABLES = "*** Variables ***"
@@ -97,9 +102,9 @@ def setup(app):
 
 # -- Project information -----------------------------------------------------
 
-project = CONF["metadata"]["name"]
-copyright = f"""{YEAR}, {CONF["metadata"]["author"]}"""
-author = CONF["metadata"]["author"]
+project = PROJ["project"]["name"]
+author = PROJ["project"]["authors"][0]["name"]
+copyright = f"""{YEAR}, {author}"""
 
 # The short X.Y version
 version = ".".join(JupyterLibrary.__version__.split(".")[:2])
@@ -167,8 +172,8 @@ html_theme = "pydata_sphinx_theme"
 #
 html_theme_options = {
     "navbar_center": ["navbar-nav.html"],
-    "github_url": CONF["metadata"]["url"],
-    "logo": {"text": CONF["metadata"]["name"]},
+    "github_url": PROJ["project"]["urls"]["Source Code"],
+    "logo": {"text": NAME},
     "icon_links": [
         {
             "name": "PyPI",
@@ -213,7 +218,7 @@ nb_execution_mode = "force"
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = f"""{CONF["metadata"]["name"]}-doc"""
+htmlhelp_basename = f"""{NAME}-doc"""
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -235,9 +240,9 @@ latex_elements = {
 latex_documents = [
     (
         master_doc,
-        f"""{CONF["metadata"]["name"]}.tex""",
-        f"""{CONF["metadata"]["name"]} Documentation""",
-        CONF["metadata"]["author"],
+        f"""{NAME}.tex""",
+        f"""{NAME} Documentation""",
+        author,
         "manual",
     ),
 ]
@@ -250,8 +255,8 @@ latex_documents = [
 man_pages = [
     (
         master_doc,
-        CONF["metadata"]["name"],
-        f"""{CONF["metadata"]["name"]} Documentation""",
+        NAME,
+        f"""{NAME} Documentation""",
         [author],
         1,
     ),
@@ -267,10 +272,10 @@ texinfo_documents = [
     (
         master_doc,
         "jupyterlibrary",
-        f"""{CONF["metadata"]["name"]} Documentation""",
+        f"""{NAME} Documentation""",
         author,
-        CONF["metadata"]["name"],
-        CONF["metadata"]["description"],
+        NAME,
+        PROJ["project"]["description"],
         "Miscellaneous",
     ),
 ]

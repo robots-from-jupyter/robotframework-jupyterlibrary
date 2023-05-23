@@ -1,9 +1,6 @@
 """A Robot Framework library for automating (testing of) Jupyter end-user applications and extensions."""
-from pathlib import Path
-
+from ._version import __version__
 from .core import JupyterLibrary
-
-__version__ = (Path(__file__).parent / "VERSION").read_text()
 
 __all__ = ["__version__", "JupyterLibrary", "load_ipython_extension"]
 

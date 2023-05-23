@@ -62,9 +62,9 @@ def task_build():
     yield {
         "name": "pypi",
         "doc": "build the pypi sdist/wheel",
-        "actions": [[*run_in, *P.PY, "setup.py", "sdist", "bdist_wheel"]],
+        "actions": [[*run_in, "flit", "build"]],
         "targets": [P.SDIST, P.WHEEL],
-        "file_dep": [*P.PY_SRC, *P.ROBOT_SRC, P.VERSION_FILE, *P.SETUP_CRUFT, env_lock],
+        "file_dep": [*P.PY_SRC, *P.ROBOT_SRC, *P.SETUP_CRUFT, env_lock],
     }
 
     def _update_hash():
@@ -107,9 +107,9 @@ def task_conda_build():
 
     if P.CI:
         # we _don't_ want to force irreproducibly re-building the tarball
-        file_dep = [P.META_YAML_IN, P.VERSION_FILE]
+        file_dep = [P.META_YAML_IN, P.PPT]
     else:
-        file_dep = [P.META_YAML_IN, P.SDIST, P.VERSION_FILE, P.SHA256SUMS]
+        file_dep = [P.META_YAML_IN, P.SDIST, P.PPT, P.SHA256SUMS]
 
     yield {
         "name": "recipe",
@@ -405,7 +405,7 @@ def _make_setup(env):
         ]
         doc = f"[{env}] install from dist"
     else:
-        pip_args = ["-e", "."]
+        pip_args = ["-e", ".", "--no-deps", "--no-build-isolation"]
         doc = f"[{env}] python development install"
 
     yield {
@@ -413,7 +413,15 @@ def _make_setup(env):
         "doc": doc,
         "actions": [
             lambda: frozen.unlink() if frozen.exists() else None,
-            [*pym, "pip", "install", "--no-deps", "--ignore-installed", *pip_args],
+            [
+                *pym,
+                "pip",
+                "install",
+                "--no-deps",
+                "--ignore-installed",
+                "--no-build-isolation",
+                *pip_args,
+            ],
             [*pym, "pip", "check"],
             lambda: [
                 frozen.write_bytes(subprocess.check_output([*pym, "pip", "freeze"])),

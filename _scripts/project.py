@@ -4,22 +4,14 @@ import os
 import platform
 import shutil
 import sys
-from configparser import ConfigParser
 from pathlib import Path
 
-for _yaml in ["yaml", "ruamel_yaml", "ruamel.yaml"]:
-    try:
-        yaml = __import__(_yaml)
-        if _yaml == "ruamel.yaml":
-            yaml = yaml.yaml
-        safe_load = yaml.safe_load
-        safe_dump = yaml.safe_dump
-        break
-    except ImportError:
-        pass
+try:
+    import tomllib
+except ImportError:
+    import tomli as tomllib
 
-assert safe_load, "need at least a yaml parser"
-
+from yaml import safe_load
 
 CI = safe_load(os.environ.get("CI", "0"))
 INSTALL_ARTIFACT = safe_load(os.environ.get("INSTALL_ARTIFACT", "0"))
@@ -63,22 +55,14 @@ DODO = ROOT / "dodo.py"
 
 
 SRC = ROOT / "src" / "JupyterLibrary"
-VERSION_FILE = SRC / "VERSION"
 LICENSE = ROOT / "LICENSE"
-VERSION = VERSION_FILE.read_text().strip()
 PY_SRC = [*SRC.rglob("*.py")]
-SETUP_CFG = ROOT / "setup.cfg"
 PPT = ROOT / "pyproject.toml"
+PPT_DATA = tomllib.loads(PPT.read_text(encoding="utf-8"))
+VERSION = PPT_DATA["project"]["version"]
 
-_cfg_parser = ConfigParser()
-_cfg_parser.read(SETUP_CFG)
-
-SETUP = {k: dict(_cfg_parser[k]) for k in _cfg_parser.sections()}
 SETUP_CRUFT = [
-    ROOT / "setup.py",
-    ROOT / "MANIFEST.in",
-    SETUP_CFG,
-    VERSION_FILE,
+    PPT,
     LICENSE,
 ]
 BINDER = ROOT / ".binder"
@@ -101,9 +85,9 @@ ATEST_HTMLCOV_RFJL_INDEX = ATEST_HTMLCOV_RFJL / "index.html"
 COV_FAIL_UNDER_RFJL = 86
 
 DIST = ROOT / "dist"
-IMPORTABLE = "robotframework_jupyterlibrary"
-SDIST = DIST / f"""{IMPORTABLE.replace("_", "-")}-{VERSION}.tar.gz"""
-WHEEL = DIST / f"{IMPORTABLE}-{VERSION}-py3-none-any.whl"
+PEP_625_NAME = "robotframework_jupyterlibrary"
+SDIST = DIST / f"""{PEP_625_NAME}-{VERSION}.tar.gz"""
+WHEEL = DIST / f"{PEP_625_NAME}-{VERSION}-py3-none-any.whl"
 HASH_DEPS = [SDIST, WHEEL]
 SHA256SUMS = DIST / "SHA256SUMS"
 
@@ -272,7 +256,9 @@ META_YAML_IN = RECIPE / "meta.yaml.in"
 META_YAML = GITHUB / "recipe" / "meta.yaml"
 CONDA_BLD = DIST / "conda-bld"
 CONDA_PKG = (
-    CONDA_BLD / "noarch" / f"""{IMPORTABLE.replace("_", "-")}-{VERSION}-py_0.tar.bz2"""
+    CONDA_BLD
+    / "noarch"
+    / f"""{PEP_625_NAME.replace("_", "-")}-{VERSION}-py_0.tar.bz2"""
 )
 
 ROBOTIDY_ARGS = [
