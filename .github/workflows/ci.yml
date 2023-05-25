@@ -183,21 +183,3 @@ jobs:
       - name: Rename uncached conda packages
         shell: bash
         run: mv "${CONDA_PKGS_DIR}" "${CONDA_PKGS_DIR}_do_not_cache"
-
-  report:
-    if: always()
-    needs: [test, conda-build]
-    runs-on: ubuntu-latest
-    steps:
-      - if: always()
-        uses: actions/download-artifact@v3
-        with:
-          path: ./artifacts
-      - if: always()
-        run: find ./artifacts
-      - if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: rfjl_${{ github.run_number }}__COMBINED
-          path: |
-            ./artifacts
