@@ -61,7 +61,7 @@ https://conda.anaconda.org/conda-forge/noarch/glob2-0.7-py_0.tar.bz2#1f3a88e65e6
 https://conda.anaconda.org/conda-forge/noarch/idna-3.4-pyhd8ed1ab_0.tar.bz2#34272b248891bddccc64479f9a7fffed
 https://conda.anaconda.org/conda-forge/noarch/json5-0.9.5-pyh9f0ad1d_0.tar.bz2#10759827a94e6b14996e81fb002c0bda
 https://conda.anaconda.org/conda-forge/win-64/libarchive-3.6.2-h6f8411a_1.conda#314124476882f64abc20b76148d2909b
-https://conda.anaconda.org/conda-forge/win-64/libcurl-8.1.0-h68f0423_0.conda#af1be419405d62cdd083cccf6db0a0e3
+https://conda.anaconda.org/conda-forge/win-64/libcurl-8.1.1-h68f0423_0.conda#3757306ebfe97643620df19d3ab4296c
 https://conda.anaconda.org/conda-forge/noarch/lockfile-0.12.2-py_1.tar.bz2#c104d98e09c47519950cffb8dd5b4f10
 https://conda.anaconda.org/conda-forge/win-64/markupsafe-2.1.2-py311ha68e1ae_0.conda#96e7ffe6ea438ba4517152abe3b39874
 https://conda.anaconda.org/conda-forge/noarch/mdurl-0.1.0-pyhd8ed1ab_0.tar.bz2#f8dab71fdc13b1bf29a01248b156d268
@@ -94,7 +94,7 @@ https://conda.anaconda.org/conda-forge/noarch/tomli-2.0.1-pyhd8ed1ab_0.tar.bz2#5
 https://conda.anaconda.org/conda-forge/noarch/tomli-w-1.0.0-pyhd8ed1ab_0.tar.bz2#73506d1ab4202481841c68c169b7ef6c
 https://conda.anaconda.org/conda-forge/noarch/tomlkit-0.11.8-pyha770c72_0.conda#75838e8556166263a82038b51d01d5f1
 https://conda.anaconda.org/conda-forge/noarch/toolz-0.12.0-pyhd8ed1ab_0.tar.bz2#92facfec94bc02d6ccf42e7173831a36
-https://conda.anaconda.org/conda-forge/noarch/typing_extensions-4.6.0-pyha770c72_0.conda#bcbb0d58d40bfe12e5ea213484e88dbc
+https://conda.anaconda.org/conda-forge/noarch/typing_extensions-4.6.1-pyha770c72_0.conda#050e6f090e0de8df4a44112cb390e21d
 https://conda.anaconda.org/conda-forge/noarch/webencodings-0.5.1-py_1.tar.bz2#3563be4c5611a44210d9ba0c16113136
 https://conda.anaconda.org/conda-forge/noarch/wheel-0.40.0-pyhd8ed1ab_0.conda#49bb0d9e60ce1db25e151780331bb5f3
 https://conda.anaconda.org/conda-forge/noarch/win_inet_pton-1.1.0-pyhd8ed1ab_6.tar.bz2#30878ecc4bd36e8deeea1e3c151b2e0b
@@ -120,7 +120,7 @@ https://conda.anaconda.org/conda-forge/noarch/pysocks-1.7.1-pyh0701188_6.tar.bz2
 https://conda.anaconda.org/conda-forge/win-64/python-libarchive-c-4.0-py311h1ea47a8_2.tar.bz2#587f3af8e6a1d545a1b3b5a2617435f7
 https://conda.anaconda.org/conda-forge/win-64/ruamel.yaml-0.17.26-py311ha68e1ae_0.conda#f37792b82eacb037a40fcd547791c00e
 https://conda.anaconda.org/conda-forge/noarch/tqdm-4.65.0-pyhd8ed1ab_1.conda#ed792aff3acb977d09c7013358097f83
-https://conda.anaconda.org/conda-forge/noarch/typing-extensions-4.6.0-hd8ed1ab_0.conda#b044d219fc2cc63a680d1bdd325a03dd
+https://conda.anaconda.org/conda-forge/noarch/typing-extensions-4.6.1-hd8ed1ab_0.conda#7a2ea3f26e18d43160c76bbe7c13f5e8
 https://conda.anaconda.org/conda-forge/noarch/click-default-group-1.2.2-pyhd8ed1ab_1.tar.bz2#72a46ffc25701c173932fd55cf0965d3
 https://conda.anaconda.org/conda-forge/win-64/cmarkgfm-0.8.0-py311ha68e1ae_2.tar.bz2#206cb594ef199270b7e0d3d17aa87cbe
 https://conda.anaconda.org/conda-forge/win-64/cryptography-40.0.2-py311h28e9c30_0.conda#2962892090a18e2977b072f1e2c067ba
@@ -129,7 +129,7 @@ https://conda.anaconda.org/conda-forge/noarch/importlib_metadata-6.6.0-hd8ed1ab_
 https://conda.anaconda.org/conda-forge/noarch/jsonschema-4.17.3-pyhd8ed1ab_0.conda#723268a468177cd44568eb8f794e0d80
 https://conda.anaconda.org/conda-forge/win-64/libmambapy-1.4.2-py311h29ee5fe_0.conda#1d07b16b07e0b3fa5d2e145b221e4f1d
 https://conda.anaconda.org/conda-forge/noarch/platformdirs-3.5.1-pyhd8ed1ab_0.conda#e2be672aece1f060adf7154f76531a35
-https://conda.anaconda.org/conda-forge/win-64/pydantic-1.10.7-py311ha68e1ae_0.conda#98b3467399648acba37cc7bebc91f688
+https://conda.anaconda.org/conda-forge/win-64/pydantic-1.10.8-py311ha68e1ae_0.conda#db03940169f3c8ac02330ddbfe02be35
 https://conda.anaconda.org/conda-forge/noarch/rich-13.3.5-pyhd8ed1ab_0.conda#2e40a02ad28e34f26cee2a72042843db
 https://conda.anaconda.org/conda-forge/noarch/urllib3-2.0.2-pyhd8ed1ab_0.conda#81a763f3c64fe6d5f32e033b0325265d
 https://conda.anaconda.org/conda-forge/noarch/watchgod-0.8.2-pyhd8ed1ab_0.tar.bz2#8bf811791ff4ea8b6368b8ff451c6421

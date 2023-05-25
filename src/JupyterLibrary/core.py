@@ -19,6 +19,30 @@ component_classes = [
 ]
 
 
+class JupyterLibraryListener(LibraryListener):
+
+    """Custom listener to do per-suite imports of resource files."""
+
+    ROBOT_LISTENER_API_VERSION = 2
+
+    def start_suite(self, name, attrs):
+        """Handle dynamic imports at suite startup."""
+        super().start_suite(name, attrs)
+        resources = []
+
+        for common in COMMON:
+            resources += [f"JupyterLibrary/common/{common.name}"]
+
+        for client in CLIENTS:
+            for path in sorted(client.rglob("*.resource")):
+                resources += [
+                    f"JupyterLibrary/{path.relative_to(HERE).as_posix()}",
+                ]
+
+        for resource in resources:
+            BuiltIn().import_resource(resource)
+
+
 class JupyterLibrary(SeleniumLibrary):
 
     """JupyterLibrary is a Jupyter testing library for Robot Framework."""
@@ -55,27 +79,3 @@ class JupyterLibrary(SeleniumLibrary):
             [Component(self) for Component in component_classes],
         )
         self.ROBOT_LIBRARY_LISTENER = JupyterLibraryListener()
-
-
-class JupyterLibraryListener(LibraryListener):
-
-    """Custom listener to do per-suite imports of resource files."""
-
-    ROBOT_LISTENER_API_VERSION = 2
-
-    def start_suite(self, name, attrs):
-        """Handle dynamic imports at suite startup."""
-        super().start_suite(name, attrs)
-        resources = []
-
-        for common in COMMON:
-            resources += [f"JupyterLibrary/common/{common.name}"]
-
-        for client in CLIENTS:
-            for path in sorted(client.rglob("*.resource")):
-                resources += [
-                    f"JupyterLibrary/{path.relative_to(HERE).as_posix()}",
-                ]
-
-        for resource in resources:
-            BuiltIn().import_resource(resource)

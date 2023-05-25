@@ -258,13 +258,23 @@ def task_lint():
     run_in = P.RUN_IN[env]
     pym = [*run_in, *P.PYM]
 
+    clean, touch = P.get_ok_actions(P.OK.ssort)
+
+    yield {
+        "name": "ssort",
+        "doc": "apply source ordering to python",
+        "actions": [clean, [*pym, "ssort", *P.ALL_PY], touch],
+        "file_dep": [*P.ALL_PY, env_lock],
+        "targets": [P.OK.ssort],
+    }
+
     clean, touch = P.get_ok_actions(P.OK.black)
 
     yield {
         "name": "black",
         "doc": "ensure python code is well-formatted",
         "actions": [clean, [*pym, "black", "--quiet", *P.ALL_PY], touch],
-        "file_dep": [*P.ALL_PY, env_lock],
+        "file_dep": [*P.ALL_PY, env_lock, P.OK.ssort],
         "targets": [P.OK.black],
     }
 
@@ -401,7 +411,7 @@ def _make_setup(env):
             "--no-index",
             "--find-links",
             P.DIST,
-            P.SETUP["metadata"]["name"],
+            P.PPT_DATA["project"]["name"],
         ]
         doc = f"[{env}] install from dist"
     else:

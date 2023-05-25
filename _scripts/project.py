@@ -277,42 +277,16 @@ ROBOCOP_ARGS = [
 
 
 class OK:
-    atest = BUILD / ".ok.atest"
-    black = BUILD / ".ok.black"
-    prettier = BUILD / ".ok.prettier"
-    ruff = BUILD / ".ok.ruff"
-    robocop = BUILD / ".ok.robocop"
-    robot = BUILD / ".ok.robot"
-    robot_dry_run = BUILD / ".ok.robot.dryrun"
-    robotidy = BUILD / ".ok.robotidy"
-
-
-def get_atest_stem(attempt=1, extra_args=None, lockfile=None, browser=None):
-    """Get the directory in ATEST_OUT for this platform/apps."""
-    browser = browser or BROWSER
-    extra_args = extra_args or []
-
-    if not lockfile:
-        lockfile = get_lockfile("test")
-
-    if not lockfile:
-        raise RuntimeError(["Couldn't get lockfile", attempt, extra_args, browser])
-
-    stem = None
-
-    for env in ["lint", "test"]:
-        with contextlib.suppress(Exception):
-            stem = (
-                str(lockfile.parent.relative_to(LOCKS / env)) + f"_{attempt}_{browser}"
-            )
-
-    if not stem:
-        raise RuntimeError(["could not get stem", lockfile])
-
-    if "--dryrun" in extra_args:
-        stem += "_dry_run"
-
-    return stem
+    ok = BUILD / "ok"
+    atest = ok / "atest.txt"
+    ssort = ok / "ssort.txt"
+    black = ok / "black.txt"
+    prettier = ok / "prettier.txt"
+    robocop = ok / "robocop.txt"
+    robot = ok / "robot.txt"
+    robot_dry_run = ok / "robot.dryrun.txt"
+    robotidy = ok / "robotidy.txt"
+    ruff = ok / "ruff.txt"
 
 
 def get_lockfile(env):
@@ -353,7 +327,35 @@ def get_lockfile(env):
     return lockfile
 
 
-def get_ok_actions(p):
+def get_atest_stem(attempt=1, extra_args=None, lockfile=None, browser=None):
+    """Get the directory in ATEST_OUT for this platform/apps."""
+    browser = browser or BROWSER
+    extra_args = extra_args or []
+
+    if not lockfile:
+        lockfile = get_lockfile("test")
+
+    if not lockfile:
+        raise RuntimeError(["Couldn't get lockfile", attempt, extra_args, browser])
+
+    stem = None
+
+    for env in ["lint", "test"]:
+        with contextlib.suppress(Exception):
+            stem = (
+                str(lockfile.parent.relative_to(LOCKS / env)) + f"_{attempt}_{browser}"
+            )
+
+    if not stem:
+        raise RuntimeError(["could not get stem", lockfile])
+
+    if "--dryrun" in extra_args:
+        stem += "_dry_run"
+
+    return stem
+
+
+def get_ok_actions(p: Path):
     """Create a pair of doit `actions` for working with a canary/ok file."""
     return [
         lambda: p.unlink() if p.exists() else None,
