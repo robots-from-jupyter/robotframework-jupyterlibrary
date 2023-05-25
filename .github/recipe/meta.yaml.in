@@ -22,7 +22,7 @@ requirements:
   run:
     - python >=3.8
     - robotframework >=5
-    - robotframework-seleniumlibrary >=4.5
+    - robotframework-seleniumlibrary >=5
 
 test:
   requires:
