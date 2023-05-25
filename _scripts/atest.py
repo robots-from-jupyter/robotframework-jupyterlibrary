@@ -25,7 +25,6 @@ NON_CRITICAL = [
 ]
 
 PABOT_DEFAULTS = [
-    "--testlevelsplit",
     *("--processes", "4"),
     "--artifactsinsubfolders",
     *("--artifacts", "png,log,txt"),

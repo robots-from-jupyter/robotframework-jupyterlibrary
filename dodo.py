@@ -5,6 +5,7 @@ from hashlib import sha256
 
 import doit
 from doit.tools import InteractiveAction, PythonInteractiveAction, config_changed
+from yaml import safe_dump
 
 from _scripts import project as P
 from _scripts.reporter import GithubActionsReporter
@@ -165,7 +166,7 @@ def task_docs():
 
         P.RTD_ENV.write_text(
             header
-            + P.safe_dump(
+            + safe_dump(
                 {
                     "name": "rtd",
                     "channels": ["conda-forge", "nodefaults"],
