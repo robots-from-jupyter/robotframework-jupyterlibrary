@@ -17,6 +17,7 @@ LAB_MAJOR_ENV_VARS = {
 
 LAB_MAJOR_ARGS = {
     4: ["--exclude=client:classic"],
+    3: ["--exclude=client:notebook"],
 }
 
 NON_CRITICAL = [
@@ -151,8 +152,12 @@ def attempt_atest_with_retries(extra_args=None):
     extra_args = list(extra_args or [])
     error_count = -1
 
-    attempt = int(os.environ.get("ATEST_ATTEMPT") or "0")
-    retries = int(os.environ.get("ATEST_RETRIES") or "0")
+    if "--dryrun" in extra_args:
+        attempt = 0
+        retries = 0
+    else:
+        attempt = int(os.environ.get("ATEST_ATTEMPT") or "0")
+        retries = int(os.environ.get("ATEST_RETRIES") or "0")
     extra_args += os.environ.get("ATEST_ARGS", "").split()
 
     while error_count != 0 and attempt <= retries:

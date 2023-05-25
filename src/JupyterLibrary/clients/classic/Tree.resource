@@ -17,14 +17,14 @@ Open Notebook Classic
     ${token} =    Run Keyword If    not "${url}"    Get Jupyter Server Token    ${nbserver}
     ${final_url} =    Set Variable If    "${url}"    ${url}    ${nbserver_url}tree?token=${token}
     Open Browser    url=${final_url}    browser=${browser}    &{configuration}
-    Wait Until Page Contains Element    css:${JNC CSS TREE LIST ITEM}
+    Wait Until Element Is Visible    css:${JNC CSS TREE LIST ITEM}
 
 Launch A New Notebook Classic Notebook
     [Documentation]    Use the Jupyter Notebook Classic tree to launch a
     ...    Notebook with the given ``kernel``
     [Arguments]    ${kernel}=Python 3
     Click Element    css:${JNC CSS TREE NEW BUTTON}
-    Wait Until Page Contains Element    css:${JNC CSS TREE NEW MENU}
+    Wait Until Element Is Visible    css:${JNC CSS TREE NEW MENU}
     Click Element    css:${JNC CSS TREE NEW MENU} a[title*="${kernel}"]
     Switch Window    NEW
-    Wait Until Page Contains Element    css:${JNC CSS NB KERNEL ICON}${JNC CSS NB KERNEL IDLE}    timeout=30s
+    Wait Until Element Is Visible    css:${JNC CSS NB KERNEL ICON}${JNC CSS NB KERNEL IDLE}    timeout=30s

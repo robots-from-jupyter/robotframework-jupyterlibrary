@@ -15,7 +15,7 @@ Execute JupyterLab Command
     Maybe Accept A JupyterLab Prompt
     Open Command Palette With Hotkeys
     Input Text    css:${JLAB CSS CMD INPUT}    ${command}
-    Wait Until Page Contains Element    css:${JLAB CSS CMD ITEM}
+    Wait Until Element Is Visible    css:${JLAB CSS CMD ITEM}
     Click Element    css:${JLAB CSS CMD ITEM}
     Run Keyword If    ${accept}    Maybe Accept A JupyterLab Prompt
     Run Keyword If    ${close}    Maybe Close JupyterLab Sidebar
@@ -28,7 +28,7 @@ Open Command Palette With Hotkeys
     ...    - [#Set JupyterLab Plugin Settings|Set JupyterLab Plugin Settings]
     ${accel} =    Get ACCEL Key
     Press Keys    id:main    ${accel}+SHIFT+c
-    Wait Until Page Contains Element    css:${JLAB CSS CMD INPUT}
+    Wait Until Element Is Visible    css:${JLAB CSS CMD INPUT}
     Run Keyword And Ignore Error    Click Element    css:${JLAB CSS CMD INPUT}
 
 Reset JupyterLab And Close

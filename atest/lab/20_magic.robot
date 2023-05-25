@@ -39,7 +39,7 @@ Wait For And Click Text
     [Documentation]    Verify clicking some text works.
     [Arguments]    ${canary}
     ${sel} =    Set Variable    xpath://*[contains(text(), '${canary}')]
-    Wait Until Page Contains Element    ${sel}
+    Wait Until Element Is Visible    ${sel}
     Click Element    ${sel}
     Capture Page Screenshot    lab${/}20-00-magic-${NEXT SCREENSHOT}-${canary}.png
     Set Test Variable    ${NEXT SCREENSHOT}    ${NEXT SCREENSHOT.__add__(1)}

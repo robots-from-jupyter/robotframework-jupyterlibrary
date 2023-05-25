@@ -8,7 +8,7 @@ Resource            JupyterLibrary/clients/jupyterlab/Selectors.resource
 Current JupyterLab Cell Output Should Contain
     [Documentation]    Check the current active Notebook cell for the ``expected`` text.
     [Arguments]    ${expected}
-    Wait Until Page Contains Element    css:${JLAB CSS ACTIVE OUTPUT CHILDREN}
+    Wait Until Element Is Visible    css:${JLAB CSS ACTIVE OUTPUT CHILDREN}
     Element Should Contain    css:${JLAB CSS ACTIVE OUTPUT CHILDREN}    ${expected}
 
 Screenshot Each Output Of Active JupyterLab Cell

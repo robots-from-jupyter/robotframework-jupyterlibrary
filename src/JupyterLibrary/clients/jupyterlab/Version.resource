@@ -2,6 +2,11 @@
 Documentation       Overrides for JupyterLab 4
 
 
+*** Variables ***
+${CM6 CSS EDITOR}       .cm-content
+${CM6 JS INSTANCE}      .cmView
+
+
 *** Keywords ***
 Update Globals For JupyterLab Version
     [Documentation]    Update global variables for JupyterLab version.
@@ -19,7 +24,7 @@ Update Globals For JupyterLab 3
 Update Globals For JupyterLab 4
     [Documentation]    Replace current selectors with JupyterLab 4-specific ones.
     Set Global Variable    ${CM VERSION}    ${6}
-    Set Global Variable    ${CM CSS EDITOR}    .cm-content
-    Set Global Variable    ${CM JS INSTANCE}    .cmView
+    Set Global Variable    ${CM CSS EDITOR}    ${CM6 CSS EDITOR}
+    Set Global Variable    ${CM JS INSTANCE}    ${CM6 JS INSTANCE}
     Set Global Variable    ${JLAB CSS ACTIVE INPUT}    ${JLAB CSS ACTIVE CELL} ${CM CSS EDITOR}
     Log    JupyterLab 4 is now the current version.

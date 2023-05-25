@@ -9,7 +9,7 @@ ${JNC CSS TREE NEW BUTTON}              \#new-dropdown-button
 ${JNC CSS TREE NEW MENU}                \#new-menu
 ${JNC CSS NB KERNEL ICON}               \#kernel_indicator_icon
 ${JNC CSS NB KERNEL IDLE}               .kernel_idle_icon
-${JNC CSS NB KERNEL BUSY}               .kernel_budy_icon
+${JNC CSS NB KERNEL BUSY}               .kernel_busy_icon
 ${JNC TEXT BUSY PROMPT}                 In [*]:
 ${JNC CSS CMD BUTTON}                   button[data-jupyter-action="jupyter-notebook:show-command-palette"]
 ${JNC CSS CMD PALETTE}                  .modal.cmd-palette.in

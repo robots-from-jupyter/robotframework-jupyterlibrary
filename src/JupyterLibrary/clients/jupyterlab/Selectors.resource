@@ -2,26 +2,48 @@
 Documentation       Common selectors for JupyterLab elements
 
 Resource            JupyterLibrary/common/CodeMirror.resource
+Resource            JupyterLibrary/common/Lumino.resource
 
 
 *** Variables ***
 # robocop: disable=line-too-long
-# css selectors
-${JLAB CSS ACCEPT}                      .jp-mod-accept
-${JLAB CSS ACTIVE DOC}                  .jp-Document:not(.jp-mod-hidden)
-${JLAB CSS ACTIVE DOC CELLS}            ${JLAB CSS ACTIVE DOC} .jp-Cell
-${JLAB CSS ACTIVE CELL}                 ${JLAB CSS ACTIVE DOC} .jp-Cell.jp-mod-active
-${JLAB CSS ACTIVE INPUT}                ${JLAB CSS ACTIVE CELL} .CodeMirror
-${JLAB CSS ACTIVE OUTPUT CHILDREN}      ${JLAB CSS ACTIVE CELL} .jp-OutputArea-child
-${JLAB CSS OUTPUT}                      .jp-OutputArea-output
-${JLAB CSS ACTIVE CELL MARKDOWN}        ${JLAB CSS ACTIVE CELL} .jp-MarkdownOutput:not(.jp-mod-hidden)
-${JLAB CSS ACTIVE SIDEBAR}              .jp-SideBar .lm-TabBar-tab.lm-mod-current
-${JLAB CSS BUSY KERNEL}                 .jp-Toolbar-kernelStatus.jp-FilledCircleIcon
-${JLAB CSS CMD INPUT}                   .lm-CommandPalette-input
-${JLAB CSS CMD ITEM}                    .lm-CommandPalette-item
-${JLAB CSS NB TOOLBAR}                  .jp-NotebookPanel-toolbar
-${JLAB CSS SIDEBAR TAB}                 .jp-SideBar .lm-TabBar-tab
+# top-level mod utility classes
+${JLAB CSS MOD ACTIVE}                  .jp-mod-active
+${JLAB CSS MOD ACCEPT}                  .jp-mod-accept
+${JLAB CSS MOD HIDDEN}                  .jp-mod-hidden
+
+# deprecated
+${JLAB CSS ACCEPT}                      ${JLAB CSS MOD ACCEPT}    # deprecated
+
+# css atom element selectors
+${JLAB CSS CELL}                        .jp-Cell
+${JLAB CSS OUTPUT MARKDOWN}             .jp-MarkdownOutput
+
+# app and utility
+${JLAB CSS DOC}                         .jp-Document
+${JLAB CSS SIDEBAR}                     .jp-SideBar
 ${JLAB CSS SPINNER}                     .jp-Spinner
+
+# component selectors
+${JLAB CSS NB TOOLBAR}                  .jp-NotebookPanel-toolbar
+${JLAB CSS OUTPUT}                      .jp-OutputArea-output
+${JLAB CSS OUTPUT CHILD}                .jp-OutputArea-child
+
+# compounds
+${JLAB CSS ACTIVE DOC}                  ${JLAB CSS DOC}:not(${JLAB CSS MOD HIDDEN})
+${JLAB CSS ACTIVE DOC CELLS}            ${JLAB CSS ACTIVE DOC} ${JLAB CSS CELL}
+${JLAB CSS ACTIVE CELL}                 ${JLAB CSS ACTIVE DOC} ${JLAB CSS CELL}${JLAB CSS MOD ACTIVE}
+${JLAB CSS ACTIVE OUTPUT CHILDREN}      ${JLAB CSS ACTIVE CELL} ${JLAB CSS OUTPUT CHILD}
+${JLAB CSS ACTIVE CELL MARKDOWN}        ${JLAB CSS ACTIVE CELL} ${JLAB CSS OUTPUT MARKDOWN}:not(${JLAB CSS MOD HIDDEN})
+${JLAB CSS ACTIVE SIDEBAR}              ${JLAB CSS SIDEBAR} ${LM CSS TAB}${LM CSS MOD CURRENT}
+${JLAB CSS BUSY KERNEL}                 .jp-Toolbar-kernelStatus.jp-FilledCircleIcon
+${JLAB CSS CMD INPUT}                   ${LM CSS CMD INPUT}
+${JLAB CSS CMD ITEM}                    ${LM CSS CMD ITEM}
+${JLAB CSS SIDEBAR TAB}                 ${JLAB CSS SIDEBAR} ${LM CSS TAB}
+
+# overloaded by version
+${JLAB CSS ACTIVE INPUT}                ${JLAB CSS ACTIVE CELL} .CodeMirror
+
 # magic ids
 ${JLAB ID SPLASH}                       jupyterlab-splash
 # magic strings

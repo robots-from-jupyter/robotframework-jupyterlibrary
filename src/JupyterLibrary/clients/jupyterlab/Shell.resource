@@ -34,7 +34,7 @@ Wait For JupyterLab Splash Screen
     [Documentation]    Wait for the JupyterLab splash animation, waiting ``timeout``
     ...    for the splash screen to appear/disappear, then ``sleep``.
     [Arguments]    ${timeout}=10s    ${sleep}=2s
-    Wait Until Page Contains Element    css:#${JLAB ID SPLASH}    timeout=${timeout}
+    Wait Until Element Is Visible    css:#${JLAB ID SPLASH}    timeout=${timeout}
     Wait Until Page Does Not Contain Element    css:#${JLAB ID SPLASH}    timeout=${timeout}
     Sleep    ${sleep}
 
@@ -49,7 +49,7 @@ Click JupyterLab Menu
     ...    e.g. _File_, _Help_, etc.
     [Arguments]    ${label}
     ${xpath} =    Set Variable    ${JLAB XP TOP}${JLAB XP MENU LABEL}\[text() = '${label}']
-    Wait Until Page Contains Element    ${xpath}
+    Wait Until Element Is Visible    ${xpath}
     Mouse Over    ${xpath}
     Click Element    ${xpath}
     Run Keyword And Ignore Error    Mouse Over    ${xpath}
@@ -58,7 +58,7 @@ Click JupyterLab Menu Item
     [Documentation]    Click a currently-visible JupyterLab menu item by ``label``.
     [Arguments]    ${label}
     ${item} =    Set Variable    ${JLAB XP MENU ITEM LABEL VISIBLE}\[text() = '${label}']
-    Wait Until Page Contains Element    ${item}
+    Wait Until Element Is Visible    ${item}
     Mouse Over    ${item}
     Click Element    ${item}
     Run Keyword And Ignore Error    Mouse Over    ${item}
