@@ -25,6 +25,7 @@ Set Up JupyterLab Suite
     Wait For New Jupyter Server To Be Ready    jupyter-lab
     ...    env:HOME=${home_dir}
     ...    env:JUPYTER_PREFER_ENV_PATH=0
+    ...    stdout=${OUTPUT_DIR}${/}server.log
 
 Tear Down JupyterLab Suite
     [Documentation]    Clean up after JupyterLab
