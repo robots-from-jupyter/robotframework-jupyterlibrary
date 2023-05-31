@@ -10,7 +10,7 @@ labels: maintenance
   - [ ] move the new release to the top of the stack
 - [ ] validate on binder
 - [ ] validate on ReadTheDocs
-- [ ] wait for a successful build of `master`
+- [ ] wait for a successful build of `main`
 - [ ] download the `dist` archive and unpack somewhere (maybe a fresh `dist`)
 - [ ] create a new release through the GitHub UI
   - [ ] paste in the relevant `HISTORY.ipynb` entries

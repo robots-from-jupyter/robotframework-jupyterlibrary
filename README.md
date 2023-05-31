@@ -74,11 +74,11 @@ also derived from other tools:
 [miniforge]: https://github.com/conda-forge/miniforge/releases
 [binder-badge]: https://mybinder.org/badge_logo.svg
 [binder]:
-  https://mybinder.org/v2/gh/robots-from-jupyter/robotframework-jupyterlibrary/master?urlpath=lab/tree/docs/MAGIC.ipynb
+  https://mybinder.org/v2/gh/robots-from-jupyter/robotframework-jupyterlibrary/main?urlpath=lab/tree/docs/MAGIC.ipynb
 [workflow-badge]:
   https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/workflows/CI/badge.svg
 [workflow]:
-  https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/actions?query=workflow%3ACI+branch%3Amaster
+  https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/actions?query=workflow%3ACI+branch%3Amain
 [docs-badge]:
   https://readthedocs.org/projects/robotframework-jupyterlibrary/badge/?version=stable
 [pip-badge]: https://img.shields.io/pypi/v/robotframework-jupyterlibrary.svg
