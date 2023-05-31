@@ -18,7 +18,8 @@ Open Notebook
     ${final_url} =    Set Variable If    "${url}"    ${url}    ${nbserver_url}tree?token=${token}
     Open Browser    url=${final_url}    browser=${browser}    &{configuration}
     Update Globals For JupyterLab 4
-    Wait Until Element Is Visible    css:${JNB CSS TREE LIST}
+    Wait Until Element Is Visible    css:${JNB CSS TREE}
+    Wait Until Element Is Visible    css:${JNB CSS TREE LIST}    timeout=10s
 
 Launch A New Notebook
     [Documentation]    Use the Jupyter Notebook tree to launch a Notebook with the

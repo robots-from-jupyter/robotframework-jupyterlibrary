@@ -367,5 +367,6 @@ def get_ok_actions(p: Path):
 def get_source_date_epoch():
     """Get the SOURCE_DATE_EPOCH from git."""
     return subprocess.check_output(
-        ["git", "log", "-1", "--format=%ct"], encoding="utf-8",
+        ["git", "log", "-1", "--format=%ct"],
+        encoding="utf-8",
     ).strip()
