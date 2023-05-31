@@ -1,31 +1,35 @@
-""" Documentation configuration and workflow for JupyterLibrary
-"""
+"""Documentation configuration and workflow for JupyterLibrary."""
+import os
 import subprocess
 import sys
-import os
 from datetime import datetime
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from configparser import ConfigParser
 
 # you have to have run `python -m pip install -e`
 import JupyterLibrary
 from JupyterLibrary.core import CLIENTS, COMMON
 
+try:
+    import tomllib
+except ImportError:
+    import tomli as tomllib
+
 # not really in use yet...
 os.environ["IN_SPHINX"] = "1"
 
-_parser = ConfigParser()
-_parser.read(Path(__file__).parent.parent / "setup.cfg")
+PROJ = tomllib.loads(
+    (Path(__file__).parent.parent / "pyproject.toml").read_text(encoding="utf-8"),
+)
+NAME = PROJ["project"]["name"]
 
-CONF = {k: _parser[k] for k in _parser.sections()}
 YEAR = datetime.now().year
 KEYWORDS = "*** Keywords ***"
 VARIABLES = "*** Variables ***"
 
 
 def setup(app):
-    """Runs before the "normal business" of sphinx. Don't go too crazy here."""
+    """Run before the "normal business" of sphinx. Don't go too crazy here."""
     here = Path(__file__).parent
 
     subprocess.check_call(
@@ -35,7 +39,7 @@ def setup(app):
             "robot.libdoc",
             "JupyterLibrary",
             str(here / "_static" / "JupyterLibrary.html"),
-        ]
+        ],
     )
 
     for client_dir in CLIENTS:
@@ -48,7 +52,7 @@ def setup(app):
                     "*** Settings ***",
                     f"Documentation    Keywords for {client.name}",
                     "",
-                ]
+                ],
             )
             for sub in sorted(client.rglob("*.resource")):
                 sub_text = sub.read_text()
@@ -69,7 +73,7 @@ def setup(app):
                     "robot.libdoc",
                     str(out_file),
                     str(here / "_static" / f"{client.name}.html"),
-                ]
+                ],
             )
 
     for common_file in COMMON:
@@ -82,7 +86,7 @@ def setup(app):
                 "robot.libdoc",
                 common,
                 str(here / "_static" / f"{common_name}.html"),
-            ]
+            ],
         )
 
     app.add_css_file("css/custom.css")
@@ -94,16 +98,13 @@ def setup(app):
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
 
 
 # -- Project information -----------------------------------------------------
 
-project = CONF["metadata"]["name"]
-copyright = f"""{YEAR}, {CONF["metadata"]["author"]}"""
-author = CONF["metadata"]["author"]
+project = PROJ["project"]["name"]
+author = PROJ["project"]["authors"][0]["name"]
+copyright = f"""{YEAR}, {author}"""
 
 # The short X.Y version
 version = ".".join(JupyterLibrary.__version__.split(".")[:2])
@@ -114,7 +115,6 @@ release = JupyterLibrary.__version__
 
 # If your documentation needs a minimal Sphinx version, state it here.
 #
-# needs_sphinx = '1.0'
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
@@ -171,10 +171,10 @@ html_theme = "pydata_sphinx_theme"
 # documentation.
 #
 html_theme_options = {
-    "page_sidebar_items": [],
     "navbar_center": ["navbar-nav.html"],
-    "github_url": CONF["metadata"]["url"],
-    "logo": {"text": CONF["metadata"]["name"]},
+    "header_links_before_dropdown": 11,
+    "github_url": PROJ["project"]["urls"]["Source Code"],
+    "logo": {"text": NAME},
     "icon_links": [
         {
             "name": "PyPI",
@@ -188,6 +188,8 @@ html_theme_options = {
             "type": "local",
         },
     ],
+    "pygment_light_style": "github-light",
+    "pygment_dark_style": "gotthard-dark",
 }
 
 html_sidebars = {
@@ -197,7 +199,7 @@ html_sidebars = {
         "edit-this-page",
         "sidebar-nav-bs",
         "sidebar-ethical-ads",
-    ]
+    ],
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
@@ -213,14 +215,13 @@ html_static_path = ["_static"]
 # default: ``['localtoc.html', 'relations.html', 'sourcelink.html',
 # 'searchbox.html']``.
 #
-# html_sidebars = {}
 
 nb_execution_mode = "force"
 
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = f"""{CONF["metadata"]["name"]}-doc"""
+htmlhelp_basename = f"""{NAME}-doc"""
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -228,16 +229,12 @@ htmlhelp_basename = f"""{CONF["metadata"]["name"]}-doc"""
 latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
     #
-    # 'papersize': 'letterpaper',
     # The font size ('10pt', '11pt' or '12pt').
     #
-    # 'pointsize': '10pt',
     # Additional stuff for the LaTeX preamble.
     #
-    # 'preamble': '',
     # Latex figure (float) alignment
     #
-    # 'figure_align': 'htbp',
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
@@ -246,11 +243,11 @@ latex_elements = {
 latex_documents = [
     (
         master_doc,
-        f"""{CONF["metadata"]["name"]}.tex""",
-        f"""{CONF["metadata"]["name"]} Documentation""",
-        CONF["metadata"]["author"],
+        f"""{NAME}.tex""",
+        f"""{NAME} Documentation""",
+        author,
         "manual",
-    )
+    ),
 ]
 
 
@@ -261,11 +258,11 @@ latex_documents = [
 man_pages = [
     (
         master_doc,
-        CONF["metadata"]["name"],
-        f"""{CONF["metadata"]["name"]} Documentation""",
+        NAME,
+        f"""{NAME} Documentation""",
         [author],
         1,
-    )
+    ),
 ]
 
 
@@ -278,12 +275,12 @@ texinfo_documents = [
     (
         master_doc,
         "jupyterlibrary",
-        f"""{CONF["metadata"]["name"]} Documentation""",
+        f"""{NAME} Documentation""",
         author,
-        CONF["metadata"]["name"],
-        CONF["metadata"]["description"],
+        NAME,
+        PROJ["project"]["description"],
         "Miscellaneous",
-    )
+    ),
 ]
 
 
@@ -295,11 +292,9 @@ epub_title = project
 # The unique identifier of the text. This can be a ISBN number
 # or the project homepage.
 #
-# epub_identifier = ''
 
 # A unique identification for the text.
 #
-# epub_uid = ''
 
 # A list of files that should not be packed into the epub file.
 epub_exclude_files = ["search.html"]

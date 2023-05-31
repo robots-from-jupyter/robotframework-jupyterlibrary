@@ -1,15 +1,15 @@
 *** Settings ***
-Documentation       Command keywords for Jupyter Classic
+Documentation       Command keywords for Jupyter Notebook
 
 Resource            JupyterLibrary/clients/notebook/Selectors.resource
 
 
 *** Keywords ***
-Execute Notebook Classic Command
-    [Documentation]    Use the Notebook Classic Command Pop-up
+Execute Notebook Command
+    [Documentation]    Use the Jupyter Notebook Command Pop-up
     ...    to run a command and ``accept`` any resulting dialogs, then ``close``
     ...    the Command Palette.
     [Arguments]    ${command}    ${accept}=${True}    ${close}=${True}
-    Click Element    css:${JNC CSS CMD BUTTON}
-    Input Text    css:${JNC CSS CMD INPUT}    ${command}
-    Click Element    css:${JNC CSS CMD ITEM}
+    Click Element    css:${JNB CSS CMD BUTTON}
+    Input Text    css:${JNB CSS CMD INPUT}    ${command}
+    Click Element    css:${JNB CSS CMD ITEM}

@@ -51,19 +51,19 @@ hoping for a better cache hit rate. On the same _operating system_, however, any
 pre-solved lockfiles can be used, by specifying the `RJFL_LOCKFILE` environment
 variable.
 
-For example, if `linux-64` running `python3.7` with `jupyterlab 1` failed:
+For example, if `linux-64` running `python3.8` with `jupyterlab 3` failed:
 
 ```bash
 !/usr/bin/env bash
 set -eux
-RFJL_LOCKDIR=test/linux-64/py3.7/lab1 doit release
+RFJL_LOCKDIR=test/linux-64/py3.8/lab3 doit release
 ```
 
 Or, in a `bat` script:
 
 ```bat
 @echo on
-set RFJL_LOCKDIR=test/win-64/py3.7/lab1
+set RFJL_LOCKDIR=test/win-64/py3.8/lab3
 doit release
 ```
 
@@ -78,6 +78,7 @@ A number of environment variables control how some of the `doit` tasks function.
 | -----------------: | :---------------: | -------------------------------------------------- |
 |       `ATEST_ARGS` |       `[]`        | a JSON array of tokens to pass to `pabot`          |
 |    `ATEST_RETRIES` |        `0`        | number of times to re-run failing tests            |
+|    `ATEST_ATTEMPT` |        `0`        | where to start in the retry order                  |
 |          `BROWSER` | `headlessfirefox` | which browser to use (only tested with FF)         |
 |        `CONDA_EXE` |      `mamba`      | a custom `conda`-compatible tool to use            |
 |        `IN_BINDER` |        `0`        | skips a number of steps                            |
@@ -87,11 +88,11 @@ A number of environment variables control how some of the `doit` tasks function.
 
 - [ ] merge all outstanding PRs
 - [ ] start a release issue with a checklist (maybe like this one)
-- [ ] ensure `VERSION` has been increased appropriately
+- [ ] ensure `pyproject.toml#/project/version` has been increased appropriately
 - [ ] ensure the `HISTORY.ipynb` is up-to-date
 - [ ] validate on binder
 - [ ] validate on ReadTheDocs
-- [ ] wait for a successful build of `master`
+- [ ] wait for a successful build of `main`
 - [ ] download the `dist` archive and unpack somewhere (maybe a fresh `dist`)
 - [ ] create a new release through the GitHub UI
   - [ ] paste in the relevant `HISTORY` entries
@@ -104,5 +105,5 @@ A number of environment variables control how some of the `doit` tasks function.
   - [ ] handle `conda-forge` feedstock tasks
   - [ ] validate on binder via simplest-possible gists
   - [ ] activate the version on ReadTheDocs
-  - [ ] bump `VERSION` to next development version
+  - [ ] bump `pyproject.toml#/project/version` to next development version
   - [ ] update release procedures

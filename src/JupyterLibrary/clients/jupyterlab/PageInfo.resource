@@ -31,7 +31,7 @@ Update JupyterLab PageInfo Cache
     [Documentation]    Update the cached JupyterLab ``pageInfo``. _Not usually needed._
     ${sel} =    Set Variable    xpath://${JLAB XP PAGEINFO}
     Wait Until Page Contains Element    ${sel}
-    ${txt} =    Get Element Attribute    ${sel}    innerHTML
+    ${txt} =    JupyterLibrary.Get Element Attribute    ${sel}    innerHTML
     ${pageInfo} =    JSON.Loads    ${txt}
     Set Suite Variable    ${JLAB PAGEINFO CACHE}    ${pageInfo}    children=${True}
 
@@ -53,4 +53,5 @@ Get JupyterLab Application Version Info
     ...    the cached info first.
     [Arguments]    ${clear}=${False}
     ${version} =    Get JupyterLab Page Info    appVersion    clear=${clear}
-    [Return]    ${version.split(".")}
+    ${version_info} =    Set Variable    ${version.split(".")}
+    [Return]    ${version_info}

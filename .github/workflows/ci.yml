@@ -2,11 +2,9 @@ name: CI
 
 on:
   push:
-    branches:
-      - master
+    branches: [main]
   pull_request:
-    branches:
-      - master
+    branches: [main]
   workflow_dispatch:
 
 concurrency:
@@ -127,8 +125,8 @@ jobs:
         #   doit -n4 lock
         #
         conda-subdir: [win-64, osx-64, linux-64]
-        python-version: [py3.7, py3.11]
-        lab-version: [lab1, lab2, lab3]
+        python-version: [py3.8, py3.11]
+        lab-version: [lab3, lab4]
         include:
           - conda-subdir: linux-64
             os: ubuntu
@@ -185,21 +183,3 @@ jobs:
       - name: Rename uncached conda packages
         shell: bash
         run: mv "${CONDA_PKGS_DIR}" "${CONDA_PKGS_DIR}_do_not_cache"
-
-  report:
-    if: always()
-    needs: [test, conda-build]
-    runs-on: ubuntu-latest
-    steps:
-      - if: always()
-        uses: actions/download-artifact@v3
-        with:
-          path: ./artifacts
-      - if: always()
-        run: find ./artifacts
-      - if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: rfjl_${{ github.run_number }}__COMBINED
-          path: |
-            ./artifacts

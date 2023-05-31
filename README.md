@@ -61,18 +61,24 @@ code from a number of other projects:
 - [Jyve] ([BSD-3-Clause][jyve-license])
   - Initial implementations of robot keywords
 
+Some of its testing approaches (only distribtued in source form, not e.g. wheels) are
+also derived from other tools:
+
+- [ipyforcegraph][ipfg] ([BSD-3-Clause][ipfg-license])
+  - Initial implementation of [kernel-under-test coverage][kernel-cov] instrumentation
+
 [license]:
-  https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/blob/master/LICENSE
+  https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/blob/main/LICENSE
 [acceptance tests]:
-  https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/tree/master/atest
+  https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/tree/main/atest
 [miniforge]: https://github.com/conda-forge/miniforge/releases
 [binder-badge]: https://mybinder.org/badge_logo.svg
 [binder]:
-  https://mybinder.org/v2/gh/robots-from-jupyter/robotframework-jupyterlibrary/master?urlpath=lab/tree/docs/MAGIC.ipynb
+  https://mybinder.org/v2/gh/robots-from-jupyter/robotframework-jupyterlibrary/main?urlpath=lab/tree/docs/MAGIC.ipynb
 [workflow-badge]:
   https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/workflows/CI/badge.svg
 [workflow]:
-  https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/actions?query=workflow%3ACI+branch%3Amaster
+  https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/actions?query=workflow%3ACI+branch%3Amain
 [docs-badge]:
   https://readthedocs.org/projects/robotframework-jupyterlibrary/badge/?version=stable
 [pip-badge]: https://img.shields.io/pypi/v/robotframework-jupyterlibrary.svg
@@ -82,9 +88,12 @@ code from a number of other projects:
 [conda-forge-badge]:
   https://img.shields.io/conda/vn/conda-forge/robotframework-jupyterlibrary.svg
 [docs]: https://robotframework-jupyterlibrary.readthedocs.io
+[ipfg]: https://github.com/jupyrdf/ipyforcegraph
+[ipfg-license]: https://github.com/jupyrdf/ipyforcegraph/blob/main/LICENSE.txt
 [jyve]: https://github.com/deathbeds/jyve
 [jyve-license]: https://github.com/deathbeds/jyve/blob/master/LICENSE
+[kernel-cov]: https://github.com/jupyrdf/ipyforcegraph/pull/89
 [magics]: https://robotframework-jupyterlibrary.readthedocs.io/en/stable/MAGIC.html
 [keywords]: https://robotframework-jupyterlibrary.readthedocs.io/en/stable/KEYWORDS.html
 [contributing]:
-  https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/blob/master/CONTRIBUTING.md
+  https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/blob/main/CONTRIBUTING.md

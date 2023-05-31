@@ -1,34 +1,38 @@
+"""A library component for managing Jupyter servers."""
 import os
 import shutil
 import socket
-import tempfile
-import typing
-import time
 import subprocess
-from os.path import join
+import tempfile
+import time
+import typing
+from pathlib import Path
+from urllib.request import urlopen
 from uuid import uuid4
 
 from robot.libraries.BuiltIn import BuiltIn
 from SeleniumLibrary.base import LibraryComponent, keyword
-from urllib.request import urlopen
 
 
 class ServerKeywords(LibraryComponent):
-    _handles = []
-    _tmpdirs = {}
-    _notebook_dirs = {}
-    _ports = {}
-    _base_urls = {}
-    _tokens = {}
 
-    _app_name = None
+    """A component that extends the core with Jupyter server management."""
+
+    _handles: typing.List[subprocess.Popen] = []
+    _tmpdirs: typing.Dict[subprocess.Popen, str] = {}
+    _notebook_dirs: typing.Dict[subprocess.Popen, str] = {}
+    _ports: typing.Dict[subprocess.Popen, int] = {}
+    _base_urls: typing.Dict[subprocess.Popen, str] = {}
+    _tokens: typing.Dict[subprocess.Popen, str] = {}
+
+    _app_name: typing.Optional[str] = None
 
     @keyword
     def set_default_jupyter_app_name(
-        self, app_name: typing.Optional[str] = None
+        self,
+        app_name: typing.Optional[str] = None,
     ) -> typing.Optional[str]:
-        """Set the current ``traitlets.Configurable`` Jupyter Server application,
-        returning the previous value.
+        """Set the current ``traitlets.Configurable`` Jupyter Server application, returning the previous value.
 
         A value of ``None`` (the default) will try to detect the app based on
         command name, such as:
@@ -47,10 +51,10 @@ class ServerKeywords(LibraryComponent):
 
     @keyword
     def get_jupyter_app_name(
-        self, command: typing.Optional[str] = None
+        self,
+        command: typing.Optional[str] = None,
     ) -> typing.Optional[str]:
-        """Get the current ``traitlets.Configurable`` Jupyter Server application,
-        optionally for a specific CLI command.
+        """Get the current ``traitlets.Configurable`` Jupyter Server application, optionally for a specific CLI command.
 
         See [#Set Default Jupyter App Name] for more.
         """
@@ -76,15 +80,16 @@ class ServerKeywords(LibraryComponent):
     ) -> subprocess.Popen:
         """Start a Jupyter server. All arguments are optional.
 
-        | = argument =     | = default =           | = notes =                          |
-        | ``command``      | ``jupyter-notebook``  | e.g. ``jupyter-lab``               |
-        | ``port``         | an unused port        |                                    |
-        | ``base_url``     | ``/@rf/``             |                                    |
-        | ``notebook_dir`` | a temporary directory |                                    |
-        | ``token``        | a random ``uuid4``    |                                    |
-        | ``*args``        |                       | extra server arguments             |
-        | ``**config``     |                       | extra process arguments            |
-        | ``app_name``     | ``None`` (detect)     | e.g. ``NotebookApp``, `ServerApp`` |
+        | = argument =     | = default =           | = notes =                               |
+        | ``command``      | ``jupyter-notebook``  | e.g. ``jupyter-lab``                    |
+        | ``port``         | an unused port        |                                         |
+        | ``base_url``     | ``/@rf/``             |                                         |
+        | ``notebook_dir`` | a temporary directory |                                         |
+        | ``token``        | a random ``uuid4``    |                                         |
+        | ``*args``        |                       | extra server arguments                  |
+        | ``**config``     |                       | extra process arguments                 |
+        | ``app_name``     | ``None`` (detect)     | e.g. ``NotebookApp``, `ServerApp``      |
+        | ``extra_args``   | ``[]``                | extra arguments beyond ```token``, etc. |
 
         If not configured, the ``%{HOME}`` environment variable and current
         working directory will be set to avoid leaking configuration
@@ -94,6 +99,8 @@ class ServerKeywords(LibraryComponent):
 
         The ``app_name`` argument is as described for the [#Get Jupyter App Name|app name],
         with the default being to autodetect from the command and environment.
+
+        ``extra_args`` are passed to ``Start Process`` before the ``token``
         """
         app_name = (
             config.pop("app_name", None)
@@ -106,33 +113,38 @@ class ServerKeywords(LibraryComponent):
         BuiltIn().import_library("Process")
         plib = BuiltIn().get_library_instance("Process")
 
-        tmpdir = tempfile.mkdtemp()
+        tmp_path = Path(tempfile.mkdtemp())
 
         if "env:HOME" not in config:
-            home_dir = join(tmpdir, "home")
-            os.mkdir(home_dir)
-            config["env:HOME"] = home_dir
+            home_dir = tmp_path / "home"
+            home_dir.mkdir()
+            config["env:HOME"] = str(home_dir)
 
         if "stdout" not in config:
-            config["stdout"] = join(tmpdir, "server.log")
+            config["stdout"] = str(tmp_path / "server.log")
 
         if "stderr" not in config:
             config["stderr"] = "STDOUT"
 
         if notebook_dir is None:
-            notebook_dir = join(tmpdir, "notebooks")
-            os.mkdir(notebook_dir)
-            config["cwd"] = notebook_dir
+            notebook_dir = tmp_path / "notebooks"
+            notebook_dir.mkdir()
+            config["cwd"] = str(notebook_dir)
 
         args = args or self.build_jupyter_server_arguments(
-            port, base_url, token, app_name
+            port,
+            base_url,
+            token,
+            app_name,
         )
 
-        handle = plib.start_process(command, *args, **config)
+        extra_args = config.pop("extra_args", [])
+
+        handle = plib.start_process(command, *extra_args, *args, **config)
 
         self._handles += [handle]
-        self._tmpdirs[handle] = tmpdir
-        self._notebook_dirs[handle] = notebook_dir
+        self._tmpdirs[handle] = str(tmp_path)
+        self._notebook_dirs[handle] = str(notebook_dir)
         self._ports[handle] = port
         self._base_urls[handle] = base_url
         self._tokens[handle] = token
@@ -146,19 +158,20 @@ class ServerKeywords(LibraryComponent):
         base_url: str,
         token: str,
         app_name: typing.Optional[str] = None,
-    ) -> typing.List[str]:
+    ) -> typing.Tuple[str]:
         """Build Some default Jupyter application arguments.
 
         If the ``app_name`` is not provided, it will be detected based on the rules
-        in [#Get Jupyter App Name]."""
+        in [#Get Jupyter App Name].
+        """
         app_name = app_name or self.get_jupyter_app_name()
-        return [
+        return (
             "--no-browser",
             "--debug",
             f"--port={port}",
             f"--{app_name}.token={token}",
             f"--{app_name}.base_url={base_url}",
-        ]
+        )
 
     @keyword
     def copy_files_to_jupyter_directory(self, *sources: str, **kwargs) -> None:
@@ -171,11 +184,11 @@ class ServerKeywords(LibraryComponent):
         notebook_dir = self._notebook_dirs[nbserver]
         BuiltIn().import_library("OperatingSystem")
         osli = BuiltIn().get_library_instance("OperatingSystem")
-        return osli.copy_files(*(list(sources) + [notebook_dir]))
+        return osli.copy_files(*sorted(sources), notebook_dir)
 
     @keyword
     def copy_files_from_jupyter_directory(self, *src_and_dest: str, **kwargs) -> None:
-        """Copy some files from the (temporary) jupyter server root
+        """Copy some files from the (temporary) jupyter server root.
 
         | = argument = | = default =                       |
         | ``nbserver`` | the most-recently launched server |
@@ -183,29 +196,34 @@ class ServerKeywords(LibraryComponent):
         Patterns will have the notebook directory prepended
         """
         nbserver = kwargs.get("nbserver", self._handles[-1])
-        notebook_dir = self._notebook_dirs[nbserver]
+        notebook_dir = Path(self._notebook_dirs[nbserver])
         BuiltIn().import_library("OperatingSystem")
         osli = BuiltIn().get_library_instance("OperatingSystem")
-        sources = [join(notebook_dir, src) for src in src_and_dest[:-1]]
+        sources = [str(notebook_dir / src) for src in src_and_dest[:-1]]
         dest = src_and_dest[-1]
-        return osli.copy_files(*sources + [dest])
+        return osli.copy_files(*sources, dest)
 
     @keyword
     def get_jupyter_directory(
-        self, nbserver: typing.Optional[subprocess.Popen] = None
+        self,
+        nbserver: typing.Optional[subprocess.Popen] = None,
     ) -> str:
-        """
+        """Get the Jupyter contents directory.
+
         | = argument = | = default =                       |
         | ``nbserver`` | the most-recently launched server |
         """
         nbserver = nbserver if nbserver is not None else self._handles[-1]
+
         return self._notebook_dirs[nbserver]
 
     @keyword
     def wait_for_jupyter_server_to_be_ready(
-        self, *nbservers: subprocess.Popen, **kwargs
+        self,
+        *nbservers: subprocess.Popen,
+        **kwargs,
     ) -> int:
-        """Wait for the most-recently started Jupyter server to be ready"""
+        """Wait for the most-recently started Jupyter server to be ready."""
         interval = float(kwargs.get("interval", 0.5))
         retries = int(kwargs.get("retries", 60))
 
@@ -228,92 +246,138 @@ class ServerKeywords(LibraryComponent):
                 time.sleep(interval)
                 error = _error
 
-        assert ready == len(nbservers), (
-            f"Only {ready} of {len(nbservers)} servers were ready after "
-            f"{interval * retries}s. Last error: {type(error)} {error}"
-        )
+        if ready != len(nbservers):
+            message = (
+                f"Only {ready} of {len(nbservers)} servers were ready after "
+                f"{interval * retries}s. Last error: {type(error)} {error}"
+            )
+            raise RuntimeError(message)
         return ready
 
     @keyword
     def get_jupyter_server_url(
-        self, nbserver: typing.Optional[subprocess.Popen] = None
+        self,
+        nbserver: typing.Optional[subprocess.Popen] = None,
     ) -> str:
-        """Get the given (or most recently-launched) server's URL"""
+        """Get the given (or most recently-launched) server's URL."""
         nbh = nbserver or self._handles[-1]
         return f"http://127.0.0.1:{self._ports[nbh]}{self._base_urls[nbh]}"
 
     @keyword
     def get_jupyter_server_token(
-        self, nbserver: typing.Optional[subprocess.Popen] = None
+        self,
+        nbserver: typing.Optional[subprocess.Popen] = None,
     ) -> str:
-        """Get the given (or most recently-launched) server's token"""
+        """Get the given (or most recently-launched) server's token."""
         nbh = nbserver or self._handles[-1]
         return self._tokens[nbh]
 
     @keyword
     def wait_for_new_jupyter_server_to_be_ready(
-        self, command: typing.Optional[str] = None, *args, **config
+        self,
+        command: typing.Optional[str] = None,
+        *args,
+        **config,
     ) -> subprocess.Popen:
-        """Get the given (or most recently-launched) server's token. See
-        [#Start New Jupyter Server|Start New Jupyter Server]
+        """Get the given (or most recently-launched) server's token.
+
+        See [#Start New Jupyter Server|Start New Jupyter Server].
         """
         handle = self.start_new_jupyter_server(command, *args, **config)
         self.wait_for_jupyter_server_to_be_ready(handle)
         return handle
 
     @keyword
-    def terminate_all_jupyter_servers(self, timeout: str = "6s") -> int:
-        """Close all Jupyter servers started by
-        [#Start New Jupyter Server|Start New Jupyter Server],
-        waiting ``timeout`` to ensure all files/processes are freed before
+    def shut_down_jupyter_server(self, nbserver=None) -> int:
+        """Gracefully shut down a Jupyter server started by [#Start New Jupyter Server|Start New Jupyter Server].
+
+        If no ``handle`` is given, the last-started server will be shut down.
+        """
+        nbh = nbserver or self._handles[-1]
+        url = self.get_jupyter_server_url(nbh)
+        token = self.get_jupyter_server_token(nbh)
+
+        try:
+            urlopen(f"{url}api/shutdown?token={token}", data=[])
+        except Exception as err:
+            BuiltIn().log(err)
+            return 0
+
+        self._ports.pop(nbh)
+        self._base_urls.pop(nbh)
+        self._tokens.pop(nbh)
+
+        return 1
+
+    @keyword
+    def clean_up_jupyter_server_files(self, nbserver=None) -> int:
+        """Clean up the files owned by a started by [#Start New Jupyter Server|Jupyter Server].
+
+        If no ``handle`` is given, the last-started server will be terminated.
+        """
+        nbh = nbserver or self._handles[-1]
+
+        shutil.rmtree(self._tmpdirs[nbh], ignore_errors=True)
+
+        self._tmpdirs.pop(nbh)
+
+    @keyword
+    def terminate_jupyter_server(self, nbserver=None) -> int:
+        """Close a Jupyter server started by [#Start New Jupyter Server|Start New Jupyter Server].
+
+        If no ``nbserver`` is given, the last-started server will be terminated.
+
+        Waiting ``timeout`` to ensure all files/processes are freed before
         cleaning up temporary directories, if any.
         """
         plib = BuiltIn().get_library_instance("Process")
 
-        self.wait_for_jupyter_server_to_be_ready()
+        nbh = nbserver or self._handles[-1]
 
-        terminated = 0
-        shutdown = 0
+        plib.terminate_process(nbh)
+
+        self._handles.remove(nbh)
+
+        return 1
+
+    @keyword
+    def terminate_all_jupyter_servers(self, timeout: str = "6s") -> int:
+        """Close all Jupyter servers started by [#Start New Jupyter Server|Start New Jupyter Server].
+
+        Waiting ``timeout`` after termination to ensure all files/processes are freed before
+        cleaning up temporary directories.
+        """
+        was_shutdown = []
+        was_terminated = []
         for nbh in self._handles:
-            url = self.get_jupyter_server_url(nbh)
-            token = self.get_jupyter_server_token(nbh)
             try:
-                urlopen(f"{url}api/shutdown?token={token}", data=[])
-                shutdown += 1
+                self.shut_down_jupyter_server(nbh)
+                was_shutdown += [nbh]
             except Exception as err:
                 BuiltIn().log(err)
 
-        if shutdown:
-            for nbh in self._handles:
-                try:
-                    plib.terminate_process(nbh)
-                    terminated += 1
-                except Exception as err:
-                    BuiltIn().log(err)
-            if self._handles:
-                BuiltIn().sleep(timeout)
-            for nbh in self._handles:
-                try:
-                    plib.terminate_process(nbh, kill=True)
-                except Exception as err:
-                    BuiltIn().log(err)
+        handles = list(self._handles)
 
-        # give processes a mo to shutdown
-        if terminated or shutdown and self._tmpdirs:
-            for nbh in self._handles:
-                shutil.rmtree(self._tmpdirs[nbh])
+        for nbh in handles:
+            try:
+                self.terminate_jupyter_server(nbh)
+                was_terminated += [nbh]
+            except Exception as err:
+                BuiltIn().log(err)
 
-        self._handles = []
-        self._tmpdirs = {}
-        self._notebook_dirs = {}
-        self._ports = {}
-        self._base_urls = {}
-        self._tokens = {}
+        if was_shutdown or was_terminated:
+            BuiltIn().sleep(timeout)
 
-        return terminated
+        tmpdir_handles = list(self._tmpdirs)
+
+        for nbh in tmpdir_handles:
+            self.clean_up_jupyter_server_files(nbh)
+
+        return len(was_terminated)
 
     @keyword
     def get_unused_port(self) -> int:
+        """Find an unused network port (could still create race conditions)."""
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.bind(("localhost", 0))
         s.listen(1)

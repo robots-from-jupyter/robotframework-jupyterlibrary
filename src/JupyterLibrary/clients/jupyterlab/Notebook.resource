@@ -18,7 +18,7 @@ Add And Run JupyterLab Code Cell
     ${add icon} =    Get JupyterLab Icon XPath    add
     ${nb} =    Get WebElement    xpath://div${JLAB XP NB FRAG}\[${n}]
     # rely on main area widgets all having ids
-    ${nbid} =    Get Element Attribute    ${nb}    id
+    ${nbid} =    JupyterLibrary.Get Element Attribute    ${nb}    id
     ${icon} =    Get WebElement Relative To    ${nb}    xpath:div${JLAB XP NB TOOLBAR FRAG}//${add icon}
     Click Element    ${icon}
     Sleep    0.1s

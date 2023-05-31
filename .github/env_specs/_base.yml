@@ -1,13 +1,16 @@
 channels:
   - conda-forge
   - nodefaults
+  - conda-forge/label/notebook_beta
 dependencies:
   # enough stuff to run doit
-  - doit
+  - doit-with-toml
   - pip
   - pyyaml
+  - flit >=3.9,<4
+  - tomli
   # really nothing for it
-  - nodejs >=16,!=17.*,!=19.*
+  - nodejs >=18,<19
   # hard deps
-  - robotframework >=4
+  - robotframework >=5
   - robotframework-seleniumlibrary >=4.5

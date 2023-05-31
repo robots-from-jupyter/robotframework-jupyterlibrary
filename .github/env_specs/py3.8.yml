@@ -1,0 +1,6 @@
+dependencies:
+  - ipython >=7,<8
+  - python >=3.8,<3.9
+  - robotframework <6
+  - robotframework-pythonlibcore <3
+  - robotframework-seleniumlibrary >=5,<6

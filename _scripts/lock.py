@@ -1,11 +1,12 @@
-import sys
-from pathlib import Path
-from . import project as P
 import subprocess
+import sys
 import tempfile
-from conda.models.match_spec import MatchSpec
 from argparse import ArgumentParser
+from pathlib import Path
 
+from conda.models.match_spec import MatchSpec
+
+from . import project as P
 
 parser = ArgumentParser()
 
@@ -71,8 +72,8 @@ def lock(flow, pf, py, lab):
                             .read_text()
                             .split(EXP)[1]
                             .strip(),
-                        ]
-                    )
+                        ],
+                    ),
                 )
                 break
     return return_code

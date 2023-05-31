@@ -1,5 +1,5 @@
-import sys
 import subprocess
+import sys
 
 from . import project as P
 
@@ -23,7 +23,8 @@ def combine():
         "🤖",
         "--nostatusrc",
         "--merge",
-    ] + all_robot
+        *all_robot,
+    ]
 
     str_args = [*map(str, args)]
 

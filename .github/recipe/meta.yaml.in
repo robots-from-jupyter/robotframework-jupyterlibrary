@@ -12,16 +12,17 @@ source:
 build:
   noarch: python
   number: 0
-  script: {{ PYTHON }} -m pip install . -vv --no-deps
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
     - pip
-    - python >=3.7
+    - python >=3.8
+    - flit >=3.9,<4
   run:
-    - python >=3.7
-    - robotframework >=4
-    - robotframework-seleniumlibrary >=4.5
+    - python >=3.8
+    - robotframework >=5
+    - robotframework-seleniumlibrary >=5
 
 test:
   requires:
@@ -39,4 +40,4 @@ about:
   summary: A Robot Framework library for testing Jupyter end-user applications and extensions
   doc_url: https://{{ name }}.readthedocs.io
   dev_url: https://github.com/robots-from-jupyter/{{ name }}
-  doc_source_url: https://github.com/robots-from-jupyter/{{ name }}/tree/master/docs
+  doc_source_url: https://github.com/robots-from-jupyter/{{ name }}/tree/main/docs

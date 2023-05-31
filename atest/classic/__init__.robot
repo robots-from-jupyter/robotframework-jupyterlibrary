@@ -6,7 +6,7 @@ Library             JupyterLibrary
 Suite Setup         Set Up Classic Suite
 Suite Teardown      Terminate All Jupyter Servers
 
-Force Tags          client:notebook
+Force Tags          client:classic
 
 
 *** Keywords ***

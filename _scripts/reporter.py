@@ -1,9 +1,8 @@
-from doit.reporter import ConsoleReporter
-
 from datetime import datetime
 
-from . import project as P
+from doit.reporter import ConsoleReporter
 
+from . import project as P
 
 START = "::group::" if P.CI else ""
 END = "::endgroup::" if P.CI else ""
@@ -14,6 +13,11 @@ SKIP = "--------"
 
 class GithubActionsReporter(ConsoleReporter):
     _gh_timings = {}
+
+    def skip_uptodate(self, task):
+        self.outstream.write(f"{START}[{SKIP}] ⏩  {task.title()}{END}\n")
+
+    skip_ignore = skip_uptodate
 
     def execute_task(self, task):
         start = datetime.now()
@@ -42,8 +46,3 @@ class GithubActionsReporter(ConsoleReporter):
     def add_success(self, task):
         super().add_success(task)
         self.gh_outtro(task, "🏁 ")
-
-    def skip_uptodate(self, task):
-        self.outstream.write(f"{START}[{SKIP}] ⏩  {task.title()}{END}\n")
-
-    skip_ignore = skip_uptodate

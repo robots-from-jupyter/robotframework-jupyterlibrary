@@ -1,0 +1,125 @@
+[build-system]
+build-backend = "flit_core.buildapi"
+requires = ["flit_core >=3.9,<4"]
+
+[tool.flit.module]
+name = "JupyterLibrary"
+
+[project]
+name = "robotframework-jupyterlibrary"
+version = "0.5.0a0"
+description = "A Robot Framework library for automating (testing of) Jupyter end-user applications and extensions."
+readme = "README.md"
+authors = [{name = "JupyterLibrary contributors", email = "robots-from-jupyter@googlegroups.com"}]
+requires-python = ">=3.8"
+classifiers = [
+    "Framework :: Jupyter",
+    "Framework :: Jupyter :: JupyterLab",
+    "Framework :: Jupyter :: JupyterLab :: 3",
+    "Framework :: Jupyter :: JupyterLab :: 4",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Testing",
+]
+dependencies = [
+  "robotframework >=5",
+  "robotframework-seleniumlibrary >=5",
+]
+keywords = [
+  "Interactive",
+  "Jupyter",
+  "notebook",
+  "Testing",
+  "Web",
+]
+[project.optional-dependencies]
+tidy = ["robotframwork-tidy"]
+widgets = ["ipywidgets"]
+[project.urls]
+"Bug Tracker" = "https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/issues"
+"Changelog" = "https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/blob/main/docs/HISTORY.ipynb"
+"CI" = "https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/actions"
+"Documentation" = "https://robotframework-jupyterlibrary.readthedocs.io/en/stable"
+"Releases" = "https://github.com/robots-from-jupyter/robotframework-jupyterlibrary/releases"
+"Source Code" = "https://github.com/robots-from-jupyter/robotframework-jupyterlibrary"
+
+[tool.ruff]
+cache-dir = "build/.cache/ruff"
+ignore = [
+  # robot framework convention
+  "N999",
+  # mutually-exclusive with other options
+  "D211",
+  "D213",
+  # trust black
+  "E501",
+  # keep 3.8 compat
+  "UP006",
+  "UP007",
+  "UP035",
+]
+select = [
+  "A",
+  "ARG",
+  "B",
+  "BLE",
+  "C4",
+  "C90",
+  "COM",
+  "D",
+  "DJ",
+  "DTZ",
+  "E",
+  "EM",
+  "ERA",
+  "EXE",
+  "F",
+  # "FBT",
+  "G",
+  "I",
+  "ICN",
+  "INP",
+  "ISC",
+  "N",
+  "NPY",
+  "PD",
+  "PGH",
+  "PIE",
+  "PL",
+  "PT",
+  "PTH",
+  "PYI",
+  "Q",
+  "RET",
+  "RSE",
+  "RUF",
+  "S",
+  "SIM",
+  "SLF",
+  "T10",
+  "T20",
+  "TCH",
+  "TID",
+  # "TRY",
+  "UP",
+  "W",
+  "YTT",
+]
+
+[tool.ruff.per-file-ignores]
+"_scripts/*.py" = [
+  "E722", "N812", "PLR0912", "C901", "T201", "BLE001", "S603", "S101", "S607",
+  "DTZ005", "PLC1901", "S110", "PLR0915"
+]
+"conf.py" = ["T201", "A001", "INP001", "S603", "DTZ005"]
+"dodo.py" = ["E722", "E501", "T201", "S603", "RET504", "N812"]
+"JupyterLibrary/__init__.py" = ["N999"]
+"server.py" = ["PLR0913", "BLE001", "PLR0912", "C901", "S310"]
