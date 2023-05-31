@@ -60,10 +60,15 @@ def task_build():
     env_lock = P.CONDA_LISTS[env]
     run_in = P.RUN_IN[env]
 
+    def _flit_build():
+        env = dict(os.environ, SOURCE_DATE_EPOCH=P.get_source_date_epoch())
+        rc = subprocess.call([*run_in, "flit", "--debug", "build"], env=env)
+        return rc == 0
+
     yield {
         "name": "pypi",
         "doc": "build the pypi sdist/wheel",
-        "actions": [[*run_in, "flit", "build"]],
+        "actions": [_flit_build],
         "targets": [P.SDIST, P.WHEEL],
         "file_dep": [*P.PY_SRC, *P.ROBOT_SRC, *P.SETUP_CRUFT, env_lock],
     }

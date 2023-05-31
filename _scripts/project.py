@@ -3,6 +3,7 @@ import contextlib
 import os
 import platform
 import shutil
+import subprocess
 import sys
 from pathlib import Path
 
@@ -361,3 +362,10 @@ def get_ok_actions(p: Path):
         lambda: p.unlink() if p.exists() else None,
         lambda: [p.parent.mkdir(exist_ok=True, parents=True), p.touch(), None][-1],
     ]
+
+
+def get_source_date_epoch():
+    """Get the SOURCE_DATE_EPOCH from git."""
+    return subprocess.check_output(
+        ["git", "log", "-1", "--format=%ct"], encoding="utf-8",
+    ).strip()
