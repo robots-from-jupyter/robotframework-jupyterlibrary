@@ -1,7 +1,11 @@
 :root {
-  --pst-color-inline-code: 0, 136, 129;
   --pst-color-navbar-link: var(--pst-color-inline-code);
   --pst-font-family-heading: 'OCR-A', var(--pst-font-family-monospace-system);
+}
+
+html[data-theme='dark'] {
+  --bs-border-color: rgba(255, 255, 255, 0.25);
+  --pst-color-border: var(--bs-border-color);
 }
 
 @font-face {
@@ -12,10 +16,6 @@
 .navbar-brand {
   font-family: var(--pst-font-family-heading);
   padding: 0.55em;
-}
-
-.navbar-brand p {
-  color: rgba(var(--pst-color-inline-code), 1);
 }
 
 h1,
@@ -104,4 +104,9 @@ div.cell div.cell_input {
   .bd-sidebar-primary {
     max-width: 300px;
   }
+}
+
+html[data-theme='dark'] .bd-content div.cell_output .text_html,
+html[data-theme='dark'] .bd-content div.cell_output img {
+  background-color: transparent;
 }

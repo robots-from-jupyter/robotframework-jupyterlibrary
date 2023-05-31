@@ -172,6 +172,7 @@ html_theme = "pydata_sphinx_theme"
 #
 html_theme_options = {
     "navbar_center": ["navbar-nav.html"],
+    "header_links_before_dropdown": 11,
     "github_url": PROJ["project"]["urls"]["Source Code"],
     "logo": {"text": NAME},
     "icon_links": [
@@ -187,6 +188,8 @@ html_theme_options = {
             "type": "local",
         },
     ],
+    "pygment_light_style": "github-light",
+    "pygment_dark_style": "gotthard-dark",
 }
 
 html_sidebars = {
