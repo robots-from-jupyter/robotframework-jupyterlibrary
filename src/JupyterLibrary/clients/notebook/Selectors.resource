@@ -14,6 +14,7 @@ ${JNB CSS CELL}                         ${JLAB CSS CELL}
 ${JNB CSS ACCEPT}                       ${JLAB CSS MOD ACCEPT}
 
 # css selectors
+${JNB CSS TREE}                         .jp-DirListing
 ${JNB CSS TREE LIST}                    .jp-DirListing-content
 ${JNB CSS TREE LIST ITEM}               ${JNB CSS TREE LIST} .jp-DirListing-item
 ${JNB CSS TREE NEW MENU}                ${LM CSS MENU}
