@@ -18,14 +18,24 @@ class ServerKeywords(LibraryComponent):
 
     """A component that extends the core with Jupyter server management."""
 
-    _handles: typing.List[subprocess.Popen] = []
-    _tmpdirs: typing.Dict[subprocess.Popen, str] = {}
-    _notebook_dirs: typing.Dict[subprocess.Popen, str] = {}
-    _ports: typing.Dict[subprocess.Popen, int] = {}
-    _base_urls: typing.Dict[subprocess.Popen, str] = {}
-    _tokens: typing.Dict[subprocess.Popen, str] = {}
+    _handles: typing.List[subprocess.Popen]
+    _tmpdirs: typing.Dict[subprocess.Popen, str]
+    _notebook_dirs: typing.Dict[subprocess.Popen, str]
+    _ports: typing.Dict[subprocess.Popen, int]
+    _base_urls: typing.Dict[subprocess.Popen, str]
+    _tokens: typing.Dict[subprocess.Popen, str]
+    _app_name: typing.Optional[str]
 
-    _app_name: typing.Optional[str] = None
+    def __init__(self, *args, **kwargs):
+        """Initialize a library with jupyter server keywords."""
+        super().__init__(*args, **kwargs)
+        self._handles = []
+        self._tmpdirs = {}
+        self._notebook_dirs = {}
+        self._ports = {}
+        self._base_urls = {}
+        self._tokens = {}
+        self._app_name = None
 
     @keyword
     def set_default_jupyter_app_name(
