@@ -7,7 +7,7 @@ name = "JupyterLibrary"
 
 [project]
 name = "robotframework-jupyterlibrary"
-version = "0.5.0a1"
+version = "0.5.0"
 description = "A Robot Framework library for automating (testing of) Jupyter end-user applications and extensions."
 readme = "README.md"
 authors = [{name = "JupyterLibrary contributors", email = "robots-from-jupyter@googlegroups.com"}]

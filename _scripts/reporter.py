@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import ClassVar, Dict, List
 
 from doit.reporter import ConsoleReporter
 
@@ -12,7 +13,7 @@ SKIP = "--------"
 
 
 class GithubActionsReporter(ConsoleReporter):
-    _gh_timings = {}
+    _gh_timings: ClassVar[Dict[str, List[datetime]]] = {}
 
     def skip_uptodate(self, task):
         self.outstream.write(f"{START}[{SKIP}] ⏩  {task.title()}{END}\n")

@@ -274,6 +274,8 @@ ROBOCOP_ARGS = [
     *("--exclude", "deprecated-with-name"),
     *("--exclude", "if-can-be-used"),
     *("--exclude", "too-many-calls-in-keyword"),
+    *("--exclude", "unnecessary-string-conversion"),
+    *("--exclude", "unused-variable"),
 ]
 
 

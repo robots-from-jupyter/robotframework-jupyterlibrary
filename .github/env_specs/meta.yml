@@ -5,7 +5,7 @@ channels:
 dependencies:
   - boa >=0.14,<0.15
   - conda <22.11.1 # known-incompatible version with conda-lock
-  - conda-lock >=2,<2.1
+  - conda-lock >=2.1,<2.2
   - doit-with-toml
   - flit >=3.9,<4.0
   - mamba >=1.4.0,<1.5

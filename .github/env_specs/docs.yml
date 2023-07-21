@@ -1,7 +1,9 @@
 dependencies:
   - docutils >=0.18
   - ipykernel
+  - mdit-py-plugins >=0.3.1,<0.4.0
   - myst-nb
+  - myst-parser >=0.18.1,<0.19.0
   - port-for
   - pydata-sphinx-theme >=0.13.3,<0.14
   - sphinx >=5.1
