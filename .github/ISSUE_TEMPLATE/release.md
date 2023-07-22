@@ -5,6 +5,7 @@ labels: maintenance
 ---
 
 - [ ] merge all outstanding PRs
+  - [ ] #PR ...
 - [ ] ensure the versions have been bumped (check with `doit`)
 - [ ] ensure `HISTORY.ipynb` is up-to-date
   - [ ] move the new release to the top of the stack
@@ -20,9 +21,16 @@ labels: maintenance
   cd dist
   twine upload *.tar.gz *.whl
   ```
+  - [ ] PyPI URL
 - [ ] postmortem
   - [ ] handle `conda-forge` feedstock tasks
+    - [ ] https://github.com/conda-forge/robotframework-jupyterlibrary-feedstock/pull/PULL
+    - [ ] https://anaconda.org/conda-forge/robotframework-jupyterlibrary/files?version=VERSION
   - [ ] validate on binder via simplest-possible gists
   - [ ] bump to next development version
-  - [ ] rebuild `yarn.lock`
+  - [ ] rebuild locks
+    - [ ] `.github/locks`
+    - [ ] `yarn.lock`
+  - [ ] handle linter opinion changes
+  - [ ] update `HISTORY.ipynb`
   - [ ] update release procedures with lessons learned

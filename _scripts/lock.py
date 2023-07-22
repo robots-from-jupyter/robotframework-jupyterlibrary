@@ -83,9 +83,9 @@ def main(lockfile=None):
     lockfile = lockfile or sys.argv[1]
     assert lockfile
     lockpath = Path(lockfile)
-    flow, platform, python, lab = [k for k, v in P.ENVENTURES.items() if v == lockpath][
-        0
-    ]
+    flow, platform, python, lab = next(
+        k for k, v in P.ENVENTURES.items() if v == lockpath
+    )
     return lock(flow, platform, python, lab)
 
 
